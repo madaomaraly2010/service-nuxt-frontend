@@ -33,7 +33,7 @@
               <q-item>
                 <q-item-section>
                   <!-- <q-item-label class="text-h6">{{
-                    props.row.availableNumber
+                    props.row.availableNumber   
                   }}</q-item-label> -->
                   <q-circular-progress
                     :value="props.row.availableNumber"
