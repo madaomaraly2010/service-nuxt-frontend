@@ -11,10 +11,28 @@
           icon="menu"
         />
 
-        <q-btn flat no-caps no-wrap class="q-ml-xs" v-if="$q.screen.gt.xs">
-          <q-icon :name="fabYoutube" color="red" size="28px" />
-          <q-toolbar-title shrink class="text-weight-bold">
-            YouTube
+        <q-btn
+          flat
+          no-caps
+          no-wrap
+          class="q-ml-xs"
+          v-if="nuxtApp.$q.screen.gt.xs"
+        >
+          <!-- <q-icon :name="fabYoutube" color="red" size="28px" /> -->
+          <q-avatar>
+            <q-img
+              fit="fill"
+              src="/images/App-Logo.png"
+              alt="App Logo"
+              width="5vw"
+              height="5vh"
+            />
+          </q-avatar>
+          <q-toolbar-title
+            shrink
+            class="text-weight-bolder q-ma-sm text-green-10"
+          >
+            خدماتى
           </q-toolbar-title>
         </q-btn>
 
@@ -67,7 +85,7 @@
             flat
             color="grey-8"
             icon="message"
-            v-if="$q.screen.gt.sm"
+            v-if="nuxtApp.$q.screen.gt.sm"
           >
             <q-tooltip>Messages</q-tooltip>
           </q-btn>
@@ -176,20 +194,21 @@
   </q-layout>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from "vue";
 import { fabYoutube } from "@quasar/extras/fontawesome-v6";
 
 const leftDrawerOpen = ref(false);
 const search = ref("");
 const nuxtApp = useNuxtApp();
+
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
-const gotoAbout = () => {
-  // nuxtApp.$router.push("/about");
-  nuxtApp.$q.lang.rtl = !nuxtApp.$q.lang.rtl;
-};
+// const gotoAbout = () => {
+//   // nuxtApp.$router.push("/about");
+//   nuxtApp.$q.lang.rtl = !nuxtApp.$q.lang.rtl;
+// };
 const links1 = [
   { icon: "home", text: "Home" },
   { icon: "whatshot", text: "Trending" },

@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div class="row">
-      <q-card-section class="q-pa-none q-ma-none col-3">
+    <div class="row block">
+      <q-card-section class="q-pa-none q-ma-none">
         <q-table
           hide-bottom
           class="custom-table"
           :rows="sales_data"
           :columns="sales_column"
+          flat
+          bordered
         >
           <template v-slot:body-cell-work="props">
             <q-td :props="props">
@@ -112,27 +114,27 @@ const sales_column: QTableColumn[] = [
   },
 ];
 
-const getColor = (val: number) => {
-  if (val > 70 && val <= 100) {
-    return "green";
-  } else if (val > 50 && val <= 70) {
-    return "blue";
-  }
-  return "red";
-};
-const getChipColor = (status: string) => {
-  if (status == "Canceled") {
-    return "negative";
-  } else if (status == "Sent") {
-    return "positive";
-  } else if (status == "Pending") {
-    return "warning";
-  } else if (status == "Paid") {
-    return "info";
-  } else {
-    return "dark";
-  }
-};
+// const getColor = (val: number) => {
+//   if (val > 70 && val <= 100) {
+//     return "green";
+//   } else if (val > 50 && val <= 70) {
+//     return "blue";
+//   }
+//   return "red";
+// };
+// const getChipColor = (status: string) => {
+//   if (status == "Canceled") {
+//     return "negative";
+//   } else if (status == "Sent") {
+//     return "positive";
+//   } else if (status == "Pending") {
+//     return "warning";
+//   } else if (status == "Paid") {
+//     return "info";
+//   } else {
+//     return "dark";
+//   }
+// };
 </script>
 
 <style lang="css"></style>
