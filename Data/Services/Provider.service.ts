@@ -8,8 +8,9 @@ export class ProviderService implements IProviderRepositry{
     getByWork(workId: number): Promise<Provider[]> {
         throw new Error("Method not implemented.");
     }
-    findAll(): Promise<Provider[]> {
-        throw new Error("Method not implemented.");
+   async  findAll(): Promise<Provider[]> {
+       let fetch = await  useFetch("")
+       fetch.
     }
     findOne(id: number): Promise<Provider> {
         throw new Error("Method not implemented.");

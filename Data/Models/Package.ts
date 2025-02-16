@@ -1,8 +1,7 @@
-import type { PackageItem, Provider } from ".";
+import { PackageItem, Provider } from ".";
 import type { IPackageAttributes } from "../Models-Row-Attributes";
 
-
-export class Package  {
+export class Package {
   id!: number;
   eng_name!: string;
   arb_name!: string;
@@ -14,29 +13,33 @@ export class Package  {
   packageItemList!: PackageItem[];
   providerList!: Provider[];
 
-  public  toDbRow():Package {
-    return {
-      id:this.id,
-      arb_name:this.arb_name,
-      eng_name:this.eng_name,
-      created_at : this.created_at,
-      updated_at : this.updated_at
+  public toDbRow(): IPackageAttributes {
+    let row: IPackageAttributes = {};
+    row.id = this.id;
+    row.arb_name = this.arb_name;
+    row.eng_name = this.eng_name;
+    row.is_active = this.is_active;
+    row.package_items = this.packageItemList.map((it) => it.toDbRow());
+    return row;
+  }
+
+  public static fromDbRow(dbRow: IPackageAttributes): Package {
+    let row: Package = new Package();
+    row.id = dbRow.id ?? 0;
+    row.arb_name = dbRow.arb_name ?? "";
+    row.eng_name = dbRow.eng_name ?? "";
+    row.is_active = dbRow.is_active;
+    row.created_at = dbRow.created_at;
+    row.updated_at = dbRow.updated_at;
+    if (dbRow.package_items) {
+      row.packageItemList = dbRow.package_items.map((it) =>
+        PackageItem.fromDbRow(it)
+      );
     }
-  
-}
 
-public static fromDbRow(dbRow:IPackageAttributes):Package {
-let row:Package = new Package();
- row.id = dbRow.id
- row.arb_name = dbRow.arb_name
- row.eng_name = dbRow.eng_name
- row.is_active = dbRow.is_active
- row.created_at = dbRow.created_at
- row.updated_at = dbRow.updated_at
- if(dbRow.package_items)
-     row.packageItemList = dbRow.package_items.map(it=>PackageItem.fromDbRow(it))
-return row;
-}
-
-
+    if (dbRow.providers) {
+      row.providerList = dbRow.providers.map((it) => Provider.fromDbRow(it));
+    }
+    return row;
+  }
 }

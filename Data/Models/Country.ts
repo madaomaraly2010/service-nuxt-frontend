@@ -1,8 +1,7 @@
-import type { Provider } from ".";
+import { Provider } from ".";
+import type { ICountryAttributes } from "../Models-Row-Attributes";
 
-
-
-export class Country  {
+export class Country {
   id!: number;
   created_at!: Date;
   updated_at?: Date;
@@ -12,33 +11,26 @@ export class Country  {
   arb_name?: string;
 
   // Country hasMany Provider via country_id
-  providers!: Provider[];
-   
+  providerList!: Provider[];
 
+  public toDbRow(): ICountryAttributes {
+    let row: ICountryAttributes = {};
+    (row.id = this.id),
+      (row.arb_name = this.arb_name),
+      (row.eng_name = this.eng_name),
+      (row.iso_code = this.iso_code),
+      (row.flag_url = this.flag_url);
+    return row;
+  }
 
-  public  toJson():string {
-    return JSON.stringify({
-      id:this.id,
-      arb_name:this.arb_name,
-      eng_name:this.eng_name,
-      flag_url : this.flag_url,
-      iso_code : this.iso_code,
-      created_at : this.created_at,
-      updated_at : this.updated_at,
-    })
-}
-
-public static fromJson(json:any):Country {
-let row:Country = new Country();
- row.id = json.id
- row.arb_name = json.arb_name
- row.eng_name = json.eng_name
- row.flag_url = json.flag_url
- row.iso_code = json.iso_code
- row.created_at = json.created_at
- row.updated_at = json.updated_at
-return row;
-}
-
-
+  public static fromDbRow(dbRow: ICountryAttributes): Country {
+    let row: Country = new Country();
+    row.id = dbRow.id ?? 0;
+    row.arb_name = dbRow.arb_name;
+    row.eng_name = dbRow.eng_name;
+    if (dbRow.providers) {
+      row.providerList = dbRow.providers.map((it) => Provider.fromDbRow(it));
+    }
+    return row;
+  }
 }

@@ -1,26 +1,28 @@
-import type { Provider } from "./Provider";
-export class ReligionStatus  {
+import type { IReligionStatusAttributes } from "../Models-Row-Attributes";
+import { Provider } from "./Provider";
+export class ReligionStatus {
   id!: number;
-  arb_name!: string;
+  arb_name?: string;
   eng_name?: string;
 
   // ReligionStatus hasMany Provider via religion_status
-  providers!: Provider[];
-  
-  public  toJson():string {
-    return JSON.stringify({
-      id:this.id,
-      arb_name:this.arb_name,
-      eng_name:this.eng_name
-    })
-}
+  providerList!: Provider[];
+  public toDbRow(): IReligionStatusAttributes {
+    let row: IReligionStatusAttributes = {};
+    row.id = this.id;
+    row.arb_name = this.arb_name;
+    row.eng_name = this.eng_name;
+    return row;
+  }
 
-public static fromJson(json:any):ReligionStatus {
-let row:ReligionStatus = new ReligionStatus();
- row.id = json.id
- row.arb_name = json.arb_name
- row.eng_name = json.eng_name
-return row;
-}
-  
+  public static fromDbRow(dbRow: IReligionStatusAttributes): ReligionStatus {
+    let row: ReligionStatus = new ReligionStatus();
+    row.id = dbRow.id ?? 0;
+    row.arb_name = dbRow.arb_name;
+    row.eng_name = dbRow.eng_name;
+    if (dbRow.providers) {
+      row.providerList = dbRow.providers.map((it) => Provider.fromDbRow(it));
+    }
+    return row;
+  }
 }

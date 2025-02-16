@@ -1,23 +1,24 @@
-export class RentStatus  {
+import type { IRentStatusAttributes } from "../Models-Row-Attributes";
+
+export class RentStatus {
   id!: number;
   arb_name?: string;
   eng_name?: string;
 
+  public toDbRow(): IRentStatusAttributes {
+    let row: IRentStatusAttributes = {};
+    row.id = this.id;
+    row.arb_name = this.arb_name;
+    row.eng_name = this.eng_name;
+    return row;
+  }
 
-  
-  public  toJson():string {
-    return JSON.stringify({
-      id:this.id,
-      arb_name:this.arb_name,
-      eng_name:this.eng_name
-    })
-}
+  public static fromDbRow(dbRow: IRentStatusAttributes): RentStatus {
+    let row: RentStatus = new RentStatus();
+    row.id = dbRow.id ?? 0;
+    row.arb_name = dbRow.arb_name;
+    row.eng_name = dbRow.eng_name;
 
-public static fromJson(json:any):RentStatus {
-let row:RentStatus = new RentStatus();
- row.id = json.id
- row.arb_name = json.arb_name
- row.eng_name = json.eng_name
-return row;
-}
+    return row;
+  }
 }
