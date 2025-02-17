@@ -158,7 +158,7 @@ export interface IUserAttributes {
   last_name?: string;
   middle_name?: string;
   mobile?: string;
-  DateBirth?: string;
+  date_birth?: string;
   gender?: number;
 
   provider?: IProviderAttributes;
@@ -170,6 +170,8 @@ export interface IWorkAttributes {
   arb_name?: string;
   eng_name?: string;
   work_category_id?: number;
+  image_url?: string;
+  icon?: string;
   providers?: IProviderAttributes[];
   work_category?: IWorkCategoryAttributes;
 }
@@ -179,5 +181,6 @@ export interface IWorkCategoryAttributes {
   arb_name?: string;
   eng_name?: string;
   image_url?: string;
+  icon?: string;
   works?: IWorkAttributes[];
 }

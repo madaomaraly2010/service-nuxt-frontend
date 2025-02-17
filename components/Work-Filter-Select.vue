@@ -1,33 +1,37 @@
 <template>
   <q-select
     v-model="selectedWork"
-    :options="workList"
+    :options="workStore.works"
     option-label="arb_name"
     option-value="id"
     filled
     dense
     clearable
+    @update:model-value="onWorkSelected"
     popup-content-style="text-align: right; direction: rtl;"
     input-style="text-align: right; direction: rtl;"
   >
-    <template v-slot:label>
+    <!-- <template v-slot:label>
       <div class="rtl-label">اختر العمل</div>
-    </template>
+    </template> -->
   </q-select>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script lang="ts" setup>
+import type { Work } from "~/Data/Models";
+import { useWorkStore } from "../Data/Stores/useWorkStore";
+import { useProviderStore } from "../Data/Stores/useProviderStore";
 
-const selectedWork = ref(null);
-const workList = ref([
-  { id: 1, arb_name: "سباك", eng_name: "Plumber" },
-  { id: 2, arb_name: "نجار", eng_name: "Carpenter" },
-  { id: 3, arb_name: "كهربائى", eng_name: "Electrician" },
-  { id: 4, arb_name: "فنى تكييف", eng_name: "Air Conditioner" },
-  { id: 5, arb_name: "مربية منزل", eng_name: "Baby Sitter" },
-  { id: 6, arb_name: "سواق خصوصى", eng_name: "Driver" },
-]);
+const workStore = useWorkStore();
+const providerStore = useProviderStore();
+await workStore.findAll();
+console.log("store.Works", workStore.works);
+const selectedWork = ref();
+const emits = defineEmits(["workSelected"]);
+const onWorkSelected = async (work: Work) => {
+  providerStore.getByWork(work.id);
+  console.log(work, "selected");
+};
 </script>
 <style>
 .rtl {

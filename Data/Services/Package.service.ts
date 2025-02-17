@@ -1,20 +1,22 @@
 import type { Package } from "../Models";
 import type { IPackageRepositry } from "../Repositries/Models-Repositries";
-
+import { config } from "../UrlsConfig";
 export class PackageService implements IPackageRepositry{
-    findAll(): Promise<Package[]> {
+    async findAll(): Promise<Package[]> {
+         let { data, error } = await useFetch(config.Package.API_PACKAGE_STATUS_GET);
+    console.log("Lang Data", data);
+    return [];
+    }
+    async findOne(id: number): Promise<Package> {
         throw new Error("Method not implemented.");
     }
-    findOne(id: number): Promise<Package> {
+    async create(row: Package): Promise<Package> {
         throw new Error("Method not implemented.");
     }
-    create(row: Package): Promise<Package> {
+    async update(row: Package): Promise<Package> {
         throw new Error("Method not implemented.");
     }
-    update(row: Package): Promise<Package> {
-        throw new Error("Method not implemented.");
-    }
-    delete(id: number): Promise<Package> {
+    async delete(id: number): Promise<Package> {
         throw new Error("Method not implemented.");
     }
 

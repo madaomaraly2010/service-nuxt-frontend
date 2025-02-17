@@ -1,36 +1,47 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { defineNuxtConfig } from 'nuxt/config';
+import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
   pages: true, // Ensures pages directory is used
-  modules: ['nuxt-quasar-ui', '@nuxtjs/i18n', "nuxt-echarts"],
+  modules: ["nuxt-quasar-ui", "@nuxtjs/i18n", "nuxt-echarts", "@pinia/nuxt"],
   devtools: { enabled: true },
-  app: { 
+  pinia: {
+    storesDirs: ["./stores/**", "./custom-folder/stores/**"],
+  },
+  app: {
     head: {
       link: [
-        { rel:'stylesheet' ,href: "https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;700&display=swap"},
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap' }
-      ]
-    }
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;700&display=swap",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap",
+        },
+      ],
+    },
   },
   css: [
-    '~/assets/css/global.css', // ✅ Load global styles
-    'quasar/dist/quasar.css',
-    '@quasar/extras/material-icons/material-icons.css',
-    '@fortawesome/fontawesome-svg-core/styles.css',
-    '@fortawesome/fontawesome-free/css/all.css'
+    "~/assets/css/global.css", // ✅ Load global styles
+    "quasar/dist/quasar.css",
+    "@quasar/extras/material-icons/material-icons.css",
+    "@fortawesome/fontawesome-svg-core/styles.css",
+    "@fortawesome/fontawesome-free/css/all.css",
   ],
   build: {
-    transpile: ['quasar']
+    transpile: ["quasar"],
   },
-  
-  quasar:{
-    
+
+  quasar: {
     config: {
-      extras: ['fontawesome-v5'],
-      rtl: true // Enable RTL globally for Quasar components
-    }
+      extras: ["fontawesome-v5"],
+      rtl: true, // Enable RTL globally for Quasar components
+    },
   },
   i18n: {
     /* module options */
@@ -47,5 +58,4 @@ export default defineNuxtConfig({
     ],
     defaultLocale: "en-US",
   },
-  
-})
+});

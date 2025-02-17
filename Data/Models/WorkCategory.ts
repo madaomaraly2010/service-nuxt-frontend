@@ -5,7 +5,8 @@ export class WorkCategory {
   id!: number;
   arb_name!: string | undefined;
   eng_name!: string | undefined;
-  // WorkCategory hasMany Provider via work_id
+  image_url?: string;
+  icon?: string;
   providers!: Provider[];
   works!: Work[];
 
@@ -14,6 +15,8 @@ export class WorkCategory {
     row.id = this.id;
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
+    row.image_url = this.image_url;
+    row.icon = this.icon;
     return row;
   }
 
@@ -22,6 +25,8 @@ export class WorkCategory {
     row.id = dbRow.id ?? 0;
     row.arb_name = dbRow.arb_name;
     row.eng_name = dbRow.eng_name;
+    row.image_url = dbRow.image_url;
+    row.icon = dbRow.icon;
     return row;
   }
 }

@@ -103,14 +103,14 @@ const sales_column: QTableColumn[] = [
     label: "العمل",
     field: "work",
     sortable: true,
-    align: "left",
+    // align: "left",
   },
   {
     name: "availableNumber",
     label: "متاح",
     field: "availableNumber",
     sortable: true,
-    align: "left",
+    // align: "left",
   },
 ];
 

@@ -13,7 +13,7 @@ export class User {
   last_name!: string | undefined;
   middle_name!: string | undefined;
   mobile?: string;
-  DateBirth?: string;
+  date_birth?: string;
   gender?: number;
 
   // User hasOne Provider via user_id
@@ -35,7 +35,7 @@ export class User {
     row.last_name = this.last_name;
     row.middle_name = this.middle_name;
     row.mobile = this.mobile;
-    row.DateBirth = this.DateBirth;
+    row.date_birth = this.date_birth;
     row.gender = this.gender;
     return row;
   }
@@ -53,7 +53,7 @@ export class User {
     row.last_name = dbRow.last_name;
     row.middle_name = dbRow.middle_name;
     row.mobile = dbRow.mobile;
-    row.DateBirth = dbRow.DateBirth;
+    row.date_birth = dbRow.date_birth;
     row.gender = dbRow.gender;
     if (dbRow.provider) {
       row.provider = Provider.fromDbRow(dbRow.provider);

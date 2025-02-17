@@ -145,16 +145,13 @@ export class Provider {
     row.package_id = dbRow.package_id;
     row.cook_status_id = dbRow.cook_status_id;
 
-    if (dbRow.package) {
-      row.package = Package.fromDbRow(dbRow.package);
-    }
+    
     if (dbRow.arabic_status) {
       row.arabicStatus = LangStatus.fromDbRow(dbRow.arabic_status);
     }
     if (dbRow.english_status) {
       row.englishStatus = LangStatus.fromDbRow(dbRow.english_status);
     }
-
     if (dbRow.child_status)
       row.childStatus = ChildStatus.fromDbRow(dbRow.child_status);
     if (dbRow.cook_status)

@@ -1,40 +1,51 @@
-
-import type { ChildStatus, CookStatus, Country, Package, PackageItem, Provider, ReligionStatus, RentStatus, RequestCustomer, RequestPayment, User, Work, WorkCategory } from "../Models";
+import type {
+  ChildStatus,
+  CookStatus,
+  Country,
+  Package,
+  PackageItem,
+  Provider,
+  ReligionStatus,
+  RentStatus,
+  RequestCustomer,
+  RequestPayment,
+  User,
+  Work,
+  WorkCategory,
+} from "../Models";
 import type { LangStatus } from "../Models/LangStatus";
 import type { IRepositry } from "./IRepositry";
 
+export interface ICountryRepositry extends IRepositry<Country> {}
 
-export interface ICountryRepositry extends IRepositry<Country>{}
-
-export interface IUserRepositry extends IRepositry<User>{}
-
-export interface IProviderRepositry extends IRepositry<Provider>{
-
-   getByCountry(countryId:number):Promise<Provider[]>
-   getByWork(workId:number):Promise<Provider[]>
-
+export interface IUserRepositry extends IRepositry<User> {
+  //   getAllUser(): User[];
 }
 
-export interface IWorkRepositry extends IRepositry<Work>{}
+export interface IProviderRepositry extends IRepositry<Provider> {
+  getByCountry(countryId: number): Promise<Provider[]>;
+  getByWork(workId: number): Promise<Provider[]>;
+}
 
-export interface IWorkCategoryRepositry extends IRepositry<WorkCategory>{}
+export interface IWorkRepositry extends IRepositry<Work> {}
 
-export interface IPackageRepositry extends IRepositry<Package>{}
+export interface IWorkCategoryRepositry extends IRepositry<WorkCategory> {}
 
-export interface IPackageItemRepositry extends IRepositry<PackageItem>{}
+export interface IPackageRepositry extends IRepositry<Package> {}
 
-export interface IRequestCustomerRepositry extends IRepositry<RequestCustomer>{}
+export interface IPackageItemRepositry extends IRepositry<PackageItem> {}
 
-export interface IRequestPaymentRepositry extends 
-IRepositry<RequestPayment>{}
+export interface IRequestCustomerRepositry
+  extends IRepositry<RequestCustomer> {}
 
-export interface ICookStatusRepositry extends IRepositry<CookStatus
->{}
+export interface IRequestPaymentRepositry extends IRepositry<RequestPayment> {}
 
-export interface ILangStatusRepositry extends IRepositry<LangStatus>{}
+export interface ICookStatusRepositry extends IRepositry<CookStatus> {}
 
-export interface IChildStatusRepositry extends IRepositry<ChildStatus>{}
+export interface ILangStatusRepositry extends IRepositry<LangStatus> {}
 
-export interface IReligionStatusRepositry extends IRepositry<ReligionStatus>{}
+export interface IChildStatusRepositry extends IRepositry<ChildStatus> {}
 
-export interface IRentStatusRepositry extends IRepositry<RentStatus>{}
+export interface IReligionStatusRepositry extends IRepositry<ReligionStatus> {}
+
+export interface IRentStatusRepositry extends IRepositry<RentStatus> {}

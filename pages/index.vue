@@ -29,7 +29,7 @@
         <CardTableSales></CardTableSales>
       </div>
       <div class="col-9 block q-pa-sm">
-        <CardTableSales></CardTableSales>
+        <ProviderTable></ProviderTable>
       </div>
     </div>
   </div>
