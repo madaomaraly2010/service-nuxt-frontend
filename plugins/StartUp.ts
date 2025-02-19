@@ -8,8 +8,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   return {
     provide: {
       today: Date.now(),
-      direction: "rtl",
-      //  currentLocale: () => "",
+      t: (nuxtApp.$i18n as any).t,
     },
   };
 });

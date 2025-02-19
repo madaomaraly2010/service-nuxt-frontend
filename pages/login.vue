@@ -2,7 +2,7 @@
   <q-page class="flex flex-center">
     <q-card class="q-pa-md login-card">
       <q-card-section>
-        <div class="text-h5 text-center">{{ app.$i18n.t("login.login") }}</div>
+        <div class="text-h5 text-center">{{ $t("login.login") }}</div>
       </q-card-section>
       <q-card-section>
         <q-form @submit="doLogin" ref="loginForm">
@@ -18,10 +18,10 @@
             ]" -->
           <base-text-input
             v-model="email"
-            :label="app.$i18n.t('login.email')"
+            :label="$t('login.email')"
             filled
             lazy-rules
-            :rules="[requiredValidation(app.$i18n.t, 'login.email')]"
+            :rules="[requiredValidation($t, 'login.email')]"
           >
             <template v-slot:prepend>
               <q-icon name="email" />
@@ -39,7 +39,7 @@
           <base-text-input
             :is-password="true"
             v-model="password"
-            :label="app.$i18n.t('login.password')"
+            :label="$t('login.password')"
             filled
             lazy-rules
           >
@@ -51,7 +51,7 @@
           <!-- Login Button -->
           <q-btn
             type="submit"
-            :label="app.$i18n.t('login.submit')"
+            :label="$t('login.submit')"
             color="primary"
             class="full-width q-mt-md"
             :loading="loading"
@@ -63,7 +63,7 @@
         <q-btn
           flat
           color="primary"
-          :label="app.$i18n.t('login.forgetpassword')"
+          :label="$t('login.forgetpassword')"
           @click="forgotPassword"
         />
       </q-card-section>
@@ -74,19 +74,14 @@
 <script setup>
 import { ref } from "vue";
 import { useQuasar } from "quasar";
-import json from "../locales/ar-EG.json";
-console.log(json, "JSON Arabic");
 import { requiredValidation } from "../common/Input-Validations";
 const $q = useQuasar();
 const email = ref("");
 const password = ref("");
 const isPwd = ref(true);
 const loading = ref(false);
-const app = useNuxtApp();
-
 const doLogin = async () => {
   loading.value = true;
-
   setTimeout(() => {
     loading.value = false;
     $q.notify({
