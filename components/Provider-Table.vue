@@ -2,64 +2,77 @@
   <div>
     <div class="row block">
       <q-card-section class="q-pa-none q-ma-none">
-        <q-table
+        <base-table
           class="provider-table"
           :rows="store.providers"
           :columns="provider_column"
           flat
           bordered
         >
-          <template v-slot:body-cell-id="props">
-            <q-td :props="props">
+          <template #id="{ row }">
+            <q-td>
               <q-item>
                 <q-item-section>
                   <q-item-label class="text-bold text-grey-7">{{
-                    props.row?.id
+                    row?.id
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-td>
           </template>
-          <template v-slot:body-cell-work="props">
-            <q-td :props="props">
+          <template #fullname="{ row }">
+            <q-td>
               <q-item>
-                <q-item-label class="text-bold text-grey-7">{{
-                  props.row.work?.arb_name
+                <q-item-section>
+                  <q-item-label class="text-bold text-grey-7">{{
+                    (row.user?.first_name ?? " ") +
+                    " " +
+                    (row.user?.last_name ?? " ")
+                  }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-td>
+          </template>
+          <template #work="{ row }">
+            <q-td>
+              <q-item>
+                <q-item-label class="text-bold text-red-7">{{
+                  row.work?.arb_name
                 }}</q-item-label>
               </q-item>
             </q-td>
           </template>
 
-          <template v-slot:body-cell-country="props">
-            <q-td :props="props">
+          <template #country="{ row }">
+            <q-td>
               <q-item>
                 <q-item-label class="text-bold text-grey-7">{{
-                  props.row.country?.arb_name
+                  row.country?.arb_name
                 }}</q-item-label>
               </q-item>
             </q-td>
           </template>
 
-          <template v-slot:body-cell-mobile="props">
-            <q-td :props="props">
+          <template #mobile="{ row }">
+            <q-td>
               <q-item>
                 <q-item-label class="text-bold text-grey-7">{{
-                  props.row.user?.mobile
+                  row.user?.mobile
                 }}</q-item-label>
               </q-item>
             </q-td>
           </template>
 
-          <!-- <template v-slot:body-cell-gender="props">
-            <q-td :props="props">
+          <template #gender="{ row }">
+            <q-td>
               <q-item>
                 <q-item-label class="text-bold text-grey-7">{{
-                  props.row.user?.gender
+                  row.user?.gender == 1 ? "ذكر" : "أنثى"
                 }}</q-item-label>
               </q-item>
             </q-td>
-          </template> -->
-        </q-table>
+          </template>
+        </base-table>
       </q-card-section>
     </div>
   </div>
@@ -67,7 +80,7 @@
 
 <script lang="ts" setup>
 import type { QTableColumn } from "quasar";
-import { Provider } from "~/Data/Models";
+
 import { useProviderStore } from "~/Data/Stores/useProviderStore";
 const store = useProviderStore();
 await store.findAll();
@@ -85,34 +98,24 @@ const provider_column: QTableColumn[] = [
     label: "الاسم",
     field: "id",
     sortable: true,
-    format(val, row: Provider) {
-      return (row.user?.first_name ?? " ") + " " + (row.user?.last_name ?? " ");
-    },
-    // align: "left",
   },
   {
     name: "mobile",
     label: "الجوال",
     field: "user.mobile",
     sortable: true,
-    // align: "left",
   },
   {
     name: "gender",
     label: "الجنس",
     field: "user.gender",
     sortable: true,
-    format: (val: any, row: Provider) => {
-      return row.user?.gender == 1 ? "ذكر" : "أنثى";
-    },
-    // align: "left",
   },
   {
     name: "country",
     label: "الجنسية",
     field: "country.arb_name",
     sortable: true,
-    // align: "left",
   },
 
   {
@@ -120,7 +123,6 @@ const provider_column: QTableColumn[] = [
     label: "العمل",
     field: "work.arb_name",
     sortable: true,
-    // align: "left",
   },
 ];
 </script>

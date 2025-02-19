@@ -1,0 +1,10 @@
+{
+    "login":{
+        "login":"دخول"
+    },
+    "error":{
+        "email_not_correct" :"بريد إلكترونى غير صحيح",
+        "password_not_correct":"خطأ فى كلمة المرور",
+        "email_password_not_correct":"خطأ فى اسم المستخدم أو كلمة المرور"
+    }
+}

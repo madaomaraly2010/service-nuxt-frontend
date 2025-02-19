@@ -2,7 +2,6 @@
   <div>
     <CardSocial></CardSocial>
     <CardCharts></CardCharts>
-
     <div class="q-pa-sm row">
       <div class="col-3">
         <q-item class="" dense="">
@@ -34,6 +33,10 @@
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+definePageMeta({
+  middleware: "auth",
+});
+</script>
 
 <style lang="scss" scoped></style>

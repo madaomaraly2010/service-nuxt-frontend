@@ -5,6 +5,12 @@ export default defineNuxtConfig({
   pages: true, // Ensures pages directory is used
   modules: ["nuxt-quasar-ui", "@nuxtjs/i18n", "nuxt-echarts", "@pinia/nuxt"],
   devtools: { enabled: true },
+  router: {
+    options: {
+      middleware: ["auth"], // Apply authentication middleware
+    },
+  },
+
   pinia: {
     storesDirs: ["./stores/**", "./custom-folder/stores/**"],
   },
@@ -55,7 +61,13 @@ export default defineNuxtConfig({
         name: "English(US)",
         file: "en-US.json",
       },
+      {
+        code: "ar-EG",
+        iso: "ar-EG",
+        name: "Arabic(EG)",
+        file: "ar-EG.json",
+      },
     ],
-    defaultLocale: "en-US",
+    defaultLocale: "ar-EG",
   },
 });

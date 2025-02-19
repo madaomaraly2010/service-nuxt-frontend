@@ -9,5 +9,4 @@
   "vueCompilerOptions": {
     "strictTemplates": true // ✅ Enables strict template type-checking
   }
-    
 }

@@ -7,7 +7,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(Quasar);
   return {
     provide: {
-      //   today: Date.now(),
+      today: Date.now(),
       //  currentLocale: () => "",
     },
   };
