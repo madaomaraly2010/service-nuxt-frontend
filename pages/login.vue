@@ -3,54 +3,55 @@
     <q-card class="q-pa-md login-card">
       <q-card-section>
         <div class="text-h5 text-center">{{ app.$i18n.t("login.login") }}</div>
-        <!-- <div class="text-h5 text-center">{{ app.$i18n.t("login.login") }}</div> -->
       </q-card-section>
       <q-card-section>
         <q-form @submit="doLogin" ref="loginForm">
           <!-- Email Input -->
-          <q-input
+          <!-- :rules="[
+              (val) =>
+                !!val ||
+                app.$i18n.t('error.field_is_required', [
+                  app.$i18n.t('login.email'),
+                ]),
+              (val) =>
+                /.+@.+\..+/.test(val) || app.$i18n.t('error.email_not_correct'),
+            ]" -->
+          <base-text-input
             v-model="email"
-            label="Email"
+            :label="app.$i18n.t('login.email')"
             filled
             lazy-rules
-            :rules="[
-              (val) => !!val || $t('error.email_not_correct'),
-              (val) => /.+@.+\..+/.test(val) || 'Enter a valid email',
-            ]"
+            :rules="[requiredValidation(app.$i18n.t, 'login.email')]"
           >
             <template v-slot:prepend>
               <q-icon name="email" />
             </template>
-          </q-input>
-
+          </base-text-input>
+          <div class="q-ma-lg"></div>
           <!-- Password Input -->
-          <q-input
+          <!-- :rules="[
+              (val) =>
+                !!val ||
+                app.$i18n.t('error.field_is_required', [
+                  app.$i18n.t('login.password'),
+                ]),
+            ]" -->
+          <base-text-input
+            :is-password="true"
             v-model="password"
-            label="Password"
+            :label="app.$i18n.t('login.password')"
             filled
             lazy-rules
-            type="password"
-            :type="isPwd ? 'password' : 'text'"
-            :rules="[(val) => !!val || 'Password is required']"
           >
             <template v-slot:prepend>
               <q-icon name="lock" />
             </template>
-            <template v-slot:append>
-              <q-btn
-                flat
-                dense
-                round
-                :icon="isPwd ? 'visibility' : 'visibility_off'"
-                @click="isPwd = !isPwd"
-              />
-            </template>
-          </q-input>
+          </base-text-input>
 
           <!-- Login Button -->
           <q-btn
             type="submit"
-            label="Login"
+            :label="app.$i18n.t('login.submit')"
             color="primary"
             class="full-width q-mt-md"
             :loading="loading"
@@ -62,7 +63,7 @@
         <q-btn
           flat
           color="primary"
-          label="Forgot Password?"
+          :label="app.$i18n.t('login.forgetpassword')"
           @click="forgotPassword"
         />
       </q-card-section>
@@ -75,7 +76,7 @@ import { ref } from "vue";
 import { useQuasar } from "quasar";
 import json from "../locales/ar-EG.json";
 console.log(json, "JSON Arabic");
-
+import { requiredValidation } from "../common/Input-Validations";
 const $q = useQuasar();
 const email = ref("");
 const password = ref("");

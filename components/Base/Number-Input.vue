@@ -5,10 +5,10 @@
       v-model="theNumber"
       label="Wage Amount"
       mask="#######"
-      :fill-mask="0"
-      input-class="text-right"
+      fill-mask="0"
+      lazy-rules
+      
     ></q-input>
-    <p>{{ theNumber }}</p>
   </div>
 </template>
 

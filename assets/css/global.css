@@ -1,3 +1,10 @@
 body {
     font-family:'Noto Kufi Arabic', 'Cairo', 'Tajawal', sans-serif;
   }
+
+ 
+/* 
+  .q-field .q-field__label {
+    direction: rtl;
+    text-align: right;
+  } */

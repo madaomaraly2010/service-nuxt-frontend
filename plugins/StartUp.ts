@@ -8,6 +8,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   return {
     provide: {
       today: Date.now(),
+      direction: "rtl",
       //  currentLocale: () => "",
     },
   };

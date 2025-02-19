@@ -1,5 +1,5 @@
 <template>
-  <q-layout dir="rtl" view="hHh lpR fFf" class="bg-grey-1">
+  <q-layout :dir="globalStore.direction" view="hHh lpR fFf" class="bg-grey-1">
     <q-header elevated class="bg-white text-grey-8 q-py-xs" height-hint="58">
       <q-toolbar>
         <q-btn
@@ -105,7 +105,7 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
-      side="right"
+      side="left"
       bordered
       class="bg-grey-2"
       :width="240"
@@ -189,6 +189,7 @@
     </q-drawer>
 
     <q-page-container>
+      <q-btn @click="globalStore.toggleDirection">Change to arabic</q-btn>
       <slot></slot>
     </q-page-container>
   </q-layout>
@@ -197,6 +198,8 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { fabYoutube } from "@quasar/extras/fontawesome-v6";
+import { useGlobalStore } from "../Data/Stores/useGlobalStore";
+const globalStore = useGlobalStore();
 
 const leftDrawerOpen = ref(false);
 const search = ref("");

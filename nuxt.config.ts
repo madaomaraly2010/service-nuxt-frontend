@@ -2,18 +2,27 @@
 import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
-  pages: true, // Ensures pages directory is used
+  // Ensures pages directory is used
+  pages: true,
+
   modules: ["nuxt-quasar-ui", "@nuxtjs/i18n", "nuxt-echarts", "@pinia/nuxt"],
   devtools: { enabled: true },
+
   router: {
-    options: {
-      middleware: ["auth"], // Apply authentication middleware
-    },
+    options: {},
   },
 
   pinia: {
     storesDirs: ["./stores/**", "./custom-folder/stores/**"],
   },
+
+  postcss: {
+    plugins: {
+      autoprefixer: {}, // Enable Autoprefixer
+      "postcss-rtlcss": {}, // Example for RTL support
+    },
+  },
+
   app: {
     head: {
       link: [
@@ -32,6 +41,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   css: [
     "~/assets/css/global.css", // ✅ Load global styles
     "quasar/dist/quasar.css",
@@ -39,6 +49,7 @@ export default defineNuxtConfig({
     "@fortawesome/fontawesome-svg-core/styles.css",
     "@fortawesome/fontawesome-free/css/all.css",
   ],
+
   build: {
     transpile: ["quasar"],
   },
@@ -49,6 +60,7 @@ export default defineNuxtConfig({
       rtl: true, // Enable RTL globally for Quasar components
     },
   },
+
   i18n: {
     /* module options */
     lazy: true,
@@ -70,4 +82,6 @@ export default defineNuxtConfig({
     ],
     defaultLocale: "ar-EG",
   },
+
+  compatibilityDate: "2025-02-19",
 });

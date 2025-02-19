@@ -1,10 +1,15 @@
 {
     "login":{
-        "login":"دخول"
+        "login":"دخول",
+        "submit":"دخول",
+        "password":"كلمة المرور",
+        "email":"البريد الإكترونى",
+        "forgetpassword":"نسيت كلمة المرور"
     },
     "error":{
-        "email_not_correct" :"بريد إلكترونى غير صحيح",
-        "password_not_correct":"خطأ فى كلمة المرور",
-        "email_password_not_correct":"خطأ فى اسم المستخدم أو كلمة المرور"
+        "email_incorrect" :"بريد إلكترونى غير صحيح",
+        "password_incorrect":"خطأ فى كلمة المرور",
+        "email_password_incorrect":"خطأ فى اسم المستخدم أو كلمة المرور",
+        "field_is_required" : "حقل {0} إلزامى"
     }
 }

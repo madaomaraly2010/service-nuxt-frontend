@@ -1,4 +1,6 @@
 <template>
+  <!-- popup-content-style="text-align: right; direction: rtl;"
+    input-style="text-align: right; direction: rtl;" -->
   <q-select
     v-model="selectedWork"
     :options="workStore.works"
@@ -8,8 +10,6 @@
     dense
     clearable
     @update:model-value="onWorkSelected"
-    popup-content-style="text-align: right; direction: rtl;"
-    input-style="text-align: right; direction: rtl;"
   >
     <!-- <template v-slot:label>
       <div class="rtl-label">اختر العمل</div>
