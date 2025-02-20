@@ -33,7 +33,7 @@ const providerStore = useProviderStore();
 debugger;
 await workStore.findAll();
 debugger;
-//  //=====this gives error :[nuxt] [request error] [unhandled] [500] Cannot stringify arbitrary non-POJOs
+// =====this gives error :[nuxt] [request error] [unhandled] [500] Cannot stringify arbitrary non-POJOs
 const selectedWork = ref();
 const emits = defineEmits(["workSelected"]);
 const onWorkSelected = async (work: Work) => {

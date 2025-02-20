@@ -14,7 +14,9 @@ export class ProviderService implements IProviderRepositry {
         },
       }
     );
-    let response: ProviderResponse = ModelResponse.fromServerResponse(data);
+    let response: ProviderResponse = ModelResponse.fromServerResponse(
+      data.value
+    );
 
     if (error.value?.message) {
       throw new Error(error.value?.message);
@@ -38,7 +40,9 @@ export class ProviderService implements IProviderRepositry {
         },
       }
     );
-    let response: ProviderResponse = ModelResponse.fromServerResponse(data);
+    let response: ProviderResponse = ModelResponse.fromServerResponse(
+      data.value
+    );
 
     if (error.value?.message) {
       throw new Error(error.value?.message);
@@ -52,11 +56,12 @@ export class ProviderService implements IProviderRepositry {
   }
   async findAll(): Promise<ProviderResponse> {
     let list: Provider[] | undefined = [];
-    debugger;
     let { data, error } = await useFetch<ProviderResponse>(
       config.Provider.API_PROVIDER_GET
     );
-    let response: ProviderResponse = ModelResponse.fromServerResponse(data);
+    let response: ProviderResponse = ModelResponse.fromServerResponse(
+      data.value
+    );
 
     if (error.value?.message) {
       throw new Error(error.value?.message);

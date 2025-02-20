@@ -1,31 +1,13 @@
-export const useGlobalStore = defineStore<
-  "global",
-  IGlobalStoreState,
-  {},
-  IGlobalStoreActions
->("global", {
-  state: () => ({
-    direction: "ltr",
-  }),
-  actions: {
-    setDirectionArabic() {
-      this.direction = "rtl";
-    },
-    setDirectionEnglish() {
-      this.direction = "ltr";
-    },
-    toggleDirection() {
-      this.direction = this.direction == "ltr" ? "rtl" : "ltr";
-    },
+export const state = reactive({
+  direction: "ltr" as "ltr" | "rtl",
+  setDirectionArabic() {
+    state.direction = "rtl";
+  },
+  setDirectionEnglish() {
+    state.direction = "ltr";
+  },
+  toggleDirection() {
+    state.direction = state.direction == "ltr" ? "rtl" : "ltr";
   },
 });
-
-export interface IGlobalStoreState {
-  direction: "ltr" | "rtl";
-}
-
-export interface IGlobalStoreActions {
-  setDirectionArabic(): void;
-  setDirectionEnglish(): void;
-  toggleDirection(): void;
-}
+export const useGlobalStore = () => state;

@@ -24,11 +24,15 @@
             <q-td>
               <q-item>
                 <q-item-section>
-                  <q-item-label class="text-bold text-grey-7">{{
-                    (row.user?.first_name ?? " ") +
-                    " " +
-                    (row.user?.last_name ?? " ")
-                  }}</q-item-label>
+                  <q-item-label
+                    style="text-align: center"
+                    class="text-bold text-grey-7"
+                    >{{
+                      (row.user?.first_name ?? " ") +
+                      " " +
+                      (row.user?.last_name ?? " ")
+                    }}</q-item-label
+                  >
                 </q-item-section>
               </q-item>
             </q-td>
@@ -91,31 +95,35 @@ const provider_column: QTableColumn[] = [
     label: "السجل",
     field: "id",
     sortable: true,
-    // align: "left",
+    align: "left",
   },
   {
     name: "fullname",
     label: "الاسم",
     field: "id",
     sortable: true,
+    align: "center",
   },
   {
     name: "mobile",
     label: "الجوال",
     field: "user.mobile",
     sortable: true,
+    align: "left",
   },
   {
     name: "gender",
     label: "الجنس",
     field: "user.gender",
     sortable: true,
+    align: "left",
   },
   {
     name: "country",
     label: "الجنسية",
     field: "country.arb_name",
     sortable: true,
+    align: "left",
   },
 
   {
@@ -123,6 +131,7 @@ const provider_column: QTableColumn[] = [
     label: "العمل",
     field: "work.arb_name",
     sortable: true,
+    align: "left",
   },
 ];
 </script>

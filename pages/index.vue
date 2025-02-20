@@ -25,10 +25,10 @@
 
     <div class="row">
       <div class="col-3 q-pa-sm">
-        <!-- <CardTableSales></CardTableSales> -->
+        <CardTableSales></CardTableSales>
       </div>
       <div class="col-9 block q-pa-sm">
-        <!-- <ProviderTable></ProviderTable> -->
+        <ProviderTable></ProviderTable>
       </div>
     </div>
   </div>
