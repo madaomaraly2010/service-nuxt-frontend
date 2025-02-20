@@ -165,12 +165,10 @@
     </q-page-container>
   </q-layout>
 </template>
-
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useGlobalStore } from "../Data/Stores/useGlobalStore";
 const globalStore = useGlobalStore();
-
 const leftDrawerOpen = ref(false);
 const search = ref("");
 const nuxtApp = useNuxtApp();

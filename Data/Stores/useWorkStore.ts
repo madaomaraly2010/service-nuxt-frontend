@@ -2,10 +2,10 @@ import { Work } from "../Models";
 import { WorkService } from "../Services/Work.service";
 import type { WorkResponse } from "../Responses/Model-Responses";
 export const state = reactive({
-  works: [] as Work[],
+  list: [] as Work[],
   async findAll(): Promise<WorkResponse> {
     let response: WorkResponse = await WorkService.instance.findAll();
-    state.works = response.data ?? [];
+    state.list = response.data ?? [];
     return response;
   },
 });

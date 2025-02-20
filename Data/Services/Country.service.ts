@@ -5,6 +5,13 @@ import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
 
 export class CountryService implements ICountryRepositry {
+  static _service: CountryService;
+  public static get instance(): CountryService {
+    if (CountryService._service == null) {
+      CountryService._service = new CountryService();
+    }
+    return CountryService._service;
+  }
   async findAll(): Promise<CountryResponse> {
     let { data, error } = await useFetch(config.Country.API_COUNTRY_STATUS_GET);
     console.log("Country Data", data);

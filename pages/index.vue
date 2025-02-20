@@ -4,7 +4,7 @@
     <CardCharts></CardCharts>
     <div class="q-pa-sm row">
       <div class="col-3">
-        <q-item class="" dense="">
+        <q-item class="" dense>
           <q-item-section avatar>
             <q-icon name="fa-solid fa-users" size="md" />
           </q-item-section>
@@ -17,10 +17,10 @@
         </q-item>
       </div>
       <!-- Empty columns to push the button to column 4 -->
-      <WorkDropButton class="col-3 offset-1"></WorkDropButton>
+      <!-- <WorkDropButton class="col-3 offset-1"></WorkDropButton>
       <div class="row col-3">
         <WorkFilterSelect class="col"></WorkFilterSelect>
-      </div>
+      </div> -->
     </div>
 
     <div class="row">
@@ -33,9 +33,20 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 definePageMeta({
   middleware: "auth",
+});
+import { useLookupStore } from "~/Data/Stores/useLookupStore";
+const lookupStore = useLookupStore();
+const nuxtApp = useNuxtApp();
+
+onMounted(() => {
+  nuxtApp.$q.loading.show({ message: "Loading data..." }); // Show loading spinner
+  nextTick(async () => {
+    await lookupStore.fetchAllLookups();
+    await setTimeout(() => nuxtApp.$q.loading.hide(), 3000);
+  });
 });
 </script>
 

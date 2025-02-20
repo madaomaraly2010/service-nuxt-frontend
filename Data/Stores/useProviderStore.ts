@@ -1,13 +1,12 @@
 import { Provider } from "../Models";
-import { ProviderService } from "../Services/Provider.service";
 import type { ProviderResponse } from "../Responses/Model-Responses";
+import { ProviderService } from "../Services/Provider.service";
 export const state = reactive({
-  providers: [] as Provider[],
-  service: new ProviderService(),
+  list: [] as Provider[],
+
   async findAll(): Promise<ProviderResponse> {
-    let response: ProviderResponse = await state.service.findAll();
-    debugger;
-    state.providers = response.data ?? [];
+    let response: ProviderResponse = await ProviderService.instance.findAll();
+    state.list = response.data ?? [];
     return response;
   },
   async findOne(id: number): Promise<ProviderResponse> {
@@ -23,16 +22,16 @@ export const state = reactive({
     throw new Error("delete not implemented");
   },
   async getByCountry(countryId: number): Promise<ProviderResponse> {
-    let response: ProviderResponse = await state.service.getByCountry(
-      countryId
-    );
-    state.providers = response.data ?? [];
+    let response: ProviderResponse =
+      await ProviderService.instance.getByCountry(countryId);
+    state.list = response.data ?? [];
     return response;
   },
   async getByWork(workId: number): Promise<ProviderResponse> {
-    let response: ProviderResponse = await state.service.getByWork(workId);
-    state.providers = response.data ?? [];
-    debugger;
+    let response: ProviderResponse = await ProviderService.instance.getByWork(
+      workId
+    );
+    state.list = response.data ?? [];
     return response;
   },
 });

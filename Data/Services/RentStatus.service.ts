@@ -4,6 +4,13 @@ import type { RentStatusResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
 export class RentStatusService implements IRentStatusRepositry {
+  static _service: RentStatusService;
+  public static get instance(): RentStatusService {
+    if (RentStatusService._service == null) {
+      RentStatusService._service = new RentStatusService();
+    }
+    return RentStatusService._service;
+  }
   async findAll(): Promise<RentStatusResponse> {
     let { data, error } = await useFetch(config.RentStatus.API_RENT_STATUS_GET);
     console.log("Rent Data", data);

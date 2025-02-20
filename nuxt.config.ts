@@ -55,7 +55,7 @@ export default defineNuxtConfig({
   },
 
   quasar: {
-    plugins: ["Notify"],
+    plugins: ["Notify", "Loading"],
     config: {
       extras: ["fontawesome-v5"],
       rtl: true, // Enable RTL globally for Quasar components

@@ -1,10 +1,18 @@
 <template>
   <div>
     <div class="row block">
+      <div class="row">
+        <q-btn @click="openDialog">Add row</q-btn>
+        <ProviderAddEditDialogForm
+          ref="providerRef"
+        ></ProviderAddEditDialogForm>
+        <WorkDropButton class="col-3"></WorkDropButton>
+        <WorkFilterSelect class="col-3 offset-2"></WorkFilterSelect>
+      </div>
       <q-card-section class="q-pa-none q-ma-none">
         <base-table
           class="provider-table"
-          :rows="store.providers"
+          :rows="store.list"
           :columns="provider_column"
           flat
           bordered
@@ -87,8 +95,9 @@ import type { QTableColumn } from "quasar";
 
 import { useProviderStore } from "~/Data/Stores/useProviderStore";
 const store = useProviderStore();
+const providerRef = ref(null);
 await store.findAll();
-
+const openDialog = () => (providerRef.value as any).openDialog();
 const provider_column: QTableColumn[] = [
   {
     name: "id",

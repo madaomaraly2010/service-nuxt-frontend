@@ -5,6 +5,13 @@ import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
 
 export class UserService implements IUserRepositry {
+  static _service: UserService;
+  public static get instance(): UserService {
+    if (UserService._service == null) {
+      UserService._service = new UserService();
+    }
+    return UserService._service;
+  }
   async login(username: string, password: string): Promise<UserResponse> {
     let list: User[] | undefined = [];
     let { data, error } = await useFetch<UserResponse>(
@@ -28,7 +35,6 @@ export class UserService implements IUserRepositry {
     if (Array.isArray(response.data ?? [])) {
       list = response.data?.map((it) => User.fromDbRow(it));
       response.data = list ?? [];
-      
     }
     return response;
   }

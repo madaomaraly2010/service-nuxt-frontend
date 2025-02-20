@@ -4,6 +4,13 @@ import { config } from "~/Data/UrlsConfig";
 import type { ProviderResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
 export class ProviderService implements IProviderRepositry {
+  static _service: ProviderService;
+  public static get instance(): ProviderService {
+    if (ProviderService._service == null) {
+      ProviderService._service = new ProviderService();
+    }
+    return ProviderService._service;
+  }
   async getByCountry(countryId: number): Promise<ProviderResponse> {
     let list: Provider[] | undefined = [];
     let { data, error } = await useFetch<ProviderResponse>(

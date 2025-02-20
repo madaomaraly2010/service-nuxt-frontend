@@ -2,12 +2,14 @@ import { User } from "../Models";
 import type { UserResponse } from "../Responses/Model-Responses";
 import { UserService } from "../Services/User.service";
 export const state = reactive({
-  users: [],
-  service: new UserService(),
+  list: [],
   isAuthenticated: false,
 
   async login(username: string, password: string): Promise<UserResponse> {
-    let response: UserResponse = await state.service.login(username, password);
+    let response: UserResponse = await UserService.instance.login(
+      username,
+      password
+    );
     state.isAuthenticated = false;
     if (response.isAuthenticated) {
       localStorage.setItem("auth", "true");

@@ -5,6 +5,13 @@ import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
 
 export class ChildStatusService implements IChildStatusRepositry {
+  static _service: ChildStatusService;
+  public static get instance(): ChildStatusService {
+    if (ChildStatusService._service == null) {
+      ChildStatusService._service = new ChildStatusService();
+    }
+    return ChildStatusService._service;
+  }
   async findAll(): Promise<ChildStatusResponse> {
     let { data, error } = await useFetch(
       config.ChildStatus.API_CHILD_STATUS_GET

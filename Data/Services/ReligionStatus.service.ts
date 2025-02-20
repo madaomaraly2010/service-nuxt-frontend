@@ -4,6 +4,13 @@ import type { ReligionStatusResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
 export class ReligionStatusService implements IReligionStatusRepositry {
+  static _service: ReligionStatusService;
+  public static get instance(): ReligionStatusService {
+    if (ReligionStatusService._service == null) {
+      ReligionStatusService._service = new ReligionStatusService();
+    }
+    return ReligionStatusService._service;
+  }
   async findAll(): Promise<ReligionStatusResponse> {
     let { data, error } = await useFetch(
       config.ReligionStatus.API_RELIGION_STATUS_GET

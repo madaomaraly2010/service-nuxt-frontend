@@ -5,6 +5,13 @@ import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
 
 export class CookStatusService implements ICookStatusRepositry {
+  static _service: CookStatusService;
+  public static get instance(): CookStatusService {
+    if (CookStatusService._service == null) {
+      CookStatusService._service = new CookStatusService();
+    }
+    return CookStatusService._service;
+  }
   async findAll(): Promise<CookStatusResponse> {
     let { data, error } = await useFetch(config.CookStatus.API_COOK_STATUS_GET);
     console.log("Cook Status Data", data);

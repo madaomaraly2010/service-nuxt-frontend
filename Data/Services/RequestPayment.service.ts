@@ -3,6 +3,13 @@ import type { IRequestPaymentRepositry } from "../Repositries/Models-Repositries
 import type { RequestPaymentResponse } from "../Responses/Model-Responses";
 
 export class RequestPaymentService implements IRequestPaymentRepositry {
+  static _service: RequestPaymentService;
+  public static get instance(): RequestPaymentService {
+    if (RequestPaymentService._service == null) {
+      RequestPaymentService._service = new RequestPaymentService();
+    }
+    return RequestPaymentService._service;
+  }
   findAll(): Promise<RequestPaymentResponse> {
     throw new Error("Method not implemented.");
   }

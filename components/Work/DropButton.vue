@@ -1,7 +1,7 @@
 <template>
   <q-btn-dropdown label="إضافة" color="secondary" dense="">
-    <q-list class="rtl" separator>
-      <q-item v-for="work in workList" :key="work.id" clickable>
+    <q-list :class="globalStore.direction == 'rtl' ? 'rtl' : ''" separator>
+      <q-item v-for="work in workStore.list" :key="work.id" clickable>
         <q-item-section avatar>
           <q-icon :name="work.icon" size="sm" />
         </q-item-section>
@@ -16,6 +16,11 @@
 
 <script setup>
 import { ref } from "vue";
+import { useGlobalStore } from "~/Data/Stores/useGlobalStore";
+import { useWorkStore } from "~/Data/Stores/useWorkStore";
+
+const globalStore = useGlobalStore();
+const workStore = useWorkStore();
 
 const workList = ref([
   { id: 1, arb_name: "سباك", eng_name: "Plumber", icon: "fas fa-wrench" },
@@ -37,7 +42,7 @@ const workList = ref([
 ]);
 </script>
 <style scoped>
-.rtl {
+/* .rtl {
   direction: rtl;
   text-align: right;
 }
@@ -49,5 +54,5 @@ const workList = ref([
 .rtl-popup {
   direction: rtl;
   text-align: right;
-}
+} */
 </style>

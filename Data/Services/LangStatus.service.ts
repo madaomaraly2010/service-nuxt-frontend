@@ -4,6 +4,13 @@ import type { LangStatusResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
 export class LangStatusService implements ILangStatusRepositry {
+  static _service: LangStatusService;
+  public static get instance(): LangStatusService {
+    if (LangStatusService._service == null) {
+      LangStatusService._service = new LangStatusService();
+    }
+    return LangStatusService._service;
+  }
   async findAll(): Promise<LangStatusResponse> {
     let { data, error } = await useFetch(config.LangStatus.API_LANG_STATUS_GET);
     console.log("Lang Data", data);

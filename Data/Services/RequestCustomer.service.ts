@@ -3,6 +3,13 @@ import type { IRequestCustomerRepositry } from "../Repositries/Models-Repositrie
 import type { RequestCustomerResponse } from "../Responses/Model-Responses";
 
 export class RequestCustomerService implements IRequestCustomerRepositry {
+  static _service: RequestCustomerService;
+  public static get instance(): RequestCustomerService {
+    if (RequestCustomerService._service == null) {
+      RequestCustomerService._service = new RequestCustomerService();
+    }
+    return RequestCustomerService._service;
+  }
   findAll(): Promise<RequestCustomerResponse> {
     throw new Error("Method not implemented.");
   }

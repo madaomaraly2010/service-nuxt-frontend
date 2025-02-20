@@ -4,6 +4,13 @@ import type { WorkCategoryResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
 export class WorkCategoryService implements IWorkCategoryRepositry {
+  static _service: WorkCategoryService;
+  public static get instance(): WorkCategoryService {
+    if (WorkCategoryService._service == null) {
+      WorkCategoryService._service = new WorkCategoryService();
+    }
+    return WorkCategoryService._service;
+  }
   async findAll(): Promise<WorkCategoryResponse> {
     let { data, error } = await useFetch(
       config.WorkCategory.API_WORK_CATEGORY_GET

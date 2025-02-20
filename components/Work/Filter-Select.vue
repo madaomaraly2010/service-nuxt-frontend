@@ -4,12 +4,13 @@
   <!-- <q-btn @click="fillWorks">Fill Works</q-btn> -->
   <q-select
     v-model="selectedWork"
-    :options="workStore.works"
+    :options="workStore.list"
     option-label="arb_name"
     option-value="id"
     filled
     dense
     clearable
+    :popup-content-class="globalStore.direction == 'rtl' ? 'rtl' : ''"
     @update:model-value="onWorkSelected"
   >
     <!-- <template v-slot:label>
@@ -20,19 +21,19 @@
 
 <script lang="ts" setup>
 import type { Work } from "~/Data/Models";
-import { useWorkStore } from "../Data/Stores/useWorkStore";
-import { useProviderStore } from "../Data/Stores/useProviderStore";
+import { useGlobalStore } from "~/Data/Stores/useGlobalStore";
+import { useProviderStore } from "~/Data/Stores/useProviderStore";
+import { useWorkStore } from "~/Data/Stores/useWorkStore";
+
 // import { config } from "../Data/UrlsConfig";
 // import type { WorkResponse } from "~/Data/Responses/Model-Responses";
 // import { ModelResponse } from "~/Data/Responses/ModelResponse-Class";
 
 const workStore = useWorkStore();
 const providerStore = useProviderStore();
-
+const globalStore = useGlobalStore();
 // let { data } = await useFetch(config.Work.API_WORK_GET);
-debugger;
-await workStore.findAll();
-debugger;
+// await workStore.findAll();
 // =====this gives error :[nuxt] [request error] [unhandled] [500] Cannot stringify arbitrary non-POJOs
 const selectedWork = ref();
 const emits = defineEmits(["workSelected"]);
@@ -45,11 +46,11 @@ const onWorkSelected = async (work: Work) => {
 // };
 </script>
 <style>
-.rtl {
+/* .rtl {
   direction: rtl;
   text-align: right;
-}
-
+} */
+/*
 .rtl-text .q-field__control {
   text-align: right;
 }
@@ -61,5 +62,5 @@ const onWorkSelected = async (work: Work) => {
 .q-field .q-field__label {
   direction: rtl;
   text-align: right;
-}
+} */
 </style>
