@@ -16,12 +16,12 @@
               (val) =>
                 /.+@.+\..+/.test(val) || app.$i18n.t('error.email_not_correct'),
             ]" -->
+          <!-- :rules="[requiredValidation($t, 'login.email')]" -->
           <base-text-input
             v-model="email"
             :label="$t('login.email')"
             filled
             lazy-rules
-            :rules="[requiredValidation($t, 'login.email')]"
           >
             <template v-slot:prepend>
               <q-icon name="email" />
@@ -51,6 +51,7 @@
           <!-- Login Button -->
           <q-btn
             type="submit"
+            @click="doLogin"
             :label="$t('login.submit')"
             color="primary"
             class="full-width q-mt-md"
@@ -75,20 +76,24 @@
 import { ref } from "vue";
 import { useQuasar } from "quasar";
 import { requiredValidation } from "../common/Input-Validations";
+import { useUserStore } from "../Data/Stores/useUserStore";
+
 const $q = useQuasar();
+const userStore = useUserStore();
+
 const email = ref("");
 const password = ref("");
 const isPwd = ref(true);
 const loading = ref(false);
 const doLogin = async () => {
-  loading.value = true;
-  setTimeout(() => {
-    loading.value = false;
+  let response = await userStore.login(email.value, password.value);
+  debugger;
+  if (response.isAuthenticated) {
     $q.notify({
-      type: "positive",
-      message: "Login Successful!",
+      message: "User is Authenticated",
     });
-  }, 1500);
+    useRouter().push("/");
+  }
 };
 
 const forgotPassword = () => {

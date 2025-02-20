@@ -14,17 +14,21 @@ import type {
   WorkCategory,
 } from "../Models";
 import type { LangStatus } from "../Models/LangStatus";
+import type {
+  ProviderResponse,
+  UserResponse,
+} from "../Responses/Model-Responses";
 import type { IRepositry } from "./IRepositry";
 
 export interface ICountryRepositry extends IRepositry<Country> {}
 
 export interface IUserRepositry extends IRepositry<User> {
-  //   getAllUser(): User[];
+  login(username: string, password: string): Promise<UserResponse>;
 }
 
 export interface IProviderRepositry extends IRepositry<Provider> {
-  getByCountry(countryId: number): Promise<Provider[]>;
-  getByWork(workId: number): Promise<Provider[]>;
+  getByCountry(countryId: number): Promise<ProviderResponse>;
+  getByWork(workId: number): Promise<ProviderResponse>;
 }
 
 export interface IWorkRepositry extends IRepositry<Work> {}

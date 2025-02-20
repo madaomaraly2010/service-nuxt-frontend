@@ -69,4 +69,12 @@ export const config = {
     API_PACKAGE_STATUS_DELETE: `${BASE_URL}/package`,
     API_PACKAGE_STATUS_UPDATE: `${BASE_URL}/package`,
   },
+
+  User: {
+    API_PACKAGE_USER_GET: `${BASE_URL}/user`,
+    API_PACKAGE_USER_POST: `${BASE_URL}/user`,
+    API_PACKAGE_USER_POST_LOGIN: `${BASE_URL}/user/login`,
+    API_PACKAGE_USER_DELETE: `${BASE_URL}/user`,
+    API_PACKAGE_USER_UPDATE: `${BASE_URL}/user`,
+  },
 };

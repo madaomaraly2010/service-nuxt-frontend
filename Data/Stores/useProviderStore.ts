@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { Provider } from "../Models";
 import type { IProviderRepositry } from "../Repositries/Models-Repositries";
 import { ProviderService } from "../Services/Provider.service";
+import type { ProviderResponse } from "../Responses/Model-Responses";
 export const useProviderStore = defineStore<
   "provider",
   IProviderStoreState,
@@ -10,40 +11,48 @@ export const useProviderStore = defineStore<
 >("provider", {
   state: () => ({
     providers: [],
-    service: new ProviderService(),
+    service: null,
   }),
 
   actions: {
-    async findAll(): Promise<Provider[]> {
-      this.providers = await this.service.findAll();
-      return this.providers;
+    async findAll(): Promise<ProviderResponse> {
+      if(this.service==null) this.service = new ProviderService()
+      let response: ProviderResponse = await this.service.findAll();
+      this.providers = response.data ?? [];
+      return response;
     },
-    async findOne(id: number): Promise<Provider> {
-      return new Provider();
+    async findOne(id: number): Promise<ProviderResponse> {
+      throw new Error("findOne not implemented");
     },
-    async create(row: Provider): Promise<Provider> {
-      return new Provider();
+    async create(row: Provider): Promise<ProviderResponse> {
+      throw new Error("create not implemented");
     },
-    async update(row: Provider): Promise<Provider> {
-      return new Provider();
+    async update(row: Provider): Promise<ProviderResponse> {
+      throw new Error("update not implemented");
     },
-    async delete(id: number): Promise<Provider> {
-      return new Provider();
+    async delete(id: number): Promise<ProviderResponse> {
+      throw new Error("delete not implemented");
     },
-    async getByCountry(countryId: number): Promise<Provider[]> {
-      this.providers = await this.service.getByCountry(countryId);
-      return this.providers;
+    async getByCountry(countryId: number): Promise<ProviderResponse> {
+      if(this.service==null) this.service = new ProviderService()
+      let response: ProviderResponse = await this.service.getByCountry(
+        countryId
+      );
+      this.providers = response.data ?? [];
+      return response;
     },
-    async getByWork(workId: number): Promise<Provider[]> {
-      let ar: Provider[] = await this.service.getByWork(workId);
+    async getByWork(workId: number): Promise<ProviderResponse> {
+      if(this.service==null) this.service = new ProviderService()
+      let response: ProviderResponse = await this.service.getByWork(workId);
+      let ar: Provider[] = response.data ?? [];
       this.providers.length = 0;
       this.providers.push(...ar);
-      return ar;
+      return response;
     },
   },
 });
 
 export interface IProviderStoreState {
   providers: Provider[];
-  service: ProviderService;
+  service: ProviderService |null;
 }

@@ -1,22 +1,24 @@
 import type { LangStatus } from "../Models/LangStatus";
 import type { ILangStatusRepositry } from "../Repositries/Models-Repositries";
+import type { LangStatusResponse } from "../Responses/Model-Responses";
+import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
 export class LangStatusService implements ILangStatusRepositry {
-  async findAll(): Promise<LangStatus[]> {
+  async findAll(): Promise<LangStatusResponse> {
     let { data, error } = await useFetch(config.LangStatus.API_LANG_STATUS_GET);
     console.log("Lang Data", data);
-    return [];
+    return ModelResponse.createSuccessResponse([]);
   }
-  async findOne(id: number): Promise<LangStatus> {
+  async findOne(id: number): Promise<LangStatusResponse> {
     throw new Error("Method not implemented.");
   }
-  async create(row: LangStatus): Promise<LangStatus> {
+  async create(row: LangStatus): Promise<LangStatusResponse> {
     throw new Error("Method not implemented.");
   }
-  async update(row: LangStatus): Promise<LangStatus> {
+  async update(row: LangStatus): Promise<LangStatusResponse> {
     throw new Error("Method not implemented.");
   }
-  async delete(id: number): Promise<LangStatus> {
+  async delete(id: number): Promise<LangStatusResponse> {
     throw new Error("Method not implemented.");
   }
 }

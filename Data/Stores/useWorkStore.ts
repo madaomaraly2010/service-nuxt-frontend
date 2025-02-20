@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { Work } from "../Models";
 import type { IWorkRepositry } from "../Repositries/Models-Repositries";
 import { WorkService } from "../Services/Work.service";
+import type { WorkResponse } from "../Responses/Model-Responses";
 export const useWorkStore = defineStore<
   "work",
   IWorkStoreState,
@@ -10,30 +11,32 @@ export const useWorkStore = defineStore<
 >("work", {
   state: () => ({
     works: [],
-    service: new WorkService(),
   }),
 
   actions: {
-    async findAll(): Promise<Work[]> {
-      this.works = await this.service.findAll();
-      return this.works;
+    async findAll(): Promise<WorkResponse> {
+      let response: WorkResponse = await WorkService.instance.findAll();
+      debugger;
+      const works = JSON.parse(JSON.stringify(response.data ?? []));
+      this.$patch({ works });
+      // this.works = response.data ?? [];
+      return response;
     },
-    async findOne(id: number): Promise<Work> {
-      return new Work();
+    async findOne(id: number): Promise<WorkResponse> {
+      throw new Error();
     },
-    async create(row: Work): Promise<Work> {
-      return new Work();
+    async create(row: Work): Promise<WorkResponse> {
+      throw new Error();
     },
-    async update(row: Work): Promise<Work> {
-      return new Work();
+    async update(row: Work): Promise<WorkResponse> {
+      throw new Error();
     },
-    async delete(id: number): Promise<Work> {
-      return new Work();
+    async delete(id: number): Promise<WorkResponse> {
+      throw new Error();
     },
   },
 });
 
 export interface IWorkStoreState {
   works: Work[];
-  service: WorkService;
 }

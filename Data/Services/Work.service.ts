@@ -1,29 +1,48 @@
 import { Work } from "../Models";
-import type { IWorkAttributes } from "../Models-Row-Attributes";
 import type { IWorkRepositry } from "../Repositries/Models-Repositries";
+import type { WorkResponse } from "../Responses/Model-Responses";
+import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
 export class WorkService implements IWorkRepositry {
-  async findAll(): Promise<Work[]> {
+  static _workService: WorkService;
+  public static get instance(): WorkService {
+    if (WorkService._workService == null) {
+      WorkService._workService = new WorkService();
+    }
+    return WorkService._workService;
+  }
+
+  async findAll(): Promise<WorkResponse> {
     let list: Work[] = [];
-    let { data, error } = await useFetch<IWorkAttributes[]>(
+
+    let { data, error } = await useFetch<WorkResponse>(
       config.Work.API_WORK_GET
     );
 
-    if (Array.isArray(data.value)) {
-      list = data.value?.map((work) => Work.fromDbRow(work));
+    let response: WorkResponse = ModelResponse.fromServerResponse(data.value);
+    if (error.value?.message) {
+      throw new Error(error.value?.message);
     }
-    return list;
+    if (response.error) {
+      return response;
+    }
+
+    if (Array.isArray(response.data)) {
+      list = response.data.map((work) => Work.fromDbRow(work));
+      response.data = list;
+    }
+    return response;
   }
-  async findOne(id: number): Promise<Work> {
+  async findOne(id: number): Promise<WorkResponse> {
     throw new Error("Method not implemented.");
   }
-  async create(row: Work): Promise<Work> {
+  async create(row: Work): Promise<WorkResponse> {
     throw new Error("Method not implemented.");
   }
-  async update(row: Work): Promise<Work> {
+  async update(row: Work): Promise<WorkResponse> {
     throw new Error("Method not implemented.");
   }
-  async delete(id: number): Promise<Work> {
+  async delete(id: number): Promise<WorkResponse> {
     throw new Error("Method not implemented.");
   }
 }
