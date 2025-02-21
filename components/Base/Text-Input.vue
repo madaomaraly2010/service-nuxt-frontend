@@ -2,7 +2,6 @@
   <div>
     <q-input
       outlined
-      filled
       v-model="theValue"
       :label="label"
       stack-label

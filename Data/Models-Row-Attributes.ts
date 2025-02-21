@@ -158,7 +158,7 @@ export interface IUserAttributes {
   last_name?: string;
   middle_name?: string;
   mobile?: string;
-  date_birth?: string;
+  date_birth?: Date;
   gender?: number;
 
   provider?: IProviderAttributes;

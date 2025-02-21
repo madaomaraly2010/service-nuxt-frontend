@@ -5,7 +5,7 @@
     :transition-show="transitionShow"
     :transition-hide="transitionHide"
   >
-    <q-card :style="{ minWidth: width }" class="q-pa-md">
+    <q-card :style="{ maxWidth, maxHeight }" class="q-pa-sm">
       <!-- Header Slot (Title & Close Button) -->
       <q-card-section class="row items-center">
         <slot name="header">
@@ -58,9 +58,17 @@ const props = defineProps({
     type: String,
     default: "Dialog",
   },
-  width: {
+  minWidth: {
     type: String,
     default: "500px",
+  },
+  maxWidth: {
+    type: String,
+    default: "50vw",
+  },
+  maxHeight: {
+    type: String,
+    default: "80vh",
   },
   persistent: {
     type: Boolean,

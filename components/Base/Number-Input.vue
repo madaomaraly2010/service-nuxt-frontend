@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-const theNumber = defineModel<string>();
+const theNumber = defineModel<number>();
 </script>
 
 <style scoped></style>
