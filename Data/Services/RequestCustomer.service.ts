@@ -1,8 +1,12 @@
 import type { RequestCustomer } from "../Models";
 import type { IRequestCustomerRepositry } from "../Repositries/Models-Repositries";
 import type { RequestCustomerResponse } from "../Responses/Model-Responses";
-
-export class RequestCustomerService implements IRequestCustomerRepositry {
+import { config } from "../UrlsConfig";
+import { BaseModelService } from "./Base.Service";
+export class RequestCustomerService
+  extends BaseModelService<RequestCustomer>
+  implements IRequestCustomerRepositry
+{
   static _service: RequestCustomerService;
   public static get instance(): RequestCustomerService {
     if (RequestCustomerService._service == null) {
@@ -10,19 +14,27 @@ export class RequestCustomerService implements IRequestCustomerRepositry {
     }
     return RequestCustomerService._service;
   }
-  findAll(): Promise<RequestCustomerResponse> {
+
+  override get usedUrl(): string {
+    return config.RequestCustomer.API_RQUEST_CUSTOMER_GET;
+  }
+  override async findAll(): Promise<RequestCustomerResponse> {
     throw new Error("Method not implemented.");
   }
-  findOne(id: number): Promise<RequestCustomerResponse> {
+  override async findOne(id: number): Promise<RequestCustomerResponse> {
     throw new Error("Method not implemented.");
   }
-  create(row: RequestCustomer): Promise<RequestCustomerResponse> {
+  override async create(
+    row: RequestCustomer
+  ): Promise<RequestCustomerResponse> {
     throw new Error("Method not implemented.");
   }
-  update(row: RequestCustomer): Promise<RequestCustomerResponse> {
+  override async update(
+    row: RequestCustomer
+  ): Promise<RequestCustomerResponse> {
     throw new Error("Method not implemented.");
   }
-  delete(id: number): Promise<RequestCustomerResponse> {
+  override async delete(id: number): Promise<RequestCustomerResponse> {
     throw new Error("Method not implemented.");
   }
 }

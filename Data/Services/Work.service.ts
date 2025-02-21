@@ -1,9 +1,12 @@
 import { Work } from "../Models";
 import type { IWorkRepositry } from "../Repositries/Models-Repositries";
 import type { WorkResponse } from "../Responses/Model-Responses";
-import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
-export class WorkService implements IWorkRepositry {
+import { BaseModelService } from "./Base.Service";
+export class WorkService
+  extends BaseModelService<Work>
+  implements IWorkRepositry
+{
   static _workService: WorkService;
   public static get instance(): WorkService {
     if (WorkService._workService == null) {
@@ -12,37 +15,45 @@ export class WorkService implements IWorkRepositry {
     return WorkService._workService;
   }
 
-  async findAll(): Promise<WorkResponse> {
-    let list: Work[] = [];
-
-    let { data, error } = await useFetch<WorkResponse>(
-      config.Work.API_WORK_GET
-    );
-
-    let response: WorkResponse = ModelResponse.fromServerResponse(data.value);
-    if (error.value?.message) {
-      throw new Error(error.value?.message);
-    }
-    if (response.error) {
-      return response;
-    }
-
-    if (Array.isArray(response.data)) {
-      list = response.data.map((work) => Work.fromDbRow(work));
-      response.data = list;
-    }
-    return response;
+  override get usedUrl(): string {
+    return config.Work.API_WORK_GET;
   }
-  async findOne(id: number): Promise<WorkResponse> {
+
+  override async findAll(): Promise<WorkResponse> {
+    return super.fetchData(Work as any, config.Work.API_WORK_GET);
+  }
+
+  // override async findAll(): Promise<WorkResponse> {
+  //   let list: Work[] = [];
+
+  //   let { data, error } = await useFetch<WorkResponse>(
+  //     config.Work.API_WORK_GET
+  //   );
+
+  //   let response: WorkResponse = ModelResponse.fromServerResponse(data.value);
+  //   if (error.value?.message) {
+  //     throw new Error(error.value?.message);
+  //   }
+  //   if (response.error) {
+  //     return response;
+  //   }
+
+  //   if (Array.isArray(response.data)) {
+  //     list = response.data.map((work) => Work.fromDbRow(work));
+  //     response.data = list;
+  //   }
+  //   return response;
+  // }
+  override async findOne(id: number): Promise<WorkResponse> {
     throw new Error("Method not implemented.");
   }
-  async create(row: Work): Promise<WorkResponse> {
+  override async create(row: Work): Promise<WorkResponse> {
     throw new Error("Method not implemented.");
   }
-  async update(row: Work): Promise<WorkResponse> {
+  override async update(row: Work): Promise<WorkResponse> {
     throw new Error("Method not implemented.");
   }
-  async delete(id: number): Promise<WorkResponse> {
+  override async delete(id: number): Promise<WorkResponse> {
     throw new Error("Method not implemented.");
   }
 }

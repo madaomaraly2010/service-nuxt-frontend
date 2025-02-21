@@ -1,8 +1,12 @@
 import type { RequestPayment } from "../Models";
 import type { IRequestPaymentRepositry } from "../Repositries/Models-Repositries";
 import type { RequestPaymentResponse } from "../Responses/Model-Responses";
-
-export class RequestPaymentService implements IRequestPaymentRepositry {
+import { config } from "../UrlsConfig";
+import { BaseModelService } from "./Base.Service";
+export class RequestPaymentService
+  extends BaseModelService<RequestPayment>
+  implements IRequestPaymentRepositry
+{
   static _service: RequestPaymentService;
   public static get instance(): RequestPaymentService {
     if (RequestPaymentService._service == null) {
@@ -10,19 +14,23 @@ export class RequestPaymentService implements IRequestPaymentRepositry {
     }
     return RequestPaymentService._service;
   }
-  findAll(): Promise<RequestPaymentResponse> {
+
+  override get usedUrl(): string {
+    return config.RequestPayment.API_RQUEST_PAYMENT_GET;
+  }
+  override async findAll(): Promise<RequestPaymentResponse> {
     throw new Error("Method not implemented.");
   }
-  findOne(id: number): Promise<RequestPaymentResponse> {
+  override async findOne(id: number): Promise<RequestPaymentResponse> {
     throw new Error("Method not implemented.");
   }
-  create(row: RequestPayment): Promise<RequestPaymentResponse> {
+  override async create(row: RequestPayment): Promise<RequestPaymentResponse> {
     throw new Error("Method not implemented.");
   }
-  update(row: RequestPayment): Promise<RequestPaymentResponse> {
+  override async update(row: RequestPayment): Promise<RequestPaymentResponse> {
     throw new Error("Method not implemented.");
   }
-  delete(id: number): Promise<RequestPaymentResponse> {
+  override async delete(id: number): Promise<RequestPaymentResponse> {
     throw new Error("Method not implemented.");
   }
 }

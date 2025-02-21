@@ -64,10 +64,31 @@ export const config = {
   },
 
   Package: {
-    API_PACKAGE_STATUS_GET: `${BASE_URL}/package`,
-    API_PACKAGE_STATUS_POST: `${BASE_URL}/package`,
-    API_PACKAGE_STATUS_DELETE: `${BASE_URL}/package`,
-    API_PACKAGE_STATUS_UPDATE: `${BASE_URL}/package`,
+    API_PACKAGE_GET: `${BASE_URL}/package`,
+    API_PACKAGE_POST: `${BASE_URL}/package`,
+    API_PACKAGE_DELETE: `${BASE_URL}/package`,
+    API_PACKAGE_UPDATE: `${BASE_URL}/package`,
+  },
+
+  PackageItem: {
+    API_PACKAGE_ITEM_GET: `${BASE_URL}/packageitem`,
+    API_PACKAGE_ITEM_POST: `${BASE_URL}/packageitem`,
+    API_PACKAGE_ITEM_DELETE: `${BASE_URL}/packageitem`,
+    API_PACKAGE_ITEM_UPDATE: `${BASE_URL}/packageitem`,
+  },
+
+  RequestCustomer: {
+    API_RQUEST_CUSTOMER_GET: `${BASE_URL}/requestcustomer`,
+    API_RQUEST_CUSTOMER_POST: `${BASE_URL}/requestcustomer`,
+    API_RQUEST_CUSTOMER_DELETE: `${BASE_URL}/requestcustomer`,
+    API_RQUEST_CUSTOMER_UPDATE: `${BASE_URL}/requestcustomer`,
+  },
+
+  RequestPayment: {
+    API_RQUEST_PAYMENT_GET: `${BASE_URL}/requestpayment`,
+    API_RQUEST_PAYMENT_POST: `${BASE_URL}/requestpayment`,
+    API_RQUEST_PAYMENT_DELETE: `${BASE_URL}/requestpayment`,
+    API_RQUEST_PAYMENT_UPDATE: `${BASE_URL}/requestpayment`,
   },
 
   User: {

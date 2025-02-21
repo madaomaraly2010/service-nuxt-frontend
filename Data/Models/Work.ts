@@ -20,7 +20,9 @@ export class Work {
     row.icon = this.icon;
     return row;
   }
-
+  public static callStaticMethod() {
+    window.alert("OK Reflection");
+  }
   public static fromDbRow(dbRow: IWorkAttributes): Work {
     let row: Work = new Work();
     row.id = dbRow.id ?? 0;

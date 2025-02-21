@@ -1,10 +1,17 @@
-import type { ChildStatus } from "../Models";
+import { ChildStatus } from "../Models";
 import type { IChildStatusRepositry } from "../Repositries/Models-Repositries";
 import type { ChildStatusResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
+import { BaseModelService } from "./Base.Service";
 
-export class ChildStatusService implements IChildStatusRepositry {
+export class ChildStatusService
+  extends BaseModelService<ChildStatus>
+  implements IChildStatusRepositry
+{
+  override get usedUrl(): string {
+    return config.ChildStatus.API_CHILD_STATUS_GET;
+  }
   static _service: ChildStatusService;
   public static get instance(): ChildStatusService {
     if (ChildStatusService._service == null) {
@@ -12,23 +19,27 @@ export class ChildStatusService implements IChildStatusRepositry {
     }
     return ChildStatusService._service;
   }
-  async findAll(): Promise<ChildStatusResponse> {
-    let { data, error } = await useFetch(
+  override async findAll(): Promise<ChildStatusResponse> {
+    return super.fetchData(
+      ChildStatus as any,
       config.ChildStatus.API_CHILD_STATUS_GET
     );
-    console.log("Child Status Data", data);
-    return ModelResponse.createSuccessResponse([]);
+    // let { data, error } = await useFetch(
+    //   config.ChildStatus.API_CHILD_STATUS_GET
+    // );
+    // console.log("Child Status Data", data);
+    // return ModelResponse.createSuccessResponse([]);
   }
-  async findOne(id: number): Promise<ChildStatusResponse> {
+  override async findOne(id: number): Promise<ChildStatusResponse> {
     throw new Error("Method not implemented.");
   }
-  async create(row: ChildStatus): Promise<ChildStatusResponse> {
+  override async create(row: ChildStatus): Promise<ChildStatusResponse> {
     throw new Error("Method not implemented.");
   }
-  async update(row: ChildStatus): Promise<ChildStatusResponse> {
+  override async update(row: ChildStatus): Promise<ChildStatusResponse> {
     throw new Error("Method not implemented.");
   }
-  async delete(id: number): Promise<ChildStatusResponse> {
+  override async delete(id: number): Promise<ChildStatusResponse> {
     throw new Error("Method not implemented.");
   }
 }

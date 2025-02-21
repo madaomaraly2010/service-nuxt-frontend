@@ -1,9 +1,13 @@
-import type { Package } from "../Models";
+import { Package } from "../Models";
 import type { IPackageRepositry } from "../Repositries/Models-Repositries";
 import type { PackageResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
-export class PackageService implements IPackageRepositry {
+import { BaseModelService } from "./Base.Service";
+export class PackageService
+  extends BaseModelService<Package>
+  implements IPackageRepositry
+{
   static _service: PackageService;
   public static get instance(): PackageService {
     if (PackageService._service == null) {
@@ -11,21 +15,29 @@ export class PackageService implements IPackageRepositry {
     }
     return PackageService._service;
   }
-  async findAll(): Promise<PackageResponse> {
-    let { data, error } = await useFetch(config.Package.API_PACKAGE_STATUS_GET);
-    console.log("Lang Data", data);
-    return ModelResponse.createSuccessResponse([]);
+
+  override get usedUrl(): string {
+    return config.Package.API_PACKAGE_GET;
   }
-  async findOne(id: number): Promise<PackageResponse> {
+  override async findAll(): Promise<PackageResponse> {
+    return super.fetchData(
+      Package as any,
+      config.Package.API_PACKAGE_GET
+    );
+    // let { data, error } = await useFetch(config.Package.API_PACKAGE_GET);
+    // console.log("Lang Data", data);
+    // return ModelResponse.createSuccessResponse([]);
+  }
+  override async findOne(id: number): Promise<PackageResponse> {
     throw new Error("Method not implemented.");
   }
-  async create(row: Package): Promise<PackageResponse> {
+  override async create(row: Package): Promise<PackageResponse> {
     throw new Error("Method not implemented.");
   }
-  async update(row: Package): Promise<PackageResponse> {
+  override async update(row: Package): Promise<PackageResponse> {
     throw new Error("Method not implemented.");
   }
-  async delete(id: number): Promise<PackageResponse> {
+  override async delete(id: number): Promise<PackageResponse> {
     throw new Error("Method not implemented.");
   }
 }

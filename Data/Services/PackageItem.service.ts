@@ -1,9 +1,13 @@
-import type { PackageItem } from "../Models";
+import { PackageItem } from "../Models";
 import type { IPackageItemRepositry } from "../Repositries/Models-Repositries";
 import type { PackageItemResponse } from "../Responses/Model-Responses";
 import type { ModelResponse } from "../Responses/ModelResponse-Class";
-
-export class PackageItemStatusService implements IPackageItemRepositry {
+import { config } from "../UrlsConfig";
+import { BaseModelService } from "./Base.Service";
+export class PackageItemStatusService
+  extends BaseModelService<PackageItem>
+  implements IPackageItemRepositry
+{
   static _service: PackageItemStatusService;
   public static get instance(): PackageItemStatusService {
     if (PackageItemStatusService._service == null) {
@@ -11,19 +15,26 @@ export class PackageItemStatusService implements IPackageItemRepositry {
     }
     return PackageItemStatusService._service;
   }
-  findAll(): Promise<PackageItemResponse> {
+
+  override get usedUrl(): string {
+    return config.PackageItem.API_PACKAGE_ITEM_GET;
+  }
+  override async findAll(): Promise<PackageItemResponse> {
+    return super.fetchData(
+      PackageItem as any,
+      config.PackageItem.API_PACKAGE_ITEM_GET
+    );
+  }
+  override async findOne(id: number): Promise<PackageItemResponse> {
     throw new Error("Method not implemented.");
   }
-  findOne(id: number): Promise<PackageItemResponse> {
+  override async create(row: PackageItem): Promise<PackageItemResponse> {
     throw new Error("Method not implemented.");
   }
-  create(row: PackageItem): Promise<PackageItemResponse> {
+  override async update(row: PackageItem): Promise<PackageItemResponse> {
     throw new Error("Method not implemented.");
   }
-  update(row: PackageItem): Promise<PackageItemResponse> {
-    throw new Error("Method not implemented.");
-  }
-  delete(id: number): Promise<PackageItemResponse> {
+  override async delete(id: number): Promise<PackageItemResponse> {
     throw new Error("Method not implemented.");
   }
 }

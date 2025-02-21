@@ -3,14 +3,21 @@ import type { IUserRepositry } from "../Repositries/Models-Repositries";
 import type { UserResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
-
-export class UserService implements IUserRepositry {
+import { BaseModelService } from "./Base.Service";
+export class UserService
+  extends BaseModelService<User>
+  implements IUserRepositry
+{
   static _service: UserService;
   public static get instance(): UserService {
     if (UserService._service == null) {
       UserService._service = new UserService();
     }
     return UserService._service;
+  }
+
+  override get usedUrl(): string {
+    return config.User.API_PACKAGE_USER_GET;
   }
   async login(username: string, password: string): Promise<UserResponse> {
     let list: User[] | undefined = [];
@@ -38,19 +45,19 @@ export class UserService implements IUserRepositry {
     }
     return response;
   }
-  findAll(): Promise<UserResponse> {
+  override async findAll(): Promise<UserResponse> {
     throw new Error("Method not implemented.");
   }
-  findOne(id: number): Promise<UserResponse> {
+  override async findOne(id: number): Promise<UserResponse> {
     throw new Error("Method not implemented.");
   }
-  create(row: User): Promise<UserResponse> {
+  override async create(row: User): Promise<UserResponse> {
     throw new Error("Method not implemented.");
   }
-  update(row: User): Promise<UserResponse> {
+  override async update(row: User): Promise<UserResponse> {
     throw new Error("Method not implemented.");
   }
-  delete(id: number): Promise<UserResponse> {
+  override async delete(id: number): Promise<UserResponse> {
     throw new Error("Method not implemented.");
   }
 }

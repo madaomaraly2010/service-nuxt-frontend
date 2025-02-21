@@ -1,10 +1,14 @@
-import type { CookStatus } from "../Models";
+import { CookStatus } from "../Models";
 import type { ICookStatusRepositry } from "../Repositries/Models-Repositries";
 import type { CookStatusResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
+import { BaseModelService } from "./Base.Service";
 
-export class CookStatusService implements ICookStatusRepositry {
+export class CookStatusService
+  extends BaseModelService<CookStatus>
+  implements ICookStatusRepositry
+{
   static _service: CookStatusService;
   public static get instance(): CookStatusService {
     if (CookStatusService._service == null) {
@@ -12,21 +16,29 @@ export class CookStatusService implements ICookStatusRepositry {
     }
     return CookStatusService._service;
   }
-  async findAll(): Promise<CookStatusResponse> {
-    let { data, error } = await useFetch(config.CookStatus.API_COOK_STATUS_GET);
-    console.log("Cook Status Data", data);
-    return ModelResponse.createSuccessResponse([]);
+
+  override get usedUrl(): string {
+    return config.CookStatus.API_COOK_STATUS_GET;
   }
-  async findOne(id: number): Promise<CookStatusResponse> {
+  override async findAll(): Promise<CookStatusResponse> {
+    return super.fetchData(
+      CookStatus as any,
+      config.CookStatus.API_COOK_STATUS_GET
+    );
+    // let { data, error } = await useFetch(config.CookStatus.API_COOK_STATUS_GET);
+    // console.log("Cook Status Data", data);
+    // return ModelResponse.createSuccessResponse([]);
+  }
+  override async findOne(id: number): Promise<CookStatusResponse> {
     throw new Error("Method not implemented.");
   }
-  async create(row: CookStatus): Promise<CookStatusResponse> {
+  override async create(row: CookStatus): Promise<CookStatusResponse> {
     throw new Error("Method not implemented.");
   }
-  async update(row: CookStatus): Promise<CookStatusResponse> {
+  override async update(row: CookStatus): Promise<CookStatusResponse> {
     throw new Error("Method not implemented.");
   }
-  async delete(id: number): Promise<CookStatusResponse> {
+  override async delete(id: number): Promise<CookStatusResponse> {
     throw new Error("Method not implemented.");
   }
 }
