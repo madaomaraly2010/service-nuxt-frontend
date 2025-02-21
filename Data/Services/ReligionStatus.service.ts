@@ -1,4 +1,4 @@
-import type { ReligionStatus } from "../Models";
+import { ReligionStatus } from "../Models";
 import type { IReligionStatusRepositry } from "../Repositries/Models-Repositries";
 import type { ReligionStatusResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
@@ -20,11 +20,15 @@ export class ReligionStatusService
     return config.ReligionStatus.API_RELIGION_STATUS_GET;
   }
   override async findAll(): Promise<ReligionStatusResponse> {
-    let { data, error } = await useFetch(
+    return super.fetchData(
+      ReligionStatus as any,
       config.ReligionStatus.API_RELIGION_STATUS_GET
     );
-    console.log("Religion Data", data);
-    return ModelResponse.createSuccessResponse([]);
+    // let { data, error } = await useFetch(
+    //   config.ReligionStatus.API_RELIGION_STATUS_GET
+    // );
+    // console.log("Religion Data", data);
+    // return ModelResponse.createSuccessResponse([]);
   }
   override async findOne(id: number): Promise<ReligionStatusResponse> {
     throw new Error("Method not implemented.");

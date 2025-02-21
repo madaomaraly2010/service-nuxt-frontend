@@ -3,24 +3,24 @@ import type { IUserAttributes } from "../Models-Row-Attributes";
 
 export class User {
   id!: number;
-  username!: string | undefined;
-  email!: string | undefined;
-  password_hash!: string | undefined;
+  username?: string | undefined;
+  email?: string | undefined;
+  password_hash?: string | undefined;
   is_active?: boolean;
   created_at?: Date;
   updated_at?: Date;
-  first_name!: string | undefined;
-  last_name!: string | undefined;
-  middle_name!: string | undefined;
+  first_name?: string | undefined;
+  last_name?: string | undefined;
+  middle_name?: string | undefined;
   mobile?: string;
   date_birth?: string;
   gender?: number;
 
   // User hasOne Provider via user_id
-  provider!: Provider;
+  provider?: Provider;
 
   // User hasMany RequestCustomer via user_id
-  requestCustomerList!: RequestCustomer[];
+  requestCustomerList?: RequestCustomer[];
 
   public toDbRow(): IUserAttributes {
     let row: IUserAttributes = {};

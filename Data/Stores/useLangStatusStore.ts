@@ -1,7 +1,7 @@
 import { LangStatus } from "../Models";
 import type { LangStatusResponse } from "../Responses/Model-Responses";
 import { LangStatusService } from "../Services/LangStatus.service";
-export const state = reactive({
+const state = reactive({
   list: [] as LangStatus[],
   async findAll(): Promise<LangStatusResponse> {
     let response: LangStatusResponse =

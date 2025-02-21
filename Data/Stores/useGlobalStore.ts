@@ -1,4 +1,4 @@
-export const state = reactive({
+const state = reactive({
   direction: "ltr" as "ltr" | "rtl",
   setDirectionArabic() {
     state.direction = "rtl";

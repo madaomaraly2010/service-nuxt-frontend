@@ -1,7 +1,7 @@
 import { ChildStatus } from "../Models";
 import type { ChildStatusResponse } from "../Responses/Model-Responses";
 import { ChildStatusService } from "../Services/ChildStatus.service";
-export const state = reactive({
+const state = reactive({
   list: [] as ChildStatus[],
   async findAll(): Promise<ChildStatusResponse> {
     let response: ChildStatusResponse =

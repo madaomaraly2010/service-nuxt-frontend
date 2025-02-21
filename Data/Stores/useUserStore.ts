@@ -1,7 +1,7 @@
 import { User } from "../Models";
 import type { UserResponse } from "../Responses/Model-Responses";
 import { UserService } from "../Services/User.service";
-export const state = reactive({
+const state = reactive({
   list: [],
   isAuthenticated: false,
 

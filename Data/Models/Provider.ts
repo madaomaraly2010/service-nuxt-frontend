@@ -40,24 +40,24 @@ export class Provider {
   experience_date?: Date | undefined;
   max_children?: number;
   child_status_id?: number;
-  license_number!: string;
-  license_expiry!: Date | undefined;
+  license_number?: string;
+  license_expiry?: Date | undefined;
   work_id!: number;
   package_id?: number;
   cook_status_id?: number;
 
   // Provider belongsTo ChildStatus via child_status
-  childStatus!: ChildStatus;
+  childStatus?: ChildStatus;
   // Provider belongsTo CookStatus via cook_status
-  cookStatus!: CookStatus;
+  cookStatus?: CookStatus;
   // Provider belongsTo Country via country_id
-  country!: Country;
+  country?: Country;
   // Provider belongsTo LangStatus via arabic_status
-  arabicStatus!: LangStatus;
+  arabicStatus?: LangStatus;
   // Provider belongsTo LangStatus via english_status
-  englishStatus!: LangStatus;
+  englishStatus?: LangStatus;
 
-  package!: Package;
+  package?: Package;
 
   // Provider hasMany RequestCustomer via provider_id
   requestCustomerList!: RequestCustomer[];
@@ -69,6 +69,13 @@ export class Provider {
 
   // Provider belongsTo WorkCategory via work_id
   work!: Work;
+
+  public static create(): Provider {
+    let newProvider = new Provider();
+    newProvider.user = new User();
+    return newProvider;
+  }
+
   public toDbRow(): Partial<IProviderAttributes> {
     let row: Partial<IProviderAttributes> = {};
     row.id = this.id;
@@ -145,7 +152,6 @@ export class Provider {
     row.package_id = dbRow.package_id;
     row.cook_status_id = dbRow.cook_status_id;
 
-    
     if (dbRow.arabic_status) {
       row.arabicStatus = LangStatus.fromDbRow(dbRow.arabic_status);
     }

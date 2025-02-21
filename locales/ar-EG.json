@@ -1,5 +1,16 @@
 {
+    "provider":{
+        "title":"العامليين",
+        "tabs":{
+            "personal":"بيانات شخصية",
+            "contact":"بيانات الإتصال",
+            "employment":"تفاصيل",
+            "documents":"الوثائق و الحالات",
+            "additional":"بيانات أخرى"
+        }
+    },
     "login":{
+        "title":"",
         "login":"دخول",
         "submit":"دخول",
         "password":"كلمة المرور",

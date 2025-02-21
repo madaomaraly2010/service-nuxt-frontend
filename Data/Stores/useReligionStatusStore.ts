@@ -1,11 +1,7 @@
 import { ReligionStatus, Work } from "../Models";
-import { WorkService } from "../Services/Work.service";
-import type {
-  ReligionStatusResponse,
-  WorkResponse,
-} from "../Responses/Model-Responses";
+import type { ReligionStatusResponse } from "../Responses/Model-Responses";
 import { ReligionStatusService } from "../Services/ReligionStatus.service";
-export const state = reactive({
+const state = reactive({
   list: [] as ReligionStatus[],
   async findAll(): Promise<ReligionStatusResponse> {
     let response: ReligionStatusResponse =

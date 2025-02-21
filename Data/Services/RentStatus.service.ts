@@ -1,4 +1,4 @@
-import type { RentStatus } from "../Models";
+import { RentStatus } from "../Models";
 import type { IRentStatusRepositry } from "../Repositries/Models-Repositries";
 import type { RentStatusResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
@@ -20,9 +20,13 @@ export class RentStatusService
     return config.RentStatus.API_RENT_STATUS_GET;
   }
   override async findAll(): Promise<RentStatusResponse> {
-    let { data, error } = await useFetch(config.RentStatus.API_RENT_STATUS_GET);
-    console.log("Rent Data", data);
-    return ModelResponse.createSuccessResponse([]);
+    return super.fetchData(
+      RentStatus as any,
+      config.RentStatus.API_RENT_STATUS_GET
+    );
+    // let { data, error } = await useFetch(config.RentStatus.API_RENT_STATUS_GET);
+    // console.log("Rent Data", data);
+    // return ModelResponse.createSuccessResponse([]);
   }
   override async findOne(id: number): Promise<RentStatusResponse> {
     throw new Error("Method not implemented.");

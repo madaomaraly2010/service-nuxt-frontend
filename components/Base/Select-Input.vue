@@ -24,5 +24,5 @@
 
 <script setup lang="ts">
 import { defineModel } from "vue";
-const theModelValue = defineModel<string>();
+const theModelValue = defineModel<number>();
 </script>

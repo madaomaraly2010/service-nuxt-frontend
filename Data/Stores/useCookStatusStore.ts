@@ -1,7 +1,7 @@
 import { CookStatus } from "../Models";
 import type { CookStatusResponse } from "../Responses/Model-Responses";
 import { CookStatusService } from "../Services/CookStatus.service";
-export const state = reactive({
+ const state = reactive({
   list: [] as CookStatus[],
   async findAll(): Promise<CookStatusResponse> {
     let response: CookStatusResponse =

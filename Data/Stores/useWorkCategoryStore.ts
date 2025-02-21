@@ -1,11 +1,7 @@
-import { Work, WorkCategory } from "../Models";
-import { WorkService } from "../Services/Work.service";
-import type {
-  WorkCategoryResponse,
-  WorkResponse,
-} from "../Responses/Model-Responses";
+import { WorkCategory } from "../Models";
+import type { WorkCategoryResponse } from "../Responses/Model-Responses";
 import { WorkCategoryService } from "../Services/WorkCategory.service";
-export const state = reactive({
+const state = reactive({
   list: [] as WorkCategory[],
   async findAll(): Promise<WorkCategoryResponse> {
     let response: WorkCategoryResponse =

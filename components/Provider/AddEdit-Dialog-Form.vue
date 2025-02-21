@@ -3,48 +3,63 @@
     <q-page class="q-pa-md">
       <q-card class="q-pa-md">
         <q-card-section class="text-h6 text-primary">
-          Employee Information Form
+          {{ $t("provider.title") }}
         </q-card-section>
-
-        <q-form @submit="saveForm" @reset="resetForm">
+        <q-form>
           <q-tabs v-model="tab" class="text-primary" align="justify">
-            <q-tab name="personal" label="Personal Info" />
-            <q-tab name="contact" label="Contact Info" />
-            <q-tab name="employment" label="Employment Details" />
-            <q-tab name="documents" label="Documents & Status" />
-            <q-tab name="additional" label="Additional Info" />
+            <q-tab name="personal" :label="$('provider.tabs.personal')" />
+            <q-tab name="contact" :label="$('provider.tabs.contact')" />
+            <q-tab name="employment" :label="$('provider.tabs.employment')" />
+            <q-tab name="documents" :label="$('provider.tabs.documents')" />
+            <q-tab name="additional" :label="$('provider.tabs.additional')" />
           </q-tabs>
 
           <q-tab-panels v-model="tab" animated>
             <!-- Personal Information Tab -->
             <q-tab-panel name="personal">
-              <BaseTextInput
-                v-model="row.name"
-                label="Name"
-                outlined
-                lazy-rules
-              />
+              <div class="row">
+                <BaseTextInput
+                  v-model="row.user.first_name"
+                  label="Name"
+                  outlined
+                  lazy-rules
+                />
+                <BaseTextInput
+                  v-model="row.user.middle_name"
+                  label="Name"
+                  outlined
+                  lazy-rules
+                />
+                <BaseTextInput
+                  v-model="row.user.last_name"
+                  label="Name"
+                  outlined
+                  lazy-rules
+                />
+              </div>
               <BaseSelectInput
-                v-model="row.gender"
+                v-model="row.user.gender"
                 :options="genderOptions"
                 label="Gender"
                 outlined
                 lazy-rules
               />
               <BaseSelectInput
-                v-model="row.nationality"
-                :options="nationalityOptions"
+                v-model="row.country_id"
+                :options="countryStore.list"
+                option-label="arb_name"
+                option-value="id"
                 label="Nationality"
                 outlined
               />
               <BaseTextInput
-                v-model="row.birthDate"
+                v-model="row.user.date_birth"
                 label="Date of Birth"
                 type="date"
                 outlined
               />
               <BaseSelectInput
-                v-model="row.religion"
+                v-model="row.religion_status_id"
                 :options="religionOptions"
                 label="Religion"
                 outlined
@@ -168,40 +183,23 @@
   </BaseDialogForm>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
+import { Provider } from "~/Data/Models";
 const dialog = ref(null);
 
-const openDialog = () => dialog.value.open();
-const closeDialog = () => dialog.value.close();
+const openDialog = () => (dialog.value as any).open();
+const closeDialog = () => (dialog.value as any).close();
 defineExpose({ openDialog, closeDialog });
 const tab = ref("personal");
 
-const row = ref({
-  name: "",
-  gender: null,
-  nationality: null,
-  birthDate: "",
-  religion: null,
-  phone: "",
-  mobile: "",
-  email: "",
-  job: null,
-  salary: "",
-  location: null,
-  experienceStart: "",
-  idNumber: "",
-  passportNumber: "",
-  contractExpiry: "",
-  status: null,
-  cookingSkills: null,
-  childcare: null,
-  englishSkill: null,
-  arabicSkill: null,
-});
+const row = ref<Provider>(Provider.create());
 
-const genderOptions = ["Male", "Female"];
-const nationalityOptions = ["Bangladesh", "India", "Pakistan", "Philippines"];
+const genderOptions = [
+  { value: 1, label: "Male" },
+  { value: 2, label: "Female" },
+];
+
 const religionOptions = ["Islam", "Christianity", "Hinduism"];
 const jobOptions = ["Employee", "Manager", "Worker"];
 const locationOptions = ["Dubai", "Abu Dhabi", "Sharjah"];
@@ -209,33 +207,4 @@ const statusOptions = ["Available", "Unavailable"];
 const cookingOptions = ["Beginner", "Intermediate", "Expert"];
 const childcareOptions = ["Accepted", "Not Accepted"];
 const languageOptions = ["Weak", "Intermediate", "Fluent"];
-
-const saveForm = () => {
-  console.log("Form data saved:", form.value);
-};
-
-const resetForm = () => {
-  form.value = {
-    name: "",
-    gender: null,
-    nationality: null,
-    birthDate: "",
-    religion: null,
-    phone: "",
-    mobile: "",
-    email: "",
-    job: null,
-    salary: "",
-    location: null,
-    experienceStart: "",
-    idNumber: "",
-    passportNumber: "",
-    contractExpiry: "",
-    status: null,
-    cookingSkills: null,
-    childcare: null,
-    englishSkill: null,
-    arabicSkill: null,
-  };
-};
 </script>

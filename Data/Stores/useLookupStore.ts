@@ -14,7 +14,7 @@ import { useReligionStatusStore } from "./useReligionStatusStore";
 
 import { useCountryStore } from "./useCountryStore";
 
-export const state = reactive({
+const state = reactive({
   async fetchAllLookups(): Promise<void> {
     const workCategoryStore = useWorkCategoryStore();
     const workStore = useWorkStore();
