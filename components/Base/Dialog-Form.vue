@@ -5,7 +5,10 @@
     :transition-show="transitionShow"
     :transition-hide="transitionHide"
   >
-    <q-card :style="{ maxWidth, maxHeight }" class="q-pa-sm">
+    <q-card
+      :style="{ maxWidth: maxWidth, maxHeight: maxHeight }"
+      class="q-pa-sm"
+    >
       <!-- Header Slot (Title & Close Button) -->
       <q-card-section class="row items-center">
         <slot name="header">
@@ -68,7 +71,7 @@ const props = defineProps({
   },
   maxHeight: {
     type: String,
-    default: "80vh",
+    default: "85vh",
   },
   persistent: {
     type: Boolean,

@@ -79,7 +79,7 @@
             <q-td>
               <q-item>
                 <q-item-label class="text-bold text-grey-7">{{
-                  row.user?.gender == 1 ? "ذكر" : "أنثى"
+                  row?.gender == 1 ? "ذكر" : "أنثى"
                 }}</q-item-label>
               </q-item>
             </q-td>
@@ -123,7 +123,7 @@ const provider_column: QTableColumn[] = [
   {
     name: "gender",
     label: "الجنس",
-    field: "user.gender",
+    field: "gender",
     sortable: true,
     align: "left",
   },

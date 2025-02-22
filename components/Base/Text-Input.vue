@@ -2,9 +2,9 @@
   <div>
     <q-input
       outlined
+      dense
       v-model="theValue"
       :label="label"
-      stack-label
       v-bind="$attrs"
       lazy-rules
       :rules="rules"

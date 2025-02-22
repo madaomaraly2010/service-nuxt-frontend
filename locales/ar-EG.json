@@ -2,13 +2,59 @@
     "provider":{
         "title":"العامليين",
         "tabs":{
+            "account":"بيانات الحساب",
             "personal":"بيانات شخصية",
             "contact":"بيانات الإتصال",
             "employment":"بيانات توظيفية",
             "documents":"الوثائق و الحالات",
             "additional":"بيانات أخرى"
+        },
+        "fields":{
+           "address":"العنوان",
+           "city":"المدينة",
+           "state":"المقاطعة",
+           "zipcode":"الرمز البريدى",
+           "profile_picture":"الصورة الشخصية",
+           "bio":"السيرة الذاتية",
+           "rating":"التقييم",
+           "rent_status_id":"حالة التأجير",
+           "country_id" :"الجنسية",
+           "religion_status_id":"الديانة",
+           "arabic_status_id":"اللغة العربية",
+           "english_status_id":"اللغة الإنجليزية",
+            "nick_name":"الكنية",
+            "net_salary":"الراتب الشهرى",
+            "wage_amount":"الأجرة الشهرية",
+            "card_number":"رقم البطاقة",
+            "card_expire":"تاريخ إنتهاء ",
+            "passport_number":"رقم الجواز",
+            "passport_expire":"تاريخ إنتهاءه",
+            "experience_date":"تاريخ بء الخبرة",
+            "max_children":"عدد الاطفال",
+            "child_status_id":"الطفولة",
+            "license_number":"رقم الرخصة",
+            "license_expiry":"تاريخ إنتهائها",
+            "work_id":"العمل",
+            "package_id":"",
+            "cook_status_id":"الطهى",
+            "notes":"ملاحظات",
+            "date_birth":"تاريخ الميلاد",
+            "gender" :"الجنس"
         }
     },
+     "user":{
+        "title":"المستخدميين",
+        "fields":{
+            "first_name":"الاسم الاول",
+            "last_name":"اللقب",
+            "email":"البريد الإكترونى",
+            "mobile":"موبايل",
+            "username":"اسم المستخدم",
+            "password_hash":"كلمة المرور"
+
+        }
+     }
+    ,
     "login":{
         "title":"",
         "login":"دخول",

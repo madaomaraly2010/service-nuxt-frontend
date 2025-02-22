@@ -104,6 +104,10 @@ export interface IProviderAttributes {
   work_id?: number;
   package_id?: number;
   cook_status_id?: number;
+  notes?: string;
+  gender?: number;
+  date_birth?: Date;
+  phone?: string;
 
   child_status?: IChildStatusAttributes;
   cook_status?: ICookStatusAttributes;
@@ -156,10 +160,7 @@ export interface IUserAttributes {
   updated_at?: Date;
   first_name?: string;
   last_name?: string;
-  middle_name?: string;
   mobile?: string;
-  date_birth?: Date;
-  gender?: number;
 
   provider?: IProviderAttributes;
   request_customers?: IRequestCustomerAttributes[];

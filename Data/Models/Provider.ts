@@ -45,6 +45,10 @@ export class Provider {
   work_id!: number;
   package_id?: number;
   cook_status_id?: number;
+  notes?: string;
+  gender?: number;
+  date_birth?: Date;
+  phone?: string;
 
   // Provider belongsTo ChildStatus via child_status
   childStatus?: ChildStatus;
@@ -111,7 +115,10 @@ export class Provider {
     row.work_id = this.work_id;
     row.package_id = this.package_id;
     row.cook_status_id = this.cook_status_id;
-
+    row.notes = this.notes;
+    row.gender = this.gender;
+    row.phone = this.phone;
+    row.date_birth = this.date_birth;
     return row;
   }
 
@@ -151,7 +158,10 @@ export class Provider {
     row.work_id = dbRow.work_id ?? 0;
     row.package_id = dbRow.package_id;
     row.cook_status_id = dbRow.cook_status_id;
-
+    row.notes = dbRow.notes;
+    row.gender = dbRow.gender;
+    row.date_birth = dbRow.date_birth;
+    row.phone = dbRow.phone;
     if (dbRow.arabic_status) {
       row.arabicStatus = LangStatus.fromDbRow(dbRow.arabic_status);
     }

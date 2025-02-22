@@ -11,10 +11,7 @@ export class User {
   updated_at?: Date;
   first_name?: string | undefined;
   last_name?: string | undefined;
-  middle_name?: string | undefined;
   mobile?: string;
-  date_birth?: Date;
-  gender?: number;
 
   // User hasOne Provider via user_id
   provider?: Provider;
@@ -33,10 +30,9 @@ export class User {
     row.updated_at = this.updated_at;
     row.first_name = this.first_name;
     row.last_name = this.last_name;
-    row.middle_name = this.middle_name;
+
     row.mobile = this.mobile;
-    row.date_birth = this.date_birth;
-    row.gender = this.gender;
+
     return row;
   }
 
@@ -51,10 +47,9 @@ export class User {
     row.updated_at = dbRow.updated_at;
     row.first_name = dbRow.first_name;
     row.last_name = dbRow.last_name;
-    row.middle_name = dbRow.middle_name;
+
     row.mobile = dbRow.mobile;
-    row.date_birth = dbRow.date_birth;
-    row.gender = dbRow.gender;
+
     if (dbRow.provider) {
       row.provider = Provider.fromDbRow(dbRow.provider);
     }

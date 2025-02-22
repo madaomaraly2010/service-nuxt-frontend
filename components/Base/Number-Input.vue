@@ -2,10 +2,10 @@
   <div>
     <q-input
       v-bind="$attrs"
-      filled
+      dense
+      outlined
       v-model="theNumber"
-      mask="#######"
-      fill-mask="0"
+      mask="#########"
       lazy-rules
     ></q-input>
   </div>
