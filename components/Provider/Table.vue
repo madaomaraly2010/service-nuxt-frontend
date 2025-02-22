@@ -4,9 +4,13 @@
       <div class="row">
         <q-btn @click="openDialog">Add row</q-btn>
         <ProviderAddEditDialogForm
+          :default-work="defaultWork"
           ref="providerRef"
         ></ProviderAddEditDialogForm>
-        <WorkDropButton class="col-3"></WorkDropButton>
+        <WorkDropButton
+          @on-work-clicked="onWorkSelected"
+          class="col-3"
+        ></WorkDropButton>
         <WorkFilterSelect class="col-3 offset-2"></WorkFilterSelect>
       </div>
       <q-card-section class="q-pa-none q-ma-none">
@@ -92,12 +96,18 @@
 
 <script lang="ts" setup>
 import type { QTableColumn } from "quasar";
+import type { Work } from "~/Data/Models";
 
 import { useProviderStore } from "~/Data/Stores/useProviderStore";
 const store = useProviderStore();
 const providerRef = ref(null);
+const defaultWork = ref<Work>();
 await store.findAll();
 const openDialog = () => (providerRef.value as any).openDialog();
+const onWorkSelected = (w: Work) => {
+  defaultWork.value = w;
+  openDialog();
+};
 const provider_column: QTableColumn[] = [
   {
     name: "id",

@@ -1,10 +1,26 @@
 <template>
-  <BaseDialogForm ref="dialog">
+  <BaseDialogForm
+    ref="dialog"
+    :title="$t('provider.title')"
+    :icon="defaultWork?.icon"
+  >
+    <template #header>
+      <div class="row no-padding">
+        <p class="text-h5">{{ $t("provider.title") }}</p>
+        <div class="q-mx-xl"></div>
+        <span class="q-mx-lg text-h5 text-deep-purple-9"
+          >[{{ defaultWork?.arb_name }}]</span
+        >
+        <q-icon
+          :name="defaultWork?.icon"
+          color="deep-orange"
+          size="lg"
+        ></q-icon>
+      </div>
+    </template>
     <!-- <q-page class="q-pa-md bg-accent"> -->
     <q-card class="q-pa-md">
-      <q-card-section class="text-h6 text-primary">
-        {{ $t("provider.title") }}
-      </q-card-section>
+      <q-card-section class="text-h6 text-primary"> </q-card-section>
       <q-form :dir="globalStore.direction">
         <q-tabs v-model="tab" class="text-primary" align="justify">
           <q-tab
@@ -140,25 +156,26 @@
                 outlined
               />
             </div>
-          </q-tab-panel>
 
-          <!-- Contact Information Tab -->
-          <!-- <q-tab-panel name="contact" class="panel-size"> -->
-          <!-- <BaseTextInput
-              v-model="row.user.mobile"
-              label="Mobile"
-              outlined
-              lazy-rules
-              :rules="[(val) => !!val || 'Mobile is required']"
-            />
+            <div class="row">
+              <BaseTextInput
+                class="col-9"
+                v-model="row.address"
+                :label="$t('provider.fields.address')"
+                outlined
+              />
+            </div>
+
             <div class="row q-my-sm"></div>
-            <BaseTextInput
-              v-model="row.user.email"
-              label="Email"
-              type="email"
-              outlined
-            /> -->
-          <!-- </q-tab-panel> -->
+            <div class="row">
+              <BaseTextAreaInput
+                class="col"
+                :label="$t('provider.fields.notes')"
+                v-model="row.notes"
+              >
+              </BaseTextAreaInput>
+            </div>
+          </q-tab-panel>
 
           <!-- Employment Details Tab -->
           <q-tab-panel name="employment" class="panel-size">
@@ -242,6 +259,15 @@
                 outlined
               />
             </div>
+            <div class="row q-my-sm"></div>
+            <div class="row">
+              <BaseTextAreaInput
+                class="col"
+                :label="$t('provider.fields.bio')"
+                v-model="row.bio"
+              >
+              </BaseTextAreaInput>
+            </div>
           </q-tab-panel>
 
           <!-- Documents & Status Tab -->
@@ -291,6 +317,16 @@
                 outlined
               />
             </div>
+            <div class="row q-my-sm"></div>
+            <div class="row">
+              <BaseSelectInput
+                class="col-4"
+                v-model="row.max_children"
+                :options="[1, 2, 3, 4, 5, 6]"
+                :label="$t('provider.fields.max_children')"
+                outlined
+              />
+            </div>
           </q-tab-panel>
         </q-tab-panels>
 
@@ -306,7 +342,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { Provider } from "~/Data/Models";
+import { Provider, Work } from "~/Data/Models";
 import {
   useCountryStore,
   useCookStatusStore,
@@ -317,6 +353,14 @@ import {
   useGlobalStore,
 } from "~/Data/Stores";
 const dialog = ref(null);
+
+//@ts-ignore
+const props = defineProps({
+  defaultWork: {
+    required: true,
+    type: Object as PropType<Work | undefined>,
+  },
+});
 
 const globalStore = useGlobalStore();
 
@@ -355,7 +399,7 @@ const genderOptions = [
 <style scoped>
 .panel-size {
   width: 40vw;
-  height: 40vh;
+  height: 44vh;
 }
 .q-tab-panel.panel-size {
   /* overflow-y: hidden; */

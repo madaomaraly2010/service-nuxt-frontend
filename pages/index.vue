@@ -42,10 +42,10 @@ const lookupStore = useLookupStore();
 const nuxtApp = useNuxtApp();
 
 onMounted(() => {
-  nuxtApp.$q.loading.show({ message: "Loading data..." }); // Show loading spinner
+  nuxtApp.$q.loading.show({ message: nuxtApp.$t("messages.loading_data") }); // Show loading spinner
   nextTick(async () => {
     await lookupStore.fetchAllLookups();
-    await setTimeout(() => nuxtApp.$q.loading.hide(), 3000);
+    await setTimeout(() => nuxtApp.$q.loading.hide(), 2000);
   });
 });
 </script>

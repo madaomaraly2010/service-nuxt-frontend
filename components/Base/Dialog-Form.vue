@@ -10,10 +10,11 @@
       class="q-pa-sm"
     >
       <!-- Header Slot (Title & Close Button) -->
-      <q-card-section class="row items-center">
-        <slot name="header">
-          <div class="text-h6">{{ title }}</div>
-        </slot>
+      <q-card-section
+        class="row items-center no-padding"
+        :dir="globalStore.direction"
+      >
+        <slot name="header"> </slot>
         <q-space />
         <q-btn
           v-if="closable"
@@ -52,14 +53,25 @@
   </q-dialog>
 </template>
 
-<script setup>
-// import { defineProps, defineEmits, ref, defineExpose } from "vue";
+<script setup lang="ts">
+import { useGlobalStore } from "~/Data/Stores";
 
+// import { defineProps, defineEmits, ref, defineExpose } from "vue";
+const globalStore = useGlobalStore();
 // Props for customization
+//@ts-ignore
 const props = defineProps({
   title: {
     type: String,
     default: "Dialog",
+  },
+  subtitle: {
+    type: String,
+    default: "Sub title",
+  },
+
+  icon: {
+    type: String,
   },
   minWidth: {
     type: String,

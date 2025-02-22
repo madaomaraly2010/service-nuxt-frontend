@@ -63,6 +63,9 @@
         "email":"البريد الإكترونى",
         "forgetpassword":"نسيت كلمة المرور"
     },
+    "messages":{
+        "loading_data":"جارى تحميل البيانات..."
+    },
     "error":{
         "email_incorrect" :"بريد إلكترونى غير صحيح",
         "password_incorrect":"خطأ فى كلمة المرور",
