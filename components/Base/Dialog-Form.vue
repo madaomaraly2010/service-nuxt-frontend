@@ -55,7 +55,7 @@
 
 <script setup lang="ts">
 import { useGlobalStore } from "~/Data/Stores";
-
+//====
 // import { defineProps, defineEmits, ref, defineExpose } from "vue";
 const globalStore = useGlobalStore();
 // Props for customization
