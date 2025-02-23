@@ -31,7 +31,7 @@ export class UserService
         method: "POST",
       }
     );
-    let response: UserResponse = ModelResponse.fromServerResponse(data);
+    let response: UserResponse = ModelResponse.fromServerResponse(data.value);
 
     if (error.value?.message) {
       throw new Error(error.value?.message);
@@ -45,6 +45,7 @@ export class UserService
     }
     return response;
   }
+
   override async findAll(): Promise<UserResponse> {
     throw new Error("Method not implemented.");
   }

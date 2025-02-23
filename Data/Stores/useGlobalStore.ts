@@ -1,5 +1,5 @@
 const state = reactive({
-  direction: "ltr" as "ltr" | "rtl",
+  direction: "rtl" as "ltr" | "rtl",
   setDirectionArabic() {
     state.direction = "rtl";
   },

@@ -14,7 +14,7 @@
             <q-td :props="props">
               <q-item>
                 <q-item-section side>
-                  <q-avatar color="blue-4">
+                  <q-avatar>
                     <q-icon
                       :name="props.row.icon"
                       :color="props.row.color"

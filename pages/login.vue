@@ -6,21 +6,12 @@
       </q-card-section>
       <q-card-section>
         <q-form @submit="doLogin" ref="loginForm">
-          <!-- Email Input -->
-          <!-- :rules="[
-              (val) =>
-                !!val ||
-                app.$i18n.t('error.field_is_required', [
-                  app.$i18n.t('login.email'),
-                ]),
-              (val) =>
-                /.+@.+\..+/.test(val) || app.$i18n.t('error.email_not_correct'),
-            ]" -->
-          <!-- :rules="[requiredValidation($t, 'login.email')]" -->
           <base-text-input
             v-model="email"
-            :label="$t('login.email')"
-            filled
+            :label="$t('user.fields.username')"
+            outlined
+            :rules="[requiredValidation($t, $t('user.fields.username'))]"
+            :dense="false"
             lazy-rules
           >
             <template v-slot:prepend>
@@ -28,19 +19,14 @@
             </template>
           </base-text-input>
           <div class="q-ma-lg"></div>
-          <!-- Password Input -->
-          <!-- :rules="[
-              (val) =>
-                !!val ||
-                app.$i18n.t('error.field_is_required', [
-                  app.$i18n.t('login.password'),
-                ]),
-            ]" -->
+
           <base-text-input
             :is-password="true"
             v-model="password"
-            :label="$t('login.password')"
-            filled
+            :label="$t('user.fields.password_hash')"
+            :rules="[requiredValidation($t, $t('user.fields.password_hash'))]"
+            outlined
+            :dense="false"
             lazy-rules
           >
             <template v-slot:prepend>
@@ -72,27 +58,37 @@
   </q-page>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
-import { useQuasar } from "quasar";
+import { QForm, useQuasar } from "quasar";
 import { requiredValidation } from "../common/Input-Validations";
 import { useUserStore } from "../Data/Stores/useUserStore";
 
 const $q = useQuasar();
 const userStore = useUserStore();
-
+const nuxtApp = useNuxtApp();
 const email = ref("");
 const password = ref("");
 const isPwd = ref(true);
 const loading = ref(false);
+const loginForm: Ref<QForm | null> = ref<QForm | null>(null);
 const doLogin = async () => {
+  const valid = await loginForm.value?.validate();
+  if (!valid) return;
+
   let response = await userStore.login(email.value, password.value);
   debugger;
   if (response.isAuthenticated) {
     $q.notify({
-      message: "User is Authenticated",
+      message: nuxtApp.$t("messages.user_authenticated"),
+      position: "top",
     });
-    useRouter().push("/");
+  } else {
+    $q.notify({
+      message: nuxtApp.$t("messages.user_not_authenticated"),
+      position: "top",
+      color: "red-10",
+    });
   }
 };
 

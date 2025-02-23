@@ -64,7 +64,10 @@
         "forgetpassword":"نسيت كلمة المرور"
     },
     "messages":{
-        "loading_data":"جارى تحميل البيانات..."
+        "loading_data":"جارى تحميل البيانات...",
+        "user_authenticated":"المستخدم تم التحقق من هويته.",
+        "user_not_authenticated":"خطأ فى اسم المستخدم أو كلمة المرور"
+
     },
     "error":{
         "email_incorrect" :"بريد إلكترونى غير صحيح",

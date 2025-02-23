@@ -44,8 +44,8 @@ const props = defineProps({
 const theValue = defineModel<string>();
 const getType = () => {
   if (props.isPassword) {
-    if (isPwd.value) return "text";
-    return "password";
+    if (isPwd.value) return "password";
+    return "text";
   }
   return "text";
 };

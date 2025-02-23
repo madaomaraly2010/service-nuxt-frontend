@@ -2,7 +2,7 @@
   <div>
     <div class="row block">
       <div class="row">
-        <q-btn @click="openDialog">Add row</q-btn>
+        <!-- <q-btn @click="openDialog">Add row</q-btn> -->
         <ProviderAddEditDialogForm
           :default-work="defaultWork"
           ref="providerRef"

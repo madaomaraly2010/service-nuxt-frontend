@@ -89,16 +89,28 @@
           >
             <q-tooltip>Messages</q-tooltip>
           </q-btn>
+          <q-btn
+            round
+            dense
+            flat
+            color="grey-8"
+            icon="fas fa-sign-out-alt"
+            v-if="nuxtApp.$q.screen.gt.sm"
+          ></q-btn>
           <q-btn round dense flat color="grey-8" icon="notifications">
             <q-badge color="red" text-color="white" floating> 2 </q-badge>
             <q-tooltip>Notifications</q-tooltip>
           </q-btn>
-          <q-btn round flat>
-            <q-avatar size="26px">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-            </q-avatar>
+          <q-btn-dropdown :label="userStore.loggedUser?.username" round flat>
             <q-tooltip>Account</q-tooltip>
-          </q-btn>
+            <q-list>
+              <q-item clickable v-ripple @click="userStore.logout()">
+                <q-item-section>
+                  <q-item-label>{{ $t("logout") }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
         </div>
       </q-toolbar>
     </q-header>
@@ -160,15 +172,16 @@
     </q-drawer>
 
     <q-page-container>
-      <q-btn @click="globalStore.toggleDirection">Change to arabic</q-btn>
+      <!-- <q-btn @click="globalStore.toggleDirection">Change to arabic</q-btn> -->
       <slot></slot>
     </q-page-container>
   </q-layout>
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";
-import { useGlobalStore } from "../Data/Stores/useGlobalStore";
+import { useGlobalStore, useUserStore } from "../Data/Stores";
 const globalStore = useGlobalStore();
+const userStore = useUserStore();
 const leftDrawerOpen = ref(false);
 const search = ref("");
 const nuxtApp = useNuxtApp();

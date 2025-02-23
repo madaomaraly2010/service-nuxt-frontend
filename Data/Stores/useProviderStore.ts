@@ -1,7 +1,7 @@
 import { Provider } from "../Models";
 import type { ProviderResponse } from "../Responses/Model-Responses";
 import { ProviderService } from "../Services/Provider.service";
- const state = reactive({
+const state = reactive({
   list: [] as Provider[],
 
   async findAll(): Promise<ProviderResponse> {
