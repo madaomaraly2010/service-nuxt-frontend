@@ -40,6 +40,7 @@
             "notes":"ملاحظات",
             "date_birth":"تاريخ الميلاد",
             "gender" :"الجنس"
+
         }
     },
      "user":{
@@ -47,6 +48,8 @@
         "fields":{
             "first_name":"الاسم الاول",
             "last_name":"اللقب",
+            "full_name":"اسم المستخدم",
+
             "email":"البريد الإكترونى",
             "mobile":"موبايل",
             "username":"اسم المستخدم",
@@ -63,6 +66,18 @@
         "email":"البريد الإكترونى",
         "forgetpassword":"نسيت كلمة المرور"
     },
+
+    "request_customer":{
+        "title":"الطلبات",
+        "fields":{
+            "id":"السجل",
+            "request_date":"تاريخ الطلب",
+            "request_status":"حالة الطلب",
+            "provider_fullname":"اسم العامل",
+            "user_fullname":"اسم العميل"
+        }
+     },
+
     "messages":{
         "loading_data":"جارى تحميل البيانات...",
         "user_authenticated":"المستخدم تم التحقق من هويته.",

@@ -1,4 +1,4 @@
-import type { RequestCustomer } from "../Models";
+import { RequestCustomer } from "../Models";
 import type { IRequestCustomerRepositry } from "../Repositries/Models-Repositries";
 import type { RequestCustomerResponse } from "../Responses/Model-Responses";
 import { config } from "../UrlsConfig";
@@ -19,7 +19,10 @@ export class RequestCustomerService
     return config.RequestCustomer.API_RQUEST_CUSTOMER_GET;
   }
   override async findAll(): Promise<RequestCustomerResponse> {
-    throw new Error("Method not implemented.");
+    return super.fetchData(
+      RequestCustomer as any,
+      config.RequestCustomer.API_RQUEST_CUSTOMER_GET
+    );
   }
   override async findOne(id: number): Promise<RequestCustomerResponse> {
     throw new Error("Method not implemented.");

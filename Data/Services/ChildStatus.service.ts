@@ -24,11 +24,7 @@ export class ChildStatusService
       ChildStatus as any,
       config.ChildStatus.API_CHILD_STATUS_GET
     );
-    // let { data, error } = await useFetch(
-    //   config.ChildStatus.API_CHILD_STATUS_GET
-    // );
-    // console.log("Child Status Data", data);
-    // return ModelResponse.createSuccessResponse([]);
+   
   }
   override async findOne(id: number): Promise<ChildStatusResponse> {
     throw new Error("Method not implemented.");

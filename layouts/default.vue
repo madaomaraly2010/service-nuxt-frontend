@@ -127,6 +127,7 @@
           <q-item
             v-for="link in drawerItems"
             :key="link.text"
+            @click="gotoPage(link)"
             v-ripple
             clickable
           >
@@ -189,6 +190,10 @@ const nuxtApp = useNuxtApp();
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
+
+const gotoPage = (item: any) => {
+  useRouter().push("/" + item.page);
+};
 const app = useNuxtApp();
 // const gotoAbout = () => {
 //   // nuxtApp.$router.push("/about");
@@ -204,13 +209,41 @@ const app = useNuxtApp();
 //   { icon: "", text: app.$t("drawer.items.aboutus") },
 // ];
 const drawerItems = [
-  { icon: "home", text: app.$t("drawer.items.main") }, // Home icon for main
-  { icon: "account-tie", text: app.$t("drawer.items.employees") }, // Suit-tie for employees
-  { icon: "worker", text: app.$t("drawer.items.workers") }, // Worker icon
-  { icon: "mdi-account-group", text: app.$t("drawer.items.customers") }, // Group icon for customers
-  { icon: "mdi-file-document", text: app.$t("drawer.items.requests") }, // Document icon for requests
-  { icon: "mdi-logout", text: app.$t("drawer.items.logout") }, // Logout icon for exit
-  { icon: "mdi-information", text: app.$t("drawer.items.aboutus") }, // Info icon for About Us
+  {
+    icon: "home",
+    text: app.$t("drawer.items.main"),
+    page: "RequestCustomerPage",
+  }, // Home icon for main
+  {
+    icon: "account-tie",
+    text: app.$t("drawer.items.employees"),
+    page: "RequestCustomerPage",
+  }, // Suit-tie for employees
+  {
+    icon: "worker",
+    text: app.$t("drawer.items.workers"),
+    page: "RequestCustomerPage",
+  }, // Worker icon
+  {
+    icon: "mdi-account-group",
+    text: app.$t("drawer.items.customers"),
+    page: "RequestCustomerPage",
+  }, // Group icon for customers
+  {
+    icon: "mdi-file-document",
+    text: app.$t("drawer.items.requests"),
+    page: "RequestCustomerPage",
+  }, // Document icon for requests
+  {
+    icon: "mdi-logout",
+    text: app.$t("drawer.items.logout"),
+    page: "RequestCustomerPage",
+  }, // Logout icon for exit
+  {
+    icon: "mdi-information",
+    text: app.$t("drawer.items.aboutus"),
+    page: "RequestCustomerPage",
+  }, // Info icon for About Us
 ];
 </script>
 
