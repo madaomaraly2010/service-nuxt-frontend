@@ -74,7 +74,15 @@
             "request_date":"تاريخ الطلب",
             "request_status":"حالة الطلب",
             "provider_fullname":"اسم العامل",
-            "user_fullname":"اسم العميل"
+            "user_fullname":"اسم العميل",
+            "pending":"قيد الانتظار",
+            "approved":"موافق عليه",
+            "inprogress":"قيد التنفيذ",
+            "completed":"مكتمل",
+            "cancelled":"ملغى",
+            "rejected":"مرفوض",
+            "expired":"منتهي الصلاحية",
+            "all":"الكل"
         }
      },
 
@@ -100,5 +108,10 @@
             "logout":"خروج",
             "aboutus":"من نحن"
         }
+    },
+    "labels":{
+        "today":"اليوم",
+        "last_week":"الاسبوع الماضى",
+        "last_month":"الشهر الماضى"
     }
 }

@@ -1,9 +1,17 @@
 <template>
   <div>
-    <div class="row justify-center">Put filter options here</div>
-    <div class="row justify-center">
+    <request-customer-filter-options></request-customer-filter-options>
+
+    <div class="row">
       <q-card-section style="width: 70vw" class="q-pa-none q-ma-none">
-        <base-table :rows="store.list" :columns="theColumns" flat bordered>
+        <base-table
+          :rows="store.list"
+          style="height: 50vh"
+          :columns="theColumns"
+          flat
+          bordered
+          :pagination="pagination"
+        >
           <template #id="{ row }">
             <q-td class="text-left">
               <q-item class="text-center">
@@ -65,9 +73,13 @@
           <template #request_status="{ row }">
             <q-td>
               <q-item>
-                <q-item-label class="text-bold text-grey-7 text-center">{{
-                  row.request_status
-                }}</q-item-label>
+                <q-item-label class="text-bold text-grey-7 text-center">
+                  <q-badge
+                    class="q-pa-sm"
+                    :color="getBadgeColorFromRequestStatus(row.request_status)"
+                    >{{ getRequestStatusName(row.request_status) }}
+                  </q-badge>
+                </q-item-label>
               </q-item>
             </q-td>
           </template>
@@ -79,11 +91,59 @@
 
 <script lang="ts" setup>
 import type { QTableColumn } from "quasar";
+import { RequestStatusEnum } from "~/Data/Enums/RequestStatus.enum";
 
 import { useRequestCustomerStore } from "~/Data/Stores";
 const store = useRequestCustomerStore();
 await store.findAll();
 const nuxtApp = useNuxtApp();
+// const selectedTime: Ref<"today" | "last_week" | "last_month"> = ref("today");
+// const selectedRequestStatus: Ref<RequestStatusEnum> = ref<RequestStatusEnum>(
+//   RequestStatusEnum.All
+// );
+const pagination = ref({
+  page: 1,
+  rowsPerPage: 20, // Control number of rows per page
+});
+// const periodOptions = [
+//   { label: nuxtApp.$t("labels.today"), value: "today" },
+//   { label: nuxtApp.$t("labels.last_week"), value: "last_week" },
+//   { label: nuxtApp.$t("labels.last_month"), value: "last_month" },
+// ];
+// const requestStatusOptions = [
+//   {
+//     label: nuxtApp.$t("request_customer.fields.all"),
+//     value: RequestStatusEnum.All,
+//   },
+//   {
+//     label: nuxtApp.$t("request_customer.fields.pending"),
+//     value: RequestStatusEnum.PENDING,
+//   },
+//   {
+//     label: nuxtApp.$t("request_customer.fields.approved"),
+//     value: RequestStatusEnum.APPROVED,
+//   },
+//   {
+//     label: nuxtApp.$t("request_customer.fields.inprogress"),
+//     value: RequestStatusEnum.IN_PROGRESS,
+//   },
+//   {
+//     label: nuxtApp.$t("request_customer.fields.completed"),
+//     value: RequestStatusEnum.COMPLETED,
+//   },
+//   {
+//     label: nuxtApp.$t("request_customer.fields.cancelled"),
+//     value: RequestStatusEnum.CANCELLED,
+//   },
+//   {
+//     label: nuxtApp.$t("request_customer.fields.rejected"),
+//     value: RequestStatusEnum.REJECTED,
+//   },
+//   {
+//     label: nuxtApp.$t("request_customer.fields.expired"),
+//     value: RequestStatusEnum.EXPIRED,
+//   },
+// ];
 const theColumns: QTableColumn[] = [
   {
     name: "id",
@@ -133,6 +193,48 @@ const theColumns: QTableColumn[] = [
     align: "left",
   },
 ];
+
+const getBadgeColorFromRequestStatus = (status: number): string => {
+  // PENDING = 1,
+  // APPROVED = 2,
+  // IN_PROGRESS = 3,
+  // COMPLETED = 4,
+  // CANCELLED = 5,
+  // REJECTED = 6,
+  // EXPIRED = 7,
+
+  const badgeColors: any = {
+    1: "yellow-8",
+    2: "green-6",
+    3: "blue-6",
+    4: "teal-6",
+    5: "grey-7",
+    6: "red-6",
+    7: "orange-6",
+  };
+  return badgeColors[status];
+};
+
+const getRequestStatusName = (status: number): string => {
+  switch (status) {
+    case RequestStatusEnum.PENDING:
+      return nuxtApp.$t("request_customer.fields.pending");
+    case RequestStatusEnum.APPROVED:
+      return nuxtApp.$t("request_customer.fields.approved");
+    case RequestStatusEnum.IN_PROGRESS:
+      return nuxtApp.$t("request_customer.fields.inprogress");
+    case RequestStatusEnum.COMPLETED:
+      return nuxtApp.$t("request_customer.fields.completed");
+    case RequestStatusEnum.CANCELLED:
+      return nuxtApp.$t("request_customer.fields.cancelled");
+    case RequestStatusEnum.REJECTED:
+      return nuxtApp.$t("request_customer.fields.rejected");
+    case RequestStatusEnum.EXPIRED:
+      return nuxtApp.$t("request_customer.fields.expired");
+    default:
+      return "Unknown";
+  }
+};
 </script>
 
 <style lang="css"></style>

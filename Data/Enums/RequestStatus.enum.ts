@@ -1,4 +1,5 @@
-export enum RequestStatus {
+export enum RequestStatusEnum {
+  All = 0,
   PENDING = 1,
   APPROVED = 2,
   IN_PROGRESS = 3,
