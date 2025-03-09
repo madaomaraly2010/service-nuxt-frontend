@@ -1,97 +1,99 @@
 <template>
   <div>
-    <div class="row block">
-      <div class="row">
-        <!-- <q-btn @click="openDialog">Add row</q-btn> -->
-        <ProviderAddEditDialogForm
-          :default-work="defaultWork"
-          ref="providerRef"
-        ></ProviderAddEditDialogForm>
-        <WorkDropButton
-          @on-work-clicked="onWorkSelected"
-          class="col-3"
-        ></WorkDropButton>
-        <WorkFilterSelect class="col-3 offset-2"></WorkFilterSelect>
+    <!-- <div class="row block"> -->
+    <div class="row bg-amber">
+      <!-- <q-btn @click="openDialog">Add row</q-btn> -->
+      <ProviderAddEditDialogForm
+        v-if="defaultWork"
+        :default-work="defaultWork"
+        ref="providerRef"
+      ></ProviderAddEditDialogForm>
+      <div class="col-3">
+        <WorkDropButton @on-work-clicked="onWorkSelected"></WorkDropButton>
       </div>
-      <q-card-section class="q-pa-none q-ma-none">
-        <base-table
-          class="provider-table"
-          :rows="store.list"
-          :columns="provider_column"
-          flat
-          bordered
-        >
-          <template #id="{ row }">
-            <q-td>
-              <q-item>
-                <q-item-section>
-                  <q-item-label class="text-bold text-grey-7">{{
-                    row?.id
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-td>
-          </template>
-          <template #fullname="{ row }">
-            <q-td>
-              <q-item>
-                <q-item-section>
-                  <q-item-label
-                    style="text-align: center"
-                    class="text-bold text-grey-7"
-                    >{{
-                      (row.user?.first_name ?? " ") +
-                      " " +
-                      (row.user?.last_name ?? " ")
-                    }}</q-item-label
-                  >
-                </q-item-section>
-              </q-item>
-            </q-td>
-          </template>
-          <template #work="{ row }">
-            <q-td>
-              <q-item>
-                <q-item-label class="text-bold text-red-7">{{
-                  row.work?.arb_name
-                }}</q-item-label>
-              </q-item>
-            </q-td>
-          </template>
-
-          <template #country="{ row }">
-            <q-td>
-              <q-item>
-                <q-item-label class="text-bold text-grey-7">{{
-                  row.country?.arb_name
-                }}</q-item-label>
-              </q-item>
-            </q-td>
-          </template>
-
-          <template #mobile="{ row }">
-            <q-td>
-              <q-item>
-                <q-item-label class="text-bold text-grey-7">{{
-                  row.user?.mobile
-                }}</q-item-label>
-              </q-item>
-            </q-td>
-          </template>
-
-          <template #gender="{ row }">
-            <q-td>
-              <q-item>
-                <q-item-label class="text-bold text-grey-7">{{
-                  row?.gender == 1 ? "ذكر" : "أنثى"
-                }}</q-item-label>
-              </q-item>
-            </q-td>
-          </template>
-        </base-table>
-      </q-card-section>
+      <div class="col-3">
+        <WorkFilterSelect></WorkFilterSelect>
+      </div>
     </div>
+    <q-card-section class="q-pa-none q-ma-none">
+      <base-table
+        class="provider-table"
+        :rows="store.list"
+        :columns="provider_column"
+        flat
+        bordered
+      >
+        <template #id="{ row }">
+          <q-td>
+            <q-item>
+              <q-item-section>
+                <q-item-label class="text-bold text-grey-7">{{
+                  row?.id
+                }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-td>
+        </template>
+        <template #fullname="{ row }">
+          <q-td>
+            <q-item>
+              <q-item-section>
+                <q-item-label
+                  style="text-align: center"
+                  class="text-bold text-grey-7"
+                  >{{
+                    (row.user?.first_name ?? " ") +
+                    " " +
+                    (row.user?.last_name ?? " ")
+                  }}</q-item-label
+                >
+              </q-item-section>
+            </q-item>
+          </q-td>
+        </template>
+        <template #work="{ row }">
+          <q-td>
+            <q-item>
+              <q-item-label class="text-bold text-red-7">{{
+                row.work?.arb_name
+              }}</q-item-label>
+            </q-item>
+          </q-td>
+        </template>
+
+        <template #country="{ row }">
+          <q-td>
+            <q-item>
+              <q-item-label class="text-bold text-grey-7">{{
+                row.country?.arb_name
+              }}</q-item-label>
+            </q-item>
+          </q-td>
+        </template>
+
+        <template #mobile="{ row }">
+          <q-td>
+            <q-item>
+              <q-item-label class="text-bold text-grey-7">{{
+                row.user?.mobile
+              }}</q-item-label>
+            </q-item>
+          </q-td>
+        </template>
+
+        <template #gender="{ row }">
+          <q-td>
+            <q-item>
+              <q-item-label class="text-bold text-grey-7">{{
+                row?.gender == 1 ? "ذكر" : "أنثى"
+              }}</q-item-label>
+            </q-item>
+          </q-td>
+        </template>
+      </base-table>
+    </q-card-section>
   </div>
+  <!-- </div> -->
 </template>
 
 <script lang="ts" setup>
