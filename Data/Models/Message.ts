@@ -1,4 +1,4 @@
-import { Provider, RequestCustomer, WorkCategory } from ".";
+import { RequestCustomer } from ".";
 import type { IMessageAttributes } from "../Models-Row-Attributes";
 
 export class Message {
@@ -24,8 +24,8 @@ export class Message {
   public static callStaticMethod() {
     window.alert("OK Reflection");
   }
-  public static fromDbRow(dbRow: IMessageAttributes): Work {
-    let row: Work = new Work();
+  public static fromDbRow(dbRow: IMessageAttributes): Message {
+    let row: Message = new Message();
     row.id = dbRow.id ?? 0;
     row.created_at = dbRow.created_at;
     row.description = dbRow.description;
