@@ -13,6 +13,15 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const nuxtApp = useNuxtApp();
+// const showSocket = () => console.log("GateWay Socket IO", nuxtApp.$socket);
+
+onMounted(() => {
+  (nuxtApp.$socket as any).on("orderRequest", (requestRow: any) => {
+    console.log(requestRow);
+  });
+});
+</script>
 
 <style scoped></style>
