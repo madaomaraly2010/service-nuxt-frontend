@@ -14,6 +14,7 @@ import {
   WorkCategory,
 } from "../Models";
 import type { LangStatus } from "../Models/LangStatus";
+import type { Message } from "../Models/Message";
 import { ModelResponse } from "./ModelResponse-Class";
 
 export class UserResponse extends ModelResponse<User> {
@@ -21,6 +22,8 @@ export class UserResponse extends ModelResponse<User> {
 }
 
 export class ProviderResponse extends ModelResponse<Provider> {}
+
+export class MessageResponse extends ModelResponse<Message> {}
 
 export class PackageResponse extends ModelResponse<Package> {}
 

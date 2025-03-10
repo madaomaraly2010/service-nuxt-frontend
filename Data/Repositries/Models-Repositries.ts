@@ -14,6 +14,7 @@ import type {
   WorkCategory,
 } from "../Models";
 import type { LangStatus } from "../Models/LangStatus";
+import type { Message } from "../Models/Message";
 import type {
   ProviderResponse,
   UserResponse,
@@ -36,6 +37,8 @@ export interface IWorkRepositry extends IRepositry<Work> {}
 export interface IWorkCategoryRepositry extends IRepositry<WorkCategory> {}
 
 export interface IPackageRepositry extends IRepositry<Package> {}
+
+export interface IMessageRepositry extends IRepositry<Message> {}
 
 export interface IPackageItemRepositry extends IRepositry<PackageItem> {}
 

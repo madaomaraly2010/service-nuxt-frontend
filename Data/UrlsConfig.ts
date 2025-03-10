@@ -14,6 +14,13 @@ export const config = {
     API_WORK_UPDATE: `${BASE_URL}/work`,
   },
 
+  Message: {
+    API_MESSAGE_GET: `${BASE_URL}/message`,
+    API_MESSAGE_POST: `${BASE_URL}/message`,
+    API_MESSAGE_DELETE: `${BASE_URL}/message`,
+    API_MESSAGE_UPDATE: `${BASE_URL}/message`,
+  },
+
   WorkCategory: {
     API_WORK_CATEGORY_GET: `${BASE_URL}/workcategory`,
     API_WORK_CATEGORY_POST: `${BASE_URL}/workcategory`,

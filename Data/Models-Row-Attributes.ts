@@ -166,6 +166,15 @@ export interface IUserAttributes {
   request_customers?: IRequestCustomerAttributes[];
 }
 
+export interface IMessageAttributes {
+  id?: number;
+  created_at?: Date;
+  title?: string;
+  description?: string;
+  row?: object;
+  read?: number;
+  type?: number;
+}
 export interface IWorkAttributes {
   id?: number;
   arb_name?: string;
