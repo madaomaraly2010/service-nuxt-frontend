@@ -5,7 +5,12 @@ export default defineNuxtConfig({
   // Ensures pages directory is used
   pages: true,
 
-  modules: ["nuxt-quasar-ui", "@nuxtjs/i18n", "nuxt-echarts"],
+  modules: [
+    "nuxt-quasar-ui",
+    "@nuxtjs/i18n",
+    "nuxt-echarts",
+    "@vueuse/motion/nuxt",
+  ],
   devtools: { enabled: true },
 
   router: {

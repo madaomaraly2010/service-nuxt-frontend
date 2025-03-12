@@ -1,5 +1,5 @@
 import { Work } from "../Models";
-import type { Message } from "../Models/Message";
+import { Message } from "../Models/Message";
 import type { IMessageRepositry } from "../Repositries/Models-Repositries";
 import type {
   MessageResponse,
@@ -20,11 +20,11 @@ export class MessageService
   }
 
   override get usedUrl(): string {
-    return config.Work.API_WORK_GET;
+    return config.Message.API_MESSAGE_GET;
   }
 
   override async findAll(): Promise<MessageResponse> {
-    return super.fetchData(Work as any, config.Message.API_MESSAGE_GET);
+    return super.fetchData(Message as any, config.Message.API_MESSAGE_GET);
   }
 
   // override async findAll(): Promise<WorkResponse> {

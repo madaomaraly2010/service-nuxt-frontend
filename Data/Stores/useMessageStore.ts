@@ -6,7 +6,12 @@ const state = reactive({
   async findAll(): Promise<MessageResponse> {
     let response: MessageResponse = await MessageService.instance.findAll();
     state.list = response.data ?? [];
+    console.log("Messages", state.list);
     return response;
   },
+
+  addMessage(message: Message) {
+    state.list.push(message);
+  },
 });
-export const useWorkStore = () => state;
+export const useMessageStore = () => state;

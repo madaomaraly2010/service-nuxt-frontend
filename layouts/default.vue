@@ -79,7 +79,7 @@
           >
             <q-tooltip>Apps</q-tooltip>
           </q-btn> -->
-          <q-btn
+          <!-- <q-btn
             round
             dense
             flat
@@ -88,7 +88,7 @@
             v-if="nuxtApp.$q.screen.gt.sm"
           >
             <q-tooltip>Messages</q-tooltip>
-          </q-btn>
+          </q-btn> -->
           <q-btn
             round
             dense
@@ -98,8 +98,24 @@
             v-if="nuxtApp.$q.screen.gt.sm"
           ></q-btn>
           <q-btn round dense flat color="grey-8" icon="notifications">
-            <q-badge color="red" text-color="white" floating> 2 </q-badge>
-            <q-tooltip>Notifications</q-tooltip>
+            <q-badge
+              ref="badgeRef"
+              color="red"
+              text-color="white"
+              floating
+              style="width: 1.5vw; height: 1.5vh"
+              class="q-py-sm display: flex; align-items: center; justify-content: center;"
+            >
+              <span>223</span>
+            </q-badge>
+            <!-- <q-tooltip>Notifications</q-tooltip> -->
+            <q-popup-proxy
+              ref="popupRef"
+              transition-show="fade"
+              transition-hide="fade"
+            >
+              <message-list></message-list>
+            </q-popup-proxy>
           </q-btn>
           <q-btn-dropdown :label="userStore.loggedUser?.username" round flat>
             <q-tooltip>Account</q-tooltip>
@@ -180,12 +196,37 @@
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";
-import { useGlobalStore, useUserStore } from "../Data/Stores";
+import { useGlobalStore, useUserStore, useMessageStore } from "../Data/Stores";
+import type { Message } from "~/Data/Models/Message";
 const globalStore = useGlobalStore();
 const userStore = useUserStore();
+const messageStore = useMessageStore();
+
 const leftDrawerOpen = ref(false);
 const search = ref("");
 const nuxtApp = useNuxtApp();
+
+const badgeRef = ref();
+
+const motion = useMotion(badgeRef);
+
+onMounted(() => {
+  (nuxtApp.$socket as any).on("orderRequest", (requestRow: Message) => {
+    console.log(requestRow.id);
+    messageStore.addMessage(requestRow);
+    useMotion(badgeRef, {
+      initial: { x: 0 },
+      visible: {
+        x: [0, -10, 0] as any,
+        transition: {
+          repeat: 3,
+          repeatType: "loop",
+          duration: 500,
+        },
+      }, // issue:
+    });
+  });
+});
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
