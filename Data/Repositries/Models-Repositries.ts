@@ -1,7 +1,9 @@
 import type {
+  Bank,
   ChildStatus,
   CookStatus,
   Country,
+  Location,
   Package,
   PackageItem,
   Provider,
@@ -9,12 +11,15 @@ import type {
   RentStatus,
   RequestCustomer,
   RequestPayment,
+  Setting,
   User,
   Work,
   WorkCategory,
 } from "../Models";
+import type { City } from "../Models/City";
 import type { LangStatus } from "../Models/LangStatus";
 import type { Message } from "../Models/Message";
+import type { RequestAttach } from "../Models/RequestAttach";
 import type {
   ProviderResponse,
   UserResponse,
@@ -56,3 +61,11 @@ export interface IChildStatusRepositry extends IRepositry<ChildStatus> {}
 export interface IReligionStatusRepositry extends IRepositry<ReligionStatus> {}
 
 export interface IRentStatusRepositry extends IRepositry<RentStatus> {}
+
+export interface IBankRepositry extends IRepositry<Bank> {}
+export interface ISettingRepositry extends IRepositry<Setting> {}
+export interface ILocationRepositry extends IRepositry<Location> {}
+
+export interface ICityRepositry extends IRepositry<City> {}
+
+export interface IRequestAttachRepositry extends IRepositry<RequestAttach> {}

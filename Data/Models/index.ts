@@ -14,3 +14,10 @@ export * from "./User";
 export * from "./Work";
 export * from "./WorkCategory";
 export * from "./ReligionStatus";
+export * from "./Location";
+
+export * from "./Bank";
+
+export * from "./Setting";
+export * from "./City";
+export * from "./RequestAttach";

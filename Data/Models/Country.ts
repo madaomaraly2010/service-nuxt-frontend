@@ -1,4 +1,4 @@
-import { Provider } from ".";
+import { City, Provider } from ".";
 import type { ICountryAttributes } from "../Models-Row-Attributes";
 
 export class Country {
@@ -9,17 +9,18 @@ export class Country {
   flag_url!: string;
   iso_code!: string;
   arb_name?: string;
-
   // Country hasMany Provider via country_id
   providerList!: Provider[];
 
+  cityList!: City[];
+
   public toDbRow(): ICountryAttributes {
     let row: ICountryAttributes = {};
-    (row.id = this.id),
-      (row.arb_name = this.arb_name),
-      (row.eng_name = this.eng_name),
-      (row.iso_code = this.iso_code),
-      (row.flag_url = this.flag_url);
+    row.id = this.id;
+    row.arb_name = this.arb_name;
+    row.eng_name = this.eng_name;
+    row.iso_code = this.iso_code;
+    row.flag_url = this.flag_url;
     return row;
   }
 
@@ -30,6 +31,9 @@ export class Country {
     row.eng_name = dbRow.eng_name;
     if (dbRow.providers) {
       row.providerList = dbRow.providers.map((it) => Provider.fromDbRow(it));
+    }
+    if (dbRow.cities) {
+      row.cityList = dbRow.cities.map((it) => City.fromDbRow(it));
     }
     return row;
   }

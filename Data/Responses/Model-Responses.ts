@@ -1,7 +1,9 @@
 import {
+  Bank,
   ChildStatus,
   CookStatus,
   Country,
+  Location,
   Package,
   PackageItem,
   Provider,
@@ -9,12 +11,15 @@ import {
   RentStatus,
   RequestCustomer,
   RequestPayment,
+  Setting,
   User,
   Work,
   WorkCategory,
 } from "../Models";
+import type { City } from "../Models/City";
 import type { LangStatus } from "../Models/LangStatus";
 import type { Message } from "../Models/Message";
+import type { RequestAttach } from "../Models/RequestAttach";
 import { ModelResponse } from "./ModelResponse-Class";
 
 export class UserResponse extends ModelResponse<User> {
@@ -48,3 +53,13 @@ export class CountryResponse extends ModelResponse<Country> {}
 export class WorkResponse extends ModelResponse<Work> {}
 
 export class WorkCategoryResponse extends ModelResponse<WorkCategory> {}
+
+export class BankResponse extends ModelResponse<Bank> {}
+
+export class LocationResponse extends ModelResponse<Location> {}
+
+export class SettingResponse extends ModelResponse<Setting> {}
+
+export class CityResponse extends ModelResponse<City> {}
+
+export class RequestAttachResponse extends ModelResponse<RequestAttach> {}

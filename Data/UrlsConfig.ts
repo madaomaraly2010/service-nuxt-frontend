@@ -105,4 +105,39 @@ export const config = {
     API_PACKAGE_USER_DELETE: `${BASE_URL}/user`,
     API_PACKAGE_USER_UPDATE: `${BASE_URL}/user`,
   },
+
+  Bank: {
+    API_BANK_GET: `${BASE_URL}/bank`,
+    API_BANK_POST: `${BASE_URL}/bank`,
+    API_BANK_DELETE: `${BASE_URL}/bank`,
+    API_BANK_UPDATE: `${BASE_URL}/bank`,
+  },
+
+  Setting: {
+    API_SETTING_GET: `${BASE_URL}/setting`,
+    API_SETTING_POST: `${BASE_URL}/setting`,
+    API_SETTING_DELETE: `${BASE_URL}/setting`,
+    API_SETTING_UPDATE: `${BASE_URL}/setting`,
+  },
+
+  Location: {
+    API_LOCATION_GET: `${BASE_URL}/location`,
+    API_LOCATION_POST: `${BASE_URL}/location`,
+    API_LOCATION_DELETE: `${BASE_URL}/location`,
+    API_LOCATION_UPDATE: `${BASE_URL}/location`,
+  },
+
+  City: {
+    API_CITY_GET: `${BASE_URL}/city`,
+    API_CITY_POST: `${BASE_URL}/city`,
+    API_CITY_DELETE: `${BASE_URL}/city`,
+    API_CITY_UPDATE: `${BASE_URL}/city`,
+  },
+
+  RequestAttach: {
+    API_REQUEST_ATTACH_GET: `${BASE_URL}/requestattach`,
+    API_REQUEST_ATTACH_POST: `${BASE_URL}/requestattach`,
+    API_REQUEST_ATTACH_DELETE: `${BASE_URL}/requestattach`,
+    API_REQUEST_ATTACH_UPDATE: `${BASE_URL}/requestattach`,
+  },
 };

@@ -1,4 +1,4 @@
-import { RequestCustomer, Provider } from ".";
+import { RequestCustomer, Provider, Location } from ".";
 import type { IUserAttributes } from "../Models-Row-Attributes";
 
 export class User {
@@ -15,6 +15,7 @@ export class User {
 
   // User hasOne Provider via user_id
   provider?: Provider;
+  location?: Location;
 
   // User hasMany RequestCustomer via user_id
   requestCustomerList?: RequestCustomer[];
@@ -52,6 +53,9 @@ export class User {
 
     if (dbRow.provider) {
       row.provider = Provider.fromDbRow(dbRow.provider);
+    }
+    if (dbRow.location) {
+      row.location = Location.fromDbRow(dbRow.location);
     }
     if (dbRow.request_customers) {
       row.requestCustomerList = dbRow.request_customers.map((it) =>

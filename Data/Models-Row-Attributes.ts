@@ -1,4 +1,5 @@
-import type { Package } from "./Models";
+import type { Country, Package, RequestCustomer } from "./Models";
+import type { City } from "./Models/City";
 
 export interface IChildStatusAttributes {
   id?: number;
@@ -45,6 +46,7 @@ export interface ICountryAttributes {
   iso_code?: string;
   arb_name?: string;
   providers?: IProviderAttributes[];
+  cities?: ICityAttributes[];
 }
 
 export interface IPackageAttributes {
@@ -74,12 +76,12 @@ export interface IProviderAttributes {
   id?: number;
   created_at?: Date;
   updated_at?: Date;
-  address?: string;
-  city?: number;
-  state?: number;
-  zipcode?: string;
-  lat?: number;
-  lng?: number;
+  // address?: string;
+  // city?: number;
+  // state?: number;
+  // zipcode?: string;
+  // lat?: number;
+  // lng?: number;
   profile_picture?: string;
   user_id: number;
   bio?: string;
@@ -119,6 +121,7 @@ export interface IProviderAttributes {
   religion_status?: IReligionStatusAttributes;
   user?: IUserAttributes;
   work?: IWorkAttributes;
+  location_id: number;
 }
 
 export interface IRequestCustomerAttributes {
@@ -131,10 +134,12 @@ export interface IRequestCustomerAttributes {
   updated_at?: Date;
   provider_id?: number;
   wage_amount?: number;
+  month_number?: number;
   package_id?: number;
   provider?: IProviderAttributes;
   request_payments?: IRequestPaymentAttributes[];
   user?: IUserAttributes;
+  attaches?: IRequestAttachAttributes[];
 }
 
 export interface IRequestPaymentAttributes {
@@ -163,6 +168,8 @@ export interface IUserAttributes {
   mobile?: string;
 
   provider?: IProviderAttributes;
+  location?: ILocationAttributes;
+
   request_customers?: IRequestCustomerAttributes[];
 }
 
@@ -193,4 +200,54 @@ export interface IWorkCategoryAttributes {
   image_url?: string;
   icon?: string;
   works?: IWorkAttributes[];
+}
+
+export interface IBankAttributes {
+  id?: number;
+  created_at?: Date;
+  bank_name?: string;
+  bank_account?: string;
+}
+
+export interface ISettingAttributes {
+  id?: number;
+  created_at?: Date;
+  auto_cancel_request?: number;
+  max_hour?: number;
+  payment_method?: number;
+}
+
+export interface ILocationAttributes {
+  id?: number;
+  created_at?: Date;
+  user_id?: number;
+  address?: string;
+  country_id?: number;
+  city_id?: number;
+  state?: string;
+  post_code?: string;
+  lat?: number;
+  lng?: number;
+  country?: ICountryAttributes;
+  city?: ICityAttributes;
+}
+
+export interface ICityAttributes {
+  id?: number;
+  created_at?: Date;
+  arb_name?: string;
+  eng_name?: string;
+  country_id?: number;
+  country?: ICountryAttributes;
+}
+
+export interface IRequestAttachAttributes {
+  id?: number;
+  created_at?: Date;
+  file_path?: string;
+  file_name?: string;
+  file_type?: string;
+  uploaded_at?: Date;
+  request_id?: number;
+  request?: IRequestCustomerAttributes;
 }

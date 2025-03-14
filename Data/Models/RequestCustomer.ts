@@ -1,25 +1,28 @@
 import { Provider, RequestPayment, User } from ".";
 import type { IRequestCustomerAttributes } from "../Models-Row-Attributes";
+import { RequestAttach } from "./RequestAttach";
 export class RequestCustomer {
   id!: number;
-  user_id!: number;
+  user_id?: number;
   request_date?: Date;
   request_status?: number;
   payment_id?: number;
   created_at?: Date;
   updated_at?: Date;
-  provider_id!: number;
-  wage_amount!: number;
+  provider_id?: number;
+  wage_amount?: number;
+  month_number?: number;
   package_id?: number;
-
   // RequestCustomer belongsTo Provider via provider_id
-  provider!: Provider;
+  provider?: Provider;
 
   // RequestCustomer hasMany RequestPayment via request_id
-  requestPaymentList!: RequestPayment[];
+  requestPaymentList?: RequestPayment[];
+
+  attaches?: RequestAttach[];
 
   // RequestCustomer belongsTo User via user_id
-  user!: User;
+  user?: User;
 
   public toDbRow(): IRequestCustomerAttributes {
     let row: IRequestCustomerAttributes = {};
@@ -57,6 +60,10 @@ export class RequestCustomer {
       row.requestPaymentList = dbRow.request_payments.map((it) =>
         RequestPayment.fromDbRow(it)
       );
+    }
+
+    if (dbRow.attaches) {
+      row.attaches = dbRow.attaches.map((it) => RequestAttach.fromDbRow(it));
     }
     return row;
   }

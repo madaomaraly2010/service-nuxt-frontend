@@ -157,14 +157,14 @@
               />
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
               <BaseTextInput
                 class="col-9"
-                v-model="row.address"
+                v-model="row.user?.location?.address"
                 :label="$t('provider.fields.address')"
                 outlined
               />
-            </div>
+            </div> -->
 
             <div class="row q-my-sm"></div>
             <div class="row">
