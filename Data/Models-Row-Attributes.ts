@@ -166,6 +166,7 @@ export interface IUserAttributes {
   first_name?: string;
   last_name?: string;
   mobile?: string;
+  location_id?: number;
 
   provider?: IProviderAttributes;
   location?: ILocationAttributes;

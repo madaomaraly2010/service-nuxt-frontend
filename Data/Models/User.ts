@@ -12,6 +12,7 @@ export class User {
   first_name?: string | undefined;
   last_name?: string | undefined;
   mobile?: string;
+  location_id?: number;
 
   // User hasOne Provider via user_id
   provider?: Provider;
