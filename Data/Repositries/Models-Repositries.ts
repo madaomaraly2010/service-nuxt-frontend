@@ -20,6 +20,7 @@ import type { City } from "../Models/City";
 import type { LangStatus } from "../Models/LangStatus";
 import type { Message } from "../Models/Message";
 import type { RequestAttach } from "../Models/RequestAttach";
+import type { RequestStatus } from "../Models/RequestStatus";
 import type {
   ProviderResponse,
   UserResponse,
@@ -69,3 +70,5 @@ export interface ILocationRepositry extends IRepositry<Location> {}
 export interface ICityRepositry extends IRepositry<City> {}
 
 export interface IRequestAttachRepositry extends IRepositry<RequestAttach> {}
+
+export interface IRequestStatusRepositry extends IRepositry<RequestStatus> {}

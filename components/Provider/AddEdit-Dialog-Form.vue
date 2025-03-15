@@ -188,8 +188,8 @@
               />
               <BaseNumberInput
                 class="col-4 offset-1"
-                v-model="row.wage_amount"
-                :label="$t('provider.fields.wage_amount')"
+                v-model="row.wage_per_amount"
+                :label="$t('provider.fields.wage_per_amount')"
               />
             </div>
             <div class="row q-my-sm"></div>

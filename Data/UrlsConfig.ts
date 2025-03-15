@@ -140,4 +140,11 @@ export const config = {
     API_REQUEST_ATTACH_DELETE: `${BASE_URL}/requestattach`,
     API_REQUEST_ATTACH_UPDATE: `${BASE_URL}/requestattach`,
   },
+
+  RequestStatus: {
+    API_REQUEST_STATUS_GET: `${BASE_URL}/requeststatus`,
+    API_REQUEST_STATUS_POST: `${BASE_URL}/requeststatus`,
+    API_REQUEST_STATUS_DELETE: `${BASE_URL}/requeststatus`,
+    API_REQUEST_STATUS_UPDATE: `${BASE_URL}/requeststatus`,
+  },
 };

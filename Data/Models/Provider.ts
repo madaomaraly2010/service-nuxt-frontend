@@ -32,7 +32,7 @@ export class Provider {
   english_status_id?: number;
   nick_name?: string;
   net_salary?: number;
-  wage_amount?: number;
+  wage_per_amount?: number;
   card_number?: string;
   card_expire?: Date | undefined;
   passport_number?: string;
@@ -83,7 +83,7 @@ export class Provider {
   public toDbRow(): Partial<IProviderAttributes> {
     let row: Partial<IProviderAttributes> = {};
     row.id = this.id;
-    row.wage_amount = this.wage_amount;
+    row.wage_per_month = this.wage_per_amount;
     row.created_at = this.created_at;
     row.updated_at = this.updated_at;
     // row.city = this.city;
@@ -102,7 +102,7 @@ export class Provider {
     row.english_status_id = this.english_status_id;
     row.nick_name = this.nick_name;
     row.net_salary = this.net_salary;
-    row.wage_amount = this.wage_amount;
+    row.wage_per_month = this.wage_per_amount;
     row.card_number = this.card_number;
     row.card_expire = this.card_expire;
     row.passport_number = this.passport_number;
@@ -126,7 +126,7 @@ export class Provider {
     let row: Provider = new Provider();
     row.id = dbRow.id ?? 0;
 
-    row.wage_amount = dbRow.wage_amount;
+    row.wage_per_amount = dbRow.wage_per_month;
     row.created_at = dbRow.created_at;
     row.updated_at = dbRow.updated_at;
     // row.city = dbRow.city;
@@ -145,7 +145,7 @@ export class Provider {
     row.english_status_id = dbRow.english_status_id;
     row.nick_name = dbRow.nick_name;
     row.net_salary = dbRow.net_salary;
-    row.wage_amount = dbRow.wage_amount;
+    row.wage_per_amount = dbRow.wage_per_month;
     row.card_number = dbRow.card_number;
     row.card_expire = dbRow.card_expire;
     row.passport_number = dbRow.passport_number;

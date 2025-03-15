@@ -5,13 +5,16 @@ export class RequestCustomer {
   id!: number;
   user_id?: number;
   request_date?: Date;
-  request_status?: number;
+  request_status_id?: number;
   payment_id?: number;
   created_at?: Date;
   updated_at?: Date;
   provider_id?: number;
   wage_amount?: number;
   month_number?: number;
+  down_payment?: number;
+  payment_method?: number;
+
   package_id?: number;
   // RequestCustomer belongsTo Provider via provider_id
   provider?: Provider;
@@ -29,10 +32,13 @@ export class RequestCustomer {
     row.id = this.id;
     row.user_id = this.user_id;
     row.request_date = this.request_date;
-    row.request_status = this.request_status;
+    row.request_status_id = this.request_status_id;
     row.payment_id = this.payment_id;
     row.provider_id = this.provider_id;
     row.wage_amount = this.wage_amount;
+
+    row.down_payment = this.down_payment;
+    row.payment_method = this.payment_method;
     row.package_id = this.package_id;
     return row;
   }
@@ -42,12 +48,15 @@ export class RequestCustomer {
     row.id = dbRow.id ?? 0;
     row.user_id = dbRow.user_id ?? 0;
     row.request_date = dbRow.request_date;
-    row.request_status = dbRow.request_status;
+    row.request_status_id = dbRow.request_status_id;
     row.payment_id = dbRow.payment_id;
     row.created_at = dbRow.created_at;
     row.updated_at = dbRow.updated_at;
     row.provider_id = dbRow.provider_id ?? 0;
     row.wage_amount = dbRow.wage_amount ?? 0;
+
+    row.down_payment = dbRow.down_payment;
+    row.payment_method = dbRow.payment_method;
     row.package_id = dbRow.package_id;
 
     if (dbRow.provider) {

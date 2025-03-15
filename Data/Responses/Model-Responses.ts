@@ -20,6 +20,7 @@ import type { City } from "../Models/City";
 import type { LangStatus } from "../Models/LangStatus";
 import type { Message } from "../Models/Message";
 import type { RequestAttach } from "../Models/RequestAttach";
+import type { RequestStatus } from "../Models/RequestStatus";
 import { ModelResponse } from "./ModelResponse-Class";
 
 export class UserResponse extends ModelResponse<User> {
@@ -63,3 +64,4 @@ export class SettingResponse extends ModelResponse<Setting> {}
 export class CityResponse extends ModelResponse<City> {}
 
 export class RequestAttachResponse extends ModelResponse<RequestAttach> {}
+export class RequestStatusResponse extends ModelResponse<RequestStatus> {}

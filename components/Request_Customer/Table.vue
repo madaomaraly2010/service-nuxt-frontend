@@ -70,14 +70,14 @@
             </q-td>
           </template>
 
-          <template #request_status="{ row }">
+          <template #request_status_id="{ row }">
             <q-td>
               <q-item>
                 <q-item-label class="text-bold text-grey-7 text-center">
                   <q-badge
                     class="q-pa-sm"
                     :color="getBadgeColorFromRequestStatus(row.request_status)"
-                    >{{ getRequestStatusName(row.request_status) }}
+                    >{{ getRequestStatusName(row.request_status_id) }}
                   </q-badge>
                 </q-item-label>
               </q-item>
@@ -186,9 +186,9 @@ const theColumns: QTableColumn[] = [
   },
 
   {
-    name: "request_status",
+    name: "request_status_id",
     label: nuxtApp.$t("request_customer.fields.request_status"),
-    field: "request_status",
+    field: "request_status_id",
     sortable: true,
     align: "left",
   },

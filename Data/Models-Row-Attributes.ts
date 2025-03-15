@@ -56,6 +56,7 @@ export interface IPackageAttributes {
   is_active?: number;
   created_at?: Date;
   updated_at?: Date;
+  wage_per_month?: number;
   package_items?: IPackageItemAttributes[];
   providers?: IProviderAttributes[];
 }
@@ -76,12 +77,7 @@ export interface IProviderAttributes {
   id?: number;
   created_at?: Date;
   updated_at?: Date;
-  // address?: string;
-  // city?: number;
-  // state?: number;
-  // zipcode?: string;
-  // lat?: number;
-  // lng?: number;
+
   profile_picture?: string;
   user_id: number;
   bio?: string;
@@ -93,7 +89,7 @@ export interface IProviderAttributes {
   english_status_id?: number;
   nick_name?: string;
   net_salary?: number;
-  wage_amount?: number;
+  wage_per_month?: number;
   card_number?: string;
   card_expire?: Date;
   passport_number?: string;
@@ -128,13 +124,15 @@ export interface IRequestCustomerAttributes {
   id?: number;
   user_id?: number;
   request_date?: Date;
-  request_status?: number;
+  request_status_id?: number;
   payment_id?: number;
   created_at?: Date;
   updated_at?: Date;
   provider_id?: number;
   wage_amount?: number;
   month_number?: number;
+  down_payment?: number;
+  payment_method?: number;
   package_id?: number;
   provider?: IProviderAttributes;
   request_payments?: IRequestPaymentAttributes[];
@@ -251,4 +249,11 @@ export interface IRequestAttachAttributes {
   uploaded_at?: Date;
   request_id?: number;
   request?: IRequestCustomerAttributes;
+}
+
+export interface IRequestStatusAttributes {
+  id?: number;
+  arb_name?: string;
+  eng_name?: string;
+  request_customers?: IRequestCustomerAttributes[];
 }
