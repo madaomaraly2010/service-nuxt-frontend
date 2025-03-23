@@ -1,4 +1,4 @@
-import { Provider, RequestPayment, User } from ".";
+import { PackageItem, Provider, RequestPayment, User } from ".";
 import type { IRequestCustomerAttributes } from "../Models-Row-Attributes";
 import { RequestAttach } from "./RequestAttach";
 export class RequestCustomer {
@@ -15,7 +15,7 @@ export class RequestCustomer {
   down_payment?: number;
   payment_method?: number;
 
-  package_id?: number;
+  package_item_id?: number;
   // RequestCustomer belongsTo Provider via provider_id
   provider?: Provider;
 
@@ -23,6 +23,8 @@ export class RequestCustomer {
   requestPaymentList?: RequestPayment[];
 
   attaches?: RequestAttach[];
+
+  packageItem?: PackageItem;
 
   // RequestCustomer belongsTo User via user_id
   user?: User;
@@ -39,7 +41,7 @@ export class RequestCustomer {
 
     row.down_payment = this.down_payment;
     row.payment_method = this.payment_method;
-    row.package_id = this.package_id;
+    row.package_item_id = this.package_item_id;
     return row;
   }
 
@@ -57,13 +59,16 @@ export class RequestCustomer {
 
     row.down_payment = dbRow.down_payment;
     row.payment_method = dbRow.payment_method;
-    row.package_id = dbRow.package_id;
+    row.package_item_id = dbRow.package_item_id;
 
     if (dbRow.provider) {
       row.provider = Provider.fromDbRow(dbRow.provider);
     }
     if (dbRow.user) {
       row.user = User.fromDbRow(dbRow.user);
+    }
+    if (dbRow.package_item) {
+      row.packageItem = PackageItem.fromDbRow(dbRow.package_item);
     }
     if (dbRow.request_payments) {
       row.requestPaymentList = dbRow.request_payments.map((it) =>
@@ -74,6 +79,7 @@ export class RequestCustomer {
     if (dbRow.attaches) {
       row.attaches = dbRow.attaches.map((it) => RequestAttach.fromDbRow(it));
     }
+
     return row;
   }
 }

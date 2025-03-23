@@ -1,6 +1,4 @@
-import type {
-  ISettingAttributes,
-} from "../Models-Row-Attributes";
+import type { ISettingAttributes } from "../Models-Row-Attributes";
 
 export class Setting {
   id!: number;
@@ -8,12 +6,14 @@ export class Setting {
   auto_cancel_request?: number;
   max_hour?: number;
   payment_method?: number;
+  down_payment_percent?: number;
   public toDbRow(): ISettingAttributes {
     let row: ISettingAttributes = {};
     row.id = this.id;
     row.auto_cancel_request = this.auto_cancel_request;
     row.max_hour = this.max_hour;
     row.payment_method = this.payment_method;
+    row.down_payment_percent = this.down_payment_percent;
     return row;
   }
 
@@ -23,6 +23,7 @@ export class Setting {
     row.auto_cancel_request = dbRow.auto_cancel_request;
     row.max_hour = dbRow.max_hour;
     row.payment_method = dbRow.payment_method;
+    row.down_payment_percent = dbRow.down_payment_percent;
     return row;
   }
 }

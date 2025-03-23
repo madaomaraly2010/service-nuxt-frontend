@@ -10,6 +10,7 @@ export class PackageItem {
   wage_amount!: number;
   arb_name!: string;
   eng_name!: string;
+  down_payment_percent?: number;
 
   // PackageItem belongsTo Package via package_id
   package!: Package;
@@ -22,6 +23,8 @@ export class PackageItem {
     row.month_number = this.month_number;
     row.wage_amount = this.wage_amount;
     row.package_id = this.package_id;
+    row.down_payment_percent = this.down_payment_percent;
+
     return row;
   }
 
@@ -34,6 +37,7 @@ export class PackageItem {
     row.wage_amount = dbRow.wage_amount ?? 0;
     row.created_at = dbRow.created_at;
     row.updated_at = dbRow.updated_at;
+    row.down_payment_percent = dbRow.down_payment_percent;
     if (dbRow.package) {
       row.package = Package.fromDbRow(dbRow.package);
     }

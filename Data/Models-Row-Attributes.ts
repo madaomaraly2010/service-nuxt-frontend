@@ -69,6 +69,8 @@ export interface IPackageItemAttributes {
   wage_amount?: number;
   arb_name?: string;
   eng_name?: string;
+  down_payment_percent?: number;
+
 
   package?: IPackageAttributes;
 }
@@ -133,7 +135,8 @@ export interface IRequestCustomerAttributes {
   month_number?: number;
   down_payment?: number;
   payment_method?: number;
-  package_id?: number;
+  package_item_id?: number;
+  package_item?: IPackageItemAttributes;
   provider?: IProviderAttributes;
   request_payments?: IRequestPaymentAttributes[];
   user?: IUserAttributes;
@@ -214,6 +217,8 @@ export interface ISettingAttributes {
   auto_cancel_request?: number;
   max_hour?: number;
   payment_method?: number;
+  down_payment_percent?: number;
+
 }
 
 export interface ILocationAttributes {
