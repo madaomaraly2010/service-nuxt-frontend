@@ -1,4 +1,4 @@
-import { PackageItem, Provider, RequestPayment, User } from ".";
+import { PackageItem, Provider, RequestPayment, User, Work } from ".";
 import type { IRequestCustomerAttributes } from "../Models-Row-Attributes";
 import { RequestAttach } from "./RequestAttach";
 export class RequestCustomer {
@@ -10,6 +10,8 @@ export class RequestCustomer {
   created_at?: Date;
   updated_at?: Date;
   provider_id?: number;
+  work_id?: number;
+
   wage_amount?: number;
   month_number?: number;
   down_payment?: number;
@@ -18,6 +20,7 @@ export class RequestCustomer {
   package_item_id?: number;
   // RequestCustomer belongsTo Provider via provider_id
   provider?: Provider;
+  work?: Work;
 
   // RequestCustomer hasMany RequestPayment via request_id
   requestPaymentList?: RequestPayment[];
@@ -37,6 +40,8 @@ export class RequestCustomer {
     row.request_status_id = this.request_status_id;
     row.payment_id = this.payment_id;
     row.provider_id = this.provider_id;
+    row.work_id = this.work_id;
+
     row.wage_amount = this.wage_amount;
 
     row.down_payment = this.down_payment;
@@ -55,6 +60,8 @@ export class RequestCustomer {
     row.created_at = dbRow.created_at;
     row.updated_at = dbRow.updated_at;
     row.provider_id = dbRow.provider_id ?? 0;
+    row.work_id = dbRow.work_id ?? 0;
+
     row.wage_amount = dbRow.wage_amount ?? 0;
 
     row.down_payment = dbRow.down_payment;
@@ -64,6 +71,11 @@ export class RequestCustomer {
     if (dbRow.provider) {
       row.provider = Provider.fromDbRow(dbRow.provider);
     }
+
+    if (dbRow.work) {
+      row.work = Work.fromDbRow(dbRow.work);
+    }
+
     if (dbRow.user) {
       row.user = User.fromDbRow(dbRow.user);
     }
