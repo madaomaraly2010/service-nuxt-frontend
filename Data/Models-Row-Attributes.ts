@@ -130,6 +130,7 @@ export interface IRequestCustomerAttributes {
   created_at?: Date;
   updated_at?: Date;
   provider_id?: number;
+  total_before_discount?: number;
   work_id?: number;
   wage_amount?: number;
   month_number?: number;

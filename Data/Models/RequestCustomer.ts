@@ -16,6 +16,7 @@ export class RequestCustomer {
   month_number?: number;
   down_payment?: number;
   payment_method?: number;
+  total_before_discount?: number;
 
   package_item_id?: number;
   // RequestCustomer belongsTo Provider via provider_id
@@ -41,7 +42,7 @@ export class RequestCustomer {
     row.payment_id = this.payment_id;
     row.provider_id = this.provider_id;
     row.work_id = this.work_id;
-
+    row.total_before_discount = this.total_before_discount;
     row.wage_amount = this.wage_amount;
 
     row.down_payment = this.down_payment;
@@ -63,7 +64,7 @@ export class RequestCustomer {
     row.work_id = dbRow.work_id ?? 0;
 
     row.wage_amount = dbRow.wage_amount ?? 0;
-
+    row.total_before_discount = dbRow.total_before_discount;
     row.down_payment = dbRow.down_payment;
     row.payment_method = dbRow.payment_method;
     row.package_item_id = dbRow.package_item_id;
