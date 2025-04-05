@@ -7,7 +7,9 @@
         height="6vh"
       ></q-img>
     </q-avatar>
-    <q-item-label>{{ work?.arb_name }}</q-item-label>
+    <q-item-label class="text-subtitle1 text-grey-8">{{
+      work?.arb_name
+    }}</q-item-label>
   </div>
 </template>
 

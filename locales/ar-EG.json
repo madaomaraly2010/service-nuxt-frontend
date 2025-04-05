@@ -81,7 +81,8 @@
       "expired": "منتهي الصلاحية",
       "all": "الكل",
       "month_number": "عدد الأشهر",
-      "total_amount": "الإجمالى",
+      "net_total_amount": "الصافى",
+      "total_before_discount": " الإجمالى قبل الخصم",
       "down_payment": "العربون",
       "discount_value": "إجمالى الخصم",
       "discount_percent": "نسبة الخصم"
@@ -112,7 +113,9 @@
     }
   },
   "global": {
-    "details": "التفاصيل"
+    "details": "التفاصيل",
+    "male": "ذكر",
+    "female": "أنثى"
   },
   "labels": {
     "today": "اليوم",

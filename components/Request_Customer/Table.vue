@@ -119,7 +119,11 @@
 
           <template #request_status_id="{ row }">
             <q-td>
-              <q-item>
+              <request-customer-status
+                :request-customer="row"
+                :show-label="false"
+              ></request-customer-status>
+              <!-- <q-item>
                 <q-item-label class="text-bold text-grey-7 text-center">
                   <q-badge
                     class="q-pa-sm"
@@ -127,7 +131,7 @@
                     >{{ row.status.arb_name }}
                   </q-badge>
                 </q-item-label>
-              </q-item>
+              </q-item> -->
             </q-td>
           </template>
         </base-table>
@@ -247,27 +251,6 @@ const theColumns: QTableColumn[] = [
     align: "left",
   },
 ];
-
-const getStatusColor = (status: number): string => {
-  // PENDING = 1,
-  // APPROVED = 2,
-  // IN_PROGRESS = 3,
-  // COMPLETED = 4,
-  // CANCELLED = 5,
-  // REJECTED = 6,
-  // EXPIRED = 7,
-
-  const badgeColors: any = {
-    1: "yellow-8",
-    2: "green-6",
-    3: "blue-6",
-    4: "teal-6",
-    5: "grey-7",
-    6: "red-6",
-    7: "orange-6",
-  };
-  return badgeColors[status];
-};
 
 // const getRequestStatusName = (status: number): string => {
 //   switch (status) {

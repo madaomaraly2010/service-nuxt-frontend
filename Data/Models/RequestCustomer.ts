@@ -42,6 +42,24 @@ export class RequestCustomer {
   // RequestCustomer belongsTo User via user_id
   user?: User;
 
+  get discountPercent(): number {
+    if (this.total == 0) return 0; // Avoid division by zero
+    return ((this.total! - this.discountedPrice!) / this.total!) * 100;
+  }
+
+  get discountValue(): number {
+    if (this.total == 0) return 0; // Avoid division by zero
+    return (this.total ?? 0) - (this.discountedPrice ?? 0);
+  }
+
+  get discountedPrice(): number {
+    return this.wage_amount ?? 0;
+  }
+
+  get total(): number {
+    return this.total_before_discount ?? 0;
+  }
+
   public toDbRow(): IRequestCustomerAttributes {
     const row: IRequestCustomerAttributes = {};
     row.id = this.id;

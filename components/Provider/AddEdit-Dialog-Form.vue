@@ -361,6 +361,7 @@ const props = defineProps({
     type: Object as PropType<Work | undefined>,
   },
 });
+const nuxtApp = useNuxtApp();
 
 const globalStore = useGlobalStore();
 
@@ -376,25 +377,17 @@ const cookStore = useCookStatusStore();
 
 const rentStore = useRentStatusStore();
 
-const openDialog = () => (dialog.value as any).open();
-const closeDialog = () => (dialog.value as any).close();
-defineExpose({ openDialog, closeDialog });
+const open = () => (dialog.value as any).open();
+const close = () => (dialog.value as any).close();
+defineExpose({ open, close });
 const tab = ref("account");
 
 const row = ref<Provider>(Provider.create());
 
 const genderOptions = [
-  { value: 1, label: "Male" },
-  { value: 2, label: "Female" },
+  { value: 1, label: nuxtApp.$t("global.male") },
+  { value: 2, label: nuxtApp.$t("global.female") },
 ];
-
-// const religionOptions = ["Islam", "Christianity", "Hinduism"];
-// const jobOptions = ["Employee", "Manager", "Worker"];
-// const locationOptions = ["Dubai", "Abu Dhabi", "Sharjah"];
-// const statusOptions = ["Available", "Unavailable"];
-// const cookingOptions = ["Beginner", "Intermediate", "Expert"];
-// const childcareOptions = ["Accepted", "Not Accepted"];
-// const languageOptions = ["Weak", "Intermediate", "Fluent"];
 </script>
 <style scoped>
 .panel-size {
