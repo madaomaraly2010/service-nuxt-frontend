@@ -5,7 +5,7 @@ const state = reactive({
   list: [] as Provider[],
 
   async findAll(): Promise<ProviderResponse> {
-    let response: ProviderResponse = await ProviderService.instance.findAll();
+    const response: ProviderResponse = await ProviderService.instance.findAll();
     state.list = response.data ?? [];
     return response;
   },
@@ -22,13 +22,13 @@ const state = reactive({
     throw new Error("delete not implemented");
   },
   async getByCountry(countryId: number): Promise<ProviderResponse> {
-    let response: ProviderResponse =
+    const response: ProviderResponse =
       await ProviderService.instance.getByCountry(countryId);
     state.list = response.data ?? [];
     return response;
   },
   async getByWork(workId: number): Promise<ProviderResponse> {
-    let response: ProviderResponse = await ProviderService.instance.getByWork(
+    const response: ProviderResponse = await ProviderService.instance.getByWork(
       workId
     );
     state.list = response.data ?? [];

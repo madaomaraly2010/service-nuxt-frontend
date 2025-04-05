@@ -1,4 +1,11 @@
-import { PackageItem, Provider, RequestPayment, User, Work } from ".";
+import {
+  PackageItem,
+  Provider,
+  RequestPayment,
+  RequestStatus,
+  User,
+  Work,
+} from ".";
 import type { IRequestCustomerAttributes } from "../Models-Row-Attributes";
 import { RequestAttach } from "./RequestAttach";
 export class RequestCustomer {
@@ -30,11 +37,13 @@ export class RequestCustomer {
 
   packageItem?: PackageItem;
 
+  status?: RequestStatus;
+
   // RequestCustomer belongsTo User via user_id
   user?: User;
 
   public toDbRow(): IRequestCustomerAttributes {
-    let row: IRequestCustomerAttributes = {};
+    const row: IRequestCustomerAttributes = {};
     row.id = this.id;
     row.user_id = this.user_id;
     row.request_date = this.request_date;
@@ -52,7 +61,7 @@ export class RequestCustomer {
   }
 
   public static fromDbRow(dbRow: IRequestCustomerAttributes): RequestCustomer {
-    let row: RequestCustomer = new RequestCustomer();
+    const row: RequestCustomer = new RequestCustomer();
     row.id = dbRow.id ?? 0;
     row.user_id = dbRow.user_id ?? 0;
     row.request_date = dbRow.request_date;
@@ -91,6 +100,10 @@ export class RequestCustomer {
 
     if (dbRow.attaches) {
       row.attaches = dbRow.attaches.map((it) => RequestAttach.fromDbRow(it));
+    }
+
+    if (dbRow.request_status) {
+      row.status = RequestStatus.fromDbRow(dbRow.request_status);
     }
 
     return row;

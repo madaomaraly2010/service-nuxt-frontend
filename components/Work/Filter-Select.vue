@@ -10,7 +10,7 @@
       :options="workStore.list"
       option-label="arb_name"
       option-value="id"
-      filled
+      outlined
       dense
       clearable
       :popup-content-class="globalStore.direction == 'rtl' ? 'rtl' : ''"

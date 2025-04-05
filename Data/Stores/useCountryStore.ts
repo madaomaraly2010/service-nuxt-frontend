@@ -4,7 +4,7 @@ import { CountryService } from "../Services/Country.service";
  const state = reactive({
   list: [] as Country[],
   async findAll(): Promise<CountryResponse> {
-    let response: CountryResponse = await CountryService.instance.findAll();
+    const response: CountryResponse = await CountryService.instance.findAll();
     state.list = response.data ?? [];
     return response;
   },

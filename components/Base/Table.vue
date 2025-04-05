@@ -1,5 +1,11 @@
 <template>
-  <q-table v-bind="$attrs" :rows="rows" :columns="computedColumns" row-key="id">
+  <q-table
+    v-bind="$attrs"
+    :rows="rows"
+    :columns="computedColumns"
+    row-key="id"
+    class="sticky-header-table"
+  >
     <!-- Dynamically create slots for each column -->
     <template
       v-for="col in columns"
@@ -14,19 +20,11 @@
             ? col.format(props.row[col.field], props.row)
             : props.row[col.field]
         }}
-
-        <!-- {{
-          props.row && col.field in props.row
-            ? col.format
-              ? col.format(props.row[col.field], props.row)
-              : props.row[col.field]
-            : "N/A"
-        }} -->
       </slot>
     </template>
 
     <!-- Actions Column -->
-    <template v-slot:body-cell-actions="props">
+    <template v-if="showActions" v-slot:body-cell-actions="props">
       <q-td>
         <q-btn flat round dense icon="more_vert">
           <q-menu>
@@ -54,16 +52,29 @@ import { computed, defineProps, defineEmits } from "vue";
 const props = defineProps({
   columns: Array,
   rows: Array,
+  showActions: Boolean,
 });
 
 const emit = defineEmits(["action"]);
 
-const computedColumns = computed(() => [
-  { name: "actions", label: "Actions", align: "right", field: "id" },
-  ...props.columns,
-]);
+const computedColumns = computed(() =>
+  props.showActions
+    ? [
+        { name: "actions", label: "Actions", align: "right", field: "id" },
+        ...props.columns,
+      ]
+    : [...props.columns]
+);
 
 function emitAction(action, row) {
   emit("action", { action, row });
 }
 </script>
+<style>
+.sticky-header-table thead tr th {
+  position: sticky;
+  top: 0;
+  background: white; /* or match your table's background */
+  z-index: 1;
+}
+</style>

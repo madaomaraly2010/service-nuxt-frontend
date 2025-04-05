@@ -22,7 +22,7 @@ export class User {
   requestCustomerList?: RequestCustomer[];
 
   public toDbRow(): IUserAttributes {
-    let row: IUserAttributes = {};
+    const row: IUserAttributes = {};
     row.id = this.id;
     row.username = this.username;
     row.email = this.email;
@@ -39,7 +39,7 @@ export class User {
   }
 
   public static fromDbRow(dbRow: IUserAttributes): User {
-    let row: User = new User();
+    const row: User = new User();
     row.id = dbRow.id ?? 0;
     row.username = dbRow.username;
     row.email = dbRow.email;

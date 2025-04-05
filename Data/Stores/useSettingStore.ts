@@ -4,7 +4,7 @@ import { SettingService } from "../Services/Setting.service";
 const state = reactive({
   list: [] as Setting[],
   async findAll(): Promise<SettingResponse> {
-    let response: SettingResponse = await SettingService.instance.findAll();
+    const response: SettingResponse = await SettingService.instance.findAll();
     state.list = response.data ?? [];
     return response;
   },

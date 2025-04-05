@@ -53,6 +53,7 @@ export default defineNuxtConfig({
     "@quasar/extras/material-icons/material-icons.css",
     "@fortawesome/fontawesome-svg-core/styles.css",
     "@fortawesome/fontawesome-free/css/all.css",
+    "flag-icon-css/css/flag-icons.min.css", // ✅ corr
   ],
 
   build: {

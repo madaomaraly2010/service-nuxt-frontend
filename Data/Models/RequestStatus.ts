@@ -9,7 +9,7 @@ export class RequestStatus {
   requestCustomerList?: RequestCustomer[];
 
   public toDbRow(): IRequestStatusAttributes {
-    let row: IRequestStatusAttributes = {};
+    const row: IRequestStatusAttributes = {};
     row.id = this.id;
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
@@ -17,7 +17,7 @@ export class RequestStatus {
   }
 
   public static fromDbRow(dbRow: IRequestStatusAttributes): RequestStatus {
-    let row: RequestStatus = new RequestStatus();
+    const row: RequestStatus = new RequestStatus();
     row.id = dbRow.id ?? 0;
     row.arb_name = dbRow.arb_name;
     row.eng_name = dbRow.eng_name;

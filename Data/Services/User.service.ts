@@ -21,7 +21,7 @@ export class UserService
   }
   async login(username: string, password: string): Promise<UserResponse> {
     let list: User[] | undefined = [];
-    let { data, error } = await useFetch<UserResponse>(
+    const { data, error } = await useFetch<UserResponse>(
       config.User.API_PACKAGE_USER_POST_LOGIN,
       {
         body: {
@@ -31,7 +31,7 @@ export class UserService
         method: "POST",
       }
     );
-    let response: UserResponse = ModelResponse.fromServerResponse(data.value);
+    const response: UserResponse = ModelResponse.fromServerResponse(data.value);
 
     if (error.value?.message) {
       throw new Error(error.value?.message);

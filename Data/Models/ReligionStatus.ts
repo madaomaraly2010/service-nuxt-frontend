@@ -8,7 +8,7 @@ export class ReligionStatus {
   // ReligionStatus hasMany Provider via religion_status
   providerList!: Provider[];
   public toDbRow(): IReligionStatusAttributes {
-    let row: IReligionStatusAttributes = {};
+    const row: IReligionStatusAttributes = {};
     row.id = this.id;
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
@@ -16,7 +16,7 @@ export class ReligionStatus {
   }
 
   public static fromDbRow(dbRow: IReligionStatusAttributes): ReligionStatus {
-    let row: ReligionStatus = new ReligionStatus();
+    const row: ReligionStatus = new ReligionStatus();
     row.id = dbRow.id ?? 0;
     row.arb_name = dbRow.arb_name;
     row.eng_name = dbRow.eng_name;

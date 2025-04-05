@@ -1,117 +1,122 @@
 {
-    "provider":{
-        "title":"العامليين",
-        "tabs":{
-            "account":"بيانات الحساب",
-            "personal":"بيانات شخصية",
-            "contact":"بيانات الإتصال",
-            "employment":"بيانات توظيفية",
-            "documents":"الوثائق و الحالات",
-            "additional":"بيانات أخرى"
-        },
-        "fields":{
-           "address":"العنوان",
-           "city":"المدينة",
-           "state":"المقاطعة",
-           "zipcode":"الرمز البريدى",
-           "profile_picture":"الصورة الشخصية",
-           "bio":"السيرة الذاتية",
-           "rating":"التقييم",
-           "rent_status_id":"حالة التأجير",
-           "country_id" :"الجنسية",
-           "religion_status_id":"الديانة",
-           "arabic_status_id":"اللغة العربية",
-           "english_status_id":"اللغة الإنجليزية",
-            "nick_name":"الكنية",
-            "net_salary":"الراتب الشهرى",
-            "wage_amount":"الأجرة الشهرية",
-            "card_number":"رقم البطاقة",
-            "card_expire":"تاريخ إنتهاء ",
-            "passport_number":"رقم الجواز",
-            "passport_expire":"تاريخ إنتهاءه",
-            "experience_date":"تاريخ بء الخبرة",
-            "max_children":"عدد الاطفال",
-            "child_status_id":"الطفولة",
-            "license_number":"رقم الرخصة",
-            "license_expiry":"تاريخ إنتهائها",
-            "work_id":"العمل",
-            "package_id":"",
-            "cook_status_id":"الطهى",
-            "notes":"ملاحظات",
-            "date_birth":"تاريخ الميلاد",
-            "gender" :"الجنس"
-
-        }
+  "provider": {
+    "title": "العامليين",
+    "tabs": {
+      "account": "بيانات الحساب",
+      "personal": "بيانات شخصية",
+      "contact": "بيانات الإتصال",
+      "employment": "بيانات توظيفية",
+      "documents": "الوثائق و الحالات",
+      "additional": "بيانات أخرى"
     },
-     "user":{
-        "title":"المستخدميين",
-        "fields":{
-            "first_name":"الاسم الاول",
-            "last_name":"اللقب",
-            "full_name":"اسم المستخدم",
-
-            "email":"البريد الإكترونى",
-            "mobile":"موبايل",
-            "username":"اسم المستخدم",
-            "password_hash":"كلمة المرور"
-
-        }
-     }
-    ,
-    "login":{
-        "title":"",
-        "login":"دخول",
-        "submit":"دخول",
-        "password":"كلمة المرور",
-        "email":"البريد الإكترونى",
-        "forgetpassword":"نسيت كلمة المرور"
-    },
-
-    "request_customer":{
-        "title":"الطلبات",
-        "fields":{
-            "id":"السجل",
-            "request_date":"تاريخ الطلب",
-            "request_status":"حالة الطلب",
-            "provider_fullname":"اسم العامل",
-            "user_fullname":"اسم العميل",
-            "pending":"قيد الانتظار",
-            "approved":"موافق عليه",
-            "inprogress":"قيد التنفيذ",
-            "completed":"مكتمل",
-            "cancelled":"ملغى",
-            "rejected":"مرفوض",
-            "expired":"منتهي الصلاحية",
-            "all":"الكل"
-        }
-     },
-
-    "messages":{
-        "loading_data":"جارى تحميل البيانات...",
-        "user_authenticated":"المستخدم تم التحقق من هويته.",
-        "user_not_authenticated":"خطأ فى اسم المستخدم أو كلمة المرور"
-
-    },
-    "error":{
-        "email_incorrect" :"بريد إلكترونى غير صحيح",
-        "password_incorrect":"خطأ فى كلمة المرور",
-        "email_password_incorrect":"خطأ فى اسم المستخدم أو كلمة المرور",
-        "field_is_required" : "حقل {0} إلزامى"
-    },
-    "drawer":{
-        "items":{
-            "main":"الرئيسية",
-            "employees":"الموظفيين",
-            "customers":"العملاء",
-            "workers":"العمالة",
-            "requests":"الطلبات",
-            "logout":"خروج",
-            "aboutus":"من نحن"
-        }
-    },
-    "labels":{
-        "today":"اليوم",
-        "last_week":"الاسبوع الماضى",
-        "last_month":"الشهر الماضى"
+    "fields": {
+      "address": "العنوان",
+      "city": "المدينة",
+      "state": "المقاطعة",
+      "zipcode": "الرمز البريدى",
+      "profile_picture": "الصورة الشخصية",
+      "bio": "السيرة الذاتية",
+      "rating": "التقييم",
+      "rent_status_id": "حالة التأجير",
+      "country_id": "الجنسية",
+      "religion_status_id": "الديانة",
+      "arabic_status_id": "اللغة العربية",
+      "english_status_id": "اللغة الإنجليزية",
+      "nick_name": "الكنية",
+      "net_salary": "الراتب الشهرى",
+      "wage_amount": "الأجرة الشهرية",
+      "card_number": "رقم البطاقة",
+      "card_expire": "تاريخ إنتهاء ",
+      "passport_number": "رقم الجواز",
+      "passport_expire": "تاريخ إنتهاءه",
+      "experience_date": "تاريخ بء الخبرة",
+      "max_children": "عدد الاطفال",
+      "child_status_id": "الطفولة",
+      "license_number": "رقم الرخصة",
+      "license_expiry": "تاريخ إنتهائها",
+      "work_id": "العمل",
+      "package_id": "",
+      "cook_status_id": "الطهى",
+      "notes": "ملاحظات",
+      "date_birth": "تاريخ الميلاد",
+      "gender": "الجنس"
     }
+  },
+  "user": {
+    "title": "المستخدميين",
+    "fields": {
+      "first_name": "الاسم الاول",
+      "last_name": "اللقب",
+      "full_name": "اسم المستخدم",
+
+      "email": "البريد الإكترونى",
+      "mobile": "موبايل",
+      "username": "اسم المستخدم",
+      "password_hash": "كلمة المرور"
+    }
+  },
+  "login": {
+    "title": "",
+    "login": "دخول",
+    "submit": "دخول",
+    "password": "كلمة المرور",
+    "email": "البريد الإكترونى",
+    "forgetpassword": "نسيت كلمة المرور"
+  },
+
+  "request_customer": {
+    "title": "الطلبات",
+    "fields": {
+      "id": "السجل",
+      "request_date": "تاريخ الطلب",
+      "request_status": "حالة الطلب",
+      "provider_fullname": "اسم العامل",
+      "user_fullname": "اسم العميل",
+      "pending": "قيد الانتظار",
+      "approved": "موافق عليه",
+      "inprogress": "قيد التنفيذ",
+      "completed": "مكتمل",
+      "cancelled": "ملغى",
+      "rejected": "مرفوض",
+      "expired": "منتهي الصلاحية",
+      "all": "الكل",
+      "month_number": "عدد الأشهر",
+      "total_amount": "الإجمالى",
+      "down_payment": "العربون",
+      "discount_value": "إجمالى الخصم",
+      "discount_percent": "نسبة الخصم"
+    }
+  },
+
+  "messages": {
+    "loading_data": "جارى تحميل البيانات...",
+    "user_authenticated": "المستخدم تم التحقق من هويته.",
+    "user_not_authenticated": "خطأ فى اسم المستخدم أو كلمة المرور"
+  },
+  "error": {
+    "email_incorrect": "بريد إلكترونى غير صحيح",
+    "password_incorrect": "خطأ فى كلمة المرور",
+    "email_password_incorrect": "خطأ فى اسم المستخدم أو كلمة المرور",
+    "field_is_required": "حقل {0} إلزامى"
+  },
+  "drawer": {
+    "items": {
+      "main": "الرئيسية",
+      "employees": "الموظفيين",
+      "customers": "العملاء",
+      "workers": "العمالة",
+      "requests": "الطلبات",
+      "logout": "خروج",
+      "settings": "الإعدادات",
+      "aboutus": "من نحن"
+    }
+  },
+  "global": {
+    "details": "التفاصيل"
+  },
+  "labels": {
+    "today": "اليوم",
+    "last_week": "الاسبوع الماضى",
+    "last_month": "الشهر الماضى"
+  }
 }

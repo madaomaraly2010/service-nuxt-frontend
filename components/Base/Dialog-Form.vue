@@ -6,7 +6,12 @@
     :transition-hide="transitionHide"
   >
     <q-card
-      :style="{ maxWidth: maxWidth, maxHeight: maxHeight }"
+      :style="{
+        maxWidth: maxWidth,
+        maxHeight: maxHeight,
+        width: width,
+        height: height,
+      }"
       class="q-pa-sm"
     >
       <!-- Header Slot (Title & Close Button) -->
@@ -78,6 +83,15 @@ const props = defineProps({
     default: "500px",
   },
   maxWidth: {
+    type: String,
+    default: "50vw",
+  },
+
+  width: {
+    type: String,
+    default: "50vw",
+  },
+  height: {
     type: String,
     default: "50vw",
   },

@@ -18,7 +18,7 @@ export class Location {
   city?: City;
 
   public toDbRow(): ILocationAttributes {
-    let row: ILocationAttributes = {};
+    const row: ILocationAttributes = {};
     row.id = this.id;
     row.address = this.address;
     row.city_id = this.city_id;
@@ -41,7 +41,7 @@ export class Location {
   }
 
   public static fromDbRow(dbRow: ILocationAttributes): Location {
-    let row: Location = new Location();
+    const row: Location = new Location();
     row.id = dbRow.id ?? 0;
     row.address = dbRow.address;
     row.city_id = dbRow.city_id;

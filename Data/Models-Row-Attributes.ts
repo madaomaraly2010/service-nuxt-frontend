@@ -143,6 +143,7 @@ export interface IRequestCustomerAttributes {
   request_payments?: IRequestPaymentAttributes[];
   user?: IUserAttributes;
   attaches?: IRequestAttachAttributes[];
+  request_status?: IRequestStatusAttributes;
 }
 
 export interface IRequestPaymentAttributes {

@@ -12,7 +12,7 @@ export class Work {
   providerList?: Provider[];
 
   public toDbRow(): IWorkAttributes {
-    let row: IWorkAttributes = {};
+    const row: IWorkAttributes = {};
     row.id = this.id;
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
@@ -24,7 +24,7 @@ export class Work {
     window.alert("OK Reflection");
   }
   public static fromDbRow(dbRow: IWorkAttributes): Work {
-    let row: Work = new Work();
+    const row: Work = new Work();
     row.id = dbRow.id ?? 0;
     row.arb_name = dbRow.arb_name;
     row.eng_name = dbRow.eng_name;

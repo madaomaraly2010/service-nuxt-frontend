@@ -9,10 +9,10 @@ export class ModelResponse<ModelType> {
 
     if (seen.has(obj)) return seen.get(obj); // Handle circular reference
 
-    let copy: any = Array.isArray(obj) ? [] : {};
+    const copy: any = Array.isArray(obj) ? [] : {};
     seen.set(obj, copy);
 
-    for (let key in obj) {
+    for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
         copy[key] = ModelResponse.deepClone(obj[key], seen);
       }

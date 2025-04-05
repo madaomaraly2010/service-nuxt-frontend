@@ -4,7 +4,7 @@ import type { WorkResponse } from "../Responses/Model-Responses";
 const state = reactive({
   list: [] as Work[],
   async findAll(): Promise<WorkResponse> {
-    let response: WorkResponse = await WorkService.instance.findAll();
+    const response: WorkResponse = await WorkService.instance.findAll();
     state.list = response.data ?? [];
     return response;
   },

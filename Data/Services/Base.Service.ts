@@ -40,9 +40,9 @@ export abstract class BaseModelService<ModelType>
 
     let list: ModelType[] = [];
 
-    let { data, error } = await useFetch<ModelResponse<ModelType>>(url,queryStrings);
+    const { data, error } = await useFetch<ModelResponse<ModelType>>(url,queryStrings);
 
-    let response: ModelResponse<ModelType> = ModelResponse.fromServerResponse(
+    const response: ModelResponse<ModelType> = ModelResponse.fromServerResponse(
       data.value
     );
 

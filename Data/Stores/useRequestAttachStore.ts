@@ -4,7 +4,7 @@ import { RequestAttachService } from "../Services/RequestAttach.service";
 const state = reactive({
   list: [] as RequestAttach[],
   async findAll(): Promise<RequestAttachResponse> {
-    let response: RequestAttachResponse =
+    const response: RequestAttachResponse =
       await RequestAttachService.instance.findAll();
     state.list = response.data ?? [];
     return response;

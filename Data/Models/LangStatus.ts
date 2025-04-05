@@ -9,7 +9,7 @@ export class LangStatus {
   englishProviderList!: Provider[];
 
   public toDbRow(): ILangStatusAttributes {
-    let row: ILangStatusAttributes = {};
+    const row: ILangStatusAttributes = {};
     row.id = this.id;
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
@@ -17,7 +17,7 @@ export class LangStatus {
   }
 
   public static fromDbRow(dbRow: ILangStatusAttributes): LangStatus {
-    let row: LangStatus = new LangStatus();
+    const row: LangStatus = new LangStatus();
     row.id = dbRow.id ?? 0;
     row.arb_name = dbRow.arb_name;
     row.eng_name = dbRow.eng_name;

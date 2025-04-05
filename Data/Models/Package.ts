@@ -15,7 +15,7 @@ export class Package {
   providerList!: Provider[];
 
   public toDbRow(): IPackageAttributes {
-    let row: IPackageAttributes = {};
+    const row: IPackageAttributes = {};
     row.id = this.id;
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
@@ -26,7 +26,7 @@ export class Package {
   }
 
   public static fromDbRow(dbRow: IPackageAttributes): Package {
-    let row: Package = new Package();
+    const row: Package = new Package();
     row.id = dbRow.id ?? 0;
     row.arb_name = dbRow.arb_name ?? "";
     row.eng_name = dbRow.eng_name ?? "";

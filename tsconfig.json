@@ -1,7 +1,9 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
+  
   "compilerOptions": {
+  
 "module": "esnext",
     "target": "es2017",
     "strict": true, // Enable strict TypeScript checking
@@ -9,6 +11,7 @@
     "noUnusedLocals": true
   },
   "vueCompilerOptions": {
+    
     "strictTemplates": true // ✅ Enables strict template type-checking
   }
 }

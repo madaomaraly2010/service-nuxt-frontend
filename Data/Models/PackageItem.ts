@@ -16,7 +16,7 @@ export class PackageItem {
   package!: Package;
 
   public toDbRow(): IPackageItemAttributes {
-    let row: IPackageItemAttributes = {};
+    const row: IPackageItemAttributes = {};
     row.id = this.id;
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
@@ -29,7 +29,7 @@ export class PackageItem {
   }
 
   public static fromDbRow(dbRow: IPackageItemAttributes): PackageItem {
-    let row: PackageItem = new PackageItem();
+    const row: PackageItem = new PackageItem();
     row.id = dbRow.id ?? 0;
     row.arb_name = dbRow.arb_name ?? "";
     row.eng_name = dbRow.eng_name ?? "";

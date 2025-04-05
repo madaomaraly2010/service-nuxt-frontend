@@ -16,7 +16,7 @@ export class RequestPayment {
   requestCustomer!: RequestCustomer;
 
   public toDbRow(): IRequestPaymentAttributes {
-    let row: IRequestPaymentAttributes = {};
+    const row: IRequestPaymentAttributes = {};
     row.id = this.id;
     row.request_customer_id = this.request_customer_id;
     row.user_id = this.user_id;
@@ -29,7 +29,7 @@ export class RequestPayment {
   }
 
   public static fromDbRow(dbRow: IRequestPaymentAttributes): RequestPayment {
-    let row: RequestPayment = new RequestPayment();
+    const row: RequestPayment = new RequestPayment();
     row.id = dbRow.id ?? 0;
     row.request_customer_id = dbRow.request_customer_id;
     row.user_id = dbRow.user_id;

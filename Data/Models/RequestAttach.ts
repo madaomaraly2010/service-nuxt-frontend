@@ -11,7 +11,7 @@ export class RequestAttach {
   request_id?: number;
   request?: RequestCustomer
   public toDbRow(): IRequestAttachAttributes {
-    let row: IRequestAttachAttributes = {};
+    const row: IRequestAttachAttributes = {};
     row.id = this.id;
     row.file_name = this.file_name;
     row.file_path = this.file_path;
@@ -23,7 +23,7 @@ export class RequestAttach {
   }
 
   public static fromDbRow(dbRow: IRequestAttachAttributes): RequestAttach {
-    let row: RequestAttach = new RequestAttach();
+    const row: RequestAttach = new RequestAttach();
     row.id = dbRow.id ?? 0;
     row.file_name = dbRow.file_name;
     row.file_path = dbRow.file_path;

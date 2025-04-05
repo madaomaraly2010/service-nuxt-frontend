@@ -1,5 +1,6 @@
 <template>
-  <q-layout :dir="globalStore.direction" view="hHh lpR fFf" class="bg-grey-1">
+  <!-- view="hHh lpR fFf" -->
+  <q-layout :dir="globalStore.direction" view="lHh Lpr lFf" class="bg-grey-1">
     <q-header elevated class="bg-white text-grey-8 q-py-xs" height-hint="58">
       <q-toolbar>
         <q-btn
@@ -133,8 +134,10 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
-      side="left"
+      :side="globalStore.direction == 'rtl' ? 'right' : 'left'"
       bordered
+      show-if-above
+      behavior="desktop"
       class="bg-grey-2"
       :width="240"
     >
@@ -208,7 +211,7 @@ const nuxtApp = useNuxtApp();
 
 const badgeRef = ref();
 
-const motion = useMotion(badgeRef);
+// const motion = useMotion(badgeRef);
 
 onMounted(() => {
   (nuxtApp.$socket as any).on("orderRequest", (requestRow: Message) => {
@@ -275,16 +278,17 @@ const drawerItems = [
     text: app.$t("drawer.items.requests"),
     page: "RequestCustomerPage",
   }, // Document icon for requests
+
+  {
+    icon: "mdi-information",
+    text: app.$t("drawer.items.settings"),
+    page: "RequestCustomerPage",
+  }, // Info icon for About Us
   {
     icon: "mdi-logout",
     text: app.$t("drawer.items.logout"),
     page: "RequestCustomerPage",
   }, // Logout icon for exit
-  {
-    icon: "mdi-information",
-    text: app.$t("drawer.items.aboutus"),
-    page: "RequestCustomerPage",
-  }, // Info icon for About Us
 ];
 </script>
 

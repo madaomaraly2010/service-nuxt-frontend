@@ -11,7 +11,7 @@ export class WorkCategory {
   works!: Work[];
 
   public toDbRow(): IWorkCategoryAttributes {
-    let row: IWorkCategoryAttributes = {};
+    const row: IWorkCategoryAttributes = {};
     row.id = this.id;
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
@@ -21,7 +21,7 @@ export class WorkCategory {
   }
 
   public static fromDbRow(dbRow: IWorkCategoryAttributes): WorkCategory {
-    let row: WorkCategory = new WorkCategory();
+    const row: WorkCategory = new WorkCategory();
     row.id = dbRow.id ?? 0;
     row.arb_name = dbRow.arb_name;
     row.eng_name = dbRow.eng_name;

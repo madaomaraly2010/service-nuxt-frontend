@@ -6,8 +6,8 @@ export class Country {
   created_at!: Date;
   updated_at?: Date;
   eng_name?: string;
-  flag_url!: string;
-  iso_code!: string;
+  flag_url?: string;
+  iso_code?: string;
   arb_name?: string;
   // Country hasMany Provider via country_id
   providerList!: Provider[];
@@ -15,7 +15,7 @@ export class Country {
   cityList!: City[];
 
   public toDbRow(): ICountryAttributes {
-    let row: ICountryAttributes = {};
+    const row: ICountryAttributes = {};
     row.id = this.id;
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
@@ -25,10 +25,11 @@ export class Country {
   }
 
   public static fromDbRow(dbRow: ICountryAttributes): Country {
-    let row: Country = new Country();
+    const row: Country = new Country();
     row.id = dbRow.id ?? 0;
     row.arb_name = dbRow.arb_name;
     row.eng_name = dbRow.eng_name;
+    row.iso_code = dbRow.iso_code;
     if (dbRow.providers) {
       row.providerList = dbRow.providers.map((it) => Provider.fromDbRow(it));
     }

@@ -8,7 +8,7 @@ export class UserStoreState {
   loggedUser: User | null = null;
 
   async login(username: string, password: string): Promise<UserResponse> {
-    let response: UserResponse = await UserService.instance.login(
+    const response: UserResponse = await UserService.instance.login(
       username,
       password
     );
@@ -50,7 +50,7 @@ const state = reactive({
   loggedUser: {} as User | null,
 
   async login(username: string, password: string): Promise<UserResponse> {
-    let response: UserResponse = await UserService.instance.login(
+    const response: UserResponse = await UserService.instance.login(
       username,
       password
     );

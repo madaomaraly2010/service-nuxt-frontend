@@ -4,7 +4,7 @@ import { CookStatusService } from "../Services/CookStatus.service";
  const state = reactive({
   list: [] as CookStatus[],
   async findAll(): Promise<CookStatusResponse> {
-    let response: CookStatusResponse =
+    const response: CookStatusResponse =
       await CookStatusService.instance.findAll();
     state.list = response.data ?? [];
     return response;

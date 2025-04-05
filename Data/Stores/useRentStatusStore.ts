@@ -4,7 +4,7 @@ import { RentStatusService } from "../Services/RentStatus.service";
 const state = reactive({
   list: [] as RentStatus[],
   async findAll(): Promise<RentStatusResponse> {
-    let response: RentStatusResponse =
+    const response: RentStatusResponse =
       await RentStatusService.instance.findAll();
     state.list = response.data ?? [];
     return response;

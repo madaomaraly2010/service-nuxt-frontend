@@ -10,15 +10,21 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@eslint/js": "^9.24.0",
     "@nuxt/devtools": "latest",
     "@nuxtjs/i18n": "^9.0.0-rc.2",
-    "@pinia/nuxt": "^0.10.1",
-    "eslint-plugin-vue": "^9.32.0",
+    "@typescript-eslint/eslint-plugin": "^8.29.0",
+    "@typescript-eslint/parser": "^8.29.0",
+    "eslint": "^9.24.0",
+    "eslint-plugin-vue": "^9.33.0",
     "nuxt": "^3.15.4",
     "nuxt-echarts": "^0.2.4",
     "nuxt-quasar-ui": "^2.1.12",
     "sass": "^1.85.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.29.0",
     "vue": "^3.3.12",
+    "vue-eslint-parser": "^10.1.2",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
@@ -30,6 +36,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@quasar/extras": "^1.16.17",
     "@vueuse/motion": "^3.0.3",
+    "flag-icon-css": "^4.1.7",
     "postcss-rtlcss": "^5.6.0",
     "quasar": "^2.17.7",
     "socket.io-client": "^4.8.1"

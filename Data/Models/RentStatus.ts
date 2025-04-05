@@ -6,7 +6,7 @@ export class RentStatus {
   eng_name?: string;
 
   public toDbRow(): IRentStatusAttributes {
-    let row: IRentStatusAttributes = {};
+    const row: IRentStatusAttributes = {};
     row.id = this.id;
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
@@ -14,7 +14,7 @@ export class RentStatus {
   }
 
   public static fromDbRow(dbRow: IRentStatusAttributes): RentStatus {
-    let row: RentStatus = new RentStatus();
+    const row: RentStatus = new RentStatus();
     row.id = dbRow.id ?? 0;
     row.arb_name = dbRow.arb_name;
     row.eng_name = dbRow.eng_name;

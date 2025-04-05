@@ -11,7 +11,7 @@ export class Message {
   type?: number;
 
   public toDbRow(): IMessageAttributes {
-    let row: IMessageAttributes = {};
+    const row: IMessageAttributes = {};
     row.id = this.id;
 
     row.created_at = this.created_at;
@@ -25,7 +25,7 @@ export class Message {
     window.alert("OK Reflection");
   }
   public static fromDbRow(dbRow: IMessageAttributes): Message {
-    let row: Message = new Message();
+    const row: Message = new Message();
     row.id = dbRow.id ?? 0;
     row.created_at = dbRow.created_at;
     row.description = dbRow.description;

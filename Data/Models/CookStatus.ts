@@ -9,7 +9,7 @@ export class CookStatus {
   // CookStatus hasMany Provider via cook_status
   providerList!: Provider[];
   public toDbRow(): ICookStatusAttributes {
-    let row: ICookStatusAttributes = {};
+    const row: ICookStatusAttributes = {};
     row.id = this.id;
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
@@ -17,7 +17,7 @@ export class CookStatus {
   }
 
   public static fromDbRow(dbRow: ICookStatusAttributes): CookStatus {
-    let row: CookStatus = new CookStatus();
+    const row: CookStatus = new CookStatus();
     row.id = dbRow.id ?? 0;
     row.arb_name = dbRow.arb_name;
     row.eng_name = dbRow.eng_name;

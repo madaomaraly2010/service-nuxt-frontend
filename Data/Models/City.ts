@@ -8,7 +8,7 @@ export class City {
   country_id?: number;
   country?: Country;
   public toDbRow(): ICityAttributes {
-    let row: ICityAttributes = {};
+    const row: ICityAttributes = {};
     row.id = this.id;
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
@@ -17,7 +17,7 @@ export class City {
   }
 
   public static fromDbRow(dbRow: ICityAttributes): City {
-    let row: City = new City();
+    const row: City = new City();
     row.id = dbRow.id ?? 0;
     row.arb_name = dbRow.arb_name;
     row.eng_name = dbRow.eng_name;

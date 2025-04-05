@@ -4,7 +4,7 @@ import { MessageService } from "../Services/Message.service";
 const state = reactive({
   list: [] as Message[],
   async findAll(): Promise<MessageResponse> {
-    let response: MessageResponse = await MessageService.instance.findAll();
+    const response: MessageResponse = await MessageService.instance.findAll();
     state.list = response.data ?? [];
     console.log("Messages", state.list);
     return response;

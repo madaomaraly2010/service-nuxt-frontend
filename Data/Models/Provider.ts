@@ -75,13 +75,13 @@ export class Provider {
   work!: Work;
 
   public static create(): Provider {
-    let newProvider = new Provider();
+    const newProvider = new Provider();
     newProvider.user = new User();
     return newProvider;
   }
 
   public toDbRow(): Partial<IProviderAttributes> {
-    let row: Partial<IProviderAttributes> = {};
+    const row: Partial<IProviderAttributes> = {};
     row.id = this.id;
     row.wage_per_month = this.wage_per_amount;
     row.created_at = this.created_at;
@@ -123,7 +123,7 @@ export class Provider {
   }
 
   public static fromDbRow(dbRow: IProviderAttributes): Provider {
-    let row: Provider = new Provider();
+    const row: Provider = new Provider();
     row.id = dbRow.id ?? 0;
 
     row.wage_per_amount = dbRow.wage_per_month;

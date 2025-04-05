@@ -4,7 +4,7 @@ import { WorkCategoryService } from "../Services/WorkCategory.service";
 const state = reactive({
   list: [] as WorkCategory[],
   async findAll(): Promise<WorkCategoryResponse> {
-    let response: WorkCategoryResponse =
+    const response: WorkCategoryResponse =
       await WorkCategoryService.instance.findAll();
     state.list = response.data ?? [];
     return response;

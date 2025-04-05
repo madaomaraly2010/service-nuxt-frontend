@@ -4,7 +4,7 @@ import { RequestStatusService } from "../Services/RequestStatus.service";
 const state = reactive({
   list: [] as RequestStatus[],
   async findAll(): Promise<RequestStatusResponse> {
-    let response: RequestStatusResponse =
+    const response: RequestStatusResponse =
       await RequestStatusService.instance.findAll();
     state.list = response.data ?? [];
     return response;

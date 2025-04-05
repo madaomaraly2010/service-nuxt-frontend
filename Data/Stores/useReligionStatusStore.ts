@@ -4,7 +4,7 @@ import { ReligionStatusService } from "../Services/ReligionStatus.service";
 const state = reactive({
   list: [] as ReligionStatus[],
   async findAll(): Promise<ReligionStatusResponse> {
-    let response: ReligionStatusResponse =
+    const response: ReligionStatusResponse =
       await ReligionStatusService.instance.findAll();
     state.list = response.data ?? [];
     return response;
