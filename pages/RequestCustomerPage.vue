@@ -14,7 +14,11 @@
 </template>
 
 <script setup lang="ts">
-// const showSocket = () => console.log("GateWay Socket IO", nuxtApp.$socket);
+import { useRequestStatusStore } from "~/Data/Stores";
+
+const statusStore = useRequestStatusStore();
+
+await statusStore.findAll();
 </script>
 
 <style scoped></style>

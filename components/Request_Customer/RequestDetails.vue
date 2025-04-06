@@ -22,10 +22,14 @@
 
       <div class="col-4 row">
         <div class="col">
-          <request-customer-status
+          <RequestCustomerStatusDropDown
+            v-model="requestCustomer.request_status_id"
+          >
+          </RequestCustomerStatusDropDown>
+          <!-- <request-customer-status
             :request-customer="requestCustomer"
             :show-label="true"
-          ></request-customer-status>
+          ></request-customer-status> -->
         </div>
       </div>
     </div>
@@ -42,8 +46,10 @@
         :work="requestCustomer.work"
       ></WorkDetails>
     </div>
-
     <QSeparator class="q-my-lg"></QSeparator>
+    <div class="row" :dir="globalStore.direction">
+      <RequestCustomerStatusDropDown></RequestCustomerStatusDropDown>
+    </div>
   </div>
 
   <!-- total_amount   discount_percent -->
