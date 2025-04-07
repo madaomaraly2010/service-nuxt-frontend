@@ -1,8 +1,6 @@
 <template>
   <div>
-    <!-- <div class="row block"> -->
     <div class="row bg-amber">
-      <!-- <q-btn @click="openDialog">Add row</q-btn> -->
       <ProviderAddEditDialogForm
         v-if="defaultWork"
         :default-work="defaultWork"
@@ -19,9 +17,8 @@
       <base-table
         class="provider-table"
         :rows="store.list"
-        :columns="provider_column"
-        flat
-        bordered
+        :columns="provider_columns"
+        @action="onAction"
       >
         <template #id="{ row }">
           <q-td>
@@ -98,19 +95,21 @@
 
 <script lang="ts" setup>
 import type { QTableColumn } from "quasar";
-import type { Work } from "~/Data/Models";
+import type { Provider, Work } from "~/Data/Models";
 
 import { useProviderStore } from "~/Data/Stores/useProviderStore";
+import type { TableActionType } from "~/common/common-types";
 const store = useProviderStore();
 const providerRef = ref(null);
 const defaultWork = ref<Work>();
 await store.findAll();
+const onAction = (action: TableActionType, row: Provider) => {};
 const openDialog = () => (providerRef.value as any).openDialog();
 const onWorkSelected = (w: Work) => {
   defaultWork.value = w;
   openDialog();
 };
-const provider_column: QTableColumn[] = [
+const provider_columns: QTableColumn[] = [
   {
     name: "id",
     label: "السجل",

@@ -15,8 +15,8 @@ export class WorkService
     return WorkService._workService;
   }
 
-  override get usedUrl(): string {
-    return config.Work.API_WORK_GET;
+  override get getFetchKey(): string {
+    return "work";
   }
 
   override async findAll(): Promise<WorkResponse> {

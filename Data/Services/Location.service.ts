@@ -15,8 +15,8 @@ export class LocationService
     return LocationService._service;
   }
 
-  override get usedUrl(): string {
-    return config.Work.API_WORK_GET;
+  override get getFetchKey(): string {
+    return "location";
   }
 
   override async findAll(): Promise<LocationResponse> {

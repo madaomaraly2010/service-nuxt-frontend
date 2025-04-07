@@ -15,8 +15,8 @@ export class RequestPaymentService
     return RequestPaymentService._service;
   }
 
-  override get usedUrl(): string {
-    return config.RequestPayment.API_RQUEST_PAYMENT_GET;
+  override get getFetchKey(): string {
+    return "request-payment";
   }
   override async findAll(): Promise<RequestPaymentResponse> {
     throw new Error("Method not implemented.");

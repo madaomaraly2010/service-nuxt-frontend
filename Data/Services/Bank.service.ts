@@ -15,8 +15,8 @@ export class BankService
     return BankService._service;
   }
 
-  override get usedUrl(): string {
-    return config.Work.API_WORK_GET;
+  override get getFetchKey(): string {
+    return "bank";
   }
 
   override async findAll(): Promise<BankResponse> {

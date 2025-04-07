@@ -16,14 +16,11 @@ export class PackageService
     return PackageService._service;
   }
 
-  override get usedUrl(): string {
-    return config.Package.API_PACKAGE_GET;
+  override get getFetchKey(): string {
+    return "package";
   }
   override async findAll(): Promise<PackageResponse> {
-    return super.fetchData(
-      Package as any,
-      config.Package.API_PACKAGE_GET
-    );
+    return super.fetchData(Package as any, config.Package.API_PACKAGE_GET);
     // let { data, error } = await useFetch(config.Package.API_PACKAGE_GET);
     // console.log("Lang Data", data);
     // return ModelResponse.createSuccessResponse([]);

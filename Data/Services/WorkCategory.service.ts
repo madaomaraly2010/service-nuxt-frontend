@@ -16,8 +16,8 @@ export class WorkCategoryService
     return WorkCategoryService._service;
   }
 
-  override get usedUrl(): string {
-    return config.WorkCategory.API_WORK_CATEGORY_GET;
+  override get getFetchKey(): string {
+    return "work-category";
   }
 
   override async findAll(): Promise<WorkCategoryResponse> {

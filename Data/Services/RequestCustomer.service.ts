@@ -15,8 +15,8 @@ export class RequestCustomerService
     return RequestCustomerService._service;
   }
 
-  override get usedUrl(): string {
-    return config.RequestCustomer.API_RQUEST_CUSTOMER_GET;
+  override get getFetchKey(): string {
+    return "request-customer";
   }
   override async findAll(): Promise<RequestCustomerResponse> {
     return super.fetchData(

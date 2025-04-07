@@ -19,8 +19,8 @@ export class MessageService
     return MessageService._messageService;
   }
 
-  override get usedUrl(): string {
-    return config.Message.API_MESSAGE_GET;
+  override get getFetchKey(): string {
+    return "message";
   }
 
   override async findAll(): Promise<MessageResponse> {

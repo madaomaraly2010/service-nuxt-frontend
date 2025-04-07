@@ -17,8 +17,8 @@ export class CountryService
     return CountryService._service;
   }
 
-  override get usedUrl(): string {
-    return config.Country.API_COUNTRY_STATUS_GET;
+  override get getFetchKey(): string {
+    return "country";
   }
   override async findAll(): Promise<CountryResponse> {
     return super.fetchData(

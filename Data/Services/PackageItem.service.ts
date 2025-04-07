@@ -16,8 +16,8 @@ export class PackageItemStatusService
     return PackageItemStatusService._service;
   }
 
-  override get usedUrl(): string {
-    return config.PackageItem.API_PACKAGE_ITEM_GET;
+  override get getFetchKey(): string {
+    return "package-item";
   }
   override async findAll(): Promise<PackageItemResponse> {
     return super.fetchData(

@@ -17,8 +17,8 @@
         <!-- {{ props.row[col.field] }} -->
         {{
           col.format
-            ? col.format(props.row[col.field], props.row)
-            : props.row[col.field]
+            ? col.format(props.row[col.field as string], props.row)
+            : props.row[col.field as string]
         }}
       </slot>
     </template>
@@ -29,13 +29,13 @@
         <q-btn flat round dense icon="more_vert">
           <q-menu>
             <q-list dense>
-              <q-item clickable @click="emitAction('add', props.row)">
+              <q-item clickable @click="emitAction('Add', props.row)">
                 <q-item-section>Add</q-item-section>
               </q-item>
-              <q-item clickable @click="emitAction('edit', props.row)">
+              <q-item clickable @click="emitAction('Edit', props.row)">
                 <q-item-section>Edit</q-item-section>
               </q-item>
-              <q-item clickable @click="emitAction('delete', props.row)">
+              <q-item clickable @click="emitAction('Delete', props.row)">
                 <q-item-section>Delete</q-item-section>
               </q-item>
             </q-list>
@@ -46,28 +46,46 @@
   </q-table>
 </template>
 
-<script setup>
+<script lang="ts" setup generic="T">
+import type { QTableColumn, QTableProps } from "quasar";
 import { computed, defineProps, defineEmits } from "vue";
+import type { TableActionType } from "~/common/common-types";
 
-const props = defineProps({
-  columns: Array,
-  rows: Array,
-  showActions: Boolean,
-});
+interface ITablePropType<RowType> {
+  // columns: Array<QTableColumn>;
+  // rows: Array<RowType>;
+  showActions?: boolean;
+}
 
-const emit = defineEmits(["action"]);
+const props = defineProps<QTableProps & ITablePropType<T>>();
+//   {
+//   columns: {
+//     type: Array<QTableColumn>,
+//     required: false,
+//   },
+//   rows: {
+//     type: Array<T>,
+//     required: true,
+//   },
+//   showActions: Boolean,
+// }
 
-const computedColumns = computed(() =>
+// const emit = defineEmits(["action"]);
+const emit = defineEmits<{
+  (event: "action", action: TableActionType, row: any): void;
+}>();
+
+const computedColumns: ComputedRef<Array<QTableColumn>> = computed(() =>
   props.showActions
     ? [
         { name: "actions", label: "Actions", align: "right", field: "id" },
-        ...props.columns,
+        ...(props.columns ?? []),
       ]
-    : [...props.columns]
+    : [...(props.columns ?? [])]
 );
 
-function emitAction(action, row) {
-  emit("action", { action, row });
+function emitAction(action: TableActionType, row: any) {
+  emit("action", action, row);
 }
 </script>
 <style>

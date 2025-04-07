@@ -16,8 +16,8 @@ export class LangStatusService
     return LangStatusService._service;
   }
 
-  override get usedUrl(): string {
-    return config.LangStatus.API_LANG_STATUS_GET;
+  override get getFetchKey(): string {
+    return "lang-status";
   }
   override async findAll(): Promise<LangStatusResponse> {
     return super.fetchData(

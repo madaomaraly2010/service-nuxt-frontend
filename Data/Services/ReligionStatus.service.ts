@@ -16,8 +16,8 @@ export class ReligionStatusService
     return ReligionStatusService._service;
   }
 
-  override get usedUrl(): string {
-    return config.ReligionStatus.API_RELIGION_STATUS_GET;
+  override get getFetchKey(): string {
+    return "religion-status";
   }
   override async findAll(): Promise<ReligionStatusResponse> {
     return super.fetchData(

@@ -118,7 +118,7 @@ export interface IProviderAttributes {
   religion_status?: IReligionStatusAttributes;
   user?: IUserAttributes;
   work?: IWorkAttributes;
-  location_id: number;
+  location_id?: number;
 }
 
 export interface IRequestCustomerAttributes {

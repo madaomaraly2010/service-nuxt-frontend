@@ -15,8 +15,8 @@ export class ProviderService
     }
     return ProviderService._service;
   }
-  override get usedUrl(): string {
-    return config.Provider.API_PROVIDER_GET;
+  override get getFetchKey(): string {
+    return "provider";
   }
   async getByCountry(countryId: number): Promise<ProviderResponse> {
     return super.fetchData(Provider as any, config.Provider.API_PROVIDER_GET, {

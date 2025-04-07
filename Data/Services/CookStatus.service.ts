@@ -17,8 +17,8 @@ export class CookStatusService
     return CookStatusService._service;
   }
 
-  override get usedUrl(): string {
-    return config.CookStatus.API_COOK_STATUS_GET;
+  override get getFetchKey(): string {
+    return "cook-status";
   }
   override async findAll(): Promise<CookStatusResponse> {
     return super.fetchData(

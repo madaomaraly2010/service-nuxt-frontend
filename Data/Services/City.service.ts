@@ -15,8 +15,8 @@ export class CityService
     return CityService._service;
   }
 
-  override get usedUrl(): string {
-    return config.Work.API_WORK_GET;
+  override get getFetchKey(): string {
+    return "city";
   }
 
   override async findAll(): Promise<CityResponse> {

@@ -15,8 +15,8 @@ export class RequestStatusService
     return RequestStatusService._service;
   }
 
-  override get usedUrl(): string {
-    return config.Work.API_WORK_GET;
+  override get getFetchKey(): string {
+    return "request-status";
   }
 
   override async findAll(): Promise<RequestStatusResponse> {

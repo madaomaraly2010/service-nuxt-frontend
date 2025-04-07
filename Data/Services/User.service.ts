@@ -16,8 +16,8 @@ export class UserService
     return UserService._service;
   }
 
-  override get usedUrl(): string {
-    return config.User.API_PACKAGE_USER_GET;
+  override get getFetchKey(): string {
+    return "user";
   }
   async login(username: string, password: string): Promise<UserResponse> {
     let list: User[] | undefined = [];

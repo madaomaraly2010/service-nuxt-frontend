@@ -1,5 +1,6 @@
 import type { IRepositry } from "../Repositries/IRepositry";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
+import type { FetchError } from "ofetch";
 function callStaticMethod<T>(
   clazz: { [key: string]: any }, // Class reference
   methodName: string,
@@ -14,7 +15,7 @@ function callStaticMethod<T>(
 export abstract class BaseModelService<ModelType>
   implements IRepositry<ModelType>
 {
-  abstract get usedUrl(): string;
+  abstract get getFetchKey(): string;
 
   findAll(): Promise<ModelResponse<ModelType>> {
     throw new Error("Method not implemented.");
@@ -34,20 +35,56 @@ export abstract class BaseModelService<ModelType>
   async fetchData(
     cls: ModelType,
     url: string,
-    queryStrings?: any
+    queryStrings?: any,
+    method?: "GET" | "HEAD" | "PATCH" | "POST" | "PUT" | "DELETE"
   ): Promise<ModelResponse<ModelType>> {
     //callStaticMethod(cls as any, "callStaticMethod");
 
-    let list: ModelType[] = [];
+    if (!method) method = "GET";
 
-    const { data, error } = await useFetch<ModelResponse<ModelType>>(url,queryStrings);
+    let list: ModelType[] = [];
+    //@ts-ignore
+    let retResponse: Ref<ModelResponse<ModelType> | null> = ref<
+      ModelResponse<ModelType | null>
+    >(null as any);
+    //@ts-ignore
+    let retError: Ref<FetchError<any> | null> = ref<FetchError<any> | null>();
+
+    if (method == "GET") {
+      const { data: cachedReponse } = useNuxtData<ModelResponse<ModelType>>(
+        this.getFetchKey
+      );
+      if (cachedReponse.value) {
+        retResponse = cachedReponse;
+      } else {
+        const { data: fetchResponse, error: fetchError } = await useFetch<
+          ModelResponse<ModelType>
+        >(url, {
+          method,
+          query: queryStrings,
+          key: this.getFetchKey,
+        });
+        retResponse = fetchResponse;
+        retError = fetchError;
+      }
+    } else {
+      const { data: fetchResponse, error: fetchError } = await useFetch<
+        ModelResponse<ModelType>
+      >(url, {
+        method,
+        query: queryStrings,
+        key: this.getFetchKey,
+      });
+      retResponse = fetchResponse;
+      retError = fetchError;
+    }
 
     const response: ModelResponse<ModelType> = ModelResponse.fromServerResponse(
-      data.value
+      retResponse.value
     );
 
-    if (error.value?.message) {
-      throw new Error(error.value?.message);
+    if (retError.value?.message) {
+      throw new Error(retError.value?.message);
     }
     if (response.error) {
       return response;

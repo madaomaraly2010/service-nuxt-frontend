@@ -16,8 +16,8 @@ export class RentStatusService
     return RentStatusService._service;
   }
 
-  override get usedUrl(): string {
-    return config.RentStatus.API_RENT_STATUS_GET;
+  override get getFetchKey(): string {
+    return "rent-status";
   }
   override async findAll(): Promise<RentStatusResponse> {
     return super.fetchData(

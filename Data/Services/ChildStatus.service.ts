@@ -9,8 +9,8 @@ export class ChildStatusService
   extends BaseModelService<ChildStatus>
   implements IChildStatusRepositry
 {
-  override get usedUrl(): string {
-    return config.ChildStatus.API_CHILD_STATUS_GET;
+  override get getFetchKey(): string {
+    return "child-status";
   }
   static _service: ChildStatusService;
   public static get instance(): ChildStatusService {
@@ -24,7 +24,6 @@ export class ChildStatusService
       ChildStatus as any,
       config.ChildStatus.API_CHILD_STATUS_GET
     );
-   
   }
   override async findOne(id: number): Promise<ChildStatusResponse> {
     throw new Error("Method not implemented.");
