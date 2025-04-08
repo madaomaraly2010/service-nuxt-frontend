@@ -92,7 +92,9 @@
   "messages": {
     "loading_data": "جارى تحميل البيانات...",
     "user_authenticated": "المستخدم تم التحقق من هويته.",
-    "user_not_authenticated": "خطأ فى اسم المستخدم أو كلمة المرور"
+    "user_not_authenticated": "خطأ فى اسم المستخدم أو كلمة المرور",
+    "greater_than_max": "يجب الا تزيد القيمة عن {val}",
+    "less_than_min": "يجب الا تقل القيمة عن {val}"
   },
   "error": {
     "email_incorrect": "بريد إلكترونى غير صحيح",

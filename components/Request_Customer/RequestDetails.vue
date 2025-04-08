@@ -2,11 +2,16 @@
   <div>
     <div class="row items-center" :dir="globalStore.direction">
       <div class="col-4 row items-center">
-        <div class="col text-grey-8 text-subtitle1">
+        <div class="col-4 text-grey-8 text-subtitle1">
           {{ $t("request_customer.fields.month_number") }}
         </div>
-        <div class="col">
-          <span>{{ 14 }}</span>
+        <div class="col-7">
+          <BaseNumberInput
+            :min="1"
+            :max="12"
+            :show-spin="true"
+            readonly
+          ></BaseNumberInput>
         </div>
       </div>
       <div class="col-4 row">
@@ -26,15 +31,11 @@
             v-model="requestCustomer.request_status_id"
           >
           </RequestCustomerStatusDropDown>
-          <!-- <request-customer-status
-            :request-customer="requestCustomer"
-            :show-label="true"
-          ></request-customer-status> -->
         </div>
       </div>
     </div>
     <QSeparator class="q-my-lg"></QSeparator>
-    <div class="row" :dir="globalStore.direction">
+    <div class="row items-center" :dir="globalStore.direction">
       <ProviderFullName
         class="col-4"
         v-if="requestCustomer.provider"
@@ -47,36 +48,41 @@
       ></WorkDetails>
     </div>
     <QSeparator class="q-my-lg"></QSeparator>
-    <div class="row" :dir="globalStore.direction">
-      <RequestCustomerStatusDropDown></RequestCustomerStatusDropDown>
-    </div>
   </div>
 
   <!-- total_amount   discount_percent -->
-  <div class="row q-gutter-lg justify-between" :dir="globalStore.direction">
-    <div class="col row">
-      <div class="col text-grey-8 text-subtitle1">
+  <div class="row items-center" :dir="globalStore.direction">
+    <div class="col-4 row">
+      <div class="col-2 text-grey-8 text-subtitle1">
         {{ $t("request_customer.fields.down_payment") }}
       </div>
-      <div class="col">
-        <span>SR {{ requestCustomer.down_payment }}</span>
+      <div class="col-7">
+        <!-- <span>SR {{ requestCustomer.down_payment }}</span> -->
+        <BaseNumberInput :show-currency="true" currency="SR"></BaseNumberInput>
       </div>
     </div>
-    <div class="col row">
-      <div class="col text-grey-8 text-subtitle1">
+    <div class="col-4 row">
+      <div class="col-3 text-grey-8 text-subtitle1">
         {{ $t("request_customer.fields.discount_value") }}
       </div>
-      <div class="col">
-        <span>SR {{ requestCustomer.discountValue }}</span>
+      <div class="col-7">
+        <!-- <span>SR {{ requestCustomer.discountValue }}</span> -->
+        <span>SR 467374</span>
       </div>
     </div>
 
-    <div class="col row">
-      <div class="col text-grey-8 text-subtitle1">
+    <div class="col-4 row q-gutter-xs">
+      <div class="col-1 text-grey-8 text-subtitle1">
         {{ $t("request_customer.fields.discount_percent") }}
       </div>
-      <div class="col">
-        <span>{{ requestCustomer.discountPercent }}%</span>
+      <div class="col-10">
+        <!-- <span>{{ requestCustomer.discountPercent }}%</span> -->
+        <BaseNumberInput
+          :show-spin="true"
+          :show-percent="true"
+          :min="1"
+          :max="100"
+        ></BaseNumberInput>
       </div>
     </div>
   </div>

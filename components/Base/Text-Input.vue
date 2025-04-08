@@ -13,8 +13,9 @@
       <template v-if="$slots.prepend" v-slot:prepend>
         <slot name="prepend"></slot>
       </template>
-      <template v-if="isPassword" v-slot:append>
+      <template v-slot:append>
         <q-btn
+          v-if="isPassword"
           flat
           dense
           round

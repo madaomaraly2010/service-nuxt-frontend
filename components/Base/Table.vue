@@ -1,6 +1,6 @@
 <template>
   <q-table
-    v-bind="$attrs"
+    v-bind="props"
     :rows="rows"
     :columns="computedColumns"
     row-key="id"
