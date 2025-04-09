@@ -69,7 +69,7 @@ const userStore = useUserStore();
 const nuxtApp = useNuxtApp();
 const email = ref("");
 const password = ref("");
-const isPwd = ref(true);
+// const isPwd = ref(true);
 const loading = ref(false);
 const loginForm: Ref<QForm | null> = ref<QForm | null>(null);
 const doLogin = async () => {
@@ -77,7 +77,6 @@ const doLogin = async () => {
   if (!valid) return;
 
   let response = await userStore.login(email.value, password.value);
-  debugger;
   if (response.isAuthenticated) {
     $q.notify({
       message: nuxtApp.$t("messages.user_authenticated"),

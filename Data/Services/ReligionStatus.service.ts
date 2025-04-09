@@ -1,9 +1,11 @@
+import { TableKeys } from "~/common/table-keys";
 import { ReligionStatus } from "../Models";
 import type { IReligionStatusRepositry } from "../Repositries/Models-Repositries";
 import type { ReligionStatusResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
+import type { FetchOptions } from "~/common/fetch-options";
 export class ReligionStatusService
   extends BaseModelService<ReligionStatus>
   implements IReligionStatusRepositry
@@ -17,12 +19,17 @@ export class ReligionStatusService
   }
 
   override get getFetchKey(): string {
-    return "religion-status";
+    return TableKeys.RELIGION_STATUS_KEY;
   }
-  override async findAll(): Promise<ReligionStatusResponse> {
+  override async findAll(
+    options?: FetchOptions
+  ): Promise<ReligionStatusResponse> {
     return super.fetchData(
       ReligionStatus as any,
-      config.ReligionStatus.API_RELIGION_STATUS_GET
+      config.ReligionStatus.API_RELIGION_STATUS_GET,
+      {
+        options,
+      }
     );
     // let { data, error } = await useFetch(
     //   config.ReligionStatus.API_RELIGION_STATUS_GET

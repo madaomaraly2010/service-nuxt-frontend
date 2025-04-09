@@ -1,3 +1,4 @@
+import { TableKeys } from "~/common/table-keys";
 import { Work } from "../Models";
 import { Message } from "../Models/Message";
 import type { IMessageRepositry } from "../Repositries/Models-Repositries";
@@ -7,6 +8,8 @@ import type {
 } from "../Responses/Model-Responses";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
+import type { FetchOptions } from "~/common/fetch-options";
+
 export class MessageService
   extends BaseModelService<Message>
   implements IMessageRepositry
@@ -20,11 +23,13 @@ export class MessageService
   }
 
   override get getFetchKey(): string {
-    return "message";
+    return TableKeys.MESSAGE_KEY;
   }
 
-  override async findAll(): Promise<MessageResponse> {
-    return super.fetchData(Message as any, config.Message.API_MESSAGE_GET);
+  override async findAll(options?: FetchOptions): Promise<MessageResponse> {
+    return super.fetchData(Message as any, config.Message.API_MESSAGE_GET, {
+      options,
+    });
   }
 
   // override async findAll(): Promise<WorkResponse> {

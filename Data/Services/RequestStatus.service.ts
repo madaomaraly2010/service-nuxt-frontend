@@ -1,8 +1,11 @@
+import { TableKeys } from "~/common/table-keys";
 import { RequestStatus, Work } from "../Models";
 import type { IRequestStatusRepositry } from "../Repositries/Models-Repositries";
 import type { RequestStatusResponse } from "../Responses/Model-Responses";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
+import type { FetchOptions } from "~/common/fetch-options";
+
 export class RequestStatusService
   extends BaseModelService<RequestStatus>
   implements IRequestStatusRepositry
@@ -16,13 +19,18 @@ export class RequestStatusService
   }
 
   override get getFetchKey(): string {
-    return "request-status";
+    return TableKeys.REQUEST_STATUS_KEY;
   }
 
-  override async findAll(): Promise<RequestStatusResponse> {
+  override async findAll(
+    options?: FetchOptions
+  ): Promise<RequestStatusResponse> {
     return super.fetchData(
       Work as any,
-      config.RequestStatus.API_REQUEST_STATUS_GET
+      config.RequestStatus.API_REQUEST_STATUS_GET,
+      {
+        options,
+      }
     );
   }
 

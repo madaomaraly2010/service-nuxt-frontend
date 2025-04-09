@@ -1,89 +1,71 @@
-import { User } from "../Models";
+import { TableKeys } from "~/common/table-keys";
+import type { User } from "../Models";
+import type { IUserRepositry } from "../Repositries/Models-Repositries";
 import type { UserResponse } from "../Responses/Model-Responses";
 import { UserService } from "../Services/User.service";
+import { toRefs } from "vue";
+import type { FetchOptions } from "~/common/fetch-options";
 
-export class UserStoreState {
-  list: User[] = [];
-  isAuthenticated: boolean = false;
-  loggedUser: User | null = null;
+export const useUserStore = () => {
+  const state = useState<IUserState>(TableKeys.USER_KEY, () => ({
+    list: [] as User[],
+    loggedUser: null,
+    isAuthenticated: false,
+  }));
 
-  async login(username: string, password: string): Promise<UserResponse> {
-    const response: UserResponse = await UserService.instance.login(
-      username,
-      password
-    );
-    this.isAuthenticated = false;
-    if (response.isAuthenticated) {
-      localStorage.setItem("auth", "true");
-      this.isAuthenticated = true;
-      this.loggedUser = response.data![0] as any;
-      useRouter().push("/");
-    }
-    return response;
-  }
-  async logout() {
-    localStorage.setItem("auth", "false");
-    this.isAuthenticated = false;
-    this.loggedUser = null;
-    useRouter().push("/login");
-  }
-  async findAll(): Promise<UserResponse> {
-    throw new Error("findAll not Implemented");
-  }
-  async findOne(id: number): Promise<UserResponse> {
-    throw new Error("findOne not Implemented");
-  }
-  async create(row: User): Promise<UserResponse> {
-    throw new Error("create not Implemented");
-  }
-  async update(row: User): Promise<UserResponse> {
-    throw new Error("update not Implemented");
-  }
-  async delete(id: number): Promise<UserResponse> {
-    throw new Error("delete not Implemented");
-  }
+  const repositry: IUserRepositry = {
+    async findAll(options?:FetchOptions): Promise<UserResponse> {
+      const response = await UserService.instance.findAll();
+      state.value.list = response.data ?? [];
+      return response;
+    },
+
+    async findOne(id: number): Promise<UserResponse> {
+      throw new Error("Method not implemented.");
+    },
+
+    async create(row: User): Promise<UserResponse> {
+      throw new Error("Method not implemented.");
+    },
+
+    async update(row: User): Promise<UserResponse> {
+      throw new Error("Method not implemented.");
+    },
+
+    async delete(id: number): Promise<UserResponse> {
+      throw new Error("Method not implemented.");
+    },
+
+    async login(username: string, password: string): Promise<UserResponse> {
+      const response: UserResponse = await UserService.instance.login(
+        username,
+        password
+      );
+      state.value.isAuthenticated = false;
+      if (response.isAuthenticated) {
+        localStorage.setItem("auth", "true");
+        state.value.isAuthenticated = true;
+        state.value.loggedUser = response.data![0] as any;
+        useRouter().push("/");
+      }
+      return response;
+    },
+    async logout() {
+      localStorage.setItem("auth", "false");
+      state.value.isAuthenticated = false;
+      state.value.loggedUser = null;
+      useRouter().push("/login");
+    },
+  };
+
+  return {
+    ...toRefs(state.value), // reactive list
+    ...repositry, // auto-includes all functions
+  };
+};
+
+interface IUserState {
+  list: User[];
+  loggedUser?: User | null;
+  isAuthenticated?: boolean;
 }
-// const state = reactive(new UserStoreState());
-const state = reactive({
-  list: [] as User[],
-  isAuthenticated: false,
-  loggedUser: {} as User | null,
-
-  async login(username: string, password: string): Promise<UserResponse> {
-    const response: UserResponse = await UserService.instance.login(
-      username,
-      password
-    );
-    state.isAuthenticated = false;
-    if (response.isAuthenticated) {
-      localStorage.setItem("auth", "true");
-      state.isAuthenticated = true;
-      state.loggedUser = response.data![0] as any;
-      useRouter().push("/");
-    }
-    return response;
-  },
-  async logout() {
-    localStorage.setItem("auth", "false");
-    state.isAuthenticated = false;
-    state.loggedUser = null;
-    useRouter().push("/login");
-  },
-  async findAll(): Promise<UserResponse> {
-    throw new Error("findAll not Implemented");
-  },
-  async findOne(id: number): Promise<UserResponse> {
-    throw new Error("findOne not Implemented");
-  },
-  async create(row: User): Promise<UserResponse> {
-    throw new Error("create not Implemented");
-  },
-  async update(row: User): Promise<UserResponse> {
-    throw new Error("update not Implemented");
-  },
-  async delete(id: number): Promise<UserResponse> {
-    throw new Error("delete not Implemented");
-  },
-});
-
-export const useUserStore = () => state;

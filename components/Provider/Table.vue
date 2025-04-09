@@ -16,7 +16,7 @@
     <q-card-section class="q-pa-none q-ma-none">
       <base-table
         class="provider-table"
-        :rows="store.list"
+        :rows="store.list.value"
         :columns="provider_columns"
         @action="onAction"
       >
@@ -99,10 +99,13 @@ import type { Provider, Work } from "~/Data/Models";
 
 import { useProviderStore } from "~/Data/Stores/useProviderStore";
 import type { TableActionType } from "~/common/common-types";
-const store = useProviderStore();
+
 const providerRef = ref(null);
 const defaultWork = ref<Work>();
+const store = useProviderStore();
 await store.findAll();
+// const rowList: Provider[] = store.list.value;
+
 const onAction = (action: TableActionType, row: Provider) => {};
 const openDialog = () => (providerRef.value as any).openDialog();
 const onWorkSelected = (w: Work) => {

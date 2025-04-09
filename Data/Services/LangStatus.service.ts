@@ -1,7 +1,8 @@
+import { TableKeys } from "~/common/table-keys";
 import { LangStatus } from "../Models/LangStatus";
 import type { ILangStatusRepositry } from "../Repositries/Models-Repositries";
 import type { LangStatusResponse } from "../Responses/Model-Responses";
-import { ModelResponse } from "../Responses/ModelResponse-Class";
+import type { FetchOptions } from "~/common/fetch-options";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
 export class LangStatusService
@@ -17,12 +18,14 @@ export class LangStatusService
   }
 
   override get getFetchKey(): string {
-    return "lang-status";
+    return TableKeys.COUNTRY_KEY;
   }
-  override async findAll(): Promise<LangStatusResponse> {
+  override async findAll(options?: FetchOptions): Promise<LangStatusResponse> {
     return super.fetchData(
       LangStatus as any,
-      config.LangStatus.API_LANG_STATUS_GET
+      config.LangStatus.API_LANG_STATUS_GET, {
+        options,
+      }
     );
     // let { data, error } = await useFetch(config.LangStatus.API_LANG_STATUS_GET);
 

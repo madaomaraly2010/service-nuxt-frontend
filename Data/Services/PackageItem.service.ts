@@ -1,7 +1,9 @@
+import { TableKeys } from "~/common/table-keys";
 import { PackageItem } from "../Models";
 import type { IPackageItemRepositry } from "../Repositries/Models-Repositries";
 import type { PackageItemResponse } from "../Responses/Model-Responses";
-import type { ModelResponse } from "../Responses/ModelResponse-Class";
+import type { FetchOptions } from "~/common/fetch-options";
+
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
 export class PackageItemStatusService
@@ -17,12 +19,15 @@ export class PackageItemStatusService
   }
 
   override get getFetchKey(): string {
-    return "package-item";
+    return TableKeys.PACKAGE_ITEM_KEY;
   }
-  override async findAll(): Promise<PackageItemResponse> {
+  override async findAll(options?: FetchOptions): Promise<PackageItemResponse> {
     return super.fetchData(
       PackageItem as any,
-      config.PackageItem.API_PACKAGE_ITEM_GET
+      config.PackageItem.API_PACKAGE_ITEM_GET, {
+        options,
+      
+      }
     );
   }
   override async findOne(id: number): Promise<PackageItemResponse> {

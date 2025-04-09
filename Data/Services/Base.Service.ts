@@ -1,3 +1,4 @@
+import type { FetchOptions } from "~/common/fetch-options";
 import type { IRepositry } from "../Repositries/IRepositry";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
 import type { FetchError } from "ofetch";
@@ -35,8 +36,15 @@ export abstract class BaseModelService<ModelType>
   async fetchData(
     cls: ModelType,
     url: string,
-    queryStrings?: any,
-    method?: "GET" | "HEAD" | "PATCH" | "POST" | "PUT" | "DELETE"
+    {
+      queryStrings,
+      method,
+      options,
+    }: {
+      queryStrings?: any;
+      method?: "GET" | "HEAD" | "PATCH" | "POST" | "PUT" | "DELETE";
+      options?: FetchOptions;
+    }
   ): Promise<ModelResponse<ModelType>> {
     //callStaticMethod(cls as any, "callStaticMethod");
 
@@ -51,10 +59,11 @@ export abstract class BaseModelService<ModelType>
     let retError: Ref<FetchError<any> | null> = ref<FetchError<any> | null>();
 
     if (method == "GET") {
+      const refetch = options?.reFetch ?? false;
       const { data: cachedReponse } = useNuxtData<ModelResponse<ModelType>>(
         this.getFetchKey
       );
-      if (cachedReponse.value) {
+      if (cachedReponse.value && !refetch) {
         retResponse = cachedReponse;
       } else {
         const { data: fetchResponse, error: fetchError } = await useFetch<

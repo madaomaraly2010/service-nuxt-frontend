@@ -1,7 +1,9 @@
+import { TableKeys } from "~/common/table-keys";
 import { WorkCategory } from "../Models";
 import type { IWorkCategoryRepositry } from "../Repositries/Models-Repositries";
 import type { WorkCategoryResponse } from "../Responses/Model-Responses";
-import { ModelResponse } from "../Responses/ModelResponse-Class";
+import type { FetchOptions } from "~/common/fetch-options";
+
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
 export class WorkCategoryService
@@ -17,13 +19,18 @@ export class WorkCategoryService
   }
 
   override get getFetchKey(): string {
-    return "work-category";
+    return TableKeys.WORK_CATEGORY_KEY;
   }
 
-  override async findAll(): Promise<WorkCategoryResponse> {
+  override async findAll(
+    options?: FetchOptions
+  ): Promise<WorkCategoryResponse> {
     return super.fetchData(
       WorkCategory as any,
-      config.WorkCategory.API_WORK_CATEGORY_GET
+      config.WorkCategory.API_WORK_CATEGORY_GET,
+      {
+        options,
+      }
     );
     // let { data, error } = await useFetch(
     //   config.WorkCategory.API_WORK_CATEGORY_GET

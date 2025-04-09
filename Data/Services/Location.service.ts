@@ -1,8 +1,11 @@
+import { TableKeys } from "~/common/table-keys";
 import { Location, Work } from "../Models";
 import type { ILocationRepositry } from "../Repositries/Models-Repositries";
 import type { LocationResponse } from "../Responses/Model-Responses";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
+import type { FetchOptions } from "~/common/fetch-options";
+
 export class LocationService
   extends BaseModelService<Location>
   implements ILocationRepositry
@@ -16,11 +19,13 @@ export class LocationService
   }
 
   override get getFetchKey(): string {
-    return "location";
+    return TableKeys.LOCATION_KEY;
   }
 
-  override async findAll(): Promise<LocationResponse> {
-    return super.fetchData(Work as any, config.Location.API_LOCATION_GET);
+  override async findAll(options?:FetchOptions): Promise<LocationResponse> {
+    return super.fetchData(Work as any, config.Location.API_LOCATION_GET, {
+      options,
+    });
   }
 
   // override async findAll(): Promise<WorkResponse> {

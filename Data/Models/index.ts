@@ -22,3 +22,4 @@ export * from "./Setting";
 export * from "./City";
 export * from "./RequestAttach";
 export * from "./RequestStatus";
+export * from "./Message";

@@ -118,7 +118,11 @@
               <message-list></message-list>
             </q-popup-proxy>
           </q-btn>
-          <q-btn-dropdown :label="userStore.loggedUser?.username" round flat>
+          <q-btn-dropdown
+            :label="userStore.loggedUser?.value?.username"
+            round
+            flat
+          >
             <q-tooltip>Account</q-tooltip>
             <q-list>
               <q-item clickable v-ripple @click="userStore.logout()">

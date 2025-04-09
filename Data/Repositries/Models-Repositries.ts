@@ -1,3 +1,4 @@
+import type { FetchOptions } from "~/common/fetch-options";
 import type {
   Bank,
   ChildStatus,
@@ -24,6 +25,7 @@ import type { RequestStatus } from "../Models/RequestStatus";
 import type {
   ProviderResponse,
   UserResponse,
+  WorkResponse,
 } from "../Responses/Model-Responses";
 import type { IRepositry } from "./IRepositry";
 
@@ -31,11 +33,15 @@ export interface ICountryRepositry extends IRepositry<Country> {}
 
 export interface IUserRepositry extends IRepositry<User> {
   login(username: string, password: string): Promise<UserResponse>;
+  logout(): Promise<void>;
 }
 
 export interface IProviderRepositry extends IRepositry<Provider> {
-  getByCountry(countryId: number): Promise<ProviderResponse>;
-  getByWork(workId: number): Promise<ProviderResponse>;
+  getByCountry(
+    countryId: number,
+    options?: FetchOptions
+  ): Promise<ProviderResponse>;
+  getByWork(workId: number, options?: FetchOptions): Promise<ProviderResponse>;
 }
 
 export interface IWorkRepositry extends IRepositry<Work> {}

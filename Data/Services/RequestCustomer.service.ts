@@ -1,8 +1,11 @@
+import { TableKeys } from "~/common/table-keys";
 import { RequestCustomer } from "../Models";
 import type { IRequestCustomerRepositry } from "../Repositries/Models-Repositries";
 import type { RequestCustomerResponse } from "../Responses/Model-Responses";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
+import type { FetchOptions } from "~/common/fetch-options";
+
 export class RequestCustomerService
   extends BaseModelService<RequestCustomer>
   implements IRequestCustomerRepositry
@@ -16,12 +19,14 @@ export class RequestCustomerService
   }
 
   override get getFetchKey(): string {
-    return "request-customer";
+    return  TableKeys.REQUEST_CUSTOMER_KEY;
   }
-  override async findAll(): Promise<RequestCustomerResponse> {
+  override async findAll(options?:FetchOptions): Promise<RequestCustomerResponse> {
     return super.fetchData(
       RequestCustomer as any,
-      config.RequestCustomer.API_RQUEST_CUSTOMER_GET
+      config.RequestCustomer.API_RQUEST_CUSTOMER_GET, {
+        options,
+      }
     );
   }
   override async findOne(id: number): Promise<RequestCustomerResponse> {

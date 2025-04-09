@@ -1,7 +1,9 @@
+import { TableKeys } from "~/common/table-keys";
 import { RentStatus } from "../Models";
 import type { IRentStatusRepositry } from "../Repositries/Models-Repositries";
 import type { RentStatusResponse } from "../Responses/Model-Responses";
-import { ModelResponse } from "../Responses/ModelResponse-Class";
+import type { FetchOptions } from "~/common/fetch-options";
+
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
 export class RentStatusService
@@ -17,12 +19,15 @@ export class RentStatusService
   }
 
   override get getFetchKey(): string {
-    return "rent-status";
+    return TableKeys.RENT_STATUS_KEY;
   }
-  override async findAll(): Promise<RentStatusResponse> {
+  override async findAll(options?: FetchOptions): Promise<RentStatusResponse> {
     return super.fetchData(
       RentStatus as any,
-      config.RentStatus.API_RENT_STATUS_GET
+      config.RentStatus.API_RENT_STATUS_GET,
+      {
+        options,
+      }
     );
     // let { data, error } = await useFetch(config.RentStatus.API_RENT_STATUS_GET);
     // console.log("Rent Data", data);

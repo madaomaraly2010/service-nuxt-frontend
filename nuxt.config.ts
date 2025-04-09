@@ -4,7 +4,7 @@ import { defineNuxtConfig } from "nuxt/config";
 export default defineNuxtConfig({
   // Ensures pages directory is used
   pages: true,
-
+  ssr: false,
   modules: [
     "nuxt-quasar-ui",
     "@nuxtjs/i18n",

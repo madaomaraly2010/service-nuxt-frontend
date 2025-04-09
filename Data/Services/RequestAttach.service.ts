@@ -1,8 +1,11 @@
+import { TableKeys } from "~/common/table-keys";
 import { RequestAttach, Work } from "../Models";
 import type { IRequestAttachRepositry } from "../Repositries/Models-Repositries";
 import type { RequestAttachResponse } from "../Responses/Model-Responses";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
+import type { FetchOptions } from "~/common/fetch-options";
+
 export class RequestAttachService
   extends BaseModelService<RequestAttach>
   implements IRequestAttachRepositry
@@ -16,13 +19,15 @@ export class RequestAttachService
   }
 
   override get getFetchKey(): string {
-    return "request-attach";
+    return TableKeys.REQUEST_ATTACH_KEY;
   }
 
-  override async findAll(): Promise<RequestAttachResponse> {
+  override async findAll(options?:FetchOptions): Promise<RequestAttachResponse> {
     return super.fetchData(
       Work as any,
-      config.RequestAttach.API_REQUEST_ATTACH_GET
+      config.RequestAttach.API_REQUEST_ATTACH_GET, {
+        options,
+      }
     );
   }
 

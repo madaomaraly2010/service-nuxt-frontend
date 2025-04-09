@@ -1,8 +1,11 @@
+import { TableKeys } from "~/common/table-keys";
 import { City, Work } from "../Models";
 import type { ICityRepositry } from "../Repositries/Models-Repositries";
 import type { CityResponse } from "../Responses/Model-Responses";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
+import type { FetchOptions } from "~/common/fetch-options";
+
 export class CityService
   extends BaseModelService<City>
   implements ICityRepositry
@@ -16,11 +19,13 @@ export class CityService
   }
 
   override get getFetchKey(): string {
-    return "city";
+    return TableKeys.CITY_KEY;
   }
 
-  override async findAll(): Promise<CityResponse> {
-    return super.fetchData(Work as any, config.City.API_CITY_GET);
+  override async findAll(options?:FetchOptions): Promise<CityResponse> {
+    return super.fetchData(Work as any, config.City.API_CITY_GET, {
+      options,
+    });
   }
 
   // override async findAll(): Promise<WorkResponse> {

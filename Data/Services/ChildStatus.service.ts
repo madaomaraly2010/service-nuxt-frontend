@@ -1,7 +1,9 @@
+import { TableKeys } from "~/common/table-keys";
 import { ChildStatus } from "../Models";
 import type { IChildStatusRepositry } from "../Repositries/Models-Repositries";
 import type { ChildStatusResponse } from "../Responses/Model-Responses";
-import { ModelResponse } from "../Responses/ModelResponse-Class";
+import type { FetchOptions } from "~/common/fetch-options";
+
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
 
@@ -10,7 +12,7 @@ export class ChildStatusService
   implements IChildStatusRepositry
 {
   override get getFetchKey(): string {
-    return "child-status";
+    return TableKeys.CHILD_STATUS_KEY;
   }
   static _service: ChildStatusService;
   public static get instance(): ChildStatusService {
@@ -19,10 +21,12 @@ export class ChildStatusService
     }
     return ChildStatusService._service;
   }
-  override async findAll(): Promise<ChildStatusResponse> {
+  override async findAll(options?: FetchOptions): Promise<ChildStatusResponse> {
     return super.fetchData(
       ChildStatus as any,
-      config.ChildStatus.API_CHILD_STATUS_GET
+      config.ChildStatus.API_CHILD_STATUS_GET, {
+        options,
+      }
     );
   }
   override async findOne(id: number): Promise<ChildStatusResponse> {

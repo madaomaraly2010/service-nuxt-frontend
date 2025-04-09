@@ -1,8 +1,10 @@
+import { TableKeys } from "~/common/table-keys";
 import { Bank, Work } from "../Models";
 import type { IBankRepositry } from "../Repositries/Models-Repositries";
 import type { BankResponse } from "../Responses/Model-Responses";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
+import type { FetchOptions } from "~/common/fetch-options";
 export class BankService
   extends BaseModelService<Bank>
   implements IBankRepositry
@@ -16,11 +18,13 @@ export class BankService
   }
 
   override get getFetchKey(): string {
-    return "bank";
+    return TableKeys.BANK_KEY;
   }
 
-  override async findAll(): Promise<BankResponse> {
-    return super.fetchData(Work as any, config.Bank.API_BANK_GET);
+  override async findAll(options?: FetchOptions): Promise<BankResponse> {
+    return super.fetchData(Work as any, config.Bank.API_BANK_GET, {
+      options,
+    });
   }
 
   // override async findAll(): Promise<WorkResponse> {

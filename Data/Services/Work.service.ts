@@ -1,8 +1,11 @@
+import { TableKeys } from "~/common/table-keys";
 import { Work } from "../Models";
 import type { IWorkRepositry } from "../Repositries/Models-Repositries";
 import type { WorkResponse } from "../Responses/Model-Responses";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
+import type { FetchOptions } from "~/common/fetch-options";
+
 export class WorkService
   extends BaseModelService<Work>
   implements IWorkRepositry
@@ -16,11 +19,13 @@ export class WorkService
   }
 
   override get getFetchKey(): string {
-    return "work";
+    return TableKeys.WORK_KEY;
   }
 
-  override async findAll(): Promise<WorkResponse> {
-    return super.fetchData(Work as any, config.Work.API_WORK_GET);
+  override async findAll(options?:FetchOptions): Promise<WorkResponse> {
+    return super.fetchData(Work as any, config.Work.API_WORK_GET, {
+      options,
+    });
   }
 
   // override async findAll(): Promise<WorkResponse> {

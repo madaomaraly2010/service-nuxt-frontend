@@ -1,8 +1,11 @@
+import { TableKeys } from "~/common/table-keys";
 import { Setting, Work } from "../Models";
 import type { ISettingRepositry } from "../Repositries/Models-Repositries";
 import type { SettingResponse } from "../Responses/Model-Responses";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
+import type { FetchOptions } from "~/common/fetch-options";
+
 export class SettingService
   extends BaseModelService<Setting>
   implements ISettingRepositry
@@ -16,11 +19,13 @@ export class SettingService
   }
 
   override get getFetchKey(): string {
-    return "setting";
+    return TableKeys.SETTING_KEY;
   }
 
-  override async findAll(): Promise<SettingResponse> {
-    return super.fetchData(Work as any, config.Setting.API_SETTING_GET);
+  override async findAll(options?: FetchOptions): Promise<SettingResponse> {
+    return super.fetchData(Work as any, config.Setting.API_SETTING_GET, {
+      options,
+    });
   }
 
   // override async findAll(): Promise<WorkResponse> {

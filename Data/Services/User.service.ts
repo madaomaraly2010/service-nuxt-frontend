@@ -1,9 +1,12 @@
+import { TableKeys } from "~/common/table-keys";
 import { User } from "../Models";
 import type { IUserRepositry } from "../Repositries/Models-Repositries";
 import type { UserResponse } from "../Responses/Model-Responses";
 import { ModelResponse } from "../Responses/ModelResponse-Class";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
+import type { FetchOptions } from "~/common/fetch-options";
+
 export class UserService
   extends BaseModelService<User>
   implements IUserRepositry
@@ -17,7 +20,7 @@ export class UserService
   }
 
   override get getFetchKey(): string {
-    return "user";
+    return TableKeys.USER_KEY;
   }
   async login(username: string, password: string): Promise<UserResponse> {
     let list: User[] | undefined = [];
@@ -46,7 +49,7 @@ export class UserService
     return response;
   }
 
-  override async findAll(): Promise<UserResponse> {
+  override async findAll(options?: FetchOptions): Promise<UserResponse> {
     throw new Error("Method not implemented.");
   }
   override async findOne(id: number): Promise<UserResponse> {
@@ -59,6 +62,9 @@ export class UserService
     throw new Error("Method not implemented.");
   }
   override async delete(id: number): Promise<UserResponse> {
+    throw new Error("Method not implemented.");
+  }
+  logout(): Promise<void> {
     throw new Error("Method not implemented.");
   }
 }

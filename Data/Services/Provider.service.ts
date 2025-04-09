@@ -2,8 +2,10 @@ import { Provider } from "../Models";
 import type { IProviderRepositry } from "../Repositries/Models-Repositries";
 import { config } from "~/Data/UrlsConfig";
 import type { ProviderResponse } from "../Responses/Model-Responses";
-import { ModelResponse } from "../Responses/ModelResponse-Class";
+import type { FetchOptions } from "~/common/fetch-options";
+
 import { BaseModelService } from "./Base.Service";
+import { TableKeys } from "~/common/table-keys";
 export class ProviderService
   extends BaseModelService<Provider>
   implements IProviderRepositry
@@ -16,14 +18,21 @@ export class ProviderService
     return ProviderService._service;
   }
   override get getFetchKey(): string {
-    return "provider";
+    return TableKeys.PROVIDER_KEY;
   }
-  async getByCountry(countryId: number): Promise<ProviderResponse> {
+  async getByCountry(
+    countryId: number,
+    options?: FetchOptions
+  ): Promise<ProviderResponse> {
     return super.fetchData(Provider as any, config.Provider.API_PROVIDER_GET, {
-      query: {
-        countryId,
+      queryStrings: {
+        query: {
+          countryId,
+        },
       },
+      options,
     });
+
     // let list: Provider[] | undefined = [];
     // let { data, error } = await useFetch<ProviderResponse>(
     //   config.Provider.API_PROVIDER_GET,
@@ -48,11 +57,17 @@ export class ProviderService
     // }
     // return response;
   }
-  async getByWork(workId: number): Promise<ProviderResponse> {
+  async getByWork(
+    workId: number,
+    options?: FetchOptions
+  ): Promise<ProviderResponse> {
     return super.fetchData(Provider as any, config.Provider.API_PROVIDER_GET, {
-      query: {
-        workId,
+      queryStrings: {
+        query: {
+          workId,
+        },
       },
+      options,
     });
     // let list: Provider[] | undefined = [];
     // debugger;
@@ -78,8 +93,10 @@ export class ProviderService
     // }
     // return response;
   }
-  override async findAll(): Promise<ProviderResponse> {
-    return super.fetchData(Provider as any, config.Provider.API_PROVIDER_GET);
+  override async findAll(options?: FetchOptions): Promise<ProviderResponse> {
+    return super.fetchData(Provider as any, config.Provider.API_PROVIDER_GET, {
+      options,
+    });
     // let list: Provider[] | undefined = [];
     // let { data, error } = await useFetch<ProviderResponse>(
     //   config.Provider.API_PROVIDER_GET

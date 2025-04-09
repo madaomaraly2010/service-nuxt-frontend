@@ -1,7 +1,8 @@
+import { TableKeys } from "~/common/table-keys";
 import { Package } from "../Models";
 import type { IPackageRepositry } from "../Repositries/Models-Repositries";
 import type { PackageResponse } from "../Responses/Model-Responses";
-import { ModelResponse } from "../Responses/ModelResponse-Class";
+import type { FetchOptions } from "~/common/fetch-options";
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
 export class PackageService
@@ -17,10 +18,12 @@ export class PackageService
   }
 
   override get getFetchKey(): string {
-    return "package";
+    return TableKeys.PACKAGE_KEY;
   }
-  override async findAll(): Promise<PackageResponse> {
-    return super.fetchData(Package as any, config.Package.API_PACKAGE_GET);
+  override async findAll(options?: FetchOptions): Promise<PackageResponse> {
+    return super.fetchData(Package as any, config.Package.API_PACKAGE_GET, {
+      options,
+    });
     // let { data, error } = await useFetch(config.Package.API_PACKAGE_GET);
     // console.log("Lang Data", data);
     // return ModelResponse.createSuccessResponse([]);
