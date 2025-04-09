@@ -63,9 +63,7 @@ export class ProviderService
   ): Promise<ProviderResponse> {
     return super.fetchData(Provider as any, config.Provider.API_PROVIDER_GET, {
       queryStrings: {
-        query: {
-          workId,
-        },
+        workId,
       },
       options,
     });

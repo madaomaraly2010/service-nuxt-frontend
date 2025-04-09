@@ -35,7 +35,9 @@ const globalStore = useGlobalStore();
 const selectedWork = defineModel();
 const emits = defineEmits(["workSelected"]);
 const onWorkSelected = async (work: Work) => {
-  await providerStore.getByWork(work.id);
+  await providerStore.getByWork(work.id, {
+    reFetch: true,
+  });
   console.log(work, "selected");
 };
 </script>

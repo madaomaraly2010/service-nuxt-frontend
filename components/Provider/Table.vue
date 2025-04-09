@@ -16,7 +16,7 @@
     <q-card-section class="q-pa-none q-ma-none">
       <base-table
         class="provider-table"
-        :rows="store.list.value"
+        :rows="rowList"
         :columns="provider_columns"
         @action="onAction"
       >
@@ -104,7 +104,7 @@ const providerRef = ref(null);
 const defaultWork = ref<Work>();
 const store = useProviderStore();
 await store.findAll();
-// const rowList: Provider[] = store.list.value;
+const rowList = computed(() => store.list.value);
 
 const onAction = (action: TableActionType, row: Provider) => {};
 const openDialog = () => (providerRef.value as any).openDialog();
