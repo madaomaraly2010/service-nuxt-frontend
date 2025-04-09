@@ -1,16 +1,15 @@
 <template>
   <div>
     <div class="row items-center" :dir="globalStore.direction">
-      <div class="col-4 row items-center">
+      <div class="col-4 row items-center q-col-gutter-none">
         <div class="col-4 text-grey-8 text-subtitle1">
           {{ $t("request_customer.fields.month_number") }}
         </div>
-        <div class="col-7">
+        <div class="col-8">
           <BaseNumberInput
             :min="1"
             :max="12"
             :show-spin="true"
-            readonly
           ></BaseNumberInput>
         </div>
       </div>
@@ -80,7 +79,7 @@
         <BaseNumberInput
           :show-spin="true"
           :show-percent="true"
-          :min="1"
+          :min="0"
           :max="100"
         ></BaseNumberInput>
       </div>

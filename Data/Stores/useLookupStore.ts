@@ -13,17 +13,16 @@ interface ILookupState {}
 
 export const useLookupStore = () => {
   const state = useState<ILookupState>("lookups", () => ({}));
-
+  const workCategoryStore = useWorkCategoryStore();
+  const workStore = useWorkStore();
+  const langStore = useLangStatusStore();
+  const childStore = useChildStatusStore();
+  const rentStore = useRentStatusStore();
+  const cookStore = useCookStatusStore();
+  const religionStore = useReligionStatusStore();
+  const countryStore = useCountryStore();
   const actions = {
     async fetchAllLookups(): Promise<void> {
-      const workCategoryStore = useWorkCategoryStore();
-      const workStore = useWorkStore();
-      const langStore = useLangStatusStore();
-      const childStore = useChildStatusStore();
-      const rentStore = useRentStatusStore();
-      const cookStore = useCookStatusStore();
-      const religionStore = useReligionStatusStore();
-      const countryStore = useCountryStore();
       // Uncomment these when the methods are implemented
       await workCategoryStore.findAll();
       await workStore.findAll();

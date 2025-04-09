@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseDialogForm ref="baseDialogRef">
+    <BaseDialogForm ref="baseDialogRef" width="50vw">
       <q-card class="q-pa-md">
         <q-card-section class="text-h6 text-primary">
           <RequestCustomerRequestDetails

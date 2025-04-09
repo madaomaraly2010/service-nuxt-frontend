@@ -49,7 +49,7 @@ export abstract class BaseModelService<ModelType>
     //callStaticMethod(cls as any, "callStaticMethod");
 
     if (!method) method = "GET";
-    debugger;
+
     let list: ModelType[] = [];
     //@ts-ignore
     let retResponse: Ref<ModelResponse<ModelType> | null> = ref<

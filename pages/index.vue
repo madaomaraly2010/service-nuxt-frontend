@@ -39,7 +39,7 @@ definePageMeta({
 });
 import { useLookupStore } from "~/Data/Stores/useLookupStore";
 const lookupStore = useLookupStore();
-const nuxtApp = useNuxtApp();
+// const nuxtApp = useNuxtApp();
 await lookupStore.fetchAllLookups();
 
 // onMounted(() => {

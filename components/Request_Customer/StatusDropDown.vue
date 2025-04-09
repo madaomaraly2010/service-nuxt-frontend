@@ -6,7 +6,7 @@
       option-value="id"
       v-model="status"
       label="Request Status"
-      :options="statusStore.list"
+      :options="rowList"
       emit-value
       map-options
     />
@@ -16,7 +16,7 @@
 import { useRequestStatusStore } from "~/Data/Stores";
 
 const statusStore = useRequestStatusStore();
-
+const rowList = computed(() => statusStore.list.value);
 const status = defineModel<number>();
 </script>
 
