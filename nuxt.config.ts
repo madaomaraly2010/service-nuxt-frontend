@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "nuxt-echarts",
     "@vueuse/motion/nuxt",
+    "@pinia/nuxt",
   ],
   devtools: { enabled: true },
 
