@@ -1,5 +1,6 @@
 <template>
   <q-input
+    ref="qInputRef"
     v-bind="props"
     dense
     outlined
@@ -26,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { QInputProps } from "quasar";
+import type { QInput, QInputProps } from "quasar";
 
 interface INumberInputPropType {
   showSpin?: boolean;
@@ -38,6 +39,7 @@ interface INumberInputPropType {
 }
 const props = defineProps<INumberInputPropType & QInputProps>();
 const theNumber = defineModel<number>();
+const qInputRef: Ref<QInput | null> = ref<QInput | null>(null);
 
 const nuxtApp = useNuxtApp();
 theNumber.value = props?.min ?? 0;
@@ -77,11 +79,10 @@ const decrease = () => {
   theNumber.value = +currentValue - 1;
 };
 
-// watch(theNumber, (val) => {
-//   let v = val ?? 0;
-//   if (v < 1) theNumber.value = 1;
-//   else if (v > 10) theNumber.value = 10;
-// });
+defineExpose({
+  validate: () => qInputRef?.value?.validate?.(),
+  resetValidation: () => qInputRef?.value?.resetValidation?.(),
+});
 </script>
 
 <style scoped></style>

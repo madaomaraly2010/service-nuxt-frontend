@@ -1,5 +1,11 @@
 <template>
-  <q-select v-bind="$attrs" v-model="theModelValue" outlined dense>
+  <q-select
+    v-bind="$attrs"
+    ref="qSelectRef"
+    v-model="theModelValue"
+    outlined
+    dense
+  >
     <!-- Prepend Slot -->
     <template v-if="$slots.prepend" v-slot:prepend>
       <slot name="prepend"></slot>
@@ -23,6 +29,18 @@
 </template>
 
 <script setup lang="ts">
+import type { QSelect, QSelectProps } from "quasar";
 import { defineModel } from "vue";
 const theModelValue = defineModel<number>();
+
+interface ISelectPropType {}
+
+defineProps<ISelectPropType & QSelectProps>();
+
+const qSelectRef: Ref<QSelect | null> = ref(null);
+
+defineExpose({
+  validate: () => qSelectRef?.value?.validate?.(),
+  resetValidation: () => qSelectRef?.value?.resetValidation?.(),
+});
 </script>

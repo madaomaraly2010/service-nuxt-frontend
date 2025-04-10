@@ -3,8 +3,8 @@
   "extends": "./.nuxt/tsconfig.json",
   
   "compilerOptions": {
-  
-"module": "esnext",
+    "types": ["node"],
+    "module": "esnext",
     "target": "es2017",
     "strict": true, // Enable strict TypeScript checking
     "noImplicitAny": true,

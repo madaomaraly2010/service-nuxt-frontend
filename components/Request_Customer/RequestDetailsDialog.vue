@@ -1,11 +1,18 @@
 <template>
   <div>
-    <BaseDialogForm  ref="baseDialogRef" width="50vw" height="67vh">
+    <BaseDialogForm
+      :form-ref="requestFormRef"
+      ref="baseDialogRef"
+      width="80vw"
+      height="67vh"
+    >
       <q-card class="q-pa-md">
         <q-card-section class="text-h6 text-primary">
-          <RequestCustomerRequestDetails
+          <RequestCustomerRequestDetailsForm
+            ref="requestFormRef"
+            
             :request-customer="requestCustomer"
-          ></RequestCustomerRequestDetails>
+          ></RequestCustomerRequestDetailsForm>
         </q-card-section>
       </q-card>
     </BaseDialogForm>
@@ -15,6 +22,7 @@
 <script setup lang="ts">
 import { RequestCustomer } from "~/Data/Models";
 const baseDialogRef = ref(null);
+const requestFormRef = ref();
 defineProps({
   requestCustomer: {
     type: RequestCustomer,

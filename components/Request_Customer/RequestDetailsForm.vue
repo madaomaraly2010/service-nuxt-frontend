@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <BaseForm>
     <div class="row items-center" :dir="globalStore.direction">
       <div class="col-4 row items-center q-col-gutter-none">
         <div class="col-4 text-grey-8 text-subtitle1">
@@ -47,63 +47,66 @@
       ></WorkDetails>
     </div>
     <QSeparator class="q-my-lg"></QSeparator>
-  </div>
 
-  <!-- total_amount   discount_percent -->
-  <div class="row items-center" :dir="globalStore.direction">
-    <div class="col-4 row">
-      <div class="col-2 text-grey-8 text-subtitle1">
-        {{ $t("request_customer.fields.down_payment") }}
+    <!-- total_amount   discount_percent -->
+    <div class="row items-center" :dir="globalStore.direction">
+      <div class="col-4 row">
+        <div class="col-2 text-grey-8 text-subtitle1">
+          {{ $t("request_customer.fields.down_payment") }}
+        </div>
+        <div class="col-7">
+          <!-- <span>SR {{ requestCustomer.down_payment }}</span> -->
+          <BaseNumberInput
+            :show-currency="true"
+            currency="SR"
+          ></BaseNumberInput>
+        </div>
       </div>
-      <div class="col-7">
-        <!-- <span>SR {{ requestCustomer.down_payment }}</span> -->
-        <BaseNumberInput :show-currency="true" currency="SR"></BaseNumberInput>
+      <div class="col-4 row">
+        <div class="col-3 text-grey-8 text-subtitle1">
+          {{ $t("request_customer.fields.discount_value") }}
+        </div>
+        <div class="col-7">
+          <!-- <span>SR {{ requestCustomer.discountValue }}</span> -->
+          <span>SR 467374</span>
+        </div>
       </div>
-    </div>
-    <div class="col-4 row">
-      <div class="col-3 text-grey-8 text-subtitle1">
-        {{ $t("request_customer.fields.discount_value") }}
-      </div>
-      <div class="col-7">
-        <!-- <span>SR {{ requestCustomer.discountValue }}</span> -->
-        <span>SR 467374</span>
-      </div>
-    </div>
 
-    <div class="col-4 row q-gutter-xs">
-      <div class="col-1 text-grey-8 text-subtitle1">
-        {{ $t("request_customer.fields.discount_percent") }}
-      </div>
-      <div class="col-10">
-        <!-- <span>{{ requestCustomer.discountPercent }}%</span> -->
-        <BaseNumberInput
-          :show-spin="true"
-          :show-percent="true"
-          :min="0"
-          :max="100"
-        ></BaseNumberInput>
-      </div>
-    </div>
-  </div>
-  <QSeparator class="q-my-lg"></QSeparator>
-  <div class="row" :dir="globalStore.direction">
-    <div class="col-4 row q-gutter-xs">
-      <div class="col text-grey-8 text-subtitle1">
-        {{ $t("request_customer.fields.total_before_discount") }}
-      </div>
-      <div class="col">
-        <span>SR {{ requestCustomer.total }}</span>
+      <div class="col-4 row q-gutter-xs">
+        <div class="col-1 text-grey-8 text-subtitle1">
+          {{ $t("request_customer.fields.discount_percent") }}
+        </div>
+        <div class="col-10">
+          <!-- <span>{{ requestCustomer.discountPercent }}%</span> -->
+          <BaseNumberInput
+            :show-spin="true"
+            :show-percent="true"
+            :min="0"
+            :max="100"
+          ></BaseNumberInput>
+        </div>
       </div>
     </div>
-    <div class="col-4 row q-gutter-xs border bg-green-1">
-      <div class="col text-grey-8 text-subtitle1">
-        {{ $t("request_customer.fields.net_total_amount") }}
+    <QSeparator class="q-my-lg"></QSeparator>
+    <div class="row" :dir="globalStore.direction">
+      <div class="col-4 row q-gutter-xs">
+        <div class="col text-grey-8 text-subtitle1">
+          {{ $t("request_customer.fields.total_before_discount") }}
+        </div>
+        <div class="col">
+          <span>SR {{ requestCustomer.total }}</span>
+        </div>
       </div>
-      <div class="col">
-        <span>SR {{ requestCustomer.wage_amount }}</span>
+      <div class="col-4 row q-gutter-xs border bg-green-1">
+        <div class="col text-grey-8 text-subtitle1">
+          {{ $t("request_customer.fields.net_total_amount") }}
+        </div>
+        <div class="col">
+          <span>SR {{ requestCustomer.wage_amount }}</span>
+        </div>
       </div>
     </div>
-  </div>
+  </BaseForm>
 </template>
 
 <script setup lang="ts">

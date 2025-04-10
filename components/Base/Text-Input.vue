@@ -1,6 +1,7 @@
 <template>
   <div>
     <q-input
+      ref="qInputRef"
       outlined
       dense
       v-model="theValue"
@@ -28,19 +29,28 @@
 </template>
 
 <script lang="ts" setup>
-import type { ValidationRule } from "quasar";
-import type { PropType } from "vue";
+import type { QInput, QInputProps } from "quasar";
+interface ITextInputPropType {
+  isPassword?: boolean;
+}
+const props = defineProps<ITextInputPropType & QInputProps>();
 const isPwd = ref(true);
-const props = defineProps({
-  rules: {
-    type: Object as PropType<ValidationRule[]>,
-  },
-  label: {
-    type: String as PropType<string>,
-  },
-  isPassword: {
-    type: Boolean as PropType<boolean>,
-  },
+const qInputRef: Ref<QInput | null> = ref<QInput | null>(null);
+// const props = defineProps({
+//   rules: {
+//     type: Object as PropType<ValidationRule[]>,
+//   },
+//   label: {
+//     type: String as PropType<string>,
+//   },
+//   isPassword: {
+//     type: Boolean as PropType<boolean>,
+//   },
+// });
+
+defineExpose({
+  validate: () => qInputRef?.value?.validate?.(),
+  resetValidation: () => qInputRef?.value?.resetValidation?.(),
 });
 const theValue = defineModel<string>();
 const getType = () => {

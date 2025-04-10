@@ -42,7 +42,7 @@
       <q-separator />
 
       <!-- Footer Slot (Buttons) -->
-      <q-card-actions align="right">
+      <!-- <q-card-actions align="right">
         <slot name="footer">
           <q-btn label="Save" color="primary" @click="handleSave" />
           <q-btn
@@ -53,7 +53,7 @@
             @click="handleCancel"
           />
         </slot>
-      </q-card-actions>
+      </q-card-actions> -->
     </q-card>
   </q-dialog>
 </template>
@@ -64,63 +64,36 @@ import { useGlobalStore } from "~/Data/Stores";
 // import { defineProps, defineEmits, ref, defineExpose } from "vue";
 const globalStore = useGlobalStore();
 // Props for customization
-//@ts-ignore
-const props = defineProps({
-  title: {
-    type: String,
-    default: "Dialog",
-  },
-  subtitle: {
-    type: String,
-    default: "Sub title",
-  },
 
-  icon: {
-    type: String,
-  },
-  minWidth: {
-    type: String,
-    default: "500px",
-  },
-  maxWidth: {
-    type: String,
-    default: "100vw",
-  },
+interface IDialogPropType {
+  formRef: Ref;
+  title?: string;
+  subtitle?: string;
 
-  width: {
-    type: String,
-    default: "50vw",
-  },
-  height: {
-    type: String,
-    default: "50vw",
-  },
-  maxHeight: {
-    type: String,
-    default: "85vh",
-  },
-  persistent: {
-    type: Boolean,
-    default: false,
-  },
-  closable: {
-    type: Boolean,
-    default: true,
-  },
-  transitionShow: {
-    type: String,
-    default: "fade",
-  },
-  transitionHide: {
-    type: String,
-    default: "fade",
-  },
-});
+  icon?: string;
+  minWidth?: string;
+  maxWidth?: string;
+
+  width?: string;
+  height?: string;
+  maxHeight?: string;
+
+  persistent?: boolean;
+  closable?: boolean;
+  transitionShow?: string;
+  transitionHide?: string;
+}
+// //@ts-ignore
+const props = defineProps<IDialogPropType>();
+
+// onMounted(() => {
+//   console.log("props.formRef", props.width);
+// });
 
 const emit = defineEmits(["save", "cancel", "close"]);
 const isOpen = ref(false);
 
-// Methods to open and close the dialog
+// // Methods to open and close the dialog
 const open = () => {
   isOpen.value = true;
 };
@@ -130,10 +103,14 @@ const close = () => {
   emit("close");
 };
 
-const handleSave = () => {
-  emit("save");
-  close();
+const cancel = () => {
+  handleCancel();
 };
+
+// const handleSave = () => {
+//   emit("save");
+//   close();
+// };
 
 const handleCancel = () => {
   emit("cancel");
@@ -141,10 +118,14 @@ const handleCancel = () => {
 };
 
 const handleClose = () => {
-  emit("close");
+  // emit("close");
   close();
 };
-
-// Expose methods to the parent
-defineExpose({ open, close });
+defineExpose({ open, close, cancel });
+onMounted(() => {
+  console.log("props.formRef", props.width);
+});
+//  // Expose methods to the parent
+// eslint-disable-next-line no-undef
+// defineExpose({ open, close, cancel });
 </script>

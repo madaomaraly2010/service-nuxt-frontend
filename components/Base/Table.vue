@@ -13,8 +13,6 @@
       v-slot:[`body-cell-${col.name}`]="props"
     >
       <slot :name="col.name" v-bind="props">
-        <!-- Default rendering if no slot is provided -->
-        <!-- {{ props.row[col.field] }} -->
         {{
           col.format
             ? col.format(props.row[col.field as string], props.row)
@@ -52,25 +50,11 @@ import { computed, defineProps, defineEmits } from "vue";
 import type { TableActionType } from "~/common/common-types";
 
 interface ITablePropType<RowType> {
-  // columns: Array<QTableColumn>;
-  // rows: Array<RowType>;
   showActions?: boolean;
 }
 
 const props = defineProps<QTableProps & ITablePropType<T>>();
-//   {
-//   columns: {
-//     type: Array<QTableColumn>,
-//     required: false,
-//   },
-//   rows: {
-//     type: Array<T>,
-//     required: true,
-//   },
-//   showActions: Boolean,
-// }
 
-// const emit = defineEmits(["action"]);
 const emit = defineEmits<{
   (event: "action", action: TableActionType, row: any): void;
 }>();
