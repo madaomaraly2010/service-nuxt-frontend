@@ -1,22 +1,22 @@
 import { TableKeys } from "~/common/table-keys";
 import type { User } from "../Models";
-import type { IUserRepositry } from "../Repositries/Models-Repositries";
 import type { UserResponse } from "../Responses/Model-Responses";
 import { UserService } from "../Services/User.service";
-import { toRefs } from "vue";
 import type { FetchOptions } from "~/common/fetch-options";
 
-export const useUserStore = () => {
-  const state = useState<IUserState>(TableKeys.USER_KEY, () => ({
-    list: [] as User[],
-    loggedUser: null,
-    isAuthenticated: false,
-  }));
+interface IUserState {
+  list: User[];
+  loggedUser?: User | null;
+  isAuthenticated?: boolean;
+}
 
-  const repositry: IUserRepositry = {
-    async findAll(options?:FetchOptions): Promise<UserResponse> {
-      const response = await UserService.instance.findAll();
-      state.value.list = response.data ?? [];
+export const useUserStore = defineStore(TableKeys.USER_KEY, {
+  state: (): IUserState => ({ list: [] }),
+  getters: {},
+  actions: {
+    async findAll(options?: FetchOptions): Promise<UserResponse> {
+      const response = await UserService.instance.findAll(options);
+      this.list = response.data ?? [];
       return response;
     },
 
@@ -41,31 +41,20 @@ export const useUserStore = () => {
         username,
         password
       );
-      state.value.isAuthenticated = false;
+      this.isAuthenticated = false;
       if (response.isAuthenticated) {
         localStorage.setItem("auth", "true");
-        state.value.isAuthenticated = true;
-        state.value.loggedUser = response.data![0] as any;
+        this.isAuthenticated = true;
+        this.loggedUser = response.data![0] as any;
         useRouter().push("/");
       }
       return response;
     },
     async logout() {
       localStorage.setItem("auth", "false");
-      state.value.isAuthenticated = false;
-      state.value.loggedUser = null;
+      this.isAuthenticated = false;
+      this.loggedUser = null;
       useRouter().push("/login");
     },
-  };
-
-  return {
-    ...toRefs(state.value), // reactive list
-    ...repositry, // auto-includes all functions
-  };
-};
-
-interface IUserState {
-  list: User[];
-  loggedUser?: User | null;
-  isAuthenticated?: boolean;
-}
+  },
+});

@@ -16,7 +16,7 @@ export const useProviderStore = defineStore(TableKeys.PROVIDER_KEY, {
   getters: {},
   actions: {
     async findAll(options?: FetchOptions): Promise<ProviderResponse> {
-      const response = await ProviderService.instance.findAll();
+      const response = await ProviderService.instance.findAll(options);
       this.list = response.data ?? [];
       return response;
     },

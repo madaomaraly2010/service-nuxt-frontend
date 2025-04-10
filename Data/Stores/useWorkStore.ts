@@ -1,24 +1,20 @@
 import { TableKeys } from "~/common/table-keys";
 import type { Work } from "../Models";
-import type { IWorkRepositry } from "../Repositries/Models-Repositries";
 import type { WorkResponse } from "../Responses/Model-Responses";
 import { WorkService } from "../Services/Work.service";
-import { toRefs } from "vue";
 import type { FetchOptions } from "~/common/fetch-options";
 
 interface IWorkState {
   list: Work[];
 }
 
-export const useWorkStore = () => {
-  const state = useState<IWorkState>(TableKeys.WORK_KEY, () => ({
-    list: [] as Work[],
-  }));
-
-  const repositry: IWorkRepositry = {
-    async findAll(options?:FetchOptions): Promise<WorkResponse> {
-      const response = await WorkService.instance.findAll();
-      state.value.list = response.data ?? [];
+export const useWorkStore = defineStore(TableKeys.WORK_KEY, {
+  state: (): IWorkState => ({ list: [] }),
+  getters: {},
+  actions: {
+    async findAll(options?: FetchOptions): Promise<WorkResponse> {
+      const response = await WorkService.instance.findAll(options);
+      this.list = response.data ?? [];
       return response;
     },
 
@@ -37,10 +33,5 @@ export const useWorkStore = () => {
     async delete(id: number): Promise<WorkResponse> {
       throw new Error("Method not implemented.");
     },
-  };
-
-  return {
-    ...toRefs(state.value), // reactive list
-    ...repositry, // auto-includes all functions
-  };
-};
+  },
+});
