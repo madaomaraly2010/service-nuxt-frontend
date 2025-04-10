@@ -9,7 +9,7 @@
     <div class="row">
       <q-card-section style="width: 70vw" class="q-pa-none q-ma-none">
         <base-table
-          :rows="rowList"
+          :rows="store.list"
           style="height: 50vh"
           :columns="theColumns"
           flat
@@ -151,7 +151,7 @@ const selectedRequest: Ref<RequestCustomer | undefined> =
   ref<RequestCustomer>();
 const store = useRequestCustomerStore();
 await store.findAll();
-const rowList: RequestCustomer[] = store.list.value;
+
 const nuxtApp = useNuxtApp();
 // const selectedTime: Ref<"today" | "last_week" | "last_month"> = ref("today");
 // const selectedRequestStatus: Ref<RequestStatusEnum> = ref<RequestStatusEnum>(

@@ -7,7 +7,7 @@
   <div>
     <q-select
       v-model="selectedWork"
-      :options="rowList"
+      :options="workStore.list"
       option-label="arb_name"
       option-value="id"
       outlined
@@ -28,7 +28,6 @@ import { useWorkStore } from "~/Data/Stores/useWorkStore";
 
 const workStore = useWorkStore();
 const providerStore = useProviderStore();
-const rowList: Work[] = workStore.list.value;
 
 const globalStore = useGlobalStore();
 
