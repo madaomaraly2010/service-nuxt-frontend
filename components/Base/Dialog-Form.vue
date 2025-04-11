@@ -60,35 +60,14 @@
 
 <script setup lang="ts">
 import { useGlobalStore } from "~/Data/Stores";
+import type { IBaseDialogProps } from "~/common/common-types";
 //====
 // import { defineProps, defineEmits, ref, defineExpose } from "vue";
 const globalStore = useGlobalStore();
 // Props for customization
 
-interface IDialogPropType {
-  formRef: Ref;
-  title?: string;
-  subtitle?: string;
-
-  icon?: string;
-  minWidth?: string;
-  maxWidth?: string;
-
-  width?: string;
-  height?: string;
-  maxHeight?: string;
-
-  persistent?: boolean;
-  closable?: boolean;
-  transitionShow?: string;
-  transitionHide?: string;
-}
 // //@ts-ignore
-const props = defineProps<IDialogPropType>();
-
-// onMounted(() => {
-//   console.log("props.formRef", props.width);
-// });
+const props = defineProps<IBaseDialogProps>();
 
 const emit = defineEmits(["save", "cancel", "close"]);
 const isOpen = ref(false);

@@ -14,10 +14,10 @@
           <q-btn
             class="cursor-pointer"
             v-if="showSaveButton"
-            :loading="saveLoading"
+            :loading="loading"
             :label="getSaveLabel"
             color="blue-8"
-            @click="handleSave"
+            @click="handleSave()"
           />
           <q-btn
             class="cursor-pointer q-mx-sm"
@@ -61,7 +61,7 @@ const props = withDefaults(defineProps<IBaseFormProps>(), {
   saveLoading: false,
 });
 const qFormRef: Ref<QForm | undefined> = ref();
-
+const loading = ref(false);
 const getSaveLabel = computed(
   () => props.saveLabel || nuxtApp.$t("global.save")
 );
@@ -80,7 +80,15 @@ const handleSave = async () => {
     //     position: "top",
     //   });
     // }
-    emit("save");
+    //emit("save");
+    loading.value = true;
+    const sleep = (ms: number) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
+    await sleep(3000); //
+    await props.onSave?.();
+    loading.value = false;
+    debugger;
+    props.dialogRef?.close();
   }
 };
 const handleCancel = () => {

@@ -9,6 +9,9 @@
       <q-card class="q-pa-md">
         <q-card-section class="text-h6 text-primary">
           <RequestCustomerRequestDetailsForm
+            :show-save-button="true"
+            :show-cancel-button="true"
+            :save-label="'OK'"
             :dialog-ref="baseDialogRef"
             ref="requestFormRef"
             :request-customer="requestCustomer"

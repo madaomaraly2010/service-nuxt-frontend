@@ -1,5 +1,5 @@
 <template>
-  <BaseForm @save="onSave" :save-loading="loading" v-bind="props">
+  <BaseForm :on-save="onSave" v-bind="properties">
     <div class="row items-center" :dir="globalStore.direction">
       <div class="col-4 row items-center q-col-gutter-none">
         <div class="col-4 text-grey-8 text-subtitle1">
@@ -60,6 +60,7 @@
           <BaseNumberInput
             v-model="requestCustomer.down_payment"
             :show-currency="true"
+            :min="0"
             currency="SR"
           ></BaseNumberInput>
         </div>
@@ -125,6 +126,11 @@ const onSave = async () => {
   await requestStore.update(props.requestCustomer);
   loading.value = false;
 };
+const properties = computed(
+  (): IRequestDetailsFormProps => ({
+    ...props,
+  })
+);
 </script>
 
 <style scoped>

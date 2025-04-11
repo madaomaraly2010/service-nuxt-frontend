@@ -7,8 +7,8 @@
       <!-- @submit="doLogin" -->
       <q-card-section>
         <base-form
-          :save-loading="loading"
-          @save="doLogin"
+          
+          :on-save="doLogin"
           :save-label="$t('login.submit')"
           :show-cancel-button="false"
           ref="loginForm"
