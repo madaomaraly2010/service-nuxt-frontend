@@ -29,7 +29,15 @@ export const useRequestCustomerStore = defineStore(
       },
 
       async update(row: RequestCustomer): Promise<RequestCustomerResponse> {
-        throw new Error("Method not implemented.");
+        const response = await RequestCustomerService.instance.update(row);
+        if (!response.success) return response;
+
+        const index = this.list.findIndex((item) => item.id === row.id);
+
+        if (index !== -1 && Array.isArray(response.data)) {
+          this.list[index] = response.data[0]; // update the specific item
+        }
+        return response;
       },
 
       async delete(id: number): Promise<RequestCustomerResponse> {

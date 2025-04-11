@@ -9,6 +9,7 @@
       <q-card class="q-pa-md">
         <q-card-section class="text-h6 text-primary">
           <RequestCustomerRequestDetailsForm
+            :dialog-ref="baseDialogRef"
             ref="requestFormRef"
             :request-customer="requestCustomer"
           ></RequestCustomerRequestDetailsForm>
@@ -20,7 +21,7 @@
 
 <script setup lang="ts">
 import { RequestCustomer } from "~/Data/Models";
-const baseDialogRef = ref(null);
+const baseDialogRef = ref();
 const requestFormRef = ref();
 defineProps({
   requestCustomer: {

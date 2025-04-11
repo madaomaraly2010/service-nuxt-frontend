@@ -18,7 +18,7 @@ export abstract class BaseModelService<ModelType>
 {
   abstract get getFetchKey(): string;
 
-  findAll(): Promise<ModelResponse<ModelType>> {
+  findAll(options: FetchOptions): Promise<ModelResponse<ModelType>> {
     throw new Error("Method not implemented.");
   }
   findOne(id: number): Promise<ModelResponse<ModelType>> {
@@ -33,6 +33,67 @@ export abstract class BaseModelService<ModelType>
   delete(id: number): Promise<ModelResponse<ModelType>> {
     throw new Error("Method not implemented.");
   }
+  async serverUpdateRow(
+    cls: ModelType,
+    url: string,
+    row: any,
+    {
+      queryStrings,
+      options,
+    }: {
+      queryStrings?: any;
+      options?: FetchOptions;
+    } = {}
+  ): Promise<ModelResponse<ModelType>> {
+    let jsonRow = "toDbRow" in row ? row.toDbRow() : "";
+    return this.fetchData(cls as any, url, {
+      queryStrings,
+      method: "PATCH",
+      options,
+      body: jsonRow,
+    });
+  }
+
+  async serverCreateRow(
+    cls: ModelType,
+    url: string,
+    row: any,
+    {
+      queryStrings,
+      options,
+    }: {
+      queryStrings?: any;
+      options?: FetchOptions;
+    } = {}
+  ): Promise<ModelResponse<ModelType>> {
+    let jsonRow = "toDbRow" in row ? row.toDbRow() : "";
+    return this.fetchData(cls as any, url, {
+      queryStrings,
+      method: "POST",
+      options,
+      body: jsonRow,
+    });
+  }
+
+  async serverDeleteRow(
+    cls: ModelType,
+    url: string,
+    id: number,
+    {
+      queryStrings,
+      options,
+    }: {
+      queryStrings?: any;
+      options?: FetchOptions;
+    } = {}
+  ): Promise<ModelResponse<ModelType>> {
+    return this.fetchData(cls as any, `${url}/${id}`, {
+      queryStrings,
+      method: "DELETE",
+      options,
+    });
+  }
+
   async fetchData(
     cls: ModelType,
     url: string,
@@ -40,10 +101,12 @@ export abstract class BaseModelService<ModelType>
       queryStrings,
       method,
       options,
+      body,
     }: {
       queryStrings?: any;
       method?: "GET" | "HEAD" | "PATCH" | "POST" | "PUT" | "DELETE";
       options?: FetchOptions;
+      body?: any;
     }
   ): Promise<ModelResponse<ModelType>> {
     //callStaticMethod(cls as any, "callStaticMethod");
@@ -72,6 +135,7 @@ export abstract class BaseModelService<ModelType>
           method,
           query: queryStrings,
           key: this.getFetchKey,
+          body,
         });
         retResponse = fetchResponse;
         retError = fetchError;
@@ -83,6 +147,7 @@ export abstract class BaseModelService<ModelType>
         method,
         query: queryStrings,
         key: this.getFetchKey,
+        body,
       });
       retResponse = fetchResponse;
       retError = fetchError;
@@ -108,33 +173,5 @@ export abstract class BaseModelService<ModelType>
       response.data = list;
     }
     return response;
-
-    // throw new Error();
-
-    // console.log('(typeof Work as any)["fromDbRow"]', cls as any);
-    // let staticFuncList: any = Object.getOwnPropertyNames(cls).filter(
-    //   (prop) => typeof (cls as any)[prop] === "function"
-    // );
-    // const getFromDbRow = () =>
-    //   (staticFuncList as any[]).filter((it) => it == "fromDbRow")[0];
-    // console.log("Statis List", getFromDbRow());
-    // callStaticMethod(cls, "callStaticMethod");
-    // throw new Error();
-    // let list: Work[] = [];
-    // let { data, error } = await useFetch<WorkResponse>(
-    //   config.Work.API_WORK_GET
-    // );
-    // let response: WorkResponse = ModelResponse.fromServerResponse(data.value);
-    // if (error.value?.message) {
-    //   throw new Error(error.value?.message);
-    // }
-    // if (response.error) {
-    //   return response;
-    // }
-    // if (Array.isArray(response.data)) {
-    //   list = response.data.map((work) => Work.fromDbRow(work));
-    //   response.data = list;
-    // }
-    // return response;
   }
 }

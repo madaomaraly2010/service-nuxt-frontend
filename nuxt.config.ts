@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   // Ensures pages directory is used
   pages: true,
   ssr: false,
+  imports: {
+    dirs: ["composables", "composables/helpers", "data/stores"],
+  },
   modules: [
     "nuxt-quasar-ui",
     "@nuxtjs/i18n",
@@ -47,14 +50,13 @@ export default defineNuxtConfig({
       ],
     },
   },
-
   css: [
     "~/assets/css/global.css", // ✅ Load global styles
     "quasar/dist/quasar.css",
     "@quasar/extras/material-icons/material-icons.css",
     "@fortawesome/fontawesome-svg-core/styles.css",
     "@fortawesome/fontawesome-free/css/all.css",
-    "flag-icon-css/css/flag-icons.min.css", // ✅ corr
+    "flag-icon-css/css/flag-icons.min.css",
   ],
 
   build: {

@@ -4,9 +4,31 @@
   </QForm>
   <div class="q-my-lg"></div>
   <slot name="actions">
-    <div class="row">
-      <div class="row q-gutter-lg col-3">
-        <q-btn
+    <div class="">
+      <div class="row">
+        <q-btn-group
+          class="row col"
+          unelevated
+          :spread="!showSaveButton || !showCancelButton"
+        >
+          <q-btn
+            class="cursor-pointer"
+            v-if="showSaveButton"
+            :loading="saveLoading"
+            :label="getSaveLabel"
+            color="blue-8"
+            @click="handleSave"
+          />
+          <q-btn
+            class="cursor-pointer q-mx-sm"
+            v-if="showCancelButton"
+            :label="getCancelLabel"
+            color="red-4"
+            v-close-popup
+            @click="handleCancel"
+          />
+        </q-btn-group>
+        <!-- <q-btn
           class="col"
           v-if="showSaveButton"
           :loading="saveLoading"
@@ -21,7 +43,7 @@
           color="negative"
           v-close-popup
           @click="handleCancel"
-        />
+        /> -->
       </div>
     </div>
   </slot>
@@ -29,22 +51,14 @@
 
 <script setup lang="ts" generic="ModelType">
 import type { QForm } from "quasar";
+import type { IBaseFormProps } from "~/common/common-types";
 // import type { ModelResponse } from "~/Data/Responses/ModelResponse-Class";
 const nuxtApp = useNuxtApp();
-interface IFormPropType {
-  // onSave?: () => Promise<ModelResponse<ModelType>>;
-  showSaveButton?: boolean;
-  showCancelButton?: boolean;
-  saveLabel?: string;
-  cancelLabel?: string;
-  saveLoading?: boolean;
-}
-const props = withDefaults(defineProps<IFormPropType>(), {
+
+const props = withDefaults(defineProps<IBaseFormProps>(), {
   showCancelButton: true,
   showSaveButton: true,
   saveLoading: false,
-  //saveLabel: "save",
-  //cancelLabel: "cancel",
 });
 const qFormRef: Ref<QForm | undefined> = ref();
 
@@ -57,7 +71,6 @@ const getCancelLabel = computed(
 
 const emit = defineEmits(["save", "cancel"]);
 const handleSave = async () => {
-  debugger;
   let validated: boolean | undefined = await qFormRef.value?.validate();
   if (validated) {
     // let response: ModelResponse<ModelType> | undefined = await props.onSave?.();

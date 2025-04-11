@@ -1,5 +1,5 @@
 <template>
-  <BaseForm>
+  <BaseForm @save="onSave" :save-loading="loading" v-bind="props">
     <div class="row items-center" :dir="globalStore.direction">
       <div class="col-4 row items-center q-col-gutter-none">
         <div class="col-4 text-grey-8 text-subtitle1">
@@ -7,6 +7,7 @@
         </div>
         <div class="col-8">
           <BaseNumberInput
+            v-model="requestCustomer.month_number"
             :min="1"
             :max="12"
             :show-spin="true"
@@ -57,6 +58,7 @@
         <div class="col-7">
           <!-- <span>SR {{ requestCustomer.down_payment }}</span> -->
           <BaseNumberInput
+            v-model="requestCustomer.down_payment"
             :show-currency="true"
             currency="SR"
           ></BaseNumberInput>
@@ -67,8 +69,7 @@
           {{ $t("request_customer.fields.discount_value") }}
         </div>
         <div class="col-7">
-          <!-- <span>SR {{ requestCustomer.discountValue }}</span> -->
-          <span>SR 467374</span>
+          <span>SR {{ requestCustomer.discountValue }}</span>
         </div>
       </div>
 
@@ -79,6 +80,7 @@
         <div class="col-10">
           <!-- <span>{{ requestCustomer.discountPercent }}%</span> -->
           <BaseNumberInput
+            v-model="requestCustomer.discountPercent"
             :show-spin="true"
             :show-percent="true"
             :min="0"
@@ -110,17 +112,19 @@
 </template>
 
 <script setup lang="ts">
-/*eslint no-unused-vars: "off"*/
-import { RequestCustomer } from "~/Data/Models";
-import { useGlobalStore } from "~/Data/Stores";
+import { useGlobalStore, useRequestCustomerStore } from "~/Data/Stores";
 import { date } from "quasar";
+import type { IRequestDetailsFormProps } from "~/common/common-types";
+
 const globalStore = useGlobalStore();
-defineProps({
-  requestCustomer: {
-    type: RequestCustomer,
-    required: true,
-  },
-});
+const props = defineProps<IRequestDetailsFormProps>();
+const requestStore = useRequestCustomerStore();
+const loading = ref();
+const onSave = async () => {
+  loading.value = true;
+  await requestStore.update(props.requestCustomer);
+  loading.value = false;
+};
 </script>
 
 <style scoped>

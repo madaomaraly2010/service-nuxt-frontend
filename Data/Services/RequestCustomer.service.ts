@@ -19,12 +19,15 @@ export class RequestCustomerService
   }
 
   override get getFetchKey(): string {
-    return  TableKeys.REQUEST_CUSTOMER_KEY;
+    return TableKeys.REQUEST_CUSTOMER_KEY;
   }
-  override async findAll(options?:FetchOptions): Promise<RequestCustomerResponse> {
+  override async findAll(
+    options?: FetchOptions
+  ): Promise<RequestCustomerResponse> {
     return super.fetchData(
       RequestCustomer as any,
-      config.RequestCustomer.API_RQUEST_CUSTOMER_GET, {
+      config.RequestCustomer.API_RQUEST_CUSTOMER_GET,
+      {
         options,
       }
     );
@@ -35,14 +38,26 @@ export class RequestCustomerService
   override async create(
     row: RequestCustomer
   ): Promise<RequestCustomerResponse> {
-    throw new Error("Method not implemented.");
+    return super.serverCreateRow(
+      RequestCustomer as any,
+      config.RequestCustomer.API_RQUEST_CUSTOMER_POST,
+      row
+    );
   }
   override async update(
     row: RequestCustomer
   ): Promise<RequestCustomerResponse> {
-    throw new Error("Method not implemented.");
+    return super.serverUpdateRow(
+      RequestCustomer as any,
+      config.RequestCustomer.API_RQUEST_CUSTOMER_UPDATE,
+      row
+    );
   }
   override async delete(id: number): Promise<RequestCustomerResponse> {
-    throw new Error("Method not implemented.");
+    return super.serverDeleteRow(
+      RequestCustomer as any,
+      config.RequestCustomer.API_RQUEST_CUSTOMER_DELETE,
+      id
+    );
   }
 }

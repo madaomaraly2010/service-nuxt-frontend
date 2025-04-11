@@ -71,7 +71,7 @@ export class RequestCustomer {
     row.work_id = this.work_id;
     row.total_before_discount = this.total_before_discount;
     row.wage_amount = this.wage_amount;
-
+    row.month_number = this.month_number;
     row.down_payment = this.down_payment;
     row.payment_method = this.payment_method;
     row.package_item_id = this.package_item_id;
@@ -89,6 +89,8 @@ export class RequestCustomer {
     row.updated_at = dbRow.updated_at;
     row.provider_id = dbRow.provider_id ?? 0;
     row.work_id = dbRow.work_id ?? 0;
+
+    row.month_number = dbRow.month_number;
 
     row.wage_amount = dbRow.wage_amount ?? 0;
     row.total_before_discount = dbRow.total_before_discount;

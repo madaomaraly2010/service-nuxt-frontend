@@ -90,16 +90,18 @@
 import { ref } from "vue";
 import { QForm, useQuasar } from "quasar";
 import { ValidatorRules } from "../common/validations";
-import { useUserStore } from "../Data/Stores/useUserStore";
+import { useUserStore } from "~/Data/Stores";
+// import { useUserStore } from "../Data/Stores/useUserStore";
 const passwordRef = ref();
 // const confirmRef = ref();
 const $q = useQuasar();
 const userStore = useUserStore();
 const nuxtApp = useNuxtApp();
+
 const email = ref("madaomaraly2010@yahoo.com");
 const password = ref("12345678");
 // const confirmPassword = ref("");
-
+const uiHelper = useUIHelper();
 // const isPwd = ref(true);
 const loading = ref(false);
 const loginForm: Ref<QForm | null> = ref<QForm | null>(null);
@@ -115,16 +117,24 @@ const doLogin = async () => {
   //AppUiHelper.showErrorsIfFound(response);
 
   if (response.isAuthenticated) {
-    $q.notify({
-      message: nuxtApp.$t("messages.user_authenticated"),
-      position: "top",
-    });
+    uiHelper.showNotifyMessage(
+      nuxtApp.$t("messages.user_authenticated"),
+      "green-7"
+    );
+    // $q.notify({
+    //   message: ,
+    //   position: "top",
+    // });
   } else {
-    $q.notify({
-      message: nuxtApp.$t("messages.user_not_authenticated"),
-      position: "top",
-      color: "red-10",
-    });
+    uiHelper.showNotifyMessage(
+      nuxtApp.$t("messages.user_not_authenticated"),
+      "red-7"
+    );
+    // $q.notify({
+    //   message: nuxtApp.$t("messages.user_not_authenticated"),
+    //   position: "top",
+    //   color: "red-10",
+    // });
   }
 };
 
