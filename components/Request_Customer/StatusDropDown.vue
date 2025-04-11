@@ -16,7 +16,7 @@
 import { useRequestStatusStore } from "~/Data/Stores";
 
 const statusStore = useRequestStatusStore();
-const rowList = computed(() => statusStore.list.value);
+const rowList = computed(() => statusStore.list);
 const status = defineModel<number>();
 </script>
 

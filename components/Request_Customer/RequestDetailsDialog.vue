@@ -3,14 +3,13 @@
     <BaseDialogForm
       :form-ref="requestFormRef"
       ref="baseDialogRef"
-      width="80vw"
-      height="67vh"
+      width="50vw"
+      height="60vh"
     >
       <q-card class="q-pa-md">
         <q-card-section class="text-h6 text-primary">
           <RequestCustomerRequestDetailsForm
             ref="requestFormRef"
-            
             :request-customer="requestCustomer"
           ></RequestCustomerRequestDetailsForm>
         </q-card-section>

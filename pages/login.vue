@@ -4,13 +4,20 @@
       <q-card-section>
         <div class="text-h5 text-center">{{ $t("login.login") }}</div>
       </q-card-section>
+      <!-- @submit="doLogin" -->
       <q-card-section>
-        <q-form @submit="doLogin" ref="loginForm">
+        <base-form
+          :save-loading="loading"
+          @save="doLogin"
+          :save-label="$t('login.submit')"
+          :show-cancel-button="false"
+          ref="loginForm"
+        >
           <base-text-input
             v-model="email"
             :label="$t('user.fields.username')"
             outlined
-            :rules="[requiredValidation($t, $t('user.fields.username'))]"
+            :rules="[ValidatorRules.required($t, $t('user.fields.username'))]"
             :dense="false"
             lazy-rules
           >
@@ -21,29 +28,50 @@
           <div class="q-ma-lg"></div>
 
           <base-text-input
+            ref="passwordRef"
             :is-password="true"
             v-model="password"
             :label="$t('user.fields.password_hash')"
-            :rules="[requiredValidation($t, $t('user.fields.password_hash'))]"
+            :rules="[
+              ValidatorRules.required($t, 'user.fields.password_hash'),
+              // ValidatorRules.match(
+              //   $t,
+              //   () => confirmPassword,
+              //   'user.fields.confirm_password',
+              //   'user.fields.password_hash'
+              // ),
+            ]"
             outlined
             :dense="false"
-            lazy-rules
           >
             <template v-slot:prepend>
               <q-icon name="lock" />
             </template>
           </base-text-input>
 
-          <!-- Login Button -->
-          <q-btn
-            type="submit"
-            @click="doLogin"
-            :label="$t('login.submit')"
-            color="primary"
-            class="full-width q-mt-md"
-            :loading="loading"
-          />
-        </q-form>
+          <!-- <base-text-input
+            ref="confirmRef"
+            :is-password="true"
+            v-model="confirmPassword"
+            :label="$t('user.fields.confirm_password')"
+            @update:model-value="() => passwordRef.validate()"
+            :rules="[
+              ValidatorRules.required($t, $t('user.fields.confirm_password')),
+              ValidatorRules.match(
+                $t,
+                () => password,
+                'user.fields.confirm_password',
+                'user.fields.password_hash'
+              ),
+            ]"
+            outlined
+            :dense="false"
+          >
+            <template v-slot:prepend>
+              <q-icon name="lock" />
+            </template>
+          </base-text-input> -->
+        </base-form>
       </q-card-section>
 
       <q-card-section class="text-center">
@@ -61,22 +89,31 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { QForm, useQuasar } from "quasar";
-import { requiredValidation } from "../common/Input-Validations";
+import { ValidatorRules } from "../common/validations";
 import { useUserStore } from "../Data/Stores/useUserStore";
-
+const passwordRef = ref();
+// const confirmRef = ref();
 const $q = useQuasar();
 const userStore = useUserStore();
 const nuxtApp = useNuxtApp();
-const email = ref("");
-const password = ref("");
+const email = ref("madaomaraly2010@yahoo.com");
+const password = ref("12345678");
+// const confirmPassword = ref("");
+
 // const isPwd = ref(true);
 const loading = ref(false);
 const loginForm: Ref<QForm | null> = ref<QForm | null>(null);
 const doLogin = async () => {
-  const valid = await loginForm.value?.validate();
-  if (!valid) return;
+  loading.value = true;
+
+  await new Promise((resolve, reject) => setTimeout(resolve, 1000));
 
   let response = await userStore.login(email.value, password.value);
+
+  loading.value = false;
+  //====call AppUiHelper.showErrorsIfFound
+  //AppUiHelper.showErrorsIfFound(response);
+
   if (response.isAuthenticated) {
     $q.notify({
       message: nuxtApp.$t("messages.user_authenticated"),

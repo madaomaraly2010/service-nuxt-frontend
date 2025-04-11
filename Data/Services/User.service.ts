@@ -22,13 +22,13 @@ export class UserService
   override get getFetchKey(): string {
     return TableKeys.USER_KEY;
   }
-  async login(username: string, password: string): Promise<UserResponse> {
+  async login(email: string, password: string): Promise<UserResponse> {
     let list: User[] | undefined = [];
     const { data, error } = await useFetch<UserResponse>(
       config.User.API_PACKAGE_USER_POST_LOGIN,
       {
         body: {
-          username,
+          email,
           password,
         },
         method: "POST",

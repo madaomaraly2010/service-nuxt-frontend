@@ -42,7 +42,7 @@ export const useUserStore = defineStore(TableKeys.USER_KEY, {
         password
       );
       this.isAuthenticated = false;
-      if (response.isAuthenticated) {
+      if (response.success && response.isAuthenticated) {
         localStorage.setItem("auth", "true");
         this.isAuthenticated = true;
         this.loggedUser = response.data![0] as any;

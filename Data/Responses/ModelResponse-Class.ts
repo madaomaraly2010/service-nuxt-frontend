@@ -3,6 +3,9 @@ export class ModelResponse<ModelType> {
   error?: boolean | any;
   message?: string;
   status: number = -1;
+  isInternalServerError?: boolean;
+  isDatabaseError?: boolean;
+  success?: boolean;
 
   static deepClone(obj: any, seen = new WeakMap()) {
     if (obj === null || typeof obj !== "object") return obj;
@@ -32,6 +35,9 @@ export class ModelResponse<ModelType> {
       message: "Success",
       data: data,
       error: false,
+      isInternalServerError: false,
+      isDatabaseError: false,
+      success: true,
     };
   }
 
@@ -45,6 +51,9 @@ export class ModelResponse<ModelType> {
       message,
       data: null,
       error: error,
+      isInternalServerError: false,
+      isDatabaseError: true,
+      success: false,
     };
   }
 
@@ -57,6 +66,9 @@ export class ModelResponse<ModelType> {
       message: "Internal Server error " + message,
       data: null,
       error: error,
+      isInternalServerError: true,
+      isDatabaseError: false,
+      success: false,
     };
   }
 }

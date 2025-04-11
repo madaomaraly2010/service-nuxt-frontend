@@ -1,18 +1,18 @@
 <template>
   <q-dialog
+    class="q-pa-sm"
     v-model="isOpen"
     :persistent="persistent"
     :transition-show="transitionShow"
     :transition-hide="transitionHide"
   >
     <q-card
-      :style="{
-        maxWidth: maxWidth,
-        maxHeight: maxHeight,
-        width: width,
-        height: height,
-      }"
+      flat
       class="q-pa-sm"
+      :style="{
+        minWidth: width,
+        minHeight: height,
+      }"
     >
       <!-- Header Slot (Title & Close Button) -->
       <q-card-section
