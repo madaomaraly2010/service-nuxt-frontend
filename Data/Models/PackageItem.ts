@@ -7,7 +7,7 @@ export class PackageItem {
   created_at?: Date;
   updated_at?: Date;
   month_number!: number;
-  wage_amount!: number;
+  discount_percent!: number;
   arb_name!: string;
   eng_name!: string;
   down_payment_percent?: number;
@@ -21,7 +21,7 @@ export class PackageItem {
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
     row.month_number = this.month_number;
-    row.wage_amount = this.wage_amount;
+    row.discount_percent = this.discount_percent;
     row.package_id = this.package_id;
     row.down_payment_percent = this.down_payment_percent;
 
@@ -34,7 +34,7 @@ export class PackageItem {
     row.arb_name = dbRow.arb_name ?? "";
     row.eng_name = dbRow.eng_name ?? "";
     row.month_number = dbRow.month_number ?? -1;
-    row.wage_amount = dbRow.wage_amount ?? 0;
+    row.discount_percent = dbRow.discount_percent ?? 0;
     row.created_at = dbRow.created_at;
     row.updated_at = dbRow.updated_at;
     row.down_payment_percent = dbRow.down_payment_percent;

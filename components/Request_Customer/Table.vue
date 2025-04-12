@@ -1,11 +1,11 @@
 <template>
   <div>
     <request-customer-filter-options></request-customer-filter-options>
-    <request-customer-request-details-dialog
+    <request-customer-form-dialog
       v-if="selectedRequest"
-      :requestCustomer="selectedRequest"
+      :edit-row="selectedRequest"
       ref="dialogRef"
-    ></request-customer-request-details-dialog>
+    ></request-customer-form-dialog>
     <div class="row">
       <q-card-section style="width: 70vw" class="q-pa-none q-ma-none">
         <base-table

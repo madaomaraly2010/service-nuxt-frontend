@@ -8,7 +8,10 @@ export class Package {
   is_active?: number;
   created_at?: Date;
   updated_at?: Date;
-  wage_per_month?: number;
+
+  valid_days?: number;
+  start_date?: Date;
+  end_date?: Date;
 
   // Package hasMany PackageItem via package_id
   packageItemList!: PackageItem[];
@@ -20,7 +23,9 @@ export class Package {
     row.arb_name = this.arb_name;
     row.eng_name = this.eng_name;
     row.is_active = this.is_active;
-    row.wage_per_month = this.wage_per_month;
+    row.valid_days = this.valid_days;
+    row.start_date = this.start_date;
+    row.end_date = this.end_date;
     row.package_items = this.packageItemList.map((it) => it.toDbRow());
     return row;
   }
@@ -31,7 +36,9 @@ export class Package {
     row.arb_name = dbRow.arb_name ?? "";
     row.eng_name = dbRow.eng_name ?? "";
     row.is_active = dbRow.is_active;
-    row.wage_per_month = dbRow.wage_per_month;
+    row.valid_days = dbRow.valid_days;
+    row.start_date = dbRow.start_date;
+    row.end_date = dbRow.end_date;
     row.created_at = dbRow.created_at;
     row.updated_at = dbRow.updated_at;
     if (dbRow.package_items) {

@@ -1,4 +1,4 @@
-import type { RequestCustomer } from "~/Data/Models";
+import type { Package, RequestCustomer } from "~/Data/Models";
 
 export type TableActionType = "Add" | "Edit" | "Delete";
 
@@ -11,14 +11,8 @@ export interface IBaseFormProps {
   cancelLabel?: string;
 }
 
-export interface IRequestDetailsFormProps extends IBaseFormProps {
-  requestCustomer: RequestCustomer;
-}
-
-export interface ILoginFormProps extends IBaseFormProps {}
-
 export interface IBaseDialogProps {
-  formRef: Ref;
+  // formRef: Ref;
   title?: string;
   subtitle?: string;
 
@@ -34,4 +28,22 @@ export interface IBaseDialogProps {
   closable?: boolean;
   transitionShow?: string;
   transitionHide?: string;
+}
+
+export interface IRequestCustomerFormProps extends IBaseFormProps {
+  editRow: RequestCustomer;
+}
+
+export interface IPackageFormProps extends IBaseFormProps {
+  editRow: Package;
+}
+
+export interface ILoginFormProps extends IBaseFormProps {}
+
+export interface IRequestCustomerDialogProps extends IBaseDialogProps {
+  editRow: RequestCustomer;
+}
+
+export interface IPackageDialogProps extends IBaseDialogProps {
+  editRow: Package;
 }

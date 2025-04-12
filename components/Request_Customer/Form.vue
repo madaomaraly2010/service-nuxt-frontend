@@ -7,7 +7,7 @@
         </div>
         <div class="col-8">
           <BaseNumberInput
-            v-model="requestCustomer.month_number"
+            v-model="editRow.month_number"
             :min="1"
             :max="12"
             :show-spin="true"
@@ -20,16 +20,14 @@
         </div>
         <div class="col">
           <span>{{
-            date.formatDate(requestCustomer?.request_date, "DD/MM/YYYY")
+            date.formatDate(editRow?.request_date, "DD/MM/YYYY")
           }}</span>
         </div>
       </div>
 
       <div class="col-4 row">
         <div class="col">
-          <RequestCustomerStatusDropDown
-            v-model="requestCustomer.request_status_id"
-          >
+          <RequestCustomerStatusDropDown v-model="editRow.request_status_id">
           </RequestCustomerStatusDropDown>
         </div>
       </div>
@@ -38,13 +36,13 @@
     <div class="row items-center" :dir="globalStore.direction">
       <ProviderFullName
         class="col-4"
-        v-if="requestCustomer.provider"
-        :provider="requestCustomer.provider"
+        v-if="editRow.provider"
+        :provider="editRow.provider"
       ></ProviderFullName>
       <WorkDetails
         class="col-4"
-        v-if="requestCustomer.work"
-        :work="requestCustomer.work"
+        v-if="editRow.work"
+        :work="editRow.work"
       ></WorkDetails>
     </div>
     <QSeparator class="q-my-lg"></QSeparator>
@@ -58,7 +56,7 @@
         <div class="col-7">
           <!-- <span>SR {{ requestCustomer.down_payment }}</span> -->
           <BaseNumberInput
-            v-model="requestCustomer.down_payment"
+            v-model="editRow.down_payment"
             :show-currency="true"
             :min="0"
             currency="SR"
@@ -70,7 +68,7 @@
           {{ $t("request_customer.fields.discount_value") }}
         </div>
         <div class="col-7">
-          <span>SR {{ requestCustomer.discountValue }}</span>
+          <span>SR {{ editRow.discountValue }}</span>
         </div>
       </div>
 
@@ -81,7 +79,7 @@
         <div class="col-10">
           <!-- <span>{{ requestCustomer.discountPercent }}%</span> -->
           <BaseNumberInput
-            v-model="requestCustomer.discountPercent"
+            v-model="editRow.discountPercent"
             :show-spin="true"
             :show-percent="true"
             :min="0"
@@ -97,7 +95,7 @@
           {{ $t("request_customer.fields.total_before_discount") }}
         </div>
         <div class="col">
-          <span>SR {{ requestCustomer.total }}</span>
+          <span>SR {{ editRow.total }}</span>
         </div>
       </div>
       <div class="col-4 row q-gutter-xs border bg-green-1">
@@ -105,7 +103,7 @@
           {{ $t("request_customer.fields.net_total_amount") }}
         </div>
         <div class="col">
-          <span>SR {{ requestCustomer.wage_amount }}</span>
+          <span>SR {{ editRow.wage_amount }}</span>
         </div>
       </div>
     </div>
@@ -115,19 +113,19 @@
 <script setup lang="ts">
 import { useGlobalStore, useRequestCustomerStore } from "~/Data/Stores";
 import { date } from "quasar";
-import type { IRequestDetailsFormProps } from "~/common/common-types";
+import type { IRequestCustomerFormProps } from "~/common/common-types";
 
 const globalStore = useGlobalStore();
-const props = defineProps<IRequestDetailsFormProps>();
+const props = defineProps<IRequestCustomerFormProps>();
 const requestStore = useRequestCustomerStore();
 const loading = ref();
 const onSave = async () => {
   loading.value = true;
-  await requestStore.update(props.requestCustomer);
+  await requestStore.update(props.editRow);
   loading.value = false;
 };
 const properties = computed(
-  (): IRequestDetailsFormProps => ({
+  (): IRequestCustomerFormProps => ({
     ...props,
   })
 );

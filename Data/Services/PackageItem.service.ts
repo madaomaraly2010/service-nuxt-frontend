@@ -6,16 +6,16 @@ import type { FetchOptions } from "~/common/fetch-options";
 
 import { config } from "../UrlsConfig";
 import { BaseModelService } from "./Base.Service";
-export class PackageItemStatusService
+export class PackageItemService
   extends BaseModelService<PackageItem>
   implements IPackageItemRepositry
 {
-  static _service: PackageItemStatusService;
-  public static get instance(): PackageItemStatusService {
-    if (PackageItemStatusService._service == null) {
-      PackageItemStatusService._service = new PackageItemStatusService();
+  static _service: PackageItemService;
+  public static get instance(): PackageItemService {
+    if (PackageItemService._service == null) {
+      PackageItemService._service = new PackageItemService();
     }
-    return PackageItemStatusService._service;
+    return PackageItemService._service;
   }
 
   override get getFetchKey(): string {
@@ -24,9 +24,9 @@ export class PackageItemStatusService
   override async findAll(options?: FetchOptions): Promise<PackageItemResponse> {
     return super.fetchData(
       PackageItem as any,
-      config.PackageItem.API_PACKAGE_ITEM_GET, {
+      config.PackageItem.API_PACKAGE_ITEM_GET,
+      {
         options,
-      
       }
     );
   }

@@ -56,7 +56,11 @@ export interface IPackageAttributes {
   is_active?: number;
   created_at?: Date;
   updated_at?: Date;
-  wage_per_month?: number;
+
+  valid_days?: number;
+  start_date?: Date;
+  end_date?: Date;
+
   package_items?: IPackageItemAttributes[];
   providers?: IProviderAttributes[];
 }
@@ -66,7 +70,7 @@ export interface IPackageItemAttributes {
   created_at?: Date;
   updated_at?: Date;
   month_number?: number;
-  wage_amount?: number;
+  discount_percent?: number;
   arb_name?: string;
   eng_name?: string;
   down_payment_percent?: number;

@@ -56,6 +56,27 @@
       "confirm_password": "تأكيد كلمة المرور"
     }
   },
+
+  "package": {
+    "title": "العروض",
+    "fields": {
+      "name": "عنوان العرض",
+      "start_date": "سارى من ",
+      "end_date": "سارى إالى",
+      "valid_days": "العرض ساري عدد أيام",
+      "is_active": "نشط"
+    }
+  },
+
+  "packageitem": {
+    "title": "المستخدميين",
+    "fields": {
+      "name": "عنوان العرض",
+      "month_number": "عدد الأشهر",
+      "down_payment_percent": "نسبة العربون",
+      "discount_percent": "نسبة التخفيض"
+    }
+  },
   "login": {
     "title": "",
     "login": "دخول",
