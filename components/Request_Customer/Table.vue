@@ -146,11 +146,12 @@ import type { QTableColumn } from "quasar";
 import { useRequestCustomerStore } from "~/Data/Stores";
 import { date } from "quasar";
 import type { RequestCustomer } from "~/Data/Models";
+import { TableKeys } from "~/common/table-keys";
 const dialogRef = ref(null);
 const selectedRequest: Ref<RequestCustomer | undefined> =
   ref<RequestCustomer>();
-const store = useRequestCustomerStore();
-await store.findAll();
+const store = inject(TableKeys.PACKAGE_KEY)//;useRequestCustomerStore();
+// await store.findAll();
 
 const nuxtApp = useNuxtApp();
 // const selectedTime: Ref<"today" | "last_week" | "last_month"> = ref("today");

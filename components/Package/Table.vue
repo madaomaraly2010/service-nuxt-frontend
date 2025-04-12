@@ -84,10 +84,11 @@ import { usePackageStore } from "~/Data/Stores";
 import { date } from "quasar";
 import type { Package } from "~/Data/Models";
 import { TableKeys } from "~/common/table-keys";
+import { PackageColumns } from "~/common/table-column-names";
 const dialogRef = ref(null);
 const selectedRow: Ref<Package | undefined> = ref<Package>();
 const store = usePackageStore();
-await store.findAll();
+// await store.findAll();
 
 const nuxtApp = useNuxtApp();
 
@@ -104,7 +105,11 @@ const selectAndOpenDialog = async (req: Package) => {
 };
 const theColumns: QTableColumn[] = [
   tableHelper.createButtonColumn(nuxtApp.$t("global.details")),
-  tableHelper.createColumn(TableKeys.PACKAGE_KEY, "arb_name", "name"),
+  tableHelper.createColumn(
+    TableKeys.PACKAGE_KEY,
+    PackageColumns.arb_name,
+    "name"
+  ),
   tableHelper.createColumn(TableKeys.PACKAGE_KEY, "start_date"),
   tableHelper.createColumn(TableKeys.PACKAGE_KEY, "end_date"),
   tableHelper.createColumn(TableKeys.PACKAGE_KEY, "valid_days"),

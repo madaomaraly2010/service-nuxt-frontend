@@ -6,7 +6,7 @@
       </div>
       <div class="row">
         <div class="col offset-1">
-          <RequestCustomerTable></RequestCustomerTable>
+          <PackageTable></PackageTable>
         </div>
       </div>
     </q-page>
@@ -14,14 +14,11 @@
 </template>
 
 <script setup lang="ts">
-import { useRequestStatusStore } from "~/Data/Stores";
-import { TableKeys } from "~/common/table-keys";
+import { usePackageStore } from "~/Data/Stores";
 
-const store = useRequestStatusStore();
+const store = usePackageStore();
 
 await store.findAll();
-
-provide(TableKeys.REQUEST_CUSTOMER_KEY, store);
 </script>
 
 <style scoped></style>
