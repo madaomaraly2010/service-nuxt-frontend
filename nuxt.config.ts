@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { defineNuxtConfig } from "nuxt/config";
-
+import path from "path";
+import fs from "fs";
 export default defineNuxtConfig({
   // Ensures pages directory is used
   pages: true,
@@ -76,22 +77,50 @@ export default defineNuxtConfig({
     lazy: true,
     langDir: "../locales",
     strategy: "prefix_except_default",
+    defaultLocale: "ar",
     locales: [
       {
-        code: "en-US",
+        code: "en",
         iso: "en-US",
-        name: "English(US)",
-        file: "en-US.json",
+        file: "en/labels.json",
+        files: [...getFileList(".\\locales\\en")],
+        name: "English",
       },
       {
-        code: "ar-EG",
+        code: "ar",
         iso: "ar-EG",
-        name: "Arabic(EG)",
-        file: "ar-EG.json",
+        files: [...getFileList(".\\locales\\ar")],
+        name: "العربية",
       },
     ],
-    defaultLocale: "ar-EG",
+    // ],
+    // locales: [
+    //   {
+    //     code: "en-US",
+    //     iso: "en-US",
+    //     name: "English(US)",
+    //     file: "en-US.json",
+    //   },
+    //   {
+    //     code: "ar-EG",
+    //     iso: "ar-EG",
+    //     name: "Arabic(EG)",
+    //     file: "ar-EG.json",
+    //   },
+    // ],
   },
 
   compatibilityDate: "2025-02-19",
 });
+
+function getFileList(folderPath: string): string[] {
+  const absoluteFolderPath = path.resolve(__dirname, folderPath);
+
+  // Read all files in the folder
+  const files = fs.readdirSync(absoluteFolderPath);
+
+  // Filter and return only .json files
+  return files
+    .filter((file: string) => file.endsWith(".json"))
+    .map((file: string) => path.join(absoluteFolderPath, file));
+}

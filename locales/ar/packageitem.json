@@ -1,0 +1,11 @@
+{
+  "packageitem": {
+    "title": "المستخدميين",
+    "fields": {
+      "name": "عنوان العرض",
+      "month_number": "عدد الأشهر",
+      "down_payment_percent": "نسبة العربون",
+      "discount_percent": "نسبة التخفيض"
+    }
+  }
+}

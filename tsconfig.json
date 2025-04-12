@@ -3,6 +3,7 @@
   "extends": "./.nuxt/tsconfig.json",
   
   "compilerOptions": {
+    "resolveJsonModule": true,
     "types": ["node"],
     "module": "esnext",
     "target": "es2017",

@@ -1,0 +1,11 @@
+{
+  "login": {
+    "title": "",
+    "login": "دخول",
+    "submit": "دخول",
+    "password": "كلمة المرور",
+    "email": "البريد الإكترونى",
+    "forgetpassword": "نسيت كلمة المرور",
+    "confirm_password": "تأكيد كلمة المرور"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "items": {
+    "main": "الرئيسية",
+    "employees": "الموظفيين",
+    "customers": "العملاء",
+    "workers": "العمالة",
+    "requests": "الطلبات",
+    "logout": "خروج",
+    "settings": "الإعدادات",
+    "aboutus": "من نحن"
+  }
+}

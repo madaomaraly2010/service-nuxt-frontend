@@ -1,0 +1,16 @@
+{
+  "user": {
+    "title": "المستخدميين",
+    "fields": {
+      "first_name": "الاسم الاول",
+      "last_name": "اللقب",
+      "full_name": "اسم المستخدم",
+
+      "email": "البريد الإكترونى",
+      "mobile": "موبايل",
+      "username": "اسم المستخدم",
+      "password_hash": "كلمة المرور",
+      "confirm_password": "تأكيد كلمة المرور"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "package": {
+    "title": "العروض",
+    "fields": {
+      "name": "عنوان العرض",
+      "start_date": "سارى من ",
+      "end_date": "سارى إالى",
+      "valid_days": "العرض ساري عدد أيام",
+      "is_active": "نشط"
+    }
+  }
+}

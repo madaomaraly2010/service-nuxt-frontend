@@ -14,14 +14,11 @@
 </template>
 
 <script setup lang="ts">
-import { useRequestStatusStore } from "~/Data/Stores";
-import { TableKeys } from "~/common/table-keys";
+import { useRequestCustomerStore } from "~/Data/Stores";
 
-const store = useRequestStatusStore();
+const store = useRequestCustomerStore();
 
 await store.findAll();
-
-provide(TableKeys.REQUEST_CUSTOMER_KEY, store);
 </script>
 
 <style scoped></style>

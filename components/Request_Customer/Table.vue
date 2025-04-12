@@ -146,13 +146,14 @@ import type { QTableColumn } from "quasar";
 import { useRequestCustomerStore } from "~/Data/Stores";
 import { date } from "quasar";
 import type { RequestCustomer } from "~/Data/Models";
-import { TableKeys } from "~/common/table-keys";
+
+import { I18Provider, I18Requestcustomer, I18User } from "~/locales/i18-key";
 const dialogRef = ref(null);
 const selectedRequest: Ref<RequestCustomer | undefined> =
   ref<RequestCustomer>();
-const store = inject(TableKeys.PACKAGE_KEY)//;useRequestCustomerStore();
-// await store.findAll();
-
+const store = useRequestCustomerStore();
+await store.findAll();
+debugger;
 const nuxtApp = useNuxtApp();
 // const selectedTime: Ref<"today" | "last_week" | "last_month"> = ref("today");
 // const selectedRequestStatus: Ref<RequestStatusEnum> = ref<RequestStatusEnum>(
@@ -179,7 +180,7 @@ const theColumns: QTableColumn[] = [
   },
   {
     name: "id",
-    label: nuxtApp.$t("request_customer.fields.id"),
+    label: nuxtApp.$t(I18Requestcustomer.Fields.id),
     field: "id",
     sortable: true,
     headerClasses: "bg-grey-3",
@@ -188,7 +189,7 @@ const theColumns: QTableColumn[] = [
   },
   {
     name: "request_date",
-    label: nuxtApp.$t("request_customer.fields.request_date"),
+    label: nuxtApp.$t(I18Requestcustomer.Fields.request_date),
     field: "request_date",
     sortable: true,
     headerClasses: "bg-grey-3",
@@ -198,7 +199,7 @@ const theColumns: QTableColumn[] = [
 
   {
     name: "provider_fullname",
-    label: nuxtApp.$t("request_customer.fields.provider_fullname"),
+    label: nuxtApp.$t(I18Requestcustomer.Fields.provider_fullname),
     field: "provider_id",
     sortable: true,
     headerClasses: "bg-grey-3",
@@ -208,7 +209,8 @@ const theColumns: QTableColumn[] = [
 
   {
     name: "provider_work",
-    label: nuxtApp.$t("provider.fields.work_id"),
+    label: nuxtApp.$t(I18Provider.Fields.work_id),
+
     field: "work_id",
     headerClasses: "bg-grey-3",
     headerStyle: "font-weight:bold;color:grey;font-size:medium",
@@ -217,7 +219,7 @@ const theColumns: QTableColumn[] = [
   },
   {
     name: "user_fullname",
-    label: nuxtApp.$t("request_customer.fields.user_fullname"),
+    label: nuxtApp.$t(I18Requestcustomer.Fields.user_fullname),
     field: "user_id",
     headerClasses: "bg-grey-3",
     headerStyle: "font-weight:bold;color:grey;font-size:medium",
@@ -227,7 +229,7 @@ const theColumns: QTableColumn[] = [
 
   {
     name: "user_mobile",
-    label: nuxtApp.$t("user.fields.mobile"),
+    label: nuxtApp.$t(I18User.Fields.mobile),
     field: "user_id",
     sortable: true,
     headerClasses: "bg-grey-3",
@@ -244,7 +246,7 @@ const theColumns: QTableColumn[] = [
 
   {
     name: "request_status_id",
-    label: nuxtApp.$t("request_customer.fields.request_status"),
+    label: nuxtApp.$t(I18Requestcustomer.Fields.request_status),
     field: "request_status_id",
     sortable: true,
     headerClasses: "bg-grey-3",

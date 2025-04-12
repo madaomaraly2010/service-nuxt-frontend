@@ -1,0 +1,10 @@
+{
+  "messages": {
+    "loading_data": "جارى تحميل البيانات...",
+    "user_authenticated": "المستخدم تم التحقق من هويته.",
+    "user_not_authenticated": "خطأ فى اسم المستخدم أو كلمة المرور",
+    "greater_than_max": "يجب الا تزيد القيمة عن {val}",
+    "less_than_min": "يجب الا تقل القيمة عن {val}",
+    "operation_successed": "تمت العملية بنجاح"
+  }
+}
