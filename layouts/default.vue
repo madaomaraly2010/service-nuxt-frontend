@@ -201,6 +201,7 @@
 import { ref } from "vue";
 import { useGlobalStore, useUserStore, useMessageStore } from "../Data/Stores";
 import type { Message } from "~/Data/Models/Message";
+import { I18Drawer } from "~/locales/i18-key";
 const globalStore = useGlobalStore();
 const userStore = useUserStore();
 const messageStore = useMessageStore();
@@ -239,54 +240,49 @@ const gotoPage = (item: any) => {
   useRouter().push("/" + item.page);
 };
 const app = useNuxtApp();
-// const gotoAbout = () => {
-//   // nuxtApp.$router.push("/about");
-//   nuxtApp.$q.lang.rtl = !nuxtApp.$q.lang.rtl;
-// };
-// const drawerItems = [
-//   { icon: "", text: app.$t("drawer.items.main") },
-//   { icon: "", text: app.$t("drawer.items.employees") },
-//   { icon: "", text: app.$t("drawer.items.workers") },
-//   { icon: "", text: app.$t("drawer.items.customers") },
-//   { icon: "", text: app.$t("drawer.items.requests") },
-//   { icon: "", text: app.$t("drawer.items.exit") },
-//   { icon: "", text: app.$t("drawer.items.aboutus") },
-// ];
+
 const drawerItems = [
   {
     icon: "home",
-    text: app.$t("drawer.items.main"),
+    text: app.$t(I18Drawer.Items.main),
     page: "RequestCustomerPage",
   }, // Home icon for main
   {
     icon: "account-tie",
-    text: app.$t("drawer.items.employees"),
+    text: app.$t(I18Drawer.Items.employees),
     page: "RequestCustomerPage",
   }, // Suit-tie for employees
   {
     icon: "worker",
-    text: app.$t("drawer.items.workers"),
+    text: app.$t(I18Drawer.Items.workers),
     page: "RequestCustomerPage",
   }, // Worker icon
   {
     icon: "mdi-account-group",
-    text: app.$t("drawer.items.customers"),
+    text: app.$t(I18Drawer.Items.customers),
     page: "RequestCustomerPage",
-  }, // Group icon for customers
+  },
+  // Group icon for customers
   {
     icon: "mdi-file-document",
-    text: app.$t("drawer.items.requests"),
+    text: app.$t(I18Drawer.Items.packages),
+    page: "RequestCustomerPage",
+  }, // Document icon for requests
+
+  {
+    icon: "mdi-file-document",
+    text: app.$t(I18Drawer.Items.requests),
     page: "RequestCustomerPage",
   }, // Document icon for requests
 
   {
     icon: "mdi-information",
-    text: app.$t("drawer.items.settings"),
+    text: app.$t(I18Drawer.Items.aboutus),
     page: "RequestCustomerPage",
   }, // Info icon for About Us
   {
     icon: "mdi-logout",
-    text: app.$t("drawer.items.logout"),
+    text: app.$t(I18Drawer.Items.logout),
     page: "RequestCustomerPage",
   }, // Logout icon for exit
 ];
