@@ -1,14 +1,22 @@
+import type { QTableProps } from "quasar";
 import type { Package, RequestCustomer } from "~/Data/Models";
 
 export type TableActionType = "Add" | "Edit" | "Delete";
 
 export interface IBaseFormProps {
   onSave?: () => Promise<void>;
+  isNew?: boolean;
   dialogRef?: any;
   showSaveButton?: boolean;
   showCancelButton?: boolean;
   saveLabel?: string;
   cancelLabel?: string;
+}
+
+export interface IBaseTableProps extends QTableProps {
+  showActions?: boolean;
+  showToolbar?: boolean;
+  showCreateButton?: boolean;
 }
 
 export interface IBaseDialogProps {

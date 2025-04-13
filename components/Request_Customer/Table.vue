@@ -9,6 +9,13 @@
     <div class="row">
       <q-card-section style="width: 70vw" class="q-pa-none q-ma-none">
         <base-table
+          @on-create-button-clicked="
+            () => {
+              console.log('Create button clicked');
+            }
+          "
+          :showToolbar="true"
+          :showCreateButton="true"
           :rows="store.list"
           style="height: 50vh"
           :columns="theColumns"
@@ -152,13 +159,9 @@ const dialogRef = ref(null);
 const selectedRequest: Ref<RequestCustomer | undefined> =
   ref<RequestCustomer>();
 const store = useRequestCustomerStore();
-await store.findAll();
-debugger;
+
 const nuxtApp = useNuxtApp();
-// const selectedTime: Ref<"today" | "last_week" | "last_month"> = ref("today");
-// const selectedRequestStatus: Ref<RequestStatusEnum> = ref<RequestStatusEnum>(
-//   RequestStatusEnum.All
-// );
+
 const pagination = ref({
   page: 1,
   rowsPerPage: 20, // Control number of rows per page
@@ -254,27 +257,6 @@ const theColumns: QTableColumn[] = [
     align: "left",
   },
 ];
-
-// const getRequestStatusName = (status: number): string => {
-//   switch (status) {
-//     case RequestStatusEnum.PENDING:
-//       return nuxtApp.$t("request_customer.fields.pending");
-//     case RequestStatusEnum.APPROVED:
-//       return nuxtApp.$t("request_customer.fields.approved");
-//     case RequestStatusEnum.IN_PROGRESS:
-//       return nuxtApp.$t("request_customer.fields.inprogress");
-//     case RequestStatusEnum.COMPLETED:
-//       return nuxtApp.$t("request_customer.fields.completed");
-//     case RequestStatusEnum.CANCELLED:
-//       return nuxtApp.$t("request_customer.fields.cancelled");
-//     case RequestStatusEnum.REJECTED:
-//       return nuxtApp.$t("request_customer.fields.rejected");
-//     case RequestStatusEnum.EXPIRED:
-//       return nuxtApp.$t("request_customer.fields.expired");
-//     default:
-//       return "Unknown";
-//   }
-// };
 </script>
 
 <style lang="css"></style>

@@ -32,12 +32,24 @@ export class PackageService
     throw new Error("Method not implemented.");
   }
   override async create(row: Package): Promise<PackageResponse> {
-    throw new Error("Method not implemented.");
+    return super.serverCreateRow(
+      Package as any,
+      config.Package.API_PACKAGE_POST,
+      row
+    );
   }
   override async update(row: Package): Promise<PackageResponse> {
-    throw new Error("Method not implemented.");
+    return super.serverUpdateRow(
+      Package as any,
+      config.Package.API_PACKAGE_UPDATE,
+      row
+    );
   }
   override async delete(id: number): Promise<PackageResponse> {
-    throw new Error("Method not implemented.");
+    return super.serverDeleteRow(
+      Package as any,
+      config.Package.API_PACKAGE_DELETE,
+      id
+    );
   }
 }

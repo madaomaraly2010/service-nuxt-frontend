@@ -2,7 +2,6 @@
   <div>
     <BaseDialogForm
       v-bind="properties"
-      :form-ref="formRef"
       ref="baseDialogRef"
       width="50vw"
       height="60vh"
@@ -28,12 +27,6 @@ import type { IPackageDialogProps } from "~/common/common-types";
 const baseDialogRef = ref();
 const formRef = ref();
 
-// {
-//   requestCustomer: {
-//     type: RequestCustomer,
-//     required: true,
-//   },
-// }
 const props = defineProps<IPackageDialogProps>();
 //@ts-ignore
 const open = () => {
@@ -47,7 +40,6 @@ defineExpose({
 const properties = computed(
   (): IPackageDialogProps => ({
     ...props,
-    
   })
 );
 </script>

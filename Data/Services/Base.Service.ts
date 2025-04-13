@@ -30,6 +30,13 @@ export abstract class BaseModelService<ModelType>
   update(row: ModelType): Promise<ModelResponse<ModelType>> {
     throw new Error("Method not implemented.");
   }
+  save(row: ModelType & { id?: number }): Promise<ModelResponse<ModelType>> {
+    if (row.id) {
+      return this.update(row);
+    } else {
+      return this.create(row);
+    }
+  }
   delete(id: number): Promise<ModelResponse<ModelType>> {
     throw new Error("Method not implemented.");
   }

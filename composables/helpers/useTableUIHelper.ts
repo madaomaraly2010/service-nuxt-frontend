@@ -15,16 +15,18 @@ export const useTableHelper = () => {
   const createColumn = (
     tableName: string,
     fieldName: string,
+    label: string,
     columnName?: string,
     i18Name?: string,
     options?: QTableColumn
   ): QTableColumn => {
     let _colName = columnName ?? fieldName;
-    let _i18Name = i18Name ?? fieldName ?? columnName;
+    // let _i18Name = i18Name ?? fieldName ?? columnName;
 
     return {
       name: `${_colName}`,
-      label: nuxtApp.$t(`${tableName}.fields.${_i18Name}`),
+      // label: nuxtApp.$t(`${tableName}.fields.${_i18Name}`),
+      label,
       field: `${fieldName}`,
       sortable: true,
       headerClasses: "bg-grey-3",

@@ -49,18 +49,21 @@
 </template>
 
 <script setup lang="ts">
+import type { PackageResponse } from "~/Data/Responses/Model-Responses";
 import { useGlobalStore, usePackageStore } from "~/Data/Stores";
 // import { date } from "quasar";
 import type { IPackageFormProps } from "~/common/common-types";
+import { I18Messages } from "~/locales/i18-key";
 
 const globalStore = useGlobalStore();
 const props = defineProps<IPackageFormProps>();
 const store = usePackageStore();
-const loading = ref();
+const uiHelper = useUIHelper();
 const onSave = async () => {
-  loading.value = true;
-  await store.update(props.editRow);
-  loading.value = false;
+  let response: PackageResponse = await store.save(props.editRow);
+  if (response.success) {
+    uiHelper.showNotifyMessage(I18Messages.operation_successed);
+  }
 };
 const properties = computed(
   (): IPackageFormProps => ({

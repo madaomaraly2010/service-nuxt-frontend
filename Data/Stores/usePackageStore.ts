@@ -30,6 +30,22 @@ export const usePackageStore = defineStore(TableKeys.PACKAGE_KEY, {
       throw new Error("Method not implemented.");
     },
 
+    async save(row: Package): Promise<PackageResponse> {
+      let isNew: boolean = row.id == null || row.id == undefined;
+      const response = await PackageService.instance.save(row);
+      if (response.success) {
+        if (isNew) {
+          this.list.push(row);
+        } else {
+          const index = this.list.findIndex((item) => item.id === row.id);
+          if (index !== -1) {
+            this.list[index] = row;
+          }
+        }
+      }
+      return response;
+    },
+
     async delete(id: number): Promise<PackageResponse> {
       throw new Error("Method not implemented.");
     },
