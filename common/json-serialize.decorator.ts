@@ -27,7 +27,7 @@ export function JsonKey(options: JsonKeyOptions = {}) {
   };
 }
 
-export function Serializable<T extends { new (...args: any[]): {} }>(): (
+export function JsonSerializable<T extends { new (...args: any[]): {} }>(): (
   constructor: T
 ) => void {
   return function (constructor: T): void {

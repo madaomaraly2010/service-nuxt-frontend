@@ -1,4 +1,4 @@
-import { JsonKey, Serializable } from "~/common/json-serialize.decorator";
+import { JsonKey, JsonSerializable } from "~/common/json-serialize.decorator";
 import {
   ChildStatus,
   Package,
@@ -12,7 +12,7 @@ import {
 import type { IProviderAttributes } from "../Models-Row-Attributes";
 import { LangStatus } from "./LangStatus";
 
-@Serializable()
+@JsonSerializable()
 export class Provider {
   @JsonKey()
   id!: number;
@@ -94,33 +94,39 @@ export class Provider {
   @JsonKey({
     type: () => ChildStatus,
     name: "child_status",
+    includeToDbRow: false,
   })
   childStatus?: ChildStatus;
   // Provider belongsTo CookStatus via cook_status
   @JsonKey({
     type: () => CookStatus,
     name: "cook_status",
+    includeToDbRow: false,
   })
   cookStatus?: CookStatus;
   // Provider belongsTo Country via country_id
   @JsonKey({
     type: () => Country,
+    includeToDbRow: false,
   })
   country?: Country;
   // Provider belongsTo LangStatus via arabic_status
   @JsonKey({
     type: () => LangStatus,
     name: "arabic_status",
+    includeToDbRow: false,
   })
   arabicStatus?: LangStatus;
   // Provider belongsTo LangStatus via english_status
   @JsonKey({
     type: () => LangStatus,
     name: "english_status",
+    includeToDbRow: false,
   })
   englishStatus?: LangStatus;
   @JsonKey({
     type: () => Package,
+    includeToDbRow: false,
   })
   package?: Package;
 
@@ -128,6 +134,7 @@ export class Provider {
   @JsonKey({
     type: () => RequestCustomer,
     name: "request_customers",
+    includeToDbRow: false,
   })
   requestCustomerList!: RequestCustomer[];
 
@@ -135,17 +142,20 @@ export class Provider {
   @JsonKey({
     type: () => ReligionStatus,
     name: "religion_status",
+    includeToDbRow: false,
   })
   religionStatus!: ReligionStatus;
   // Provider belongsTo User via user_id
   @JsonKey({
     type: () => User,
+    includeToDbRow: false,
   })
   user!: User;
 
   // Provider belongsTo WorkCategory via work_id
   @JsonKey({
     type: () => Work,
+    includeToDbRow: false,
   })
   work!: Work;
 

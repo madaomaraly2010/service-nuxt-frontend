@@ -82,9 +82,10 @@ const handleSave = async () => {
     // }
     //emit("save");
     loading.value = true;
+    //@ts-ignore
     const sleep = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
-    await sleep(3000); //
+    //await sleep(3000); //
     await props.onSave?.();
     loading.value = false;
     debugger;

@@ -1,8 +1,8 @@
-import { JsonKey, Serializable } from "~/common/json-serialize.decorator";
+import { JsonKey, JsonSerializable } from "~/common/json-serialize.decorator";
 import { Provider, WorkCategory } from ".";
 import type { IWorkAttributes } from "../Models-Row-Attributes";
 
-@Serializable()
+@JsonSerializable()
 export class Work {
   @JsonKey()
   id!: number;

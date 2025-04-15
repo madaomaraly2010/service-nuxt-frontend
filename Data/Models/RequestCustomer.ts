@@ -1,4 +1,4 @@
-import { JsonKey, Serializable } from "~/common/json-serialize.decorator";
+import { JsonKey, JsonSerializable } from "~/common/json-serialize.decorator";
 import {
   PackageItem,
   Provider,
@@ -9,7 +9,7 @@ import {
 } from ".";
 import type { IRequestCustomerAttributes } from "../Models-Row-Attributes";
 import { RequestAttach } from "./RequestAttach";
-@Serializable()
+@JsonSerializable()
 export class RequestCustomer {
   @JsonKey()
   id!: number;
