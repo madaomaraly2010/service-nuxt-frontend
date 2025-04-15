@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface IRequestStatusState {
   list: RequestStatus[];
 }
+export type RequestStatusStoreType = ReturnType<typeof useRequestStatusStore>;
 
 export const useRequestStatusStore = defineStore(TableKeys.REQUEST_STATUS_KEY, {
   state: (): IRequestStatusState => ({ list: [] }),

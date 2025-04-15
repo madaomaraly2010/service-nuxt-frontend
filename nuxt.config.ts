@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     "nuxt-echarts",
     "@vueuse/motion/nuxt",
     "@pinia/nuxt",
+    "nuxt-lodash",
   ],
   devtools: { enabled: true },
 

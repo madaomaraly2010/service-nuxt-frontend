@@ -13,10 +13,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useRequestStatusStore } from "~/Data/Stores";
+import type { RequestStatusStoreType } from "~/Data/Stores/useRequestStatusStore";
+import { TableKeys } from "~/common/table-keys";
 
-const statusStore = useRequestStatusStore();
-const rowList = computed(() => statusStore.list);
+// const statusStore = useRequestStatusStore();
+const statusStore = inject<RequestStatusStoreType>(
+  TableKeys.REQUEST_STATUS_KEY
+);
+console.log("statusStore from dropdown", statusStore);
+const rowList = computed(() => statusStore?.list);
 const status = defineModel<number>();
 </script>
 

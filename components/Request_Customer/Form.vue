@@ -113,14 +113,22 @@
 </template>
 
 <script setup lang="ts">
-import { useGlobalStore, useRequestCustomerStore } from "~/Data/Stores";
+import {
+  useGlobalStore,
+  useRequestCustomerStore,
+  type RequestStatusStoreType,
+} from "~/Data/Stores";
 import { date } from "quasar";
 import type { IRequestCustomerFormProps } from "~/common/common-types";
 import { I18Requestcustomer } from "~/locales/i18-key";
+import { TableKeys } from "~/common/table-keys";
 
 const globalStore = useGlobalStore();
 const props = defineProps<IRequestCustomerFormProps>();
 const requestStore = useRequestCustomerStore();
+
+inject<RequestStatusStoreType>(TableKeys.REQUEST_STATUS_KEY);
+
 const loading = ref();
 const onSave = async () => {
   loading.value = true;

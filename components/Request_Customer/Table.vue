@@ -153,7 +153,7 @@ import type { QTableColumn } from "quasar";
 import { useRequestCustomerStore } from "~/Data/Stores";
 import { date } from "quasar";
 import type { RequestCustomer } from "~/Data/Models";
-
+import cloneDeep from "lodash/cloneDeep";
 import { I18Provider, I18Requestcustomer, I18User } from "~/locales/i18-key";
 const dialogRef = ref(null);
 const selectedRequest: Ref<RequestCustomer | undefined> =
@@ -167,7 +167,7 @@ const pagination = ref({
   rowsPerPage: 20, // Control number of rows per page
 });
 const selectAndOpenDialog = async (req: RequestCustomer) => {
-  selectedRequest.value = req;
+  selectedRequest.value = cloneDeep(req);
   await nextTick();
   //@ts-ignore
   dialogRef?.value.open();

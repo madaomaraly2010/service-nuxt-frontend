@@ -9,24 +9,46 @@ import { useCookStatusStore } from "./useCookStatusStore";
 import { useReligionStatusStore } from "./useReligionStatusStore";
 import { useCountryStore } from "./useCountryStore";
 import { useRequestStatusStore } from ".";
+import { TableKeys } from "~/common/table-keys";
 
-interface ILookupState {}
+interface ILookupState {
+  workCategoryStore: any;
+  workStore: any;
+  langStore: any;
+  childStore: any;
+  rentStore: any;
+  cookStore: any;
+  religionStore: any;
+  countryStore: any;
+  statusStore: any;
+}
 
-export const useLookupStore = () => {
-  const state = useState<ILookupState>("lookups", () => ({}));
-  const workCategoryStore = useWorkCategoryStore();
-  const workStore = useWorkStore();
-  const langStore = useLangStatusStore();
-  const childStore = useChildStatusStore();
-  const rentStore = useRentStatusStore();
-  const cookStore = useCookStatusStore();
-  const religionStore = useReligionStatusStore();
-  const countryStore = useCountryStore();
-  const statusStore = useRequestStatusStore();
-
-  const actions = {
+export const useLookupStore = defineStore("lookups", {
+  state: (): ILookupState => ({
+    workCategoryStore: useWorkCategoryStore(),
+    workStore: any,
+    langStore: any,
+    childStore: any,
+    rentStore: any,
+    cookStore: any,
+    religionStore: any,
+    countryStore: any,
+    statusStore: any,
+  }),
+  getters: {},
+  actions: {
     async fetchAllLookups(): Promise<void> {
       // Uncomment these when the methods are implemented
+
+      workCategoryStore = useWorkCategoryStore();
+      workStore = useWorkStore();
+      langStore = useLangStatusStore();
+      childStore = useChildStatusStore();
+      rentStore = useRentStatusStore();
+      cookStore = useCookStatusStore();
+      religionStore = useReligionStatusStore();
+      countryStore = useCountryStore();
+      statusStore = useRequestStatusStore();
       await workCategoryStore.findAll();
       await workStore.findAll();
       await langStore.findAll();
@@ -36,6 +58,9 @@ export const useLookupStore = () => {
       await religionStore.findAll();
       await countryStore.findAll();
       await statusStore.findAll();
+
+      provide(TableKeys.REQUEST_STATUS_KEY, statusStore);
+
       console.log("workCategoryStore", workCategoryStore.list);
       console.log("workStore", workStore.list);
       console.log("langStore", langStore.list);
@@ -45,10 +70,5 @@ export const useLookupStore = () => {
       console.log("religionStore", religionStore.list);
       console.log("countryStore", countryStore.list);
     },
-  };
-
-  return {
-    ...state.value, // still reactive if you add properties later
-    ...actions,
-  };
-};
+  },
+});
