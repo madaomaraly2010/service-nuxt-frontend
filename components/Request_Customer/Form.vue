@@ -3,7 +3,7 @@
     <div class="row items-center" :dir="globalStore.direction">
       <div class="col-4 row items-center q-col-gutter-none">
         <div class="col-4 text-grey-8 text-subtitle1">
-          {{ $t("request_customer.fields.month_number") }}
+          {{ $t(I18Requestcustomer.Fields.month_number) }}
         </div>
         <div class="col-8">
           <BaseNumberInput
@@ -16,7 +16,7 @@
       </div>
       <div class="col-4 row">
         <div class="col text-grey-8 text-subtitle1">
-          {{ $t("request_customer.fields.request_date") }}
+          {{ $t(I18Requestcustomer.Fields.request_date) }}
         </div>
         <div class="col">
           <span>{{
@@ -51,7 +51,7 @@
     <div class="row items-center" :dir="globalStore.direction">
       <div class="col-4 row">
         <div class="col-2 text-grey-8 text-subtitle1">
-          {{ $t("request_customer.fields.down_payment") }}
+          {{ $t(I18Requestcustomer.Fields.down_payment) }}
         </div>
         <div class="col-7">
           <!-- <span>SR {{ requestCustomer.down_payment }}</span> -->
@@ -59,13 +59,14 @@
             v-model="editRow.down_payment"
             :show-currency="true"
             :min="0"
+            :max="10000000"
             currency="SR"
           ></BaseNumberInput>
         </div>
       </div>
       <div class="col-4 row">
         <div class="col-3 text-grey-8 text-subtitle1">
-          {{ $t("request_customer.fields.discount_value") }}
+          {{ $t(I18Requestcustomer.Fields.discount_value) }}
         </div>
         <div class="col-7">
           <span>SR {{ editRow.discountValue }}</span>
@@ -74,17 +75,18 @@
 
       <div class="col-4 row q-gutter-xs">
         <div class="col-1 text-grey-8 text-subtitle1">
-          {{ $t("request_customer.fields.discount_percent") }}
+          {{ $t(I18Requestcustomer.Fields.discount_percent) }}
         </div>
         <div class="col-10">
-          <!-- <span>{{ requestCustomer.discountPercent }}%</span> -->
-          <BaseNumberInput
+          <span>{{ editRow.discountPercent.toFixed(1) }}%</span>
+          <!-- <BaseNumberInput
+            v-if="editRow.discountPercent"
             v-model="editRow.discountPercent"
             :show-spin="true"
             :show-percent="true"
             :min="0"
             :max="100"
-          ></BaseNumberInput>
+          ></BaseNumberInput> -->
         </div>
       </div>
     </div>
@@ -92,7 +94,7 @@
     <div class="row" :dir="globalStore.direction">
       <div class="col-4 row q-gutter-xs">
         <div class="col text-grey-8 text-subtitle1">
-          {{ $t("request_customer.fields.total_before_discount") }}
+          {{ $t(I18Requestcustomer.Fields.total_before_discount) }}
         </div>
         <div class="col">
           <span>SR {{ editRow.total }}</span>
@@ -100,7 +102,7 @@
       </div>
       <div class="col-4 row q-gutter-xs border bg-green-1">
         <div class="col text-grey-8 text-subtitle1">
-          {{ $t("request_customer.fields.net_total_amount") }}
+          {{ $t(I18Requestcustomer.Fields.net_total_amount) }}
         </div>
         <div class="col">
           <span>SR {{ editRow.wage_amount }}</span>
@@ -114,6 +116,7 @@
 import { useGlobalStore, useRequestCustomerStore } from "~/Data/Stores";
 import { date } from "quasar";
 import type { IRequestCustomerFormProps } from "~/common/common-types";
+import { I18Requestcustomer } from "~/locales/i18-key";
 
 const globalStore = useGlobalStore();
 const props = defineProps<IRequestCustomerFormProps>();

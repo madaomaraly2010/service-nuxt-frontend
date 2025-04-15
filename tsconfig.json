@@ -3,6 +3,7 @@
   "extends": "./.nuxt/tsconfig.json",
   
   "compilerOptions": {
+    "experimentalDecorators": true,
     "resolveJsonModule": true,
     "types": ["node"],
     "module": "esnext",

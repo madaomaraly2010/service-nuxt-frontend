@@ -8,6 +8,7 @@ import { useRentStatusStore } from "./useRentStatusStore";
 import { useCookStatusStore } from "./useCookStatusStore";
 import { useReligionStatusStore } from "./useReligionStatusStore";
 import { useCountryStore } from "./useCountryStore";
+import { useRequestStatusStore } from ".";
 
 interface ILookupState {}
 
@@ -21,6 +22,8 @@ export const useLookupStore = () => {
   const cookStore = useCookStatusStore();
   const religionStore = useReligionStatusStore();
   const countryStore = useCountryStore();
+  const statusStore = useRequestStatusStore();
+
   const actions = {
     async fetchAllLookups(): Promise<void> {
       // Uncomment these when the methods are implemented
@@ -32,6 +35,7 @@ export const useLookupStore = () => {
       await cookStore.findAll();
       await religionStore.findAll();
       await countryStore.findAll();
+      await statusStore.findAll();
       console.log("workCategoryStore", workCategoryStore.list);
       console.log("workStore", workStore.list);
       console.log("langStore", langStore.list);

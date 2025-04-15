@@ -18,6 +18,8 @@ import { useRequestCustomerStore } from "~/Data/Stores";
 
 const store = useRequestCustomerStore();
 
+// await useRequestStatusStore().findAll();
+
 await store.findAll();
 </script>
 

@@ -40,7 +40,7 @@ definePageMeta({
 import { useLookupStore } from "~/Data/Stores/useLookupStore";
 const lookupStore = useLookupStore();
 const nuxtApp = useNuxtApp();
-// await lookupStore.fetchAllLookups();
+await lookupStore.fetchAllLookups();
 
 onMounted(async () => {
   nuxtApp.$q.loading.show({ message: nuxtApp.$t("messages.loading_data") }); // Show loading spinner
