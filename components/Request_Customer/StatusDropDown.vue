@@ -13,15 +13,21 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { RequestStatusStoreType } from "~/Data/Stores/useRequestStatusStore";
-import { TableKeys } from "~/common/table-keys";
+import {
+  useLookupStore,
+  type LookupStoreType,
+} from "~/Data/Stores/useLookupStore";
 
+const lookupStore: LookupStoreType = useLookupStore();
+
+console.log("getStatusStore", lookupStore.requestStatusStore);
 // const statusStore = useRequestStatusStore();
-const statusStore = inject<RequestStatusStoreType>(
-  TableKeys.REQUEST_STATUS_KEY
-);
-console.log("statusStore from dropdown", statusStore);
-const rowList = computed(() => statusStore?.list);
+// const statusStore = inject<RequestStatusStoreType>(
+//   TableKeys.REQUEST_STATUS_KEY
+// );
+console.log("statusStore from dropdown", lookupStore?.requestStatusStore);
+
+const rowList = computed(() => lookupStore?.requestStatusStore.list);
 const status = defineModel<number>();
 </script>
 

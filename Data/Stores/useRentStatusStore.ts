@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface IRentStatusState {
   list: RentStatus[];
 }
+export type RentStatusStoreType = ReturnType<typeof useRentStatusStore>;
 
 export const useRentStatusStore = defineStore(TableKeys.RENT_STATUS_KEY, {
   state: (): IRentStatusState => ({ list: [] }),

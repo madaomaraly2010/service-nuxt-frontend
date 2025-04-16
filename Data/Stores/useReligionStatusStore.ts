@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface IReligionStatusState {
   list: ReligionStatus[];
 }
+export type ReligionStatusStoreType = ReturnType<typeof useReligionStatusStore>;
 
 export const useReligionStatusStore = defineStore(
   TableKeys.RELIGION_STATUS_KEY,

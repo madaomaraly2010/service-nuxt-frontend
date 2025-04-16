@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface ICookStatusState {
   list: CookStatus[];
 }
+export type CookStatusStoreType = ReturnType<typeof useCookStatusStore>;
 
 export const useCookStatusStore = defineStore(TableKeys.COOK_STATUS_KEY, {
   state: (): ICookStatusState => ({ list: [] }),

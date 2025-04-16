@@ -37,15 +37,19 @@
 definePageMeta({
   middleware: "auth",
 });
-import { useLookupStore } from "~/Data/Stores/useLookupStore";
-const lookupStore = useLookupStore();
+import {
+  useLookupStore,
+  type LookupStoreType,
+} from "~/Data/Stores/useLookupStore";
+const lookupStore: LookupStoreType = useLookupStore();
 const nuxtApp = useNuxtApp();
-await lookupStore.fetchAllLookups();
-
+// await lookupStore.fetchAllLookups();
+// console.log("getStatusStore", lookupStore.requestStatusStore);
 onMounted(async () => {
   nuxtApp.$q.loading.show({ message: nuxtApp.$t("messages.loading_data") }); // Show loading spinner
   await nextTick(async () => {
     await lookupStore.fetchAllLookups();
+    //provide("lookups", lookupStore);
   });
   nuxtApp.$q.loading.hide(); // Show loading spinner
 });

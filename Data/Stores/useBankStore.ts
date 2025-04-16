@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface IBankState {
   list: Bank[];
 }
+export type BankStoreType = ReturnType<typeof useBankStore>;
 
 export const useBankStore = defineStore(TableKeys.BANK_KEY, {
   state: (): IBankState => ({ list: [] }),

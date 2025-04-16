@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface IPackageItemState {
   list: PackageItem[];
 }
+export type PackageItemStoreType = ReturnType<typeof usePackageItemStore>;
 
 export const usePackageItemStore = defineStore(TableKeys.PACKAGE_ITEM_KEY, {
   state: (): IPackageItemState => ({ list: [] }),

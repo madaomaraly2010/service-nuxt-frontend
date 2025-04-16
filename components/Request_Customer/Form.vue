@@ -116,23 +116,24 @@
 import {
   useGlobalStore,
   useRequestCustomerStore,
-  type RequestStatusStoreType,
+  type LookupStoreType,
+  useLookupStore,
 } from "~/Data/Stores";
 import { date } from "quasar";
 import type { IRequestCustomerFormProps } from "~/common/common-types";
 import { I18Requestcustomer } from "~/locales/i18-key";
-import { TableKeys } from "~/common/table-keys";
 
 const globalStore = useGlobalStore();
 const props = defineProps<IRequestCustomerFormProps>();
 const requestStore = useRequestCustomerStore();
+const lookupStore: LookupStoreType = useLookupStore();
 
-inject<RequestStatusStoreType>(TableKeys.REQUEST_STATUS_KEY);
+console.log("getStatusStore", lookupStore.requestStatusStore);
 
 const loading = ref();
 const onSave = async () => {
   loading.value = true;
-  await requestStore.update(props.editRow);
+  await requestStore.save(props.editRow);
   loading.value = false;
 };
 const properties = computed(

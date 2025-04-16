@@ -9,6 +9,7 @@ interface IUserState {
   loggedUser?: User | null;
   isAuthenticated?: boolean;
 }
+export type UserStoreType = ReturnType<typeof useUserStore>;
 
 export const useUserStore = defineStore(TableKeys.USER_KEY, {
   state: (): IUserState => ({ list: [] }),

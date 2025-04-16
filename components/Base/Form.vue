@@ -52,6 +52,7 @@
 <script setup lang="ts" generic="ModelType">
 import type { QForm } from "quasar";
 import type { IBaseFormProps } from "~/common/common-types";
+import { I18Global } from "~/locales/i18-key";
 // import type { ModelResponse } from "~/Data/Responses/ModelResponse-Class";
 const nuxtApp = useNuxtApp();
 
@@ -63,10 +64,10 @@ const props = withDefaults(defineProps<IBaseFormProps>(), {
 const qFormRef: Ref<QForm | undefined> = ref();
 const loading = ref(false);
 const getSaveLabel = computed(
-  () => props.saveLabel || nuxtApp.$t("global.save")
+  () => props.saveLabel || nuxtApp.$t(I18Global.save) // I18Global.Fields.save
 );
 const getCancelLabel = computed(
-  () => props.cancelLabel || nuxtApp.$t("global.cancel")
+  () => props.cancelLabel || nuxtApp.$t(I18Global.cancel) // I18Global.Fields.cancel
 );
 
 const emit = defineEmits(["save", "cancel"]);

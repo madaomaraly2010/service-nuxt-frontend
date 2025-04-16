@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface IChildStatusState {
   list: ChildStatus[];
 }
+export type ChildStatusStoreType = ReturnType<typeof useChildStatusStore>;
 
 export const useChildStatusStore = defineStore(TableKeys.CHILD_STATUS_KEY, {
   state: (): IChildStatusState => ({ list: [] }),

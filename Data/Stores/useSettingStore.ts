@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface ISettingState {
   list: Setting[];
 }
+export type SettingStoreType = ReturnType<typeof useSettingStore>;
 
 export const useSettingStore = defineStore(TableKeys.SETTING_KEY, {
   state: (): ISettingState => ({ list: [] }),

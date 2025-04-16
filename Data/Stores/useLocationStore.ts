@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface ILocationState {
   list: Location[];
 }
+export type LocationStoreType = ReturnType<typeof useLocationStore>;
 
 export const useLocationStore = defineStore(TableKeys.LOCATION_KEY, {
   state: (): ILocationState => ({ list: [] }),

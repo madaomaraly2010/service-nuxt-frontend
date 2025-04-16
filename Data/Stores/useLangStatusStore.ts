@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface ILangStatusState {
   list: LangStatus[];
 }
+export type LangStatusStoreType = ReturnType<typeof useLangStatusStore>;
 
 export const useLangStatusStore = defineStore(TableKeys.LANG_STATUS_KEY, {
   state: (): ILangStatusState => ({ list: [] }),

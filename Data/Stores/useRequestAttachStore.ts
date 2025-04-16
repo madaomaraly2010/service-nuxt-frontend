@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface IRequestAttachState {
   list: RequestAttach[];
 }
+export type RequestAttachStoreType = ReturnType<typeof useRequestAttachStore>;
 
 export const useRequestAttachStore = defineStore(TableKeys.REQUEST_ATTACH_KEY, {
   state: (): IRequestAttachState => ({ list: [] }),

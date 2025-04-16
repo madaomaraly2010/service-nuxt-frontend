@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface IWorkState {
   list: Work[];
 }
+export type WorkStoreType = ReturnType<typeof useWorkStore>;
 
 export const useWorkStore = defineStore(TableKeys.WORK_KEY, {
   state: (): IWorkState => ({ list: [] }),

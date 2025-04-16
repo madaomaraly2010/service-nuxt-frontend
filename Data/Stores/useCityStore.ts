@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface ICityState {
   list: City[];
 }
+export type CityStoreType = ReturnType<typeof useCityStore>;
 
 export const useCityStore = defineStore(TableKeys.CITY_KEY, {
   state: (): ICityState => ({ list: [] }),

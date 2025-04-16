@@ -7,6 +7,7 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface IMessageState {
   list: Message[];
 }
+export type MessageStoreType = ReturnType<typeof useMessageStore>;
 
 export const useMessageStore = defineStore(TableKeys.MESSAGE_KEY, {
   state: (): IMessageState => ({ list: [] }),
