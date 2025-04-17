@@ -66,6 +66,24 @@ export function JsonSerializable<T extends { new (...args: any[]): {} }>(): (
       return instance;
     };
 
+    const formatDate = (val: any): any => {
+      // Skip formatting for numbers, booleans, etc.
+      if (typeof val === "number" || typeof val === "boolean") return val;
+
+      // Format real Date objects
+      if (val instanceof Date) return val.toISOString().split("T")[0];
+
+      // Format valid ISO date strings only
+      if (typeof val === "string" && /^\d{4}-\d{2}-\d{2}$/.test(val)) {
+        const d = new Date(val);
+        if (!isNaN(d.getTime())) {
+          return d.toISOString().split("T")[0];
+        }
+      }
+
+      return val;
+    };
+
     constructor.prototype.toDbRow = function () {
       const result: any = {};
       for (const [, field] of fields.entries()) {
@@ -73,7 +91,7 @@ export function JsonSerializable<T extends { new (...args: any[]): {} }>(): (
           field;
         if (ignore || includeToDbRow === false) continue;
 
-        const value = (this as any)[propertyKey];
+        let value = (this as any)[propertyKey];
         if (value === undefined || (value === null && includeIfNull === false))
           continue;
 
@@ -83,18 +101,86 @@ export function JsonSerializable<T extends { new (...args: any[]): {} }>(): (
         if (actualType && value !== null) {
           if (Array.isArray(value)) {
             result[name!] = value.map((v: any) =>
-              typeof v?.toDbRow === "function" ? v.toDbRow() : v
+              typeof v?.toDbRow === "function" ? v.toDbRow() : formatDate(v)
             );
           } else {
             result[name!] =
-              typeof value?.toDbRow === "function" ? value.toDbRow() : value;
+              typeof value?.toDbRow === "function"
+                ? value.toDbRow()
+                : formatDate(value);
           }
         } else {
-          result[name!] = value;
+          result[name!] = formatDate(value);
         }
       }
       return result;
     };
+
+    // constructor.prototype.toDbRow = function () {
+    //   const result: any = {};
+    //   for (const [, field] of fields.entries()) {
+    //     const { name, propertyKey, ignore, includeToDbRow, includeIfNull } =
+    //       field;
+    //     if (ignore || includeToDbRow === false) continue;
+
+    //     let value = (this as any)[propertyKey];
+    //     if (value === undefined || (value === null && includeIfNull === false))
+    //       continue;
+
+    //     const actualType =
+    //       typeof field.type === "function" ? field.type() : field.type;
+
+    //     if (actualType && value !== null) {
+    //       if (Array.isArray(value)) {
+    //         result[name!] = value.map((v: any) =>
+    //           typeof v?.toDbRow === "function" ? v.toDbRow() : formatDate(v)
+    //         );
+    //       } else if (value instanceof Date) {
+    //         debugger;
+    //         result[name!] = value.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+    //       } else {
+    //         result[name!] =
+    //           typeof value?.toDbRow === "function" ? value.toDbRow() : value;
+    //       }
+    //     } else {
+    //       debugger;
+
+    //       result[name!] =
+    //         value instanceof Date ? value.toISOString().split("T")[0] : value;
+    //     }
+    //   }
+    //   return result;
+    // };
+
+    // constructor.prototype.toDbRow = function () {
+    //   const result: any = {};
+    //   for (const [, field] of fields.entries()) {
+    //     const { name, propertyKey, ignore, includeToDbRow, includeIfNull } =
+    //       field;
+    //     if (ignore || includeToDbRow === false) continue;
+
+    //     const value = (this as any)[propertyKey];
+    //     if (value === undefined || (value === null && includeIfNull === false))
+    //       continue;
+
+    //     const actualType =
+    //       typeof field.type === "function" ? field.type() : field.type;
+
+    //     if (actualType && value !== null) {
+    //       if (Array.isArray(value)) {
+    //         result[name!] = value.map((v: any) =>
+    //           typeof v?.toDbRow === "function" ? v.toDbRow() : v
+    //         );
+    //       } else {
+    //         result[name!] =
+    //           typeof value?.toDbRow === "function" ? value.toDbRow() : value;
+    //       }
+    //     } else {
+    //       result[name!] = value;
+    //     }
+    //   }
+    //   return result;
+    // };
   };
 }
 

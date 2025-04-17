@@ -32,6 +32,7 @@ export abstract class BaseModelService<ModelType>
   }
   save(row: ModelType & { id?: number }): Promise<ModelResponse<ModelType>> {
     if (row.id) {
+      debugger;
       return this.update(row);
     } else {
       return this.create(row);

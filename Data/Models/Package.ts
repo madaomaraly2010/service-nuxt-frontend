@@ -46,6 +46,9 @@ export class Package {
   //@ts-ignore
   public static fromDbRow(dbRow: IPackageAttributes): Package {}
 
+  public static create(): Package | undefined {
+    return new Package();
+  }
   // public toDbRow(): IPackageAttributes {
   //   const row: IPackageAttributes = {};
   //   row.id = this.id;

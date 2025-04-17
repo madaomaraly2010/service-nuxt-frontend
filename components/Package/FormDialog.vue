@@ -1,15 +1,11 @@
 <template>
   <div>
     <BaseDialogForm ref="baseDialogRef" width="50vw" height="50vh">
-      <!-- <q-card flat class="q-pa-md">
-        <q-card-section class="text-h6 text-primary"> -->
       <PackageForm
         :dialog-ref="baseDialogRef"
         ref="formRef"
         :edit-row="editRow"
       ></PackageForm>
-      <!-- </q-card-section>
-      </q-card> -->
     </BaseDialogForm>
   </div>
 </template>
@@ -30,11 +26,7 @@ defineExpose({
   open,
 });
 
-// const properties = computed(
-//   (): IPackageDialogProps => ({
-//     ...props,
-//   })
-// );
+//
 </script>
 
 <style scoped></style>

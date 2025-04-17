@@ -107,11 +107,13 @@ import { Package } from "~/Data/Models";
 import { TableKeys } from "~/common/table-keys";
 import { PackageColumns } from "~/common/table-column-names";
 import { I18Package } from "~/locales/i18-key";
+import cloneDeep from "lodash/cloneDeep";
+
 const dialogRef = ref(null);
 const selectedRow: Ref<Package | undefined> = ref<Package>();
 const store = usePackageStore();
 // await store.findAll();
-const editRow = ref<Package>();
+// const editRow = ref<Package>();
 
 const nuxtApp = useNuxtApp();
 
@@ -122,13 +124,13 @@ const pagination = ref({
   rowsPerPage: 20, // Control number of rows per page
 });
 const selectAndOpenDialog = async (req: Package) => {
-  selectedRow.value = req;
+  selectedRow.value = cloneDeep(req);
   await nextTick();
   //@ts-ignore
   dialogRef?.value.open();
 };
 const onCreateClicked = async () => {
-  editRow.value = new Package();
+  selectedRow.value =  Package.create();
   await nextTick();
   //@ts-ignore
   dialogRef?.value.open();

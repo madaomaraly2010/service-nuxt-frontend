@@ -21,7 +21,7 @@ export class StoreHelper {
     row: ModelType,
     serviceCall: (row: ModelType) => Promise<ResponseType>
   ): Promise<ResponseType> {
-    const isNew = row.id == null;
+    const isNew = row.id == null || row.id == undefined;
     const response = await serviceCall(row);
 
     if (response.success) {
