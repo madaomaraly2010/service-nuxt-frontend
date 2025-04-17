@@ -2,14 +2,16 @@
   <div>
     <div class="row">
       <package-form-dialog
-        v-if="editRow"
+        v-if="selectedRow"
         ref="dialogRef"
-        :editRow="editRow as Package"
+        :editRow="selectedRow as Package"
       ></package-form-dialog>
 
       <q-card-section style="width: 70vw" class="q-pa-none q-ma-none">
         <base-table
-          
+          :show-toolbar="true"
+          :show-create-button="true"
+          @on-create-button-clicked="onCreateClicked"
           :rows="store.list"
           style="height: 50vh"
           :columns="theColumns"
@@ -27,6 +29,18 @@
                     color="blue-6"
                     >{{ $t("global.details") }}</q-btn
                   >
+                </q-item-section>
+              </q-item>
+            </q-td>
+          </template>
+
+          <template #name="{ row }">
+            <q-td>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="text-bold text-red-7 text-center">{{
+                    row.arb_name
+                  }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-td>
@@ -89,7 +103,7 @@ import type { QTableColumn } from "quasar";
 import { usePackageStore } from "~/Data/Stores";
 
 import { date } from "quasar";
-import type { Package } from "~/Data/Models";
+import { Package } from "~/Data/Models";
 import { TableKeys } from "~/common/table-keys";
 import { PackageColumns } from "~/common/table-column-names";
 import { I18Package } from "~/locales/i18-key";
@@ -113,11 +127,18 @@ const selectAndOpenDialog = async (req: Package) => {
   //@ts-ignore
   dialogRef?.value.open();
 };
+const onCreateClicked = async () => {
+  editRow.value = new Package();
+  await nextTick();
+  //@ts-ignore
+  dialogRef?.value.open();
+};
 const theColumns: QTableColumn[] = [
   tableHelper.createButtonColumn(nuxtApp.$t("global.details")),
   tableHelper.createColumn(
     TableKeys.PACKAGE_KEY,
     PackageColumns.arb_name,
+    nuxtApp.$t(I18Package.Fields.name),
     "name"
   ),
   tableHelper.createColumn(

@@ -12,7 +12,10 @@
         clickable
         v-ripple
       >
-        <q-item-section class="col-9">
+        <q-item-section avatar>
+          <q-icon name="done"></q-icon>
+        </q-item-section>
+        <q-item-section>
           <q-item-label
             >{{ message.title }}
             <span class="text-green text-bold text-caption"
@@ -21,13 +24,16 @@
               }})</span
             >
           </q-item-label>
-          <q-item-label caption>{{ message.description }}</q-item-label>
+          <q-item-label caption :lines="2">{{
+            message.description
+          }}</q-item-label>
         </q-item-section>
-        <q-item-section class="col-3">
+        <q-item-section side top>
           <q-btn
             color="primary"
             flat
             round
+            outline
             dense
             icon="detail"
             @click="goToDetails(message)"

@@ -8,7 +8,7 @@
   >
     <q-card
       flat
-      class="q-pa-sm"
+      class="q-pa-sm no-border"
       :style="{
         minWidth: width,
         minHeight: height,

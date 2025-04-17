@@ -1,22 +1,15 @@
 <template>
   <div>
-    <BaseDialogForm
-      v-bind="properties"
-      ref="baseDialogRef"
-      width="50vw"
-      height="60vh"
-    >
-      <q-card class="q-pa-md">
-        <q-card-section class="text-h6 text-primary">
-          <PackageForm
-            :show-save-button="true"
-            :show-cancel-button="true"
-            :dialog-ref="baseDialogRef"
-            ref="formRef"
-            :edit-row="editRow"
-          ></PackageForm>
-        </q-card-section>
-      </q-card>
+    <BaseDialogForm ref="baseDialogRef" width="50vw" height="50vh">
+      <!-- <q-card flat class="q-pa-md">
+        <q-card-section class="text-h6 text-primary"> -->
+      <PackageForm
+        :dialog-ref="baseDialogRef"
+        ref="formRef"
+        :edit-row="editRow"
+      ></PackageForm>
+      <!-- </q-card-section>
+      </q-card> -->
     </BaseDialogForm>
   </div>
 </template>
@@ -27,7 +20,7 @@ import type { IPackageDialogProps } from "~/common/common-types";
 const baseDialogRef = ref();
 const formRef = ref();
 
-const props = defineProps<IPackageDialogProps>();
+defineProps<IPackageDialogProps>();
 //@ts-ignore
 const open = () => {
   //@ts-ignore
@@ -37,11 +30,11 @@ defineExpose({
   open,
 });
 
-const properties = computed(
-  (): IPackageDialogProps => ({
-    ...props,
-  })
-);
+// const properties = computed(
+//   (): IPackageDialogProps => ({
+//     ...props,
+//   })
+// );
 </script>
 
 <style scoped></style>

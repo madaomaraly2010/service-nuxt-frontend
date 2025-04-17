@@ -11,6 +11,7 @@ export interface IBaseFormProps {
   showCancelButton?: boolean;
   saveLabel?: string;
   cancelLabel?: string;
+  title?: string;
 }
 
 export interface IBaseTableProps extends QTableProps {

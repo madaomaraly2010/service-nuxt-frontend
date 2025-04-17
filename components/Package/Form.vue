@@ -1,15 +1,21 @@
 <template>
-  <BaseForm :on-save="onSave" v-bind="properties">
-    <div class="row items-center" :dir="globalStore.direction">
-      <div class="col-4 row items-center q-col-gutter-none">
-        <div>
+  <BaseForm
+    :on-save="onSave"
+    :title="$t(I18Package.title)"
+    :show-cancel-button="true"
+    :show-save-button="true"
+  >
+    <div class="" :dir="globalStore.direction">
+      <div class="row items-center q-col-gutter-none">
+        <div class="col-12">
           <BaseTextInput
             :label="$t('package.fields.name')"
             v-model="editRow.arb_name"
           ></BaseTextInput>
         </div>
       </div>
-      <div class="col-4 row">
+      <QSeparator class="q-my-lg"></QSeparator>
+      <div class="row q-gutter-md">
         <div class="col">
           <BaseDateInput
             :label="$t('package.fields.start_date')"
@@ -17,9 +23,6 @@
           >
           </BaseDateInput>
         </div>
-      </div>
-
-      <div class="col-4 row">
         <div class="col">
           <BaseDateInput
             :label="$t('package.fields.end_date')"
@@ -53,23 +56,19 @@ import type { PackageResponse } from "~/Data/Responses/Model-Responses";
 import { useGlobalStore, usePackageStore } from "~/Data/Stores";
 // import { date } from "quasar";
 import type { IPackageFormProps } from "~/common/common-types";
-import { I18Messages } from "~/locales/i18-key";
+import { I18Messages, I18Package } from "~/locales/i18-key";
 
 const globalStore = useGlobalStore();
 const props = defineProps<IPackageFormProps>();
 const store = usePackageStore();
 const uiHelper = useUIHelper();
+
 const onSave = async () => {
   let response: PackageResponse = await store.save(props.editRow);
   if (response.success) {
     uiHelper.showNotifyMessage(I18Messages.operation_successed);
   }
 };
-const properties = computed(
-  (): IPackageFormProps => ({
-    ...props,
-  })
-);
 </script>
 
 <style scoped>

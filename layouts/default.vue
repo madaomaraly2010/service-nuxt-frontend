@@ -266,7 +266,7 @@ const drawerItems = [
   {
     icon: "mdi-file-document",
     text: app.$t(I18Drawer.Items.packages),
-    page: "RequestCustomerPage",
+    page: "PackagePage",
   }, // Document icon for requests
 
   {

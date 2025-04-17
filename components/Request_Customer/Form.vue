@@ -1,5 +1,9 @@
 <template>
-  <BaseForm :on-save="onSave" v-bind="properties">
+  <BaseForm
+    :on-save="onSave"
+    :show-save-button="true"
+    :show-cancel-button="true"
+  >
     <div class="row items-center" :dir="globalStore.direction">
       <div class="col-4 row items-center q-col-gutter-none">
         <div class="col-4 text-grey-8 text-subtitle1">
@@ -136,11 +140,6 @@ const onSave = async () => {
   await requestStore.save(props.editRow);
   loading.value = false;
 };
-const properties = computed(
-  (): IRequestCustomerFormProps => ({
-    ...props,
-  })
-);
 </script>
 
 <style scoped>

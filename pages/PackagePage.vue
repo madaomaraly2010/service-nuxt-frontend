@@ -2,7 +2,7 @@
   <div>
     <q-page padding>
       <div class="row text-h4">
-        {{ $t("request_customer.title") }}
+        {{ $t(I18Package.title) }}
       </div>
       <div class="row">
         <div class="col offset-1">
@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import { usePackageStore } from "~/Data/Stores";
+import { I18Package } from "~/locales/i18-key";
 
 const store = usePackageStore();
 

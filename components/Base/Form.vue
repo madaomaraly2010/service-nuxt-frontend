@@ -1,14 +1,21 @@
 <template>
+  <q-toolbar class="q-my-lg q-pa-xs">
+    <q-item-label :dir="globalStore.direction" class="col-12 text-h6">{{
+      title
+    }}</q-item-label>
+  </q-toolbar>
+
   <QForm ref="qFormRef">
     <slot></slot>
   </QForm>
-  <div class="q-my-lg"></div>
+  <QSeparator class="q-my-md"></QSeparator>
   <slot name="actions">
     <div class="">
       <div class="row">
         <q-btn-group
           class="row col"
           unelevated
+          rounded
           :spread="!showSaveButton || !showCancelButton"
         >
           <q-btn
@@ -17,6 +24,7 @@
             :loading="loading"
             :label="getSaveLabel"
             color="blue-8"
+            rounded
             @click="handleSave()"
           />
           <q-btn
@@ -28,22 +36,6 @@
             @click="handleCancel"
           />
         </q-btn-group>
-        <!-- <q-btn
-          class="col"
-          v-if="showSaveButton"
-          :loading="saveLoading"
-          :label="getSaveLabel"
-          color="primary"
-          @click="handleSave"
-        />
-        <q-btn
-          class="col"
-          v-if="showCancelButton"
-          :label="getCancelLabel"
-          color="negative"
-          v-close-popup
-          @click="handleCancel"
-        /> -->
       </div>
     </div>
   </slot>
@@ -53,18 +45,15 @@
 import type { QForm } from "quasar";
 import type { IBaseFormProps } from "~/common/common-types";
 import { I18Global } from "~/locales/i18-key";
-// import type { ModelResponse } from "~/Data/Responses/ModelResponse-Class";
-const nuxtApp = useNuxtApp();
+import { useGlobalStore } from "~/Data/Stores";
 
-const props = withDefaults(defineProps<IBaseFormProps>(), {
-  showCancelButton: true,
-  showSaveButton: true,
-  saveLoading: false,
-});
+const nuxtApp = useNuxtApp();
+const props = defineProps<IBaseFormProps>();
 const qFormRef: Ref<QForm | undefined> = ref();
 const loading = ref(false);
+const globalStore = useGlobalStore();
 const getSaveLabel = computed(
-  () => props.saveLabel || nuxtApp.$t(I18Global.save) // I18Global.Fields.save
+  () => props.saveLabel || nuxtApp.$t(I18Global.save)
 );
 const getCancelLabel = computed(
   () => props.cancelLabel || nuxtApp.$t(I18Global.cancel) // I18Global.Fields.cancel
@@ -74,14 +63,6 @@ const emit = defineEmits(["save", "cancel"]);
 const handleSave = async () => {
   let validated: boolean | undefined = await qFormRef.value?.validate();
   if (validated) {
-    // let response: ModelResponse<ModelType> | undefined = await props.onSave?.();
-    // if (response?.success) {
-    //   nuxtApp.$q.notify({
-    //     message: nuxtApp.$t("messages.operation_successed"),
-    //     position: "top",
-    //   });
-    // }
-    //emit("save");
     loading.value = true;
     //@ts-ignore
     const sleep = (ms: number) =>
@@ -90,7 +71,7 @@ const handleSave = async () => {
     await props.onSave?.();
     loading.value = false;
     debugger;
-    props.dialogRef?.close();
+    // props.dialogRef?.close();
   }
 };
 const handleCancel = () => {
