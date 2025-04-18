@@ -7,12 +7,20 @@ import type { FetchOptions } from "~/common/fetch-options";
 interface IProviderState {
   list: Provider[];
 }
+interface IProviderActions {}
 import { defineStore } from "pinia";
 import { StoreHelper } from "./storeHelper";
+import type { IProviderRepositry } from "../Repositries/Models-Repositries";
 
 export type ProviderStoreType = ReturnType<typeof useProviderStore>;
+export type ProviderStoreActionType = IProviderActions & IProviderRepositry;
 
-export const useProviderStore = defineStore(TableKeys.PROVIDER_KEY, {
+export const useProviderStore = defineStore<
+  string,
+  IProviderState,
+  {},
+  ProviderStoreActionType
+>(TableKeys.PROVIDER_KEY, {
   state: (): IProviderState => ({
     list: [],
   }),

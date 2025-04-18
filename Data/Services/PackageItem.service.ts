@@ -30,6 +30,21 @@ export class PackageItemService
       }
     );
   }
+
+  async findAllByPackage(
+    packageId: number,
+    options?: FetchOptions
+  ): Promise<PackageItemResponse> {
+    debugger;
+    return super.fetchData(
+      PackageItem as any,
+      config.PackageItem.API_PACKAGE_ITEM_GET,
+      {
+        queryStrings: { packageId },
+        options,
+      }
+    );
+  }
   override async findOne(id: number): Promise<PackageItemResponse> {
     throw new Error("Method not implemented.");
   }

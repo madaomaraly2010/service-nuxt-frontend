@@ -10,73 +10,69 @@
       <div class="row items-center q-col-gutter-none">
         <div class="col-12">
           <BaseTextInput
-            :label="$t('package.fields.name')"
+            :label="$t(I18Packageitem.Fields.name)"
             v-model="editRow.arb_name"
           ></BaseTextInput>
         </div>
       </div>
+
       <QSeparator class="q-my-lg"></QSeparator>
-      <div class="row q-gutter-md">
-        <div class="col">
-          <BaseDateInput
-            :label="$t('package.fields.start_date')"
-            v-model="editRow.start_date"
-          >
-          </BaseDateInput>
+      <!-- total_amount   discount_percent -->
+      <div class="col-12 row items-center" :dir="globalStore.direction">
+        <div class="col-4 row">
+          <div class="col-7">
+            <BaseNumberInput
+              v-model="editRow.month_number"
+              :label="$t(I18Packageitem.Fields.month_number)"
+              :min="1"
+              :max="12"
+              :show-spin="true"
+            ></BaseNumberInput>
+          </div>
         </div>
-        <div class="col">
-          <BaseDateInput
-            :label="$t('package.fields.end_date')"
-            v-model="editRow.end_date"
-          >
-          </BaseDateInput>
+        <div class="col-2"></div>
+        <div class="col-4 row">
+          <div class="col-7">
+            <BaseNumberInput
+              v-model="editRow.discount_percent"
+              :label="$t(I18Packageitem.Fields.discount_percent)"
+              prefix="%"
+              :min="1"
+              :max="100"
+            ></BaseNumberInput>
+          </div>
         </div>
-      </div>
-    </div>
-    <QSeparator class="q-my-lg"></QSeparator>
-    <!-- total_amount   discount_percent -->
-    <div class="col-12 row items-center" :dir="globalStore.direction">
-      <div class="col-4 row">
-        <div class="col-7">
-          <!-- <span>SR {{ editRow.down_payment }}</span> -->
-          <BaseNumberInput
-            v-model="editRow.valid_days"
-            :label="$t('package.fields.valid_days')"
-            :min="0"
-            :max="100"
-            :show-spin="true"
-          ></BaseNumberInput>
+
+        <div class="col-4 row">
+          <div class="col-7">
+            <BaseNumberInput
+              v-model="editRow.down_payment_percent"
+              :label="$t(I18Packageitem.Fields.down_payment_percent)"
+              prefix="%"
+              :min="1"
+              :max="100"
+            ></BaseNumberInput>
+          </div>
         </div>
-      </div>
-      <div class="col-2"></div>
-      <div class="col-4">
-        <QToggle
-          :label="$t(I18Package.Fields.is_active)"
-          v-model="editRow.is_active"
-          color="green"
-          :trueValue="1"
-          :falseValue="0"
-          size="lg"
-        ></QToggle>
       </div>
     </div>
   </BaseForm>
 </template>
 
 <script setup lang="ts">
-import type { PackageResponse } from "~/Data/Responses/Model-Responses";
-import { useGlobalStore, usePackageStore } from "~/Data/Stores";
+import type { PackageItemResponse } from "~/Data/Responses/Model-Responses";
+import { useGlobalStore, usePackageItemStore } from "~/Data/Stores";
 // import { date } from "quasar";
-import type { IPackageFormProps } from "~/common/common-types";
-import { I18Messages, I18Package } from "~/locales/i18-key";
+import type { IPackageItemFormProps } from "~/common/common-types";
+import { I18Messages, I18Package, I18Packageitem } from "~/locales/i18-key";
 
 const globalStore = useGlobalStore();
-const props = defineProps<IPackageFormProps>();
-const store = usePackageStore();
+const props = defineProps<IPackageItemFormProps>();
+const store = usePackageItemStore();
 const uiHelper = useUIHelper();
 
 const onSave = async () => {
-  let response: PackageResponse = await store.save(props.editRow);
+  let response: PackageItemResponse = await store.save(props.editRow);
   if (response.success) {
     uiHelper.showSucceedMessage(I18Messages.operation_successed);
   }

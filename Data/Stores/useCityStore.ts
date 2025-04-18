@@ -3,13 +3,21 @@ import type { City } from "../Models";
 import type { CityResponse } from "../Responses/Model-Responses";
 import { CityService } from "../Services/City.service";
 import type { FetchOptions } from "~/common/fetch-options";
+import type { ICityRepositry } from "../Repositries/Models-Repositries";
 
 interface ICityState {
   list: City[];
 }
-export type CityStoreType = ReturnType<typeof useCityStore>;
 
-export const useCityStore = defineStore(TableKeys.CITY_KEY, {
+interface ICityActions {}
+export type CityStoreType = ReturnType<typeof useCityStore>;
+export type CityStoreActionType = ICityRepositry & ICityActions;
+export const useCityStore = defineStore<
+  string,
+  ICityState,
+  {},
+  CityStoreActionType
+>(TableKeys.CITY_KEY, {
   state: (): ICityState => ({ list: [] }),
   getters: {},
   actions: {
@@ -24,6 +32,9 @@ export const useCityStore = defineStore(TableKeys.CITY_KEY, {
     },
 
     async create(row: City): Promise<CityResponse> {
+      throw new Error("Method not implemented.");
+    },
+    async save(row: City): Promise<CityResponse> {
       throw new Error("Method not implemented.");
     },
 

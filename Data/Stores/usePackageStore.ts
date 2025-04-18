@@ -4,13 +4,21 @@ import type { PackageResponse } from "../Responses/Model-Responses";
 import { PackageService } from "../Services/Package.service";
 import type { FetchOptions } from "~/common/fetch-options";
 import { StoreHelper } from "./storeHelper";
+import type { IPackageRepositry } from "../Repositries/Models-Repositries";
 
 interface IPackageState {
   list: Package[];
 }
-export type PackageStoreType = ReturnType<typeof usePackageStore>;
 
-export const usePackageStore = defineStore(TableKeys.PACKAGE_KEY, {
+interface IPackageActions {}
+export type PackageStoreType = ReturnType<typeof usePackageStore>;
+export type PackageStoreActionType = IPackageRepositry & IPackageActions;
+export const usePackageStore = defineStore<
+  string,
+  IPackageState,
+  {},
+  PackageStoreActionType
+>(TableKeys.PACKAGE_KEY, {
   state: (): IPackageState => ({ list: [] }),
   getters: {},
   actions: {

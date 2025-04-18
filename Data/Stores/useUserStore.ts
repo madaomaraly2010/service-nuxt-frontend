@@ -3,15 +3,23 @@ import type { User } from "../Models";
 import type { UserResponse } from "../Responses/Model-Responses";
 import { UserService } from "../Services/User.service";
 import type { FetchOptions } from "~/common/fetch-options";
+import type { IUserRepositry } from "../Repositries/Models-Repositries";
 
 interface IUserState {
   list: User[];
   loggedUser?: User | null;
   isAuthenticated?: boolean;
 }
+interface IUserActions {}
 export type UserStoreType = ReturnType<typeof useUserStore>;
+export type UserStoreActionType = IUserActions & IUserRepositry;
 
-export const useUserStore = defineStore(TableKeys.USER_KEY, {
+export const useUserStore = defineStore<
+  string,
+  IUserState,
+  {},
+  UserStoreActionType
+>(TableKeys.USER_KEY, {
   state: (): IUserState => ({ list: [] }),
   getters: {},
   actions: {
@@ -26,6 +34,10 @@ export const useUserStore = defineStore(TableKeys.USER_KEY, {
     },
 
     async create(row: User): Promise<UserResponse> {
+      throw new Error("Method not implemented.");
+    },
+
+    async save(row: User): Promise<UserResponse> {
       throw new Error("Method not implemented.");
     },
 

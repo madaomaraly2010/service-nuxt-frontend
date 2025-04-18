@@ -3,13 +3,23 @@ import type { Country } from "../Models";
 import type { CountryResponse } from "../Responses/Model-Responses";
 import { CountryService } from "../Services/Country.service";
 import type { FetchOptions } from "~/common/fetch-options";
+import type { ICountryRepositry } from "../Repositries/Models-Repositries";
 
 interface ICountryState {
   list: Country[];
 }
-export type CountryStoreType = ReturnType<typeof useCountryStore>;
 
-export const useCountryStore = defineStore(TableKeys.COUNTRY_KEY, {
+interface ICountryActions {}
+
+export type CountryStoreType = ReturnType<typeof useCountryStore>;
+export type CountryStoreActionType = ICountryRepositry & ICountryActions;
+
+export const useCountryStore = defineStore<
+  string,
+  ICountryState,
+  {},
+  CountryStoreActionType
+>(TableKeys.COUNTRY_KEY, {
   state: (): ICountryState => ({ list: [] }),
   getters: {},
   actions: {
@@ -24,6 +34,10 @@ export const useCountryStore = defineStore(TableKeys.COUNTRY_KEY, {
     },
 
     async create(row: Country): Promise<CountryResponse> {
+      throw new Error("Method not implemented.");
+    },
+
+    async save(row: Country): Promise<CountryResponse> {
       throw new Error("Method not implemented.");
     },
 

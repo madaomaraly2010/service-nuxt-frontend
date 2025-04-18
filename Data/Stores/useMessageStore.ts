@@ -3,13 +3,25 @@ import type { Message } from "../Models";
 import type { MessageResponse } from "../Responses/Model-Responses";
 import { MessageService } from "../Services/Message.service";
 import type { FetchOptions } from "~/common/fetch-options";
+import type { IMessageRepositry } from "../Repositries/Models-Repositries";
 
 interface IMessageState {
   list: Message[];
 }
-export type MessageStoreType = ReturnType<typeof useMessageStore>;
 
-export const useMessageStore = defineStore(TableKeys.MESSAGE_KEY, {
+interface IMessageActions {
+  addMessage(messsage: Message): void;
+}
+
+export type MessageStoreType = ReturnType<typeof useMessageStore>;
+export type MessageStoreActionType = IMessageRepositry & IMessageActions;
+
+export const useMessageStore = defineStore<
+  string,
+  IMessageState,
+  {},
+  MessageStoreActionType
+>(TableKeys.MESSAGE_KEY, {
   state: (): IMessageState => ({ list: [] }),
   getters: {},
   actions: {
@@ -28,6 +40,10 @@ export const useMessageStore = defineStore(TableKeys.MESSAGE_KEY, {
     },
 
     async create(row: Message): Promise<MessageResponse> {
+      throw new Error("Method not implemented.");
+    },
+
+    async save(row: Message): Promise<MessageResponse> {
       throw new Error("Method not implemented.");
     },
 

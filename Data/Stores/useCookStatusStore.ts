@@ -3,13 +3,23 @@ import type { CookStatus } from "../Models";
 import type { CookStatusResponse } from "../Responses/Model-Responses";
 import { CookStatusService } from "../Services/CookStatus.service";
 import type { FetchOptions } from "~/common/fetch-options";
+import type { ICookStatusRepositry } from "../Repositries/Models-Repositries";
 
 interface ICookStatusState {
   list: CookStatus[];
 }
-export type CookStatusStoreType = ReturnType<typeof useCookStatusStore>;
 
-export const useCookStatusStore = defineStore(TableKeys.COOK_STATUS_KEY, {
+interface ICookStatusActions {}
+export type CookStatusStoreType = ReturnType<typeof useCookStatusStore>;
+export type CookStatusStoreActionType = ICookStatusRepositry &
+  ICookStatusActions;
+
+export const useCookStatusStore = defineStore<
+  string,
+  ICookStatusState,
+  {},
+  CookStatusStoreActionType
+>(TableKeys.COOK_STATUS_KEY, {
   state: (): ICookStatusState => ({ list: [] }),
   getters: {},
   actions: {
@@ -24,6 +34,10 @@ export const useCookStatusStore = defineStore(TableKeys.COOK_STATUS_KEY, {
     },
 
     async create(row: CookStatus): Promise<CookStatusResponse> {
+      throw new Error("Method not implemented.");
+    },
+
+    async save(row: CookStatus): Promise<CookStatusResponse> {
       throw new Error("Method not implemented.");
     },
 

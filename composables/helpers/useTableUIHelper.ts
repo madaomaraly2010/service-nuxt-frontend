@@ -3,8 +3,11 @@ import type { QTableColumn } from "quasar";
 export const useTableHelper = () => {
   const nuxtApp = useNuxtApp();
 
-  const createButtonColumn = (label: string): QTableColumn => ({
-    name: "detailsButton",
+  const createButtonColumn = (
+    label: string,
+    columnName: string
+  ): QTableColumn => ({
+    name: columnName,
     label: "",
     field: "id",
     headerClasses: "bg-grey-3",
@@ -13,7 +16,7 @@ export const useTableHelper = () => {
   });
 
   const createColumn = (
-    tableName: string,
+    // tableName: string,
     fieldName: string,
     label: string,
     columnName?: string,

@@ -34,6 +34,12 @@ export class PackageItem {
     includeToDbRow: false,
   })
   package!: Package;
+
+  public static create(packageId: number): PackageItem {
+    let row = new PackageItem();
+    row.package_id = packageId;
+    return row;
+  }
   // @ts-ignore
   public toDbRow(): IPackageItemAttributes {}
   // @ts-ignore

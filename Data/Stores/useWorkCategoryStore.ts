@@ -3,13 +3,23 @@ import type { WorkCategory } from "../Models";
 import type { WorkCategoryResponse } from "../Responses/Model-Responses";
 import { WorkCategoryService } from "../Services/WorkCategory.service";
 import type { FetchOptions } from "~/common/fetch-options";
+import type { IWorkCategoryRepositry } from "../Repositries/Models-Repositries";
 
 interface IWorkCategoryState {
   list: WorkCategory[];
 }
-export type WorkCategoryStoreType = ReturnType<typeof useWorkCategoryStore>;
 
-export const useWorkCategoryStore = defineStore(TableKeys.WORK_CATEGORY_KEY, {
+interface IWorkCategoryActions {}
+export type WorkCategoryStoreType = ReturnType<typeof useWorkCategoryStore>;
+export type WorkCategoryStoreActionType = IWorkCategoryActions &
+  IWorkCategoryRepositry;
+
+export const useWorkCategoryStore = defineStore<
+  string,
+  IWorkCategoryState,
+  {},
+  WorkCategoryStoreActionType
+>(TableKeys.WORK_CATEGORY_KEY, {
   state: (): IWorkCategoryState => ({ list: [] }),
   getters: {},
   actions: {
@@ -24,6 +34,10 @@ export const useWorkCategoryStore = defineStore(TableKeys.WORK_CATEGORY_KEY, {
     },
 
     async create(row: WorkCategory): Promise<WorkCategoryResponse> {
+      throw new Error("Method not implemented.");
+    },
+
+    async save(row: WorkCategory): Promise<WorkCategoryResponse> {
       throw new Error("Method not implemented.");
     },
 

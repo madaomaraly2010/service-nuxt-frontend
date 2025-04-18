@@ -47,10 +47,6 @@ export interface IPackageFormProps extends IBaseFormProps {
   editRow: Package;
 }
 
-export interface IPackageItemFormProps extends IBaseFormProps {
-  editRow: PackageItem;
-}
-
 export interface ILoginFormProps extends IBaseFormProps {}
 
 export interface IRequestCustomerDialogProps extends IBaseDialogProps {
@@ -60,3 +56,19 @@ export interface IRequestCustomerDialogProps extends IBaseDialogProps {
 export interface IPackageDialogProps extends IBaseDialogProps {
   editRow: Package;
 }
+//==============================PackageItem===============
+export interface IPackageItemDialogProps extends IBaseDialogProps {
+  editRow: PackageItem;
+  packageRow: Package;
+}
+
+export interface IPackageItemTableProps
+  extends /* @vue-ignore */ Omit<IBaseTableProps, keyof QTableProps> {
+  packageRow: Package;
+}
+
+export interface IPackageItemFormProps extends IBaseFormProps {
+  editRow: PackageItem;
+  packageRow: Package;
+}
+//===============================================================

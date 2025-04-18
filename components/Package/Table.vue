@@ -34,6 +34,20 @@
             </q-td>
           </template>
 
+          <template #discountsButton="{ row }">
+            <q-td class="text-left">
+              <q-item class="text-center">
+                <q-item-section class="text-center">
+                  <q-btn
+                    @click="goToPackageItemPage(row)"
+                    flat
+                    color="blue-6"
+                    >{{ $t(I18Packageitem.title) }}</q-btn
+                  >
+                </q-item-section>
+              </q-item>
+            </q-td>
+          </template>
           <template #packageItemsButton="{ row }">
             <q-td class="text-left">
               <q-item class="text-center">
@@ -125,9 +139,9 @@ import { usePackageStore } from "~/Data/Stores";
 
 import { date } from "quasar";
 import { Package } from "~/Data/Models";
-import { PageKeys, TableKeys } from "~/common/table-keys";
+import { PageKeys } from "~/common/table-keys";
 import { PackageColumns } from "~/common/table-column-names";
-import { I18Package, I18Packageitem } from "~/locales/i18-key";
+import { I18Global, I18Package, I18Packageitem } from "~/locales/i18-key";
 import cloneDeep from "lodash/cloneDeep";
 
 const dialogRef = ref(null);
@@ -157,33 +171,37 @@ const onCreateClicked = async () => {
   dialogRef?.value.open();
 };
 const goToPackageItemPage = (row: Package) =>
-  useRouter().push(PageKeys.PACKAGE_ITEM_PAGE);
+  useRouter().push({
+    path: PageKeys.PACKAGE_ITEM_PAGE + "/" + row.id,
+  });
 const theColumns: QTableColumn[] = [
-  tableHelper.createButtonColumn(nuxtApp.$t("global.details")),
+  tableHelper.createButtonColumn(
+    nuxtApp.$t(I18Global.details),
+    "detailsButton"
+  ),
+  tableHelper.createButtonColumn(
+    nuxtApp.$t(I18Packageitem.title),
+    "discountsButton"
+  ),
   tableHelper.createColumn(
-    TableKeys.PACKAGE_KEY,
     PackageColumns.arb_name,
     nuxtApp.$t(I18Package.Fields.name),
     "name"
   ),
   tableHelper.createColumn(
-    TableKeys.PACKAGE_KEY,
-    "start_date",
+    PackageColumns.start_date,
     nuxtApp.$t(I18Package.Fields.start_date)
   ),
   tableHelper.createColumn(
-    TableKeys.PACKAGE_KEY,
-    "end_date",
+    PackageColumns.end_date,
     nuxtApp.$t(I18Package.Fields.end_date)
   ),
   tableHelper.createColumn(
-    TableKeys.PACKAGE_KEY,
-    "valid_days",
+    PackageColumns.valid_days,
     nuxtApp.$t(I18Package.Fields.valid_days)
   ),
   tableHelper.createColumn(
-    TableKeys.PACKAGE_KEY,
-    "is_active",
+    PackageColumns.is_active,
     nuxtApp.$t(I18Package.Fields.is_active)
   ),
 ];

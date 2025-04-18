@@ -33,15 +33,7 @@ import {
 } from "./useRequestStatusStore";
 
 interface ILookupState {
-  // workCategoryStore: WorkCategoryStoreType | null;
-  // workStore: WorkStoreType | null;
-  // langStore: LangStatusStoreType | null;
-  // childStore: ChildStatusStoreType | null;
-  // rentStore: RentStatusStoreType | null;
-  // cookStore: CookStatusStoreType | null;
-  // religionStore: ReligionStatusStoreType | null;
-  // countryStore: CountryStoreType | null;
-  // statusStore: RequestStatusStoreType | null;
+  
 }
 
 let workCategoryStore: WorkCategoryStoreType | null = null;
@@ -58,15 +50,7 @@ export type LookupStoreType = ReturnType<typeof useLookupStore>;
 
 export const useLookupStore = defineStore("lookups", {
   state: (): ILookupState => ({
-    // workCategoryStore,
-    // workStore,
-    // langStore,
-    // childStore,
-    // rentStore,
-    // cookStore,
-    // religionStore,
-    // countryStore,
-    // statusStore,
+  
   }),
   getters: {
     requestStatusStore(): RequestStatusStoreType {

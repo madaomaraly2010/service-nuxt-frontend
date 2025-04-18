@@ -3,6 +3,7 @@
     <div class="row">
       <package-item-form-dialog
         v-if="selectedRow"
+        :package-row="packageRow"
         ref="dialogRef"
         :editRow="(selectedRow as PackageItem)"
       ></package-item-form-dialog>
@@ -24,7 +25,7 @@
               <q-item class="text-center">
                 <q-item-section class="text-center">
                   <q-btn
-                    @click="selectAndOpenDialog(row)"
+                    @click="selectAndOpenDialog(row as PackageItem)"
                     flat
                     color="blue-6"
                     >{{ $t("global.details") }}</q-btn
@@ -39,59 +40,51 @@
               <q-item>
                 <q-item-section>
                   <q-item-label class="text-bold text-red-7 text-center">{{
-                    row.arb_name
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-td>
-          </template>
-          <template #start_date="{ row }">
-            <q-td>
-              <q-item>
-                <q-item-section>
-                  <q-item-label class="text-bold text-grey-7 text-center">{{
-                    date.formatDate(row?.start_date, "DD/MM/YYYY")
+                    (row as PackageItem).arb_name
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-td>
           </template>
 
-          <template #end_date="{ row }">
+          <template #month_number="{ row }">
             <q-td>
               <q-item>
                 <q-item-section>
                   <q-item-label class="text-bold text-grey-7 text-center">{{
-                    date.formatDate(row?.end_date, "DD/MM/YYYY")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-td>
-          </template>
-          <template #valid_days="{ row }">
-            <q-td>
-              <q-item>
-                <q-item-section>
-                  <q-item-label class="text-bold text-grey-7 text-center">{{
-                    row.valid_days ?? " "
+                    (row as PackageItem).month_number ?? " "
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-td>
           </template>
 
-          <template #is_active="{ row }">
+          <template #discount_percent="{ row }">
             <q-td style="width: 10vw">
               <q-item>
                 <q-item-section>
                   <q-item-label class="text-bold text-grey-7 text-center">
-                    <QToggle
-                      :disable="true"
-                      v-model="row.is_active"
-                      color="green"
-                      :trueValue="1"
-                      :falseValue="0"
-                    ></QToggle>
+                    {{
+                      (row as PackageItem).discount_percent
+                        ? (row as PackageItem).discount_percent + "%"
+                        : " "
+                    }}
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-td>
+          </template>
+
+          <template #down_payment_percent="{ row }">
+            <q-td style="width: 10vw">
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="text-bold text-grey-7 text-center">
+                    {{
+                      (row as PackageItem).down_payment_percent
+                        ? (row as PackageItem).down_payment_percent + "%"
+                        : " "
+                    }}
                   </q-item-label>
                 </q-item-section>
               </q-item>
@@ -104,22 +97,22 @@
 </template>
 
 <script lang="ts" setup>
-import type { QTableColumn, QToggle } from "quasar";
+import type { QTableColumn } from "quasar";
 
 import { usePackageItemStore } from "~/Data/Stores";
 
-import { date } from "quasar";
-import { TableKeys } from "~/common/table-keys";
-import { PackageColumns } from "~/common/table-column-names";
-import { I18Package } from "~/locales/i18-key";
+import { PackageItemColumns } from "~/common/table-column-names";
+import { I18Global, I18Package, I18Packageitem } from "~/locales/i18-key";
 import cloneDeep from "lodash/cloneDeep";
 import { PackageItem } from "~/Data/Models";
+import type { IPackageItemTableProps } from "~/common/common-types";
 
 const dialogRef = ref(null);
 const selectedRow: Ref<PackageItem | undefined> = ref<PackageItem>();
 const store = usePackageItemStore();
 const nuxtApp = useNuxtApp();
 const tableHelper = useTableHelper();
+const props = defineProps<IPackageItemTableProps>();
 const pagination = ref({
   page: 1,
   rowsPerPage: 20, // Control number of rows per page
@@ -131,38 +124,34 @@ const selectAndOpenDialog = async (req: PackageItem) => {
   dialogRef?.value.open();
 };
 const onCreateClicked = async () => {
-  selectedRow.value = PackageItem.create();
+  selectedRow.value = PackageItem.create(props.packageRow?.id);
   await nextTick();
   //@ts-ignore
   dialogRef?.value.open();
 };
 const theColumns: QTableColumn[] = [
-  tableHelper.createButtonColumn(nuxtApp.$t("global.details")),
+  tableHelper.createButtonColumn(
+    nuxtApp.$t(I18Global.details),
+    "detailsButton"
+  ),
   tableHelper.createColumn(
-    TableKeys.PACKAGE_KEY,
-    PackageColumns.arb_name,
+    PackageItemColumns.arb_name,
     nuxtApp.$t(I18Package.Fields.name),
     "name"
   ),
   tableHelper.createColumn(
-    TableKeys.PACKAGE_KEY,
-    "start_date",
-    nuxtApp.$t(I18Package.Fields.start_date)
+    PackageItemColumns.month_number,
+    nuxtApp.$t(I18Packageitem.Fields.month_number)
   ),
+
   tableHelper.createColumn(
-    TableKeys.PACKAGE_KEY,
-    "end_date",
-    nuxtApp.$t(I18Package.Fields.end_date)
+    PackageItemColumns.discount_percent,
+    nuxtApp.$t(I18Packageitem.Fields.discount_percent)
   ),
+
   tableHelper.createColumn(
-    TableKeys.PACKAGE_KEY,
-    "valid_days",
-    nuxtApp.$t(I18Package.Fields.valid_days)
-  ),
-  tableHelper.createColumn(
-    TableKeys.PACKAGE_KEY,
-    "is_active",
-    nuxtApp.$t(I18Package.Fields.is_active)
+    PackageItemColumns.down_payment_percent,
+    nuxtApp.$t(I18Packageitem.Fields.down_payment_percent)
   ),
 ];
 </script>

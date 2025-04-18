@@ -3,13 +3,21 @@ import type { RequestStatus } from "../Models";
 import type { RequestStatusResponse } from "../Responses/Model-Responses";
 import { RequestStatusService } from "../Services/RequestStatus.service";
 import type { FetchOptions } from "~/common/fetch-options";
+import type { IRequestStatusRepositry } from "../Repositries/Models-Repositries";
 
 interface IRequestStatusState {
   list: RequestStatus[];
 }
+interface IRequestStatusActions {}
 export type RequestStatusStoreType = ReturnType<typeof useRequestStatusStore>;
-
-export const useRequestStatusStore = defineStore(TableKeys.REQUEST_STATUS_KEY, {
+export type RequestStatusStoreActionType = IRequestStatusActions &
+  IRequestStatusRepositry;
+export const useRequestStatusStore = defineStore<
+  string,
+  IRequestStatusState,
+  {},
+  RequestStatusStoreActionType
+>(TableKeys.REQUEST_STATUS_KEY, {
   state: (): IRequestStatusState => ({ list: [] }),
   getters: {},
   actions: {
@@ -24,6 +32,10 @@ export const useRequestStatusStore = defineStore(TableKeys.REQUEST_STATUS_KEY, {
     },
 
     async create(row: RequestStatus): Promise<RequestStatusResponse> {
+      throw new Error("Method not implemented.");
+    },
+
+    async save(row: RequestStatus): Promise<RequestStatusResponse> {
       throw new Error("Method not implemented.");
     },
 

@@ -2,6 +2,7 @@
   <div>
     <BaseDialogForm ref="baseDialogRef" width="50vw" height="50vh">
       <PackageItemForm
+        :package-row="packageRow"
         :dialog-ref="baseDialogRef"
         ref="formRef"
         :edit-row="editRow"
@@ -11,12 +12,12 @@
 </template>
 
 <script setup lang="ts">
-import type { IPackageDialogProps } from "~/common/common-types";
+import type { IPackageItemDialogProps } from "~/common/common-types";
 
 const baseDialogRef = ref();
 const formRef = ref();
 
-defineProps<IPackageDialogProps>();
+defineProps<IPackageItemDialogProps>();
 //@ts-ignore
 const open = () => {
   //@ts-ignore

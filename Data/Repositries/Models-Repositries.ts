@@ -23,6 +23,7 @@ import type { Message } from "../Models/Message";
 import type { RequestAttach } from "../Models/RequestAttach";
 import type { RequestStatus } from "../Models/RequestStatus";
 import type {
+  PackageItemResponse,
   ProviderResponse,
   UserResponse,
   WorkResponse,
@@ -52,7 +53,12 @@ export interface IPackageRepositry extends IRepositry<Package> {}
 
 export interface IMessageRepositry extends IRepositry<Message> {}
 
-export interface IPackageItemRepositry extends IRepositry<PackageItem> {}
+export interface IPackageItemRepositry extends IRepositry<PackageItem> {
+  findAllByPackage(
+    packageId: number,
+    options?: FetchOptions
+  ): Promise<PackageItemResponse>;
+}
 
 export interface IRequestCustomerRepositry
   extends IRepositry<RequestCustomer> {}
