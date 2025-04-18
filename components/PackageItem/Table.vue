@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="row">
-      <package-form-dialog
+      <package-item-form-dialog
         v-if="selectedRow"
         ref="dialogRef"
-        :editRow="selectedRow as Package"
-      ></package-form-dialog>
+        :editRow="(selectedRow as PackageItem)"
+      ></package-item-form-dialog>
 
       <q-card-section style="width: 70vw" class="q-pa-none q-ma-none">
         <base-table
@@ -28,21 +28,6 @@
                     flat
                     color="blue-6"
                     >{{ $t("global.details") }}</q-btn
-                  >
-                </q-item-section>
-              </q-item>
-            </q-td>
-          </template>
-
-          <template #packageItemsButton="{ row }">
-            <q-td class="text-left">
-              <q-item class="text-center">
-                <q-item-section class="text-center">
-                  <q-btn
-                    @click="goToPackageItemPage(row)"
-                    flat
-                    color="blue-6"
-                    >{{ $t(I18Packageitem.title) }}</q-btn
                   >
                 </q-item-section>
               </q-item>
@@ -121,37 +106,31 @@
 <script lang="ts" setup>
 import type { QTableColumn, QToggle } from "quasar";
 
-import { usePackageStore } from "~/Data/Stores";
+import { usePackageItemStore } from "~/Data/Stores";
 
 import { date } from "quasar";
-import { Package } from "~/Data/Models";
 import { PageKeys, TableKeys } from "~/common/table-keys";
 import { PackageColumns } from "~/common/table-column-names";
 import { I18Package, I18Packageitem } from "~/locales/i18-key";
 import cloneDeep from "lodash/cloneDeep";
 
 const dialogRef = ref(null);
-const selectedRow: Ref<Package | undefined> = ref<Package>();
-const store = usePackageStore();
-// await store.findAll();
-// const editRow = ref<Package>();
-
+const selectedRow: Ref<PackageItem | undefined> = ref<PackageItem>();
+const store = usePackageItemStore();
 const nuxtApp = useNuxtApp();
-
 const tableHelper = useTableHelper();
-
 const pagination = ref({
   page: 1,
   rowsPerPage: 20, // Control number of rows per page
 });
-const selectAndOpenDialog = async (req: Package) => {
+const selectAndOpenDialog = async (req: PackageItem) => {
   selectedRow.value = cloneDeep(req);
   await nextTick();
   //@ts-ignore
   dialogRef?.value.open();
 };
 const onCreateClicked = async () => {
-  selectedRow.value = Package.create();
+  selectedRow.value = PackageItem.create();
   await nextTick();
   //@ts-ignore
   dialogRef?.value.open();

@@ -71,7 +71,7 @@ const handleSave = async () => {
     await props.onSave?.();
     loading.value = false;
     debugger;
-    // props.dialogRef?.close();
+    props.dialogRef?.close();
   }
 };
 const handleCancel = () => {

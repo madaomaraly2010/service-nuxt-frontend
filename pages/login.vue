@@ -7,7 +7,6 @@
       <!-- @submit="doLogin" -->
       <q-card-section>
         <base-form
-          
           :on-save="doLogin"
           :save-label="$t('login.submit')"
           :show-cancel-button="false"
@@ -91,12 +90,12 @@ import { ref } from "vue";
 import { QForm, useQuasar } from "quasar";
 import { ValidatorRules } from "../common/validations";
 import { useUserStore } from "~/Data/Stores";
+import { I18Messages } from "~/locales/i18-key";
 // import { useUserStore } from "../Data/Stores/useUserStore";
 const passwordRef = ref();
 // const confirmRef = ref();
 const $q = useQuasar();
 const userStore = useUserStore();
-const nuxtApp = useNuxtApp();
 
 const email = ref("madaomaraly2010@yahoo.com");
 const password = ref("12345678");
@@ -117,19 +116,13 @@ const doLogin = async () => {
   //AppUiHelper.showErrorsIfFound(response);
 
   if (response.isAuthenticated) {
-    uiHelper.showNotifyMessage(
-      nuxtApp.$t("messages.user_authenticated"),
-      "green-7"
-    );
+    uiHelper.showSucceedMessage(I18Messages.user_authenticated);
     // $q.notify({
     //   message: ,
     //   position: "top",
     // });
   } else {
-    uiHelper.showNotifyMessage(
-      nuxtApp.$t("messages.user_not_authenticated"),
-      "red-7"
-    );
+    uiHelper.showErrorMessage(I18Messages.user_not_authenticated);
     // $q.notify({
     //   message: nuxtApp.$t("messages.user_not_authenticated"),
     //   position: "top",

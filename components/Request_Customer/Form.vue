@@ -3,6 +3,7 @@
     :on-save="onSave"
     :show-save-button="true"
     :show-cancel-button="true"
+    :title="$t(I18Requestcustomer.title)"
   >
     <div class="row items-center" :dir="globalStore.direction">
       <div class="col-4 row items-center q-col-gutter-none">

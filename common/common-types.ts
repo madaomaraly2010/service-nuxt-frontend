@@ -1,5 +1,5 @@
 import type { QTableProps } from "quasar";
-import type { Package, RequestCustomer } from "~/Data/Models";
+import type { Package, PackageItem, RequestCustomer } from "~/Data/Models";
 
 export type TableActionType = "Add" | "Edit" | "Delete";
 
@@ -45,6 +45,10 @@ export interface IRequestCustomerFormProps extends IBaseFormProps {
 
 export interface IPackageFormProps extends IBaseFormProps {
   editRow: Package;
+}
+
+export interface IPackageItemFormProps extends IBaseFormProps {
+  editRow: PackageItem;
 }
 
 export interface ILoginFormProps extends IBaseFormProps {}

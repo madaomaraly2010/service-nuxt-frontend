@@ -24,7 +24,8 @@ export class ChildStatusService
   override async findAll(options?: FetchOptions): Promise<ChildStatusResponse> {
     return super.fetchData(
       ChildStatus as any,
-      config.ChildStatus.API_CHILD_STATUS_GET, {
+      config.ChildStatus.API_CHILD_STATUS_GET,
+      {
         options,
       }
     );

@@ -22,6 +22,34 @@ export class TableKeys {
   static CITY_KEY: string = "city";
 }
 
+export class PageKeys {
+  static LOGIN_PAGE: string = "login";
+  static HOME_PAGE: string = "index";
+  static ABOUT_PAGE: string = "index";
+
+  static WORK_PAGE: string = "WorkPage";
+  static WORK_CATEGORY_PAGE: string = "WorkCategoryPage";
+  static PROVIDER_PAGE: string = "ProviderPage";
+  static PACKAGE_PAGE: string = "PackagePage";
+  static PACKAGE_ITEM_PAGE: string = "PackageItemPage";
+  static COUNTRY_PAGE: string = "CountryPage";
+  static COOK_STATUS_PAGE: string = "CookStatusPage";
+  static LANG_STATUS_PAGE: string = "LangStatusPage";
+  static RENT_STATUS_PAGE: string = "RentStatusPage";
+  static RELIGION_STATUS_PAGE: string = "ReligionStatusPage";
+  static REQUEST_ATTACH_PAGE: string = "RequestAttachPage";
+  static REQUEST_STATUS_PAGE: string = "RequestStatusPage";
+  static CHILD_STATUS_PAGE: string = "ChildStatusPage";
+  static SETTING_PAGE: string = "SettingPage";
+  static USER_PAGE: string = "UserPage";
+  static REQUEST_CUSTOMER_PAGE: string = "RequestCustomerPage";
+  static REQUEST_PAYMENT_PAGE: string = "RequestPaymentPage";
+  static MESSAGE_PAGE: string = "MessagePage";
+  static LOCATION_PAGE: string = "LocationPage";
+  static BANK_PAGE: string = "BankPage";
+  static CITY_PAGE: string = "CityPage";
+}
+
 export class StoreKeys {
   private static key = "store";
 

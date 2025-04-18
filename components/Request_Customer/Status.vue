@@ -5,7 +5,7 @@
         class="row items-center text-grey-8 text-center text-subtitle1"
       >
         <div v-if="showLabel" class="q-mx-sm">
-          {{ $t("request_customer.fields.request_status") }}
+          {{ $t(I18Requestcustomer.Fields.request_status) }}
         </div>
         <!-- :color="getStatusColor(requestCustomer?.request_status_id ?? 0)" -->
         <!-- :style="{
@@ -35,6 +35,7 @@
 <script setup lang="ts">
 import { RequestCustomer } from "~/Data/Models";
 import { useGlobalStore } from "~/Data/Stores";
+import { I18Requestcustomer } from "~/locales/i18-key";
 
 const globalStore = useGlobalStore();
 defineProps({

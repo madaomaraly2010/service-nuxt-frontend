@@ -1,16 +1,26 @@
 export const useUIHelper = () => {
   const nuxtApp = useNuxtApp();
 
-  const showNotifyMessage = (message: string, color?: string) => {
+  const showSucceedMessage = (messageKey: string) => {
     nuxtApp.$q.notify({
-      message: message,
+      message: nuxtApp.$t(messageKey),
       position: "top",
-      color,
+      classes: "text-h6",
+      type: "positive",
     });
   };
- 
+
+  const showErrorMessage = (messageKey: string) => {
+    nuxtApp.$q.notify({
+      classes: "text-h6",
+      message: nuxtApp.$t(messageKey),
+      position: "top",
+      type: "negative",
+    });
+  };
 
   return {
-    showNotifyMessage,
+    showSucceedMessage,
+    showErrorMessage,
   };
 };
