@@ -84,9 +84,15 @@
             <q-td style="width: 10vw">
               <q-item>
                 <q-item-section>
-                  <q-item-label class="text-bold text-grey-7 text-center">{{
-                    row.is_active ?? " "
-                  }}</q-item-label>
+                  <q-item-label class="text-bold text-grey-7 text-center">
+                    <QToggle
+                      :disable="true"
+                      v-model="row.is_active"
+                      color="green"
+                      :trueValue="1"
+                      :falseValue="0"
+                    ></QToggle>
+                  </q-item-label>
                 </q-item-section>
               </q-item>
             </q-td>
@@ -98,7 +104,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { QTableColumn } from "quasar";
+import type { QTableColumn, QToggle } from "quasar";
 
 import { usePackageStore } from "~/Data/Stores";
 
@@ -130,7 +136,7 @@ const selectAndOpenDialog = async (req: Package) => {
   dialogRef?.value.open();
 };
 const onCreateClicked = async () => {
-  selectedRow.value =  Package.create();
+  selectedRow.value = Package.create();
   await nextTick();
   //@ts-ignore
   dialogRef?.value.open();

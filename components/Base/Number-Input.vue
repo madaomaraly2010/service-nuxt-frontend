@@ -42,7 +42,7 @@ const theNumber = defineModel<number>();
 const qInputRef: Ref<QInput | null> = ref<QInput | null>(null);
 
 const nuxtApp = useNuxtApp();
-theNumber.value = props?.min ?? 0;
+theNumber.value ??= props?.min ?? 0;
 const getRules = () => {
   let maxVal = props.max ?? 0;
   let minVal = props.min ?? 0;
@@ -61,6 +61,7 @@ const getRules = () => {
 };
 
 const increase = () => {
+  debugger;
   let currentValue = theNumber?.value ?? 0;
   if (props.max) {
     if (currentValue + 1 > props.max) {
@@ -70,6 +71,7 @@ const increase = () => {
   theNumber.value = +currentValue + 1;
 };
 const decrease = () => {
+  debugger;
   let currentValue = theNumber?.value ?? 0;
   if (props.min) {
     if (currentValue - 1 < props.min) {

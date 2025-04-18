@@ -14,8 +14,8 @@
               console.log('Create button clicked');
             }
           "
-          :showToolbar="true"
-          :showCreateButton="true"
+          :showToolbar="false"
+          :showCreateButton="false"
           :rows="store.list"
           style="height: 50vh"
           :columns="theColumns"
@@ -156,8 +156,7 @@ import type { RequestCustomer } from "~/Data/Models";
 import cloneDeep from "lodash/cloneDeep";
 import { I18Provider, I18Requestcustomer, I18User } from "~/locales/i18-key";
 const dialogRef = ref(null);
-const selectedRow: Ref<RequestCustomer | undefined> =
-  ref<RequestCustomer>();
+const selectedRow: Ref<RequestCustomer | undefined> = ref<RequestCustomer>();
 const store = useRequestCustomerStore();
 
 const nuxtApp = useNuxtApp();

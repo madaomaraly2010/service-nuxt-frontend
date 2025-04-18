@@ -1,6 +1,11 @@
 <template>
   <!-- view="hHh lpR fFf" -->
-  <q-layout :dir="globalStore.direction" view="lHh Lpr lFf" class="bg-grey-1">
+  <q-layout
+    style="background-color: white"
+    :dir="globalStore.direction"
+    view="lHh Lpr lFf"
+    class="bg-grey-1"
+  >
     <q-header elevated class="bg-white text-grey-8 q-py-xs" height-hint="58">
       <q-toolbar>
         <q-btn
@@ -141,8 +146,8 @@
       class="bg-grey-2"
       :width="240"
     >
-      <q-scroll-area class="fit">
-        <q-list padding>
+      <q-scroll-area class="fit" style="background-color: white">
+        <q-list padding style="background-color: white">
           <q-item
             v-for="link in drawerItems"
             :key="link.text"
