@@ -109,10 +109,11 @@ import type { QTableColumn, QToggle } from "quasar";
 import { usePackageItemStore } from "~/Data/Stores";
 
 import { date } from "quasar";
-import { PageKeys, TableKeys } from "~/common/table-keys";
+import { TableKeys } from "~/common/table-keys";
 import { PackageColumns } from "~/common/table-column-names";
-import { I18Package, I18Packageitem } from "~/locales/i18-key";
+import { I18Package } from "~/locales/i18-key";
 import cloneDeep from "lodash/cloneDeep";
+import { PackageItem } from "~/Data/Models";
 
 const dialogRef = ref(null);
 const selectedRow: Ref<PackageItem | undefined> = ref<PackageItem>();
@@ -135,8 +136,6 @@ const onCreateClicked = async () => {
   //@ts-ignore
   dialogRef?.value.open();
 };
-const goToPackageItemPage = (row: Package) =>
-  useRouter().push(PageKeys.PACKAGE_ITEM_PAGE);
 const theColumns: QTableColumn[] = [
   tableHelper.createButtonColumn(nuxtApp.$t("global.details")),
   tableHelper.createColumn(
