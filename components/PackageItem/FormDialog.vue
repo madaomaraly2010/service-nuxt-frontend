@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseDialogForm ref="baseDialogRef" width="50vw" height="50vh">
+    <BaseDialogForm ref="baseDialogRef" width="40vw" height="40vh">
       <PackageItemForm
         :package-row="packageRow"
         :dialog-ref="baseDialogRef"

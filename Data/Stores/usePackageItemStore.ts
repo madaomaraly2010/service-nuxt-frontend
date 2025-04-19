@@ -46,15 +46,27 @@ export const usePackageItemStore = defineStore<
     },
 
     async create(row: PackageItem): Promise<PackageItemResponse> {
-      throw new Error("Method not implemented.");
+      return StoreHelper.genericCreate<PackageItem, PackageItemResponse>(
+        this,
+        row,
+        () => PackageItemService.instance.create(row)
+      );
     },
 
     async save(row: PackageItem): Promise<PackageItemResponse> {
-      throw new Error("Method not implemented.");
+      return StoreHelper.genericSave<PackageItem, PackageItemResponse>(
+        this,
+        row,
+        () => PackageItemService.instance.save(row)
+      );
     },
 
     async update(row: PackageItem): Promise<PackageItemResponse> {
-      throw new Error("Method not implemented.");
+      return StoreHelper.genericUpdate<PackageItem, PackageItemResponse>(
+        this,
+        row,
+        () => PackageItemService.instance.update(row)
+      );
     },
 
     async delete(id: number): Promise<PackageItemResponse> {

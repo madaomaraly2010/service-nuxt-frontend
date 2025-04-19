@@ -10,16 +10,26 @@
 
       <q-card-section style="width: 70vw" class="q-pa-none q-ma-none">
         <base-table
+          grid
           :show-toolbar="true"
           :show-create-button="true"
           @on-create-button-clicked="onCreateClicked"
-          :rows="store.list"
+          :rows="theList"
           style="height: 50vh"
           :columns="theColumns"
           flat
           bordered
           :pagination="pagination"
         >
+          <template v-slot:item="props">
+            <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4">
+              <package-item-card
+                @details-clicked="detailsClicked"
+                :row="props.row"
+              ></package-item-card>
+            </div>
+          </template>
+          <!--
           <template #detailsButton="{ row }">
             <q-td class="text-left">
               <q-item class="text-center">
@@ -90,6 +100,7 @@
               </q-item>
             </q-td>
           </template>
+          -->
         </base-table>
       </q-card-section>
     </div>
@@ -113,12 +124,17 @@ const store = usePackageItemStore();
 const nuxtApp = useNuxtApp();
 const tableHelper = useTableHelper();
 const props = defineProps<IPackageItemTableProps>();
+const theList = computed(() => {
+  return store.list.sort((a, b) => {
+    return a.month_number - b.month_number;
+  });
+});
 const pagination = ref({
   page: 1,
   rowsPerPage: 20, // Control number of rows per page
 });
-const selectAndOpenDialog = async (req: PackageItem) => {
-  selectedRow.value = cloneDeep(req);
+const detailsClicked = async (row: PackageItem) => {
+  selectedRow.value = cloneDeep(row);
   await nextTick();
   //@ts-ignore
   dialogRef?.value.open();

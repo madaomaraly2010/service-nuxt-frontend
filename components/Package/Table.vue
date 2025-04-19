@@ -11,6 +11,7 @@
         <base-table
           :show-toolbar="true"
           :show-create-button="true"
+          :title="$t(I18Package.title)"
           @on-create-button-clicked="onCreateClicked"
           :rows="store.list"
           style="height: 50vh"
@@ -24,6 +25,8 @@
               <q-item class="text-center">
                 <q-item-section class="text-center">
                   <q-btn
+                    class="text-bold"
+                    icon="list"
                     @click="selectAndOpenDialog(row)"
                     flat
                     color="blue-6"
@@ -33,12 +36,13 @@
               </q-item>
             </q-td>
           </template>
-
           <template #discountsButton="{ row }">
             <q-td class="text-left">
               <q-item class="text-center">
                 <q-item-section class="text-center">
                   <q-btn
+                    class="text-bold"
+                    icon="money_off"
                     @click="goToPackageItemPage(row)"
                     flat
                     color="blue-6"

@@ -20,39 +20,38 @@
       <!-- total_amount   discount_percent -->
       <div class="col-12 row items-center" :dir="globalStore.direction">
         <div class="col-4 row">
-          <div class="col-7">
-            <BaseNumberInput
-              v-model="editRow.month_number"
-              :label="$t(I18Packageitem.Fields.month_number)"
-              :min="1"
-              :max="12"
-              :show-spin="true"
-            ></BaseNumberInput>
-          </div>
+          <!-- <div class="col-7"> -->
+          <BaseNumberInput
+            v-model="editRow.month_number"
+            :label="$t(I18Packageitem.Fields.month_number)"
+            :min="1"
+            :max="12"
+            :show-spin="true"
+          ></BaseNumberInput>
+          <!-- </div> -->
         </div>
-        <div class="col-2"></div>
         <div class="col-4 row">
-          <div class="col-7">
-            <BaseNumberInput
-              v-model="editRow.discount_percent"
-              :label="$t(I18Packageitem.Fields.discount_percent)"
-              prefix="%"
-              :min="1"
-              :max="100"
-            ></BaseNumberInput>
-          </div>
+          <!-- <div class="col-7"> -->
+          <BaseNumberInput
+            v-model="editRow.discount_percent"
+            :label="$t(I18Packageitem.Fields.discount_percent)"
+            prefix="%"
+            :min="0"
+            :max="100"
+          ></BaseNumberInput>
+          <!-- </div> -->
         </div>
 
         <div class="col-4 row">
-          <div class="col-7">
-            <BaseNumberInput
-              v-model="editRow.down_payment_percent"
-              :label="$t(I18Packageitem.Fields.down_payment_percent)"
-              prefix="%"
-              :min="1"
-              :max="100"
-            ></BaseNumberInput>
-          </div>
+          <!-- <div class="col-7"> -->
+          <BaseNumberInput
+            v-model="editRow.down_payment_percent"
+            :label="$t(I18Packageitem.Fields.down_payment_percent)"
+            prefix="%"
+            :min="0"
+            :max="100"
+          ></BaseNumberInput>
+          <!-- </div> -->
         </div>
       </div>
     </div>

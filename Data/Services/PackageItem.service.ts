@@ -49,10 +49,18 @@ export class PackageItemService
     throw new Error("Method not implemented.");
   }
   override async create(row: PackageItem): Promise<PackageItemResponse> {
-    throw new Error("Method not implemented.");
+    return super.serverCreateRow(
+      PackageItem as any,
+      config.PackageItem.API_PACKAGE_ITEM_POST,
+      row
+    );
   }
   override async update(row: PackageItem): Promise<PackageItemResponse> {
-    throw new Error("Method not implemented.");
+    return super.serverUpdateRow(
+      PackageItem as any,
+      config.PackageItem.API_PACKAGE_ITEM_UPDATE,
+      row
+    );
   }
   override async delete(id: number): Promise<PackageItemResponse> {
     throw new Error("Method not implemented.");

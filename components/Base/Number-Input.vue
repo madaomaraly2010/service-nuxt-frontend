@@ -42,8 +42,16 @@ const theNumber = defineModel<number>();
 const qInputRef: Ref<QInput | null> = ref<QInput | null>(null);
 
 const nuxtApp = useNuxtApp();
-theNumber.value ??= props?.min ?? 0;
+
+watch(theNumber, (val) => {
+  qInputRef.value?.validate();
+});
+onMounted(() => {
+  let minVal = props?.min ?? 0;
+  theNumber.value = minVal;
+});
 const getRules = () => {
+  debugger;
   let maxVal = props.max ?? 0;
   let minVal = props.min ?? 0;
 

@@ -16,6 +16,10 @@
       row-key="id"
       class="sticky-header-table"
     >
+      <!-- for grid style -->
+      <template v-slot:item="props">
+        <slot name="item" v-bind="props"></slot>
+      </template>
       <!-- Dynamically create slots for each column -->
       <template
         v-for="col in columns"
