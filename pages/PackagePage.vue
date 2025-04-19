@@ -16,10 +16,12 @@
 <script setup lang="ts">
 import { usePackageStore } from "~/Data/Stores";
 import { I18Package } from "~/locales/i18-key";
-
+debugger;
 const store = usePackageStore();
 
-await store.findAll();
+await store.findAll({
+  reFetch: true,
+});
 </script>
 
 <style scoped></style>

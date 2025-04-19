@@ -7,7 +7,12 @@ export default defineNuxtConfig({
   pages: true,
   ssr: false,
   imports: {
-    dirs: ["composables", "composables/helpers", "data/stores"],
+    dirs: [
+      "composables",
+      "composables/helpers",
+      "data/stores",
+      "composables/table-services-composables",
+    ],
   },
   modules: [
     "nuxt-quasar-ui",
