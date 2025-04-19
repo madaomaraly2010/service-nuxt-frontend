@@ -35,7 +35,7 @@ export class PackageItemService
     packageId: number,
     options?: FetchOptions
   ): Promise<PackageItemResponse> {
-    debugger;
+    // debugger;
     return super.fetchData(
       PackageItem as any,
       config.PackageItem.API_PACKAGE_ITEM_GET,

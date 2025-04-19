@@ -24,12 +24,13 @@ export class PackageService
     return super.fetchData(Package as any, config.Package.API_PACKAGE_GET, {
       options,
     });
-    // let { data, error } = await useFetch(config.Package.API_PACKAGE_GET);
-    // console.log("Lang Data", data);
-    // return ModelResponse.createSuccessResponse([]);
   }
   override async findOne(id: number): Promise<PackageResponse> {
-    throw new Error("Method not implemented.");
+    return super.serverFindOne(
+      Package as any,
+      config.Package.API_PACKAGE_GET,
+      id
+    );
   }
   override async create(row: Package): Promise<PackageResponse> {
     return super.serverCreateRow(

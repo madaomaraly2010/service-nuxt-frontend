@@ -23,10 +23,7 @@ export const usePackageStore = defineStore<
   getters: {},
   actions: {
     async findAll(options?: FetchOptions): Promise<PackageResponse> {
-      // const response = await PackageService.instance.findAll(options);
-      // this.list = response.data ?? [];
-      // return response;
-      return StoreHelper.genericFindAll<Package, PackageResponse>(
+      return StoreHelper.genericFind<Package, PackageResponse>(
         this,
         async () => {
           return PackageService.instance.findAll(options);
@@ -35,7 +32,9 @@ export const usePackageStore = defineStore<
     },
 
     async findOne(id: number): Promise<PackageResponse> {
-      throw new Error("Method not implemented.");
+      return StoreHelper.genericFind<Package, PackageResponse>(this, () =>
+        PackageService.instance.findOne(id)
+      );
     },
 
     async create(row: Package): Promise<PackageResponse> {
@@ -55,19 +54,6 @@ export const usePackageStore = defineStore<
     },
 
     async save(row: Package): Promise<PackageResponse> {
-      // let isNew: boolean = row.id == null || row.id == undefined;
-      // const response = await PackageService.instance.save(row);
-      // if (response.success) {
-      //   if (isNew) {
-      //     this.list.push(row);
-      //   } else {
-      //     const index = this.list.findIndex((item) => item.id === row.id);
-      //     if (index !== -1) {
-      //       this.list[index] = row;
-      //     }
-      //   }
-      // }
-      // return response;
       return StoreHelper.genericSave<Package, PackageResponse>(
         this,
         row,

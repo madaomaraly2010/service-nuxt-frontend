@@ -1,7 +1,7 @@
 import type { ModelResponse } from "../Responses/ModelResponse-Class";
 
 export class StoreHelper {
-  static async genericFindAll<
+  static async genericFind<
     ModelType,
     ResponseType extends ModelResponse<ModelType>
   >(

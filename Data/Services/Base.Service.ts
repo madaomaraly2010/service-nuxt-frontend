@@ -32,7 +32,7 @@ export abstract class BaseModelService<ModelType>
   }
   save(row: ModelType & { id?: number }): Promise<ModelResponse<ModelType>> {
     if (row.id) {
-      debugger;
+      // debugger;
       return this.update(row);
     } else {
       return this.create(row);
@@ -102,6 +102,22 @@ export abstract class BaseModelService<ModelType>
     });
   }
 
+  async serverFindOne(
+    cls: ModelType,
+    url: string,
+    id: number,
+    {
+      options,
+    }: {
+      options?: FetchOptions;
+    } = {}
+  ): Promise<ModelResponse<ModelType>> {
+    return this.fetchData(cls as any, `${url}/${id}`, {
+      method: "GET",
+      options: { ...options, reFetch: true },
+    });
+  }
+
   async fetchData(
     cls: ModelType,
     url: string,
@@ -115,7 +131,7 @@ export abstract class BaseModelService<ModelType>
       method?: "GET" | "HEAD" | "PATCH" | "POST" | "PUT" | "DELETE";
       options?: FetchOptions;
       body?: any;
-    }
+    } = {}
   ): Promise<ModelResponse<ModelType>> {
     //callStaticMethod(cls as any, "callStaticMethod");
 

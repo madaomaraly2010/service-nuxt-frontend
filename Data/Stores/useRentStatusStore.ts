@@ -27,9 +27,8 @@ export const useRentStatusStore = defineStore<
       // const response = await RentStatusService.instance.findAll(options);
       // this.list = response.data ?? [];
       // return response;
-      return StoreHelper.genericFindAll<RentStatus, RentStatusResponse>(
-        this,
-        () => RentStatusService.instance.findAll(options)
+      return StoreHelper.genericFind<RentStatus, RentStatusResponse>(this, () =>
+        RentStatusService.instance.findAll(options)
       );
     },
 

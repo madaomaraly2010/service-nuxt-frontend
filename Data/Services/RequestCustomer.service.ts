@@ -33,7 +33,10 @@ export class RequestCustomerService
     );
   }
   override async findOne(id: number): Promise<RequestCustomerResponse> {
-    throw new Error("Method not implemented.");
+    return super.fetchData(
+      RequestCustomer as any,
+      config.RequestCustomer.API_RQUEST_CUSTOMER_GET + "/" + id
+    );
   }
   override async create(
     row: RequestCustomer

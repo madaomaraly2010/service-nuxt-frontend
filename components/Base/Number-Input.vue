@@ -51,7 +51,7 @@ onMounted(() => {
   theNumber.value = minVal;
 });
 const getRules = () => {
-  debugger;
+  // debugger;
   let maxVal = props.max ?? 0;
   let minVal = props.min ?? 0;
 
@@ -69,7 +69,7 @@ const getRules = () => {
 };
 
 const increase = () => {
-  debugger;
+  // debugger;
   let currentValue = theNumber?.value ?? 0;
   if (props.max) {
     if (currentValue + 1 > props.max) {
@@ -79,7 +79,7 @@ const increase = () => {
   theNumber.value = +currentValue + 1;
 };
 const decrease = () => {
-  debugger;
+  // debugger;
   let currentValue = theNumber?.value ?? 0;
   if (props.min) {
     if (currentValue - 1 < props.min) {

@@ -18,7 +18,10 @@
 
 <script setup lang="ts">
 import type { Package } from "~/Data/Models";
-import { PackageItemResponse } from "~/Data/Responses/Model-Responses";
+import {
+  PackageItemResponse,
+  PackageResponse,
+} from "~/Data/Responses/Model-Responses";
 import { usePackageStore, usePackageItemStore } from "~/Data/Stores";
 import { I18Package } from "~/locales/i18-key";
 const store = usePackageItemStore();
@@ -28,17 +31,21 @@ debugger;
 
 const packageRow: Ref<Package | undefined> = ref<Package | undefined>();
 
-packageRow.value = packageStore.list.find(
-  (item) => item.id === +route.params.id
-);
-if (packageRow.value?.id) {
-  let response: PackageItemResponse = await store.findAllByPackage(
-    packageRow.value.id,
-    {
-      reFetch: true,
-    }
-  );
-  console.log("PackageItemResponse", response);
+const response: PackageResponse = await packageStore.findOne(+route.params.id);
+if (response.success && response.data!.length > 0) {
+  packageRow.value = response.data![0];
+  // packageStore.list.find(
+  //   (item) => item.id === +route.params.id
+  // );
+  if (packageRow.value?.id) {
+    let response: PackageItemResponse = await store.findAllByPackage(
+      packageRow.value.id,
+      {
+        reFetch: true,
+      }
+    );
+    console.log("PackageItemResponse", response);
+  }
 }
 </script>
 

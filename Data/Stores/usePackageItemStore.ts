@@ -34,8 +34,8 @@ export const usePackageItemStore = defineStore<
       packageId: number,
       options?: FetchOptions
     ): Promise<PackageItemResponse> {
-      debugger;
-      return StoreHelper.genericFindAll<PackageItem, PackageItemResponse>(
+      // debugger;
+      return StoreHelper.genericFind<PackageItem, PackageItemResponse>(
         this,
         () => PackageItemService.instance.findAllByPackage(packageId, options)
       );

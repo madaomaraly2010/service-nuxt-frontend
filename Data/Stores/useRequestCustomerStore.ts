@@ -33,12 +33,12 @@ export const useRequestCustomerStore = defineStore<
       // const response = await RequestCustomerService.instance.findAll(options);
       // this.list = response.data ?? [];
       // return response;
-      return StoreHelper.genericFindAll<
-        RequestCustomer,
-        RequestCustomerResponse
-      >(this, () => {
-        return RequestCustomerService.instance.findAll(options);
-      });
+      return StoreHelper.genericFind<RequestCustomer, RequestCustomerResponse>(
+        this,
+        () => {
+          return RequestCustomerService.instance.findAll(options);
+        }
+      );
     },
 
     async findOne(id: number): Promise<RequestCustomerResponse> {

@@ -27,7 +27,7 @@ export const useProviderStore = defineStore<
   getters: {},
   actions: {
     async findAll(options?: FetchOptions): Promise<ProviderResponse> {
-      return StoreHelper.genericFindAll<Provider, ProviderResponse>(
+      return StoreHelper.genericFind<Provider, ProviderResponse>(
         this,
         async () => {
           return ProviderService.instance.findAll(options);
@@ -87,7 +87,7 @@ export const useProviderStore = defineStore<
       //   await ProviderService.instance.getByCountry(countryId, options);
       // this.list = response.data ?? [];
       // return response;
-      return StoreHelper.genericFindAll<Provider, ProviderResponse>(this, () =>
+      return StoreHelper.genericFind<Provider, ProviderResponse>(this, () =>
         ProviderService.instance.getByCountry(countryId, options)
       );
     },
@@ -100,7 +100,7 @@ export const useProviderStore = defineStore<
       // this.list = response.data ?? [];
       // return response;
 
-      return StoreHelper.genericFindAll<Provider, ProviderResponse>(this, () =>
+      return StoreHelper.genericFind<Provider, ProviderResponse>(this, () =>
         ProviderService.instance.getByWork(workId, options)
       );
     },
