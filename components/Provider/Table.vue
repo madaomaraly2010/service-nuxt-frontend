@@ -88,7 +88,7 @@
 import type { QTableColumn } from "quasar";
 import { Provider, type Work } from "~/Data/Models";
 
-import { useProviderStore, useLookupStore } from "~/Data/Stores";
+import { useProviderStore } from "~/Data/Stores";
 import type { TableActionType } from "~/common/common-types";
 import { ProviderColumns, UserColumns } from "~/common/table-column-names";
 import { I18Global, I18Provider, I18User } from "~/locales/i18-key";
@@ -105,11 +105,11 @@ const selectedRow: Ref<Provider | undefined> = ref<Provider>();
 const nuxtApp = useNuxtApp();
 
 const onAction = (action: TableActionType, row: Provider) => {};
-const openDialog = () => (dialogRef.value as any).open();
+const openCreateDialog = () => (dialogRef.value as any).open();
 const onWorkSelected = async (w: Work) => {
-  selectedRow.value = Provider.create();
+  selectedRow.value = Provider.create(w.id);
   await nextTick();
-  openDialog();
+  openCreateDialog();
 };
 
 const selectAndOpenDialog = async (req: Provider) => {

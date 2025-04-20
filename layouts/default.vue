@@ -207,6 +207,7 @@ import { ref } from "vue";
 import { useGlobalStore, useUserStore, useMessageStore } from "../Data/Stores";
 import type { Message } from "~/Data/Models/Message";
 import { I18Drawer } from "~/locales/i18-key";
+import { PageKeys } from "~/common/table-keys";
 const globalStore = useGlobalStore();
 const userStore = useUserStore();
 const messageStore = useMessageStore();
@@ -260,7 +261,7 @@ const drawerItems = [
   {
     icon: "worker",
     text: app.$t(I18Drawer.Items.workers),
-    page: "RequestCustomerPage",
+    page: PageKeys.PROVIDER_PAGE,
   }, // Worker icon
   {
     icon: "mdi-account-group",

@@ -117,12 +117,24 @@ export class ProviderService
     throw new Error("Method not implemented.");
   }
   override async create(row: Provider): Promise<ProviderResponse> {
-    throw new Error("Method not implemented.");
+    return super.serverCreateRow(
+      Provider as any,
+      config.Provider.API_PROVIDER_POST,
+      row
+    );
   }
   override async update(row: Provider): Promise<ProviderResponse> {
-    throw new Error("Method not implemented.");
+    return super.serverUpdateRow(
+      Provider as any,
+      config.Provider.API_PROVIDER_UPDATE,
+      row
+    );
   }
   override async delete(id: number): Promise<ProviderResponse> {
-    throw new Error("Method not implemented.");
+    return super.serverDeleteRow(
+      Provider as any,
+      config.Provider.API_PROVIDER_DELETE,
+      id
+    );
   }
 }

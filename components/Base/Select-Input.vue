@@ -5,6 +5,8 @@
     v-model="theModelValue"
     outlined
     dense
+    emit-value
+    map-options
   >
     <!-- Prepend Slot -->
     <template v-if="$slots.prepend" v-slot:prepend>

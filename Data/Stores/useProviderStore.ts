@@ -73,20 +73,11 @@ export const useProviderStore = defineStore<
         }
       );
     },
-    // async findAll(options?: FetchOptions): Promise<ProviderResponse> {
-    //   const response = await ProviderService.instance.findAll(options);
-    //   this.list = response.data ?? [];
-    //   return response;
-    // },
 
     async getByCountry(
       countryId: number,
       options?: FetchOptions
     ): Promise<ProviderResponse> {
-      // const response: ProviderResponse =
-      //   await ProviderService.instance.getByCountry(countryId, options);
-      // this.list = response.data ?? [];
-      // return response;
       return StoreHelper.genericFind<Provider, ProviderResponse>(this, () =>
         ProviderService.instance.getByCountry(countryId, options)
       );
@@ -95,11 +86,6 @@ export const useProviderStore = defineStore<
       workId: number,
       options?: FetchOptions
     ): Promise<ProviderResponse> {
-      // const response: ProviderResponse =
-      //   await ProviderService.instance.getByWork(workId, options);
-      // this.list = response.data ?? [];
-      // return response;
-
       return StoreHelper.genericFind<Provider, ProviderResponse>(this, () =>
         ProviderService.instance.getByWork(workId, options)
       );

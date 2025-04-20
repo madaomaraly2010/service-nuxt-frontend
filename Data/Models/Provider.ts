@@ -16,9 +16,13 @@ import { LangStatus } from "./LangStatus";
 export class Provider {
   @JsonKey()
   id!: number;
-  @JsonKey()
+  @JsonKey({
+    includeToDbRow: false,
+  })
   created_at?: Date | undefined;
-  @JsonKey()
+  @JsonKey({
+    includeToDbRow: false,
+  })
   updated_at?: Date | undefined;
   @JsonKey()
   address?: string;
@@ -148,7 +152,7 @@ export class Provider {
   // Provider belongsTo User via user_id
   @JsonKey({
     type: () => User,
-    includeToDbRow: false,
+    includeToDbRow: true,
   })
   user!: User;
 
@@ -159,8 +163,9 @@ export class Provider {
   })
   work!: Work;
 
-  public static create(): Provider {
+  public static create(workId?: number): Provider {
     const newProvider = new Provider();
+    newProvider.work_id = workId ?? 0;
     newProvider.user = new User();
     return newProvider;
   }

@@ -49,7 +49,10 @@
               type="email"
               outlined
             />
+          </div>
+          <div class="row q-my-sm"></div>
 
+          <div class="row">
             <BaseTextInput
               :is-password="true"
               class="col-4 offset-1"
@@ -62,7 +65,7 @@
         </q-tab-panel>
 
         <q-tab-panel name="personal" class="panel-size">
-          <div class="row q-col-gutter-sm">
+          <div class="row">
             <BaseTextInput
               class="col-4"
               v-model="editRow.user.first_name"
@@ -72,14 +75,14 @@
             />
 
             <BaseTextInput
-              class="col-4"
+              class="col-4 offset-1"
               v-model="editRow.nick_name"
               :label="$t(I18Provider.Fields.nick_name)"
               outlined
               lazy-rules
             />
           </div>
-          <div class="q-my-sm"></div>
+          <div class="row q-my-sm"></div>
           <div class="row">
             <BaseSelectInput
               class="col-4"
@@ -99,7 +102,6 @@
               outlined
             />
           </div>
-          <div class="q-my-sm"></div>
           <div class="row">
             <BaseDateInput
               class="col-4"
@@ -145,12 +147,16 @@
           <div class="row">
             <BaseNumberInput
               class="col-4"
+              :min="0"
+              :max="1000000"
               v-model="editRow.net_salary"
               :label="$t(I18Provider.Fields.net_salary)"
               outlined
             />
             <BaseNumberInput
               class="col-4 offset-1"
+              :min="0"
+              :max="1000000"
               v-model="editRow.wage_per_month"
               :label="$t(I18Provider.Fields.wage_per_month)"
             />
@@ -312,6 +318,7 @@ import {
   I18User,
 } from "~/locales/i18-key";
 const tab = ref("personal");
+const nuxtApp = useNuxtApp();
 const {
   rentStatusStore,
   cookStatusStore,
@@ -328,11 +335,11 @@ console.log("Form", "countryStore", countryStore.list);
 console.log("Form", "childStatusStore", childStatusStore.list);
 const genderOptions = [
   {
-    label: I18Global.male,
+    label: nuxtApp.$t(I18Global.male),
     value: 1,
   },
   {
-    label: I18Global.female,
+    label: nuxtApp.$t(I18Global.female),
     value: 2,
   },
 ];

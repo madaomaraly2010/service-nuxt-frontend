@@ -19,8 +19,20 @@ export function JsonKey(options: JsonKeyOptions = {}) {
     if (!classFieldMap.has(constructor)) {
       classFieldMap.set(constructor, new Map());
     }
+    const {
+      type = null,
+      ignore = false,
+      includeIfNull = true,
+      includeFromDbRow = true,
+      includeToDbRow = true,
+    } = options ?? {};
+
     classFieldMap.get(constructor)!.set(propertyKey, {
-      ...options,
+      type,
+      ignore,
+      includeIfNull,
+      includeFromDbRow,
+      includeToDbRow,
       propertyKey,
       name: options.name ?? propertyKey,
     });
@@ -67,6 +79,7 @@ export function JsonSerializable<T extends { new (...args: any[]): {} }>(): (
     };
 
     const formatDate = (val: any): any => {
+      debugger;
       // Skip formatting for numbers, booleans, etc.
       if (typeof val === "number" || typeof val === "boolean") return val;
 
@@ -74,7 +87,7 @@ export function JsonSerializable<T extends { new (...args: any[]): {} }>(): (
       if (val instanceof Date) return val.toISOString().split("T")[0];
 
       // Format valid ISO date strings only
-      if (typeof val === "string" && /^\d{4}-\d{2}-\d{2}$/.test(val)) {
+      if (typeof val === "string" /*&& /^\d{4}-\d{2}-\d{2}$/.test(val)*/) {
         const d = new Date(val);
         if (!isNaN(d.getTime())) {
           return d.toISOString().split("T")[0];
@@ -85,6 +98,8 @@ export function JsonSerializable<T extends { new (...args: any[]): {} }>(): (
     };
 
     constructor.prototype.toDbRow = function () {
+      debugger;
+
       const result: any = {};
       for (const [, field] of fields.entries()) {
         const { name, propertyKey, ignore, includeToDbRow, includeIfNull } =
