@@ -62,7 +62,10 @@ const getCancelLabel = computed(
 const emit = defineEmits(["save", "cancel"]);
 const handleSave = async () => {
   let validated: boolean | undefined = await qFormRef.value?.validate();
-  if (validated) {
+  let preValidate: boolean =
+    (await props.onPrevalidate?.(qFormRef.value as QForm)) ?? true;
+
+  if (validated && preValidate) {
     loading.value = true;
     //@ts-ignore
     const sleep = (ms: number) =>

@@ -6,142 +6,127 @@
       :show-cancel-button="true"
       :show-save-button="true"
       :dialog-ref="dialogRef"
-      :on-prevalidate="preValidate"
     >
-      <q-tabs v-model="tab" class="text-primary" align="justify">
-        <q-tab
-          icon="fa fa-phone"
-          name="account"
-          :label="$t(I18Provider.Tabs.account)"
-        />
-        <q-tab
-          icon="fa fa-user"
-          name="personal"
-          :label="$t(I18Provider.Tabs.personal)"
-        />
-
-        <q-tab
-          icon="fa fa-briefcase"
-          name="employment"
-          :label="$t(I18Provider.Tabs.employment)"
-        />
-
-        <q-tab
-          icon="fa fa-plus"
-          name="additional"
-          :label="$t(I18Provider.Tabs.additional)"
-        />
-      </q-tabs>
-      <q-tab-panels class="q-pa-sm" v-model="tab" animated>
+      <q-stepper
+        v-model="step"
+        header-nav
+        ref="stepper"
+        color="primary"
+        animated
+      >
         <!-- Personal Information Tab -->
-        <q-tab-panel name="account" class="panel-size">
-          <div class="row">
-            <BaseTextInput
-              class="col-4 offset-1"
-              v-model="editRow.user.email"
-              :label="$t(I18User.Fields.email)"
-              type="email"
-              outlined
-            />
-          </div>
-          <div class="row q-my-sm"></div>
+        <q-step :name="1" :title="$t(I18Provider.Tabs.account)">
+          <div v-show="step === 1">
+            <div class="row">
+              <BaseTextInput
+                class="col-4 offset-1"
+                v-model="editRow.user.email"
+                :label="$t(I18User.Fields.email)"
+                type="email"
+                outlined
+              />
+            </div>
+            <div class="row q-my-sm"></div>
 
-          <div class="row">
-            <BaseTextInput
-              :is-password="true"
-              class="col-4 offset-1"
-              v-model="editRow.user.password_hash"
-              :label="$t(I18User.Fields.password_hash)"
-              outlined
-              lazy-rules
-            />
+            <div class="row">
+              <BaseTextInput
+                :is-password="true"
+                class="col-4 offset-1"
+                v-model="editRow.user.password_hash"
+                :label="$t(I18User.Fields.password_hash)"
+                outlined
+                lazy-rules
+              />
+            </div>
           </div>
-        </q-tab-panel>
+        </q-step>
 
-        <q-tab-panel name="personal" class="panel-size">
-          <div class="row">
-            <BaseTextInput
-              class="col-4"
-              v-model="editRow.user.first_name"
-              :label="$t(I18User.Fields.first_name)"
-              outlined
-              lazy-rules
-            />
+        <q-step :name="2" :title="$t(I18Provider.Tabs.personal)">
+          <div v-show="step === 2">
+            <div class="row">
+              <BaseTextInput
+                class="col-4"
+                v-model="editRow.user.first_name"
+                :label="$t(I18User.Fields.first_name)"
+                outlined
+                lazy-rules
+              />
 
-            <BaseTextInput
-              class="col-4 offset-1"
-              v-model="editRow.nick_name"
-              :label="$t(I18Provider.Fields.nick_name)"
-              outlined
-              lazy-rules
-            />
-          </div>
-          <div class="row q-my-sm"></div>
-          <div class="row">
-            <BaseSelectInput
-              class="col-4"
-              v-model="editRow.gender"
-              :options="genderOptions"
-              :label="$t(I18Provider.Fields.gender)"
-              outlined
-              lazy-rules
-            />
-            <BaseSelectInput
-              class="col-4 offset-1"
-              v-model="editRow.country_id"
-              :options="countryStore.list"
-              option-label="arb_name"
-              option-value="id"
-              :label="$t(I18Provider.Fields.country_id)"
-              outlined
-            />
-          </div>
-          <div class="row">
-            <BaseDateInput
-              class="col-4"
-              v-model="editRow.date_birth"
-              :label="$t(I18Provider.Fields.date_birth)"
-              outlined
-            />
-            <BaseSelectInput
-              class="col-4 offset-1"
-              v-model="editRow.religion_status_id"
-              :options="religionStatusStore.list"
-              option-label="arb_name"
-              option-value="id"
-              :label="$t(I18Provider.Fields.religion_status_id)"
-              outlined
-            />
-          </div>
-          <div class="row q-my-sm"></div>
-          <div class="row">
-            <BaseTextInput
-              class="col-4"
-              v-model="editRow.user.mobile"
-              :label="$t(I18User.Fields.mobile)"
-              outlined
-              lazy-rules
-              required
-              mobile
-            />
-          </div>
+              <BaseTextInput
+                class="col-4 offset-1"
+                v-model="editRow.nick_name"
+                :label="$t(I18Provider.Fields.nick_name)"
+                outlined
+                lazy-rules
+              />
+            </div>
+            <div class="row q-my-sm"></div>
+            <div class="row">
+              <BaseSelectInput
+                class="col-4"
+                v-model="editRow.gender"
+                :options="genderOptions"
+                :label="$t(I18Provider.Fields.gender)"
+                outlined
+                lazy-rules
+              />
+              <BaseSelectInput
+                class="col-4 offset-1"
+                v-model="editRow.country_id"
+                :options="countryStore.list"
+                option-label="arb_name"
+                option-value="id"
+                :label="$t(I18Provider.Fields.country_id)"
+                outlined
+              />
+            </div>
+            <div class="row">
+              <BaseDateInput
+                class="col-4"
+                v-model="editRow.date_birth"
+                :label="$t(I18Provider.Fields.date_birth)"
+                outlined
+              />
+              <BaseSelectInput
+                class="col-4 offset-1"
+                v-model="editRow.religion_status_id"
+                :options="religionStatusStore.list"
+                option-label="arb_name"
+                option-value="id"
+                :label="$t(I18Provider.Fields.religion_status_id)"
+                outlined
+              />
+            </div>
+            <div class="row q-my-sm"></div>
+            <div class="row">
+              <BaseTextInput
+                class="col-4"
+                v-model="editRow.user.mobile"
+                :label="$t(I18User.Fields.mobile)"
+                outlined
+                lazy-rules
+                required
+                mobile
+              />
+            </div>
 
-          <div class="row q-my-sm"></div>
-          <div class="row">
-            <BaseTextAreaInput
-              class="col"
-              :label="$t(I18Provider.Fields.notes)"
-              v-model="editRow.notes"
-            >
-            </BaseTextAreaInput>
+            <div class="row q-my-sm"></div>
+            <div class="row">
+              <BaseTextAreaInput
+                class="col"
+                :label="$t(I18Provider.Fields.notes)"
+                v-model="editRow.notes"
+              >
+              </BaseTextAreaInput>
+            </div>
           </div>
-        </q-tab-panel>
+        </q-step>
 
         <!-- Employment Details Tab -->
-        <q-tab-panel
-          name="employment"
-          class="panel-size"
-          v-show="tab == 'employment'"
+        <q-step
+          v-show="step === 3"
+          :name="3"
+          :title="$t(I18Provider.Tabs.employment)"
         >
           <div class="row">
             <BaseNumberInput
@@ -241,16 +226,16 @@
             >
             </BaseTextAreaInput>
           </div>
-        </q-tab-panel>
+        </q-step>
 
         <!-- Documents & Status Tab -->
         <!-- <q-tab-panel name="documents" class="panel-size"> </q-tab-panel> -->
 
         <!-- Additional Information Tab -->
-        <q-tab-panel
-          name="additional"
-          class="panel-size"
-          v-show="tab === 'additional'"
+        <q-step
+          v-show="step === 4"
+          :name="4"
+          :title="$t(I18Provider.Tabs.additional)"
         >
           <div class="row">
             <BaseSelectInput
@@ -308,14 +293,13 @@
               outlined
             />
           </div>
-        </q-tab-panel>
-      </q-tab-panels>
+        </q-step>
+      </q-stepper>
     </BaseForm>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { QForm } from "quasar";
 import type { ProviderResponse } from "~/Data/Responses/Model-Responses";
 import {
   useGlobalStore,
@@ -330,18 +314,9 @@ import {
   I18Provider,
   I18User,
 } from "~/locales/i18-key";
-const tab = ref("personal");
+const step = ref(1);
+const stepper = ref();
 const nuxtApp = useNuxtApp();
-const preValidate = async (form: QForm) => {
-  let tabs = ["account", "personal", "employment", "additional"];
-  let validated = true;
-  for (let i = 0; i < tabs.length; i++) {
-    tab.value = tabs[i];
-    await nextTick();
-    validated = validated && (await form.validate());
-  }
-  return validated;
-};
 const {
   rentStatusStore,
   cookStatusStore,

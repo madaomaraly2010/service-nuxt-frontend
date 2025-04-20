@@ -1,4 +1,4 @@
-import type { QTableProps } from "quasar";
+import type { QForm, QTableProps } from "quasar";
 import type {
   Package,
   PackageItem,
@@ -10,6 +10,7 @@ export type TableActionType = "Add" | "Edit" | "Delete";
 
 export interface IBaseFormProps {
   onSave?: () => Promise<void>;
+  onPrevalidate?: (form: QForm) => Promise<boolean>;
   isNew?: boolean;
   dialogRef?: any;
   showSaveButton?: boolean;
