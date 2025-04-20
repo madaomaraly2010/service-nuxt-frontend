@@ -8,7 +8,7 @@
       :label="label"
       v-bind="$attrs"
       lazy-rules
-      :rules="rules"
+      :rules="getRules"
       :type="getType()"
     >
       <template v-if="$slots.prepend" v-slot:prepend>
@@ -30,24 +30,26 @@
 
 <script lang="ts" setup>
 import type { QInput, QInputProps } from "quasar";
+import { ValidatorRules } from "~/common/validations";
 interface ITextInputPropType {
   isPassword?: boolean;
+  required?: boolean;
+  email?: boolean;
+  mobile?: boolean;
 }
 const props = defineProps<ITextInputPropType & QInputProps>();
 const isPwd = ref(true);
 const qInputRef: Ref<QInput | null> = ref<QInput | null>(null);
-// const props = defineProps({
-//   rules: {
-//     type: Object as PropType<ValidationRule[]>,
-//   },
-//   label: {
-//     type: String as PropType<string>,
-//   },
-//   isPassword: {
-//     type: Boolean as PropType<boolean>,
-//   },
-// });
+const nuxtApp = useNuxtApp();
 
+const getRules = computed(() => {
+  const { required = false, email = false, mobile = false } = props;
+  const vRules: ((value: any) => any)[] = [];
+  if (required) vRules.push(ValidatorRules.required(nuxtApp.$t));
+  if (email) vRules.push(ValidatorRules.email(nuxtApp.$t));
+  if (mobile) vRules.push(ValidatorRules.mobile(nuxtApp.$t));
+  return vRules;
+});
 defineExpose({
   validate: () => qInputRef?.value?.validate?.(),
   resetValidation: () => qInputRef?.value?.resetValidation?.(),

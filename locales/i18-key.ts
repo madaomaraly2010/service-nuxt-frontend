@@ -28,6 +28,7 @@ export class I18Errors {
     public static greater_than_max: string = "errors.greater_than_max";
     public static less_than_min: string = "errors.less_than_min";
     public static field_is_required: string = "errors.field_is_required";
+    public static mobile_is_incorrect: string = "errors.mobile_is_incorrect";
     public static field_mustbe_number: string = "errors.field_mustbe_number";
     public static two_fields_are_not_match: string = "errors.two_fields_are_not_match";
   };

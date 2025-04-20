@@ -127,7 +127,8 @@
               :label="$t(I18User.Fields.mobile)"
               outlined
               lazy-rules
-              :rules="[(val) => !!val || 'Mobile is required']"
+              required
+              mobile
             />
           </div>
 
@@ -143,15 +144,21 @@
         </q-tab-panel>
 
         <!-- Employment Details Tab -->
-        <q-tab-panel name="employment" class="panel-size">
+        <q-tab-panel
+          name="employment"
+          class="panel-size"
+          v-show="tab == 'employment'"
+        >
           <div class="row">
             <BaseNumberInput
               class="col-4"
-              :min="0"
-              :max="1000000"
+              :min="10"
+              :max="100"
               v-model="editRow.net_salary"
               :label="$t(I18Provider.Fields.net_salary)"
               outlined
+              required
+              lazy-rules
             />
             <BaseNumberInput
               class="col-4 offset-1"
@@ -159,6 +166,8 @@
               :max="1000000"
               v-model="editRow.wage_per_month"
               :label="$t(I18Provider.Fields.wage_per_month)"
+              required
+              lazy-rules
             />
           </div>
           <div class="row q-my-sm"></div>
@@ -218,6 +227,7 @@
               option-value="id"
               option-label="arb_name"
               :label="$t(I18Provider.Fields.rent_status_id)"
+              required
               outlined
             />
             <BaseDateInput
@@ -243,7 +253,11 @@
         <!-- <q-tab-panel name="documents" class="panel-size"> </q-tab-panel> -->
 
         <!-- Additional Information Tab -->
-        <q-tab-panel name="additional" class="panel-size">
+        <q-tab-panel
+          name="additional"
+          class="panel-size"
+          v-show="tab === 'additional'"
+        >
           <div class="row">
             <BaseSelectInput
               class="col-4"
@@ -252,6 +266,7 @@
               option-value="id"
               option-label="arb_name"
               :label="$t(I18Provider.Fields.cook_status_id)"
+              required
               outlined
             />
             <BaseSelectInput
@@ -261,6 +276,7 @@
               option-value="id"
               option-label="arb_name"
               :label="$t(I18Provider.Fields.child_status_id)"
+              required
               outlined
             />
           </div>
@@ -273,6 +289,7 @@
               option-value="id"
               option-label="arb_name"
               :label="$t(I18Provider.Fields.arabic_status_id)"
+              required
               outlined
             />
 
@@ -283,6 +300,7 @@
               option-value="id"
               option-label="arb_name"
               :label="$t(I18Provider.Fields.english_status_id)"
+              required
               outlined
             />
           </div>

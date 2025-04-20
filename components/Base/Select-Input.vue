@@ -6,7 +6,9 @@
     outlined
     dense
     emit-value
+    :rules="getRules"
     map-options
+    clearable
   >
     <!-- Prepend Slot -->
     <template v-if="$slots.prepend" v-slot:prepend>
@@ -33,14 +35,27 @@
 <script setup lang="ts">
 import type { QSelect, QSelectProps } from "quasar";
 import { defineModel } from "vue";
+import { ValidatorRules } from "~/common/validations";
 const theModelValue = defineModel<number>();
 
-interface ISelectPropType {}
+interface ISelectPropType {
+  required?: boolean;
+}
 
 const props = defineProps<ISelectPropType & QSelectProps>();
 
 const qSelectRef: Ref<QSelect | null> = ref(null);
 
+const nuxtApp = useNuxtApp();
+
+const getRules = computed(() => {
+  const { required = false } = props;
+  const vRules = [];
+  if (required) {
+    vRules.push(ValidatorRules.required(nuxtApp.$t));
+  }
+  return vRules;
+});
 defineExpose({
   validate: () => qSelectRef?.value?.validate?.(),
   resetValidation: () => qSelectRef?.value?.resetValidation?.(),

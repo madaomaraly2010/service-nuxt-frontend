@@ -4,7 +4,6 @@
     v-bind="props"
     dense
     outlined
-    autofocus
     hide-bottom-space
     v-model="theNumber"
     mask="#########"
@@ -28,6 +27,7 @@
 
 <script lang="ts" setup>
 import type { QInput, QInputProps } from "quasar";
+import { ValidatorRules } from "~/common/validations";
 
 interface INumberInputPropType {
   showSpin?: boolean;
@@ -35,6 +35,7 @@ interface INumberInputPropType {
   currency?: string;
   min?: number;
   max?: number;
+  required?: boolean;
   showPercent?: boolean;
 }
 const props = defineProps<INumberInputPropType & QInputProps>();
@@ -47,26 +48,48 @@ watch(theNumber, (val) => {
   qInputRef.value?.validate();
 });
 onMounted(() => {
-  let minVal = props?.min ?? 0;
-  theNumber.value = minVal;
+  // let minVal = props?.min ?? 0;
+  // theNumber.value = minVal;
 });
+
 const getRules = () => {
   // debugger;
   let maxVal = props.max ?? 0;
   let minVal = props.min ?? 0;
+  const { required = false } = props;
+  const vRules = [];
+  if (required) {
+    vRules.push(ValidatorRules.required(nuxtApp.$t));
+  }
+  if (minVal > 0) {
+    debugger;
+    vRules.push(ValidatorRules.minValue(nuxtApp.$t, minVal));
+  }
+  if (maxVal > 0) {
+    debugger;
+    vRules.push(ValidatorRules.maxValue(nuxtApp.$t, maxVal));
+  }
 
-  return [
-    ...(props.rules ?? []),
-    (val: number) =>
-      val <= maxVal || nuxtApp.$t("messages.greater_than_max", { val: maxVal }),
-    (val: number) => {
-      console.log("Val", val);
-      return (
-        val >= minVal || nuxtApp.$t("messages.less_than_min", { val: minVal })
-      );
-    },
-  ];
+  return vRules;
 };
+
+// const getRules = () => {
+//   // debugger;
+//   let maxVal = props.max ?? 0;
+//   let minVal = props.min ?? 0;
+
+//   return [
+//     ...(props.rules ?? []),
+//     (val: number) =>
+//       val <= maxVal || nuxtApp.$t("messages.greater_than_max", { val: maxVal }),
+//     (val: number) => {
+//       console.log("Val", val);
+//       return (
+//         val >= minVal || nuxtApp.$t("messages.less_than_min", { val: minVal })
+//       );
+//     },
+//   ];
+// };
 
 const increase = () => {
   // debugger;
