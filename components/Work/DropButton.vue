@@ -1,5 +1,10 @@
 <template>
-  <q-btn-dropdown label="إضافة" color="secondary" dense>
+  <q-btn-dropdown
+    style="width: 7vw; height: 4vh"
+    label="إضافة"
+    color="secondary"
+    dense
+  >
     <q-list :class="globalStore.direction == 'rtl' ? 'rtl' : ''" separator>
       <q-item
         v-for="work in workStore.list"
@@ -29,18 +34,4 @@ const workStore = useWorkStore();
 const emits = defineEmits(["onWorkClicked"]);
 const onWorkClicked = (w: Work) => emits("onWorkClicked", w);
 </script>
-<style scoped>
-/* .rtl {
-  direction: rtl;
-  text-align: right;
-}
-
-.rtl-text .q-field__control {
-  text-align: right;
-}
-
-.rtl-popup {
-  direction: rtl;
-  text-align: right;
-} */
-</style>
+<style scoped></style>

@@ -24,7 +24,8 @@ export class CountryService
   override async findAll(options?: FetchOptions): Promise<CountryResponse> {
     return super.fetchData(
       Country as any,
-      config.Country.API_COUNTRY_STATUS_GET, {
+      config.Country.API_COUNTRY_STATUS_GET,
+      {
         options,
       }
     );

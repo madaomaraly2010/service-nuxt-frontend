@@ -1,18 +1,10 @@
 <template>
   <div>
-    <div class="row bg-amber">
-      <ProviderAddEditDialogForm
-        v-if="defaultWork"
-        :default-work="defaultWork"
-        ref="providerRef"
-      ></ProviderAddEditDialogForm>
-      <div class="col-3">
-        <WorkDropButton @on-work-clicked="onWorkSelected"></WorkDropButton>
-      </div>
-      <div class="col-3">
-        <WorkFilterSelect></WorkFilterSelect>
-      </div>
-    </div>
+    <ProviderFormDialog
+      v-if="selectedRow"
+      ref="dialogRef"
+      :editRow="(selectedRow as Provider)"
+    ></ProviderFormDialog>
     <q-card-section class="q-pa-none q-ma-none">
       <base-table
         class="provider-table"
@@ -20,142 +12,148 @@
         :columns="provider_columns"
         @action="onAction"
       >
-        <template #id="{ row }">
-          <q-td>
-            <q-item>
-              <q-item-section>
-                <q-item-label class="text-bold text-grey-7">{{
-                  row?.id
-                }}</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-td>
+        <template #top>
+          <div class="row items-center">
+            <div class="col">
+              <WorkDropButton
+                @on-work-clicked="onWorkSelected"
+              ></WorkDropButton>
+            </div>
+            <div class="col">
+              <WorkFilterSelect></WorkFilterSelect>
+            </div>
+          </div>
         </template>
-        <template #fullname="{ row }">
-          <q-td>
-            <q-item>
-              <q-item-section>
-                <q-item-label
-                  style="text-align: center"
-                  class="text-bold text-grey-7"
-                  >{{
-                    (row.user?.first_name ?? " ") +
-                    " " +
-                    (row.user?.last_name ?? " ")
-                  }}</q-item-label
-                >
-              </q-item-section>
-            </q-item>
-          </q-td>
+        <template #detailsButton="{ row }">
+          <BaseTableButtonColumn
+            :label="$t('global.details')"
+            @click="selectAndOpenDialog(row)"
+          ></BaseTableButtonColumn>
         </template>
-        <template #work="{ row }">
-          <q-td>
-            <q-item>
-              <q-item-label class="text-bold text-red-7">{{
-                row.work?.arb_name
-              }}</q-item-label>
-            </q-item>
-          </q-td>
+        <template #id="{ row }: { row: Provider }">
+          <BaseTableColumn
+            :display-value="row?.id?.toString()"
+            col-class="text-bold text-red-7"
+          ></BaseTableColumn>
         </template>
-
-        <template #country="{ row }">
-          <q-td>
-            <q-item>
-              <q-item-label class="text-bold text-grey-7">{{
-                row.country?.arb_name
-              }}</q-item-label>
-            </q-item>
-          </q-td>
+        <template #fullname="{ row }: { row: Provider }">
+          <BaseTableColumn
+            :display-value="row.user?.first_name"
+            col-class="text-bold text-grey-7"
+            col-style="text-align: center"
+          ></BaseTableColumn>
+        </template>
+        <template #work_id="{ row }: { row: Provider }">
+          <BaseTableColumn>
+            <WorkDetails :image-size="5" :work="row.work"></WorkDetails>
+          </BaseTableColumn>
         </template>
 
-        <template #mobile="{ row }">
-          <q-td>
-            <q-item>
-              <q-item-label class="text-bold text-grey-7">{{
-                row.user?.mobile
-              }}</q-item-label>
-            </q-item>
-          </q-td>
+        <template #country_id="{ row }: { row: Provider }">
+          <BaseTableColumn>
+            <q-item-label class="text-bold text-grey-7">
+              <span
+                class="text-h5"
+                :class="[
+                  'flag-icon',
+                  `flag-icon-${row.country?.iso_code?.toLowerCase()}`,
+                ]"
+              ></span>
+              {{ row.country?.arb_name }}</q-item-label
+            >
+          </BaseTableColumn>
         </template>
 
-        <template #gender="{ row }">
-          <q-td>
-            <q-item>
-              <q-item-label class="text-bold text-grey-7">{{
-                row?.gender == 1 ? "ذكر" : "أنثى"
-              }}</q-item-label>
-            </q-item>
-          </q-td>
+        <template #mobile="{ row }: { row: Provider }">
+          <BaseTableColumn
+            col-class="text-bold text-grey-7"
+            :display-value="row.user?.mobile"
+          ></BaseTableColumn>
+        </template>
+
+        <template #gender="{ row }: { row: Provider }">
+          <BaseTableColumn
+            col-class="text-bold text-grey-7"
+            :display-value="
+              row?.gender == 1 ? $t(I18Global.male) : $t(I18Global.female)
+            "
+          ></BaseTableColumn>
         </template>
       </base-table>
     </q-card-section>
   </div>
-  <!-- </div> -->
 </template>
 
 <script lang="ts" setup>
 import type { QTableColumn } from "quasar";
-import type { Provider, Work } from "~/Data/Models";
+import { Provider, type Work } from "~/Data/Models";
 
-import { useProviderStore } from "~/Data/Stores/useProviderStore";
+import { useProviderStore, useLookupStore } from "~/Data/Stores";
 import type { TableActionType } from "~/common/common-types";
+import { ProviderColumns, UserColumns } from "~/common/table-column-names";
+import { I18Global, I18Provider, I18User } from "~/locales/i18-key";
+import cloneDeep from "lodash/cloneDeep";
+// import type { LookupStoreType } from "~/Data/Stores";
 
-const providerRef = ref(null);
-const defaultWork = ref<Work>();
+const dialogRef = ref(null);
+const tableHelper = useTableHelper();
 const store = useProviderStore();
+// const lookupStore: LookupStoreType = useLookupStore();
+// await lookupStore.fetchAllLookups();
 await store.findAll();
-//const rowList = computed(() => store.list.value);
+const selectedRow: Ref<Provider | undefined> = ref<Provider>();
+const nuxtApp = useNuxtApp();
 
 const onAction = (action: TableActionType, row: Provider) => {};
-const openDialog = () => (providerRef.value as any).openDialog();
-const onWorkSelected = (w: Work) => {
-  defaultWork.value = w;
+const openDialog = () => (dialogRef.value as any).open();
+const onWorkSelected = async (w: Work) => {
+  selectedRow.value = Provider.create();
+  await nextTick();
   openDialog();
 };
-const provider_columns: QTableColumn[] = [
-  {
-    name: "id",
-    label: "السجل",
-    field: "id",
-    sortable: true,
-    align: "left",
-  },
-  {
-    name: "fullname",
-    label: "الاسم",
-    field: "id",
-    sortable: true,
-    align: "center",
-  },
-  {
-    name: "mobile",
-    label: "الجوال",
-    field: "user.mobile",
-    sortable: true,
-    align: "left",
-  },
-  {
-    name: "gender",
-    label: "الجنس",
-    field: "gender",
-    sortable: true,
-    align: "left",
-  },
-  {
-    name: "country",
-    label: "الجنسية",
-    field: "country.arb_name",
-    sortable: true,
-    align: "left",
-  },
 
-  {
-    name: "work",
-    label: "العمل",
-    field: "work.arb_name",
-    sortable: true,
-    align: "left",
-  },
+const selectAndOpenDialog = async (req: Provider) => {
+  selectedRow.value = cloneDeep(req);
+  await nextTick();
+  //@ts-ignore
+  dialogRef?.value.open();
+};
+// const onCreateClicked = async () => {
+//   selectedRow.value = Provider.create();
+//   await nextTick();
+//   //@ts-ignore
+//   dialogRef?.value.open();
+// };
+const provider_columns: QTableColumn[] = [
+  tableHelper.createButtonColumn(
+    nuxtApp.$t(I18Global.details),
+    "detailsButton"
+  ),
+  tableHelper.createColumn(
+    ProviderColumns.id,
+    nuxtApp.$t(I18Provider.Fields.id)
+  ),
+  tableHelper.createColumn(
+    UserColumns.first_name,
+    nuxtApp.$t(I18User.Fields.first_name),
+    "fullname"
+  ),
+  tableHelper.createColumn(
+    UserColumns.mobile,
+    nuxtApp.$t(I18User.Fields.mobile)
+  ),
+  tableHelper.createColumn(
+    ProviderColumns.gender,
+    nuxtApp.$t(I18Provider.Fields.gender)
+  ),
+  tableHelper.createColumn(
+    ProviderColumns.country_id,
+    nuxtApp.$t(I18Provider.Fields.country_id)
+  ),
+  tableHelper.createColumn(
+    ProviderColumns.work_id,
+    nuxtApp.$t(I18Provider.Fields.work_id)
+  ),
 ];
 </script>
 

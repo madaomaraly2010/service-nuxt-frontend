@@ -6,7 +6,7 @@
       </div>
       <div class="row">
         <div class="col offset-1">
-          <PackageTable></PackageTable>
+          <ProviderTable></ProviderTable>
         </div>
       </div>
     </q-page>
@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import { usePackageStore } from "~/Data/Stores";
+import { useProviderStore } from "~/Data/Stores";
 import { I18Package } from "~/locales/i18-key";
 
-const store = usePackageStore();
+const store = useProviderStore();
 
 await store.findAll({
   reFetch: true,

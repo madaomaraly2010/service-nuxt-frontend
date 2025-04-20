@@ -10,6 +10,7 @@
       "additional": "بيانات أخرى"
     },
     "fields": {
+      "id": "السجل",
       "address": "العنوان",
       "city": "المدينة",
       "state": "المقاطعة",
@@ -24,7 +25,7 @@
       "english_status_id": "اللغة الإنجليزية",
       "nick_name": "الكنية",
       "net_salary": "الراتب الشهرى",
-      "wage_amount": "الأجرة الشهرية",
+      "wage_per_month": "الأجرة الشهرية",
       "card_number": "رقم البطاقة",
       "card_expire": "تاريخ إنتهاء ",
       "passport_number": "رقم الجواز",

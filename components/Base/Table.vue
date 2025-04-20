@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-toolbar v-if="showToolbar">
+    <!-- <q-toolbar v-if="showToolbar">
       <q-btn
         @click="onCreateButtonClicked"
         v-if="showCreateButton"
@@ -8,7 +8,7 @@
         color="primary"
         >{{ $t(I18Global.add_new_row) }}</q-btn
       >
-    </q-toolbar>
+    </q-toolbar> -->
     <q-table
       v-bind="props"
       :rows="rows"
@@ -16,6 +16,19 @@
       row-key="id"
       class="sticky-header-table"
     >
+      <template #top>
+        <slot name="top">
+          <q-toolbar v-if="showToolbar">
+            <q-btn
+              @click="onCreateButtonClicked"
+              v-if="showCreateButton"
+              icon="add"
+              color="primary"
+              >{{ $t(I18Global.add_new_row) }}</q-btn
+            >
+          </q-toolbar>
+        </slot>
+      </template>
       <!-- for grid style -->
       <template v-slot:item="props">
         <slot name="item" v-bind="props"></slot>

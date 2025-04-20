@@ -2,10 +2,9 @@
   "user": {
     "title": "المستخدميين",
     "fields": {
-      "first_name": "الاسم الاول",
+      "first_name": "الاسم",
       "last_name": "اللقب",
       "full_name": "اسم المستخدم",
-
       "email": "البريد الإكترونى",
       "mobile": "موبايل",
       "username": "اسم المستخدم",

@@ -8,7 +8,7 @@ export const useTableHelper = () => {
     columnName: string
   ): QTableColumn => ({
     name: columnName,
-    label: "",
+    label: label,
     field: "id",
     headerClasses: "bg-grey-3",
     headerStyle: "font-weight:bold;color:grey;font-size:medium",

@@ -1,6 +1,6 @@
 <template>
   <q-select
-    v-bind="$attrs"
+    v-bind="props"
     ref="qSelectRef"
     v-model="theModelValue"
     outlined
@@ -35,7 +35,7 @@ const theModelValue = defineModel<number>();
 
 interface ISelectPropType {}
 
-defineProps<ISelectPropType & QSelectProps>();
+const props = defineProps<ISelectPropType & QSelectProps>();
 
 const qSelectRef: Ref<QSelect | null> = ref(null);
 

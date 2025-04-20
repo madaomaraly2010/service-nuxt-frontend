@@ -97,6 +97,7 @@ export class I18Provider {
       public static additional: string = "provider.tabs.additional";
     };
     static Fields = class Fields {
+      public static id: string = "provider.fields.id";
       public static address: string = "provider.fields.address";
       public static city: string = "provider.fields.city";
       public static state: string = "provider.fields.state";
@@ -111,7 +112,7 @@ export class I18Provider {
       public static english_status_id: string = "provider.fields.english_status_id";
       public static nick_name: string = "provider.fields.nick_name";
       public static net_salary: string = "provider.fields.net_salary";
-      public static wage_amount: string = "provider.fields.wage_amount";
+      public static wage_per_month: string = "provider.fields.wage_per_month";
       public static card_number: string = "provider.fields.card_number";
       public static card_expire: string = "provider.fields.card_expire";
       public static passport_number: string = "provider.fields.passport_number";

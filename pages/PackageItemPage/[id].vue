@@ -27,7 +27,6 @@ import { I18Package } from "~/locales/i18-key";
 const store = usePackageItemStore();
 const route = useRoute();
 // const packageStore = usePackageStore();
-debugger;
 
 const packageRow: Ref<Package | undefined> = ref<Package | undefined>();
 

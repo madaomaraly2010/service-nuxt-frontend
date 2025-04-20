@@ -25,6 +25,7 @@ export const useCountryStore = defineStore<
   actions: {
     async findAll(options?: FetchOptions): Promise<CountryResponse> {
       const response = await CountryService.instance.findAll(options);
+
       this.list = response.data ?? [];
       return response;
     },

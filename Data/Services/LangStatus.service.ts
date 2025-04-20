@@ -18,12 +18,13 @@ export class LangStatusService
   }
 
   override get getFetchKey(): string {
-    return TableKeys.COUNTRY_KEY;
+    return TableKeys.LANG_STATUS_KEY;
   }
   override async findAll(options?: FetchOptions): Promise<LangStatusResponse> {
     return super.fetchData(
       LangStatus as any,
-      config.LangStatus.API_LANG_STATUS_GET, {
+      config.LangStatus.API_LANG_STATUS_GET,
+      {
         options,
       }
     );

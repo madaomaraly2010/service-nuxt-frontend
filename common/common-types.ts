@@ -1,5 +1,10 @@
 import type { QTableProps } from "quasar";
-import type { Package, PackageItem, RequestCustomer } from "~/Data/Models";
+import type {
+  Package,
+  PackageItem,
+  Provider,
+  RequestCustomer,
+} from "~/Data/Models";
 
 export type TableActionType = "Add" | "Edit" | "Delete";
 
@@ -72,3 +77,10 @@ export interface IPackageItemFormProps extends IBaseFormProps {
   packageRow: Package;
 }
 //===============================================================
+export interface IProviderDialogProps extends IBaseDialogProps {
+  editRow: Provider;
+}
+
+export interface IProviderFormProps extends IBaseFormProps {
+  editRow: Provider;
+}

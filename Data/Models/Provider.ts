@@ -55,7 +55,7 @@ export class Provider {
   @JsonKey()
   net_salary?: number;
   @JsonKey()
-  wage_per_amount?: number;
+  wage_per_month?: number;
   @JsonKey()
   card_number?: string;
   @JsonKey()

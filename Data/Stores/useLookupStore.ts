@@ -32,9 +32,7 @@ import {
   type RequestStatusStoreType,
 } from "./useRequestStatusStore";
 
-interface ILookupState {
-  
-}
+interface ILookupState {}
 
 let workCategoryStore: WorkCategoryStoreType | null = null;
 let workStore: WorkStoreType | null = null;
@@ -49,9 +47,7 @@ let statusStore: RequestStatusStoreType | null = null;
 export type LookupStoreType = ReturnType<typeof useLookupStore>;
 
 export const useLookupStore = defineStore("lookups", {
-  state: (): ILookupState => ({
-  
-  }),
+  state: (): ILookupState => ({}),
   getters: {
     requestStatusStore(): RequestStatusStoreType {
       return statusStore!;
@@ -107,14 +103,14 @@ export const useLookupStore = defineStore("lookups", {
 
       provide(TableKeys.REQUEST_STATUS_KEY, statusStore);
 
-      console.log("workCategoryStore", workCategoryStore.list);
-      console.log("workStore", workStore.list);
-      console.log("langStore", langStore.list);
-      console.log("childStore", childStore.list);
-      console.log("rentStore", rentStore.list);
-      console.log("cookStore", cookStore.list);
-      console.log("religionStore", religionStore.list);
-      console.log("countryStore", countryStore.list);
+      console.log("lookup", "workCategoryStore", workCategoryStore.list);
+      console.log("lookup", "workStore", workStore.list);
+      console.log("lookup", "langStore", langStore.list);
+      console.log("lookup", "childStore", childStore.list);
+      console.log("lookup", "rentStore", rentStore.list);
+      console.log("lookup", "cookStore", cookStore.list);
+      console.log("lookup", "religionStore", religionStore.list);
+      console.log("lookup", "countryStore", countryStore.list);
     },
   },
 });
