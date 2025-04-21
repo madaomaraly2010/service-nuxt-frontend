@@ -10,6 +10,19 @@ export class RequestCustomerService
   extends BaseModelService<RequestCustomer>
   implements IRequestCustomerRepositry
 {
+  findByStatusId(
+    statusId: number,
+    options?: FetchOptions
+  ): Promise<RequestCustomerResponse> {
+    options = { ...options, reFetch: true };
+    return super.fetchData(
+      RequestCustomer as any,
+      `${config.RequestCustomer.API_RQUEST_CUSTOMER_BY_STATUS}/${statusId}`,
+      {
+        options,
+      }
+    );
+  }
   static _service: RequestCustomerService;
   public static get instance(): RequestCustomerService {
     if (RequestCustomerService._service == null) {

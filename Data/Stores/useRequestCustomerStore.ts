@@ -29,10 +29,18 @@ export const useRequestCustomerStore = defineStore<
   state: (): IRequestCustomerState => ({ list: [] }),
   getters: {},
   actions: {
+    async findByStatusId(statusId: number, options?: FetchOptions) {
+      return StoreHelper.genericFind<RequestCustomer, RequestCustomerResponse>(
+        this,
+        () => {
+          return RequestCustomerService.instance.findByStatusId(
+            statusId,
+            options
+          );
+        }
+      );
+    },
     async findAll(options?: FetchOptions): Promise<RequestCustomerResponse> {
-      // const response = await RequestCustomerService.instance.findAll(options);
-      // this.list = response.data ?? [];
-      // return response;
       return StoreHelper.genericFind<RequestCustomer, RequestCustomerResponse>(
         this,
         () => {

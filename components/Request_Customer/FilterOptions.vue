@@ -33,9 +33,10 @@
 import { PeriodEnum } from "~/Data/Enums/Period.enum";
 import { RequestStatusEnum } from "~/Data/Enums/RequestStatus.enum";
 import type { Work } from "~/Data/Models";
-import { useProviderStore } from "~/Data/Stores";
+import { useProviderStore, useRequestCustomerStore } from "~/Data/Stores";
 //@ts-ignore
 const providerStore = useProviderStore();
+const requestCustomerStore = useRequestCustomerStore();
 
 const selectedWork = ref();
 const selectedPeriod: Ref<PeriodEnum> = ref<PeriodEnum>(PeriodEnum.TODAY);
@@ -46,8 +47,14 @@ const selectedStatus: Ref<RequestStatusEnum> = ref<RequestStatusEnum>(
 const periodChanged = (period: PeriodEnum) => {
   console.log("Selected Period", period);
 };
-const statusChanged = (status: RequestStatusEnum) => {
-  console.log("Selected Status", status);
+const statusChanged = async (status: RequestStatusEnum) => {
+  if (status == RequestStatusEnum.All) {
+    await requestCustomerStore.findAll({
+      reFetch: true,
+    });
+  } else {
+    await requestCustomerStore.findByStatusId(status);
+  }
 };
 const workSelected = (work: Work) => {
   console.log("Selected Work", work);

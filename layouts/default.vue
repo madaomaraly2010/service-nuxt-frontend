@@ -38,10 +38,9 @@
             shrink
             class="text-weight-bolder q-ma-sm text-green-10"
           >
-            خدماتى
+            {{ $t(I18Global.apptitle) }}
           </q-toolbar-title>
         </q-btn>
-
         <q-space />
 
         <div class="YL__toolbar-input-container row no-wrap">
@@ -128,7 +127,7 @@
             <q-list>
               <q-item clickable v-ripple @click="userStore.logout()">
                 <q-item-section>
-                  <q-item-label>{{ $t("logout") }}</q-item-label>
+                  <q-item-label>{{ $t(I18Login.logout) }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -206,7 +205,7 @@
 import { ref } from "vue";
 import { useGlobalStore, useUserStore, useMessageStore } from "../Data/Stores";
 import type { Message } from "~/Data/Models/Message";
-import { I18Drawer } from "~/locales/i18-key";
+import { I18Drawer, I18Login, I18Global } from "~/locales/i18-key";
 import { PageKeys } from "~/common/table-keys";
 const globalStore = useGlobalStore();
 const userStore = useUserStore();
@@ -251,23 +250,23 @@ const drawerItems = [
   {
     icon: "home",
     text: app.$t(I18Drawer.Items.main),
-    page: "RequestCustomerPage",
+    page: "/",
   }, // Home icon for main
-  {
-    icon: "account-tie",
-    text: app.$t(I18Drawer.Items.employees),
-    page: "RequestCustomerPage",
-  }, // Suit-tie for employees
+  // {
+  //   icon: "account-tie",
+  //   text: app.$t(I18Drawer.Items.employees),
+  //   page: "RequestCustomerPage",
+  // }, // Suit-tie for employees
   {
     icon: "worker",
     text: app.$t(I18Drawer.Items.workers),
     page: PageKeys.PROVIDER_PAGE,
   }, // Worker icon
-  {
-    icon: "mdi-account-group",
-    text: app.$t(I18Drawer.Items.customers),
-    page: "RequestCustomerPage",
-  },
+  // {
+  //   icon: "mdi-account-group",
+  //   text: app.$t(I18Drawer.Items.customers),
+  //   page: "RequestCustomerPage",
+  // },
   // Group icon for customers
   {
     icon: "mdi-file-document",

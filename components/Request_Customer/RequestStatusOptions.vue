@@ -20,9 +20,10 @@ import { RequestStatusEnum } from "~/Data/Enums/RequestStatus.enum";
 import { I18Requestcustomer } from "~/locales/i18-key";
 const nuxtApp = useNuxtApp();
 const emits = defineEmits(["statusChanged"]);
-const selectedRequestStatus = defineModel({
-  default: RequestStatusEnum.All,
-});
+const selectedRequestStatus = ref(RequestStatusEnum.All);
+// const selectedRequestStatus = defineModel({
+//   default: RequestStatusEnum.All,
+// });
 // const selectedRequestStatus: Ref<RequestStatusEnum> = ref<RequestStatusEnum>(
 //   RequestStatusEnum.All
 // );
@@ -60,8 +61,8 @@ const requestStatusOptions = [
     value: RequestStatusEnum.EXPIRED,
   },
 ];
-const statusChanged = () => {
-  emits("statusChanged", selectedRequestStatus);
+const statusChanged = (statusId: number) => {
+  emits("statusChanged", statusId);
 };
 </script>
 

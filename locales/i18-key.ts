@@ -33,6 +33,7 @@ export class I18Errors {
     public static two_fields_are_not_match: string = "errors.two_fields_are_not_match";
   };
 export class I18Global {
+    public static apptitle: string = "global.appTitle";
     public static details: string = "global.details";
     public static male: string = "global.male";
     public static female: string = "global.female";
@@ -52,6 +53,7 @@ export class I18Location {
 export class I18Login {
     public static title: string = "login.title";
     public static login: string = "login.login";
+    public static logout: string = "login.logout";
     public static submit: string = "login.submit";
     public static password: string = "login.password";
     public static email: string = "login.email";

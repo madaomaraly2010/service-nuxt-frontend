@@ -11,6 +11,7 @@
       clearable
       :popup-content-class="globalStore.direction == 'rtl' ? 'rtl' : ''"
       @update:model-value="onWorkSelected"
+      @clear="onClear"
     >
     </q-select>
   </div>
@@ -30,6 +31,9 @@ const globalStore = useGlobalStore();
 
 const selectedWork = defineModel();
 const emits = defineEmits(["workSelected"]);
+const onClear = async () => {
+  await providerStore.findAll({ reFetch: true });
+};
 const onWorkSelected = async (work: Work) => {
   await providerStore.getByWork(work.id, {
     reFetch: true,

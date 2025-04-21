@@ -25,8 +25,8 @@ import type { RequestStatus } from "../Models/RequestStatus";
 import type {
   PackageItemResponse,
   ProviderResponse,
+  RequestCustomerResponse,
   UserResponse,
-  WorkResponse,
 } from "../Responses/Model-Responses";
 import type { IRepositry } from "./IRepositry";
 
@@ -60,8 +60,12 @@ export interface IPackageItemRepositry extends IRepositry<PackageItem> {
   ): Promise<PackageItemResponse>;
 }
 
-export interface IRequestCustomerRepositry
-  extends IRepositry<RequestCustomer> {}
+export interface IRequestCustomerRepositry extends IRepositry<RequestCustomer> {
+  findByStatusId(
+    statusId: number,
+    options?: FetchOptions
+  ): Promise<RequestCustomerResponse>;
+}
 
 export interface IRequestPaymentRepositry extends IRepositry<RequestPayment> {}
 

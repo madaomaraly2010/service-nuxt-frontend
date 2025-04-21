@@ -86,6 +86,7 @@ export const config = {
 
   RequestCustomer: {
     API_RQUEST_CUSTOMER_GET: `${BASE_URL}/requestcustomer`,
+    API_RQUEST_CUSTOMER_BY_STATUS: `${BASE_URL}/requestcustomer/status`,
     API_RQUEST_CUSTOMER_POST: `${BASE_URL}/requestcustomer`,
     API_RQUEST_CUSTOMER_DELETE: `${BASE_URL}/requestcustomer`,
     API_RQUEST_CUSTOMER_UPDATE: `${BASE_URL}/requestcustomer`,
