@@ -1,4 +1,5 @@
 export default defineNuxtRouteMiddleware((to, from) => {
+  debugger;
   if (process.client) {
     const isAuthenticated = localStorage.getItem("auth") === "true";
     if (!isAuthenticated && to.path !== "/login") {

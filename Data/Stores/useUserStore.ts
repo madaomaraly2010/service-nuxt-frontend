@@ -55,10 +55,12 @@ export const useUserStore = defineStore<
         password
       );
       this.isAuthenticated = false;
+      debugger;
       if (response.success && response.isAuthenticated) {
         localStorage.setItem("auth", "true");
         this.isAuthenticated = true;
         this.loggedUser = response.data![0] as any;
+        debugger;
         useRouter().push("/");
       }
       return response;

@@ -125,7 +125,7 @@
               mobile
             />
             <BaseUploader
-              v-model="uploadedFile"
+              v-model="editRow.profile_picture"
               class="col-4 offset-1"
             ></BaseUploader>
           </div>
@@ -335,9 +335,9 @@ import {
 } from "~/locales/i18-key";
 const tab = ref("personal");
 const nuxtApp = useNuxtApp();
-const uploadedFile = ref<File>();
 const preValidate = async (form: QForm) => {
   let tabs = ["account", "personal", "employment", "additional"];
+
   let validated = true;
   for (let i = 0; i < tabs.length; i++) {
     tab.value = tabs[i];

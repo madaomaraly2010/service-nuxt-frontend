@@ -10,13 +10,14 @@
           :on-save="doLogin"
           :save-label="$t('login.submit')"
           :show-cancel-button="false"
+          :show-save-button="true"
           ref="loginForm"
         >
           <base-text-input
             v-model="email"
             :label="$t('user.fields.username')"
             outlined
-            :rules="[ValidatorRules.required($t, $t('user.fields.username'))]"
+            required
             :dense="false"
             lazy-rules
           >
@@ -31,15 +32,7 @@
             :is-password="true"
             v-model="password"
             :label="$t('user.fields.password_hash')"
-            :rules="[
-              ValidatorRules.required($t, 'user.fields.password_hash'),
-              // ValidatorRules.match(
-              //   $t,
-              //   () => confirmPassword,
-              //   'user.fields.confirm_password',
-              //   'user.fields.password_hash'
-              // ),
-            ]"
+            required
             outlined
             :dense="false"
           >
@@ -88,7 +81,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { QForm, useQuasar } from "quasar";
-import { ValidatorRules } from "../common/validations";
 import { useUserStore } from "~/Data/Stores";
 import { I18Messages } from "~/locales/i18-key";
 // import { useUserStore } from "../Data/Stores/useUserStore";
@@ -117,17 +109,8 @@ const doLogin = async () => {
 
   if (response.isAuthenticated) {
     uiHelper.showSucceedMessage(I18Messages.user_authenticated);
-    // $q.notify({
-    //   message: ,
-    //   position: "top",
-    // });
   } else {
     uiHelper.showErrorMessage(I18Messages.user_not_authenticated);
-    // $q.notify({
-    //   message: nuxtApp.$t("messages.user_not_authenticated"),
-    //   position: "top",
-    //   color: "red-10",
-    // });
   }
 };
 
