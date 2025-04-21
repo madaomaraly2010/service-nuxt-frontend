@@ -40,6 +40,7 @@ export class I18Global {
     public static save: string = "global.save";
     public static cancel: string = "global.cancel";
     public static add_new_row: string = "global.add_new_row";
+    public static add_profile_picture: string = "global.add_profile_picture";
   };
 export class I18Labels {
     public static today: string = "labels.today";

@@ -124,8 +124,11 @@
               required
               mobile
             />
+            <BaseUploader
+              v-model="uploadedFile"
+              class="col-4 offset-1"
+            ></BaseUploader>
           </div>
-
           <div class="row q-my-sm"></div>
           <div class="row">
             <BaseTextAreaInput
@@ -332,6 +335,7 @@ import {
 } from "~/locales/i18-key";
 const tab = ref("personal");
 const nuxtApp = useNuxtApp();
+const uploadedFile = ref<File>();
 const preValidate = async (form: QForm) => {
   let tabs = ["account", "personal", "employment", "additional"];
   let validated = true;
