@@ -62,11 +62,9 @@ const getRules = () => {
     vRules.push(ValidatorRules.required(nuxtApp.$t));
   }
   if (minVal > 0) {
-    debugger;
     vRules.push(ValidatorRules.minValue(nuxtApp.$t, minVal));
   }
   if (maxVal > 0) {
-    debugger;
     vRules.push(ValidatorRules.maxValue(nuxtApp.$t, maxVal));
   }
 

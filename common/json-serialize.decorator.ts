@@ -79,7 +79,7 @@ export function JsonSerializable<T extends { new (...args: any[]): {} }>(): (
     };
 
     const formatDate = (val: any): any => {
-      debugger;
+      
       // Skip formatting for numbers, booleans, etc.
       if (typeof val === "number" || typeof val === "boolean") return val;
 
@@ -98,7 +98,7 @@ export function JsonSerializable<T extends { new (...args: any[]): {} }>(): (
     };
 
     constructor.prototype.toDbRow = function () {
-      debugger;
+      
 
       const result: any = {};
       for (const [, field] of fields.entries()) {

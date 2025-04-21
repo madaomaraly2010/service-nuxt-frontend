@@ -93,6 +93,7 @@ import type { TableActionType } from "~/common/common-types";
 import { ProviderColumns, UserColumns } from "~/common/table-column-names";
 import { I18Global, I18Provider, I18User } from "~/locales/i18-key";
 import cloneDeep from "lodash/cloneDeep";
+import { useUploadStore } from "~/Data/Stores/useUploadStore";
 // import type { LookupStoreType } from "~/Data/Stores";
 
 const dialogRef = ref(null);
@@ -112,8 +113,11 @@ const onWorkSelected = async (w: Work) => {
   openCreateDialog();
 };
 
-const selectAndOpenDialog = async (req: Provider) => {
-  selectedRow.value = cloneDeep(req);
+const selectAndOpenDialog = async (row: Provider) => {
+  const uploadStore = useUploadStore();
+  uploadStore.originalProfilePictureUrl = row.profile_picture ?? "";
+  uploadStore.previousFileUrl = "";
+  selectedRow.value = cloneDeep(row);
   await nextTick();
   //@ts-ignore
   dialogRef?.value.open();
