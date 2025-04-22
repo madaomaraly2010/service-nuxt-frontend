@@ -150,7 +150,7 @@
             <BaseNumberInput
               class="col-4"
               :min="10"
-              :max="100"
+              :max="100000"
               v-model="editRow.net_salary"
               :label="$t(I18Provider.Fields.net_salary)"
               outlined
@@ -343,6 +343,9 @@ const preValidate = async (form: QForm) => {
     tab.value = tabs[i];
     await nextTick();
     validated = validated && (await form.validate());
+    if (!validated) {
+      break;
+    }
   }
   return validated;
 };
@@ -377,6 +380,7 @@ const uiHelper = useUIHelper();
 
 const onSave = async () => {
   let response: ProviderResponse = await store.save(props.editRow);
+  debugger;
   if (response.success) {
     uiHelper.showSucceedMessage(I18Messages.operation_successed);
   }

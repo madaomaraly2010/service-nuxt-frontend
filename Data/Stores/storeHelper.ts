@@ -23,14 +23,15 @@ export class StoreHelper {
   ): Promise<ResponseType> {
     const isNew = row.id == null || row.id == undefined;
     const response = await serviceCall(row);
-
-    if (response.success) {
+    let returnedRow = null;
+    if (response.success && response.data) {
+      returnedRow = response.data[0];
       if (isNew) {
-        store.list.push(row);
+        store.list.push(returnedRow);
       } else {
         const index = store.list.findIndex((item) => item.id === row.id);
         if (index !== -1) {
-          store.list[index] = row;
+          store.list[index] = returnedRow;
         }
       }
     }

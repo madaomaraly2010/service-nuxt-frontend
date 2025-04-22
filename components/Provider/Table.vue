@@ -117,6 +117,7 @@ const selectAndOpenDialog = async (row: Provider) => {
   const uploadStore = useUploadStore();
   uploadStore.originalProfilePictureUrl = row.profile_picture ?? "";
   uploadStore.previousFileUrl = "";
+  debugger;
   selectedRow.value = cloneDeep(row);
   await nextTick();
   //@ts-ignore

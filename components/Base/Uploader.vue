@@ -3,7 +3,6 @@
     <q-card flat class="q-pa-md">
       <div class="relative-position" style="width: 13vw; height: 21vh">
         <!-- Loader overlay -->
-
         <q-uploader
           url="http://your-upload-endpoint.com/upload"
           color="white"
@@ -77,7 +76,7 @@
           </template>
         </q-uploader>
         <q-inner-loading :showing="loading">
-          <q-spinner size="50px" color="primary" />
+          <q-spinner-rings size="50px" color="primary" />
         </q-inner-loading>
       </div>
     </q-card>
@@ -88,19 +87,18 @@
 import type { QUploader } from "quasar";
 import { useUploadStore } from "~/Data/Stores/useUploadStore";
 import { I18Global } from "~/locales/i18-key";
-import type { SupabaseType } from "~/plugins/supabase.client";
-// const props = defineProps<{
-//   originalFileUrl: String | "";
-// }>();
+
 const profilePicture = defineModel<string>();
 const loading = ref(false);
 const uploaderRef: Ref<QUploader | null> = ref<QUploader | null>(null);
 const uploadStore = useUploadStore();
 
-const nuxtApp = useNuxtApp();
 const uploadHelper = useUploadHelper();
 const onFileAdded = async (files: readonly File[]) => {
   loading.value = true;
+
+  profilePicture.value = URL.createObjectURL(files[0]);
+
   //@ts-ignore
   await uploadFile(files[0]);
 
@@ -112,24 +110,12 @@ const uploadFile = async (file: File) => {
   if (!file) return;
   const fileExt = file.name.split(".").pop();
   const fileName = `tfkloc_0/user_${Date.now()}.${fileExt}`;
-  //@ts-ignore
-  const supabase: SupabaseType = nuxtApp.$supabase;
-  // const { error: uploadError } = await supabase.storage
-  //   .from("app-service-images") // your Supabase storage bucket name
-  //   .upload(fileName, file, {
-  //     cacheControl: "3600",
-  //     upsert: true,
-  //   });
-  const uploadErrorMessage = await uploadHelper.uploadFile(fileName, file);
 
+  const uploadErrorMessage = await uploadHelper.uploadFile(fileName, file);
   if (uploadErrorMessage) {
     console.error("Upload error:", uploadErrorMessage);
     return;
   }
-
-  // const { data: publicData } = supabase.storage
-  //   .from("app-service-images")
-  //   .getPublicUrl(fileName);
   const publicUrl = await uploadHelper.getPublicUrl(fileName);
 
   if (
@@ -139,19 +125,18 @@ const uploadFile = async (file: File) => {
     //====delete previously uploaded file
     await uploadHelper.deleteUrlFromSupabase(uploadStore.previousFileUrl);
   }
-  profilePicture.value = publicUrl; //publicData.publicUrl;
-
-  uploadStore.previousFileUrl = profilePicture.value ?? "";
+  profilePicture.value = publicUrl;
+  await nextTick(); //====wait for profilePicture.value to reflect its value
+  uploadStore.previousFileUrl = publicUrl ?? ""; //profilePicture.value ?? "";
 };
-const removeFile = (scope: QUploader) => {
-  // if (profilePicture.value && profilePicture.value != originalFileUrl) {
-  //   //====delete previously uploaded file
-  //   UploadHelper.deleteUrlFromSupabase(
-  //     nuxtApp.$supabase as SupabaseType,
-  //     profilePicture.value
-  //   );
-  // }
-
+const removeFile = async (scope: QUploader) => {
+  if (
+    uploadStore.previousFileUrl &&
+    uploadStore.previousFileUrl != uploadStore.originalProfilePictureUrl
+  ) {
+    //====delete previously uploaded file
+    await uploadHelper.deleteUrlFromSupabase(uploadStore.previousFileUrl);
+  }
   profilePicture.value = "";
   if (scope.files.length == 0) {
     return;

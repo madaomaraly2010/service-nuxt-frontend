@@ -5,7 +5,7 @@
     dense
     outlined
     hide-bottom-space
-    v-model="theNumber"
+    v-model.number="theNumber"
     mask="#########"
     :rules="getRules()"
   >

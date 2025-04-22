@@ -79,7 +79,6 @@ export function JsonSerializable<T extends { new (...args: any[]): {} }>(): (
     };
 
     const formatDate = (val: any): any => {
-      
       // Skip formatting for numbers, booleans, etc.
       if (typeof val === "number" || typeof val === "boolean") return val;
 
@@ -98,12 +97,13 @@ export function JsonSerializable<T extends { new (...args: any[]): {} }>(): (
     };
 
     constructor.prototype.toDbRow = function () {
-      
-
       const result: any = {};
       for (const [, field] of fields.entries()) {
         const { name, propertyKey, ignore, includeToDbRow, includeIfNull } =
           field;
+
+        if (propertyKey === "net_salary") debugger;
+
         if (ignore || includeToDbRow === false) continue;
 
         let value = (this as any)[propertyKey];
