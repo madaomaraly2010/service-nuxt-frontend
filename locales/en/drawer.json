@@ -1,12 +1,15 @@
 {
-  "items": {
-    "main": "الرئيسية",
-    "employees": "الموظفيين",
-    "customers": "العملاء",
-    "workers": "العمالة",
-    "requests": "الطلبات",
-    "logout": "خروج",
-    "settings": "الإعدادات",
-    "aboutus": "من نحن"
+  "drawer": {
+    "items": {
+      "main": "الرئيسية",
+      "employees": "الموظفيين",
+      "customers": "العملاء",
+      "workers": "العمالة",
+      "requests": "الطلبات",
+      "packages": "الباقات",
+      "logout": "خروج",
+      "settings": "الإعدادات",
+      "aboutus": "من نحن"
+    }
   }
 }

@@ -1,24 +1,26 @@
 {
-  "title": "الطلبات",
-  "fields": {
-    "id": "السجل",
-    "request_date": "تاريخ الطلب",
-    "request_status": "حالة الطلب",
-    "provider_fullname": "اسم العامل",
-    "user_fullname": "اسم العميل",
-    "pending": "قيد الانتظار",
-    "approved": "موافق عليه",
-    "inprogress": "قيد التنفيذ",
-    "completed": "مكتمل",
-    "cancelled": "ملغى",
-    "rejected": "مرفوض",
-    "expired": "منتهي الصلاحية",
-    "all": "الكل",
-    "month_number": "عدد الأشهر",
-    "net_total_amount": "الصافى",
-    "total_before_discount": " الإجمالى قبل الخصم",
-    "down_payment": "العربون",
-    "discount_value": "إجمالى الخصم",
-    "discount_percent": "نسبة الخصم"
+  "requestcustomer": {
+    "title": "الطلبات",
+    "fields": {
+      "id": "السجل",
+      "request_date": "تاريخ الطلب",
+      "request_status": "حالة الطلب",
+      "provider_fullname": "اسم العامل",
+      "user_fullname": "اسم العميل",
+      "pending": "قيد الانتظار",
+      "approved": "موافق عليه",
+      "inprogress": "قيد التنفيذ",
+      "completed": "مكتمل",
+      "cancelled": "ملغى",
+      "rejected": "مرفوض",
+      "expired": "منتهي الصلاحية",
+      "all": "الكل",
+      "month_number": "عدد الأشهر",
+      "net_total_amount": "الصافى",
+      "total_before_discount": " الإجمالى قبل الخصم",
+      "down_payment": "العربون",
+      "discount_value": "إجمالى الخصم",
+      "discount_percent": "نسبة الخصم"
+    }
   }
 }

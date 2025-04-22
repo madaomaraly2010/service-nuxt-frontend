@@ -1,10 +1,13 @@
 {
-  "email_incorrect": "بريد إلكترونى غير صحيح",
-  "password_incorrect": "خطأ فى كلمة المرور",
-  "email_password_incorrect": "خطأ فى اسم المستخدم أو كلمة المرور",
-  "greater_than_max": "يجب الا تزيد القيمة عن {val}",
-  "less_than_min": "يجب الا تقل القيمة عن {val}",
-  "field_is_required": "حقل {0} إلزامى",
-  "field_mustbe_number": "حقل {0} لابد ان يكون رقم",
-  "two_fields_are_not_match": "الحقلان [{0}]  [{1}] غير متطابقان"
+  "errors": {
+    "email_incorrect": "بريد إلكترونى غير صحيح",
+    "password_incorrect": "خطأ فى كلمة المرور",
+    "email_password_incorrect": "خطأ فى اسم المستخدم أو كلمة المرور",
+    "greater_than_max": "يجب الا تزيد القيمة عن {0}",
+    "less_than_min": "يجب الا تقل القيمة عن {0}",
+    "field_is_required": "هذا الحقل  إلزامى",
+    "mobile_is_incorrect": "رقم الجوال غير صحيح",
+    "field_mustbe_number": "حقل {0} لابد ان يكون رقم",
+    "two_fields_are_not_match": "الحقلان [{0}]  [{1}] غير متطابقان"
+  }
 }

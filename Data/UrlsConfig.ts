@@ -1,4 +1,5 @@
-export const BASE_URL = "http://localhost:4000";
+// export const BASE_URL = "http://localhost:4000";
+export const BASE_URL = "https://appservice-nestjs.onrender.com";
 export const config = {
   Provider: {
     API_PROVIDER_GET: `${BASE_URL}/provider`,
