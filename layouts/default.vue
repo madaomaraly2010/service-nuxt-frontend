@@ -137,6 +137,7 @@
     </q-header>
 
     <q-drawer
+      v-if="userStore.isAuthenticated"
       v-model="leftDrawerOpen"
       :side="globalStore.direction == 'rtl' ? 'right' : 'left'"
       bordered
