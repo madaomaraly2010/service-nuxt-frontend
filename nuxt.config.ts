@@ -6,7 +6,6 @@ export default defineNuxtConfig({
   // Ensures pages directory is used
   pages: true,
   ssr: false,
-
   imports: {
     dirs: [
       "composables",
