@@ -88,13 +88,13 @@ export default defineNuxtConfig({
       {
         code: "en",
         iso: "en-US",
-        files: [...getFileList("locales\\en")],
+        files: getFileList("locales/en"),
         name: "English",
       },
       {
         code: "ar",
         iso: "ar-EG",
-        files: [...getFileList("locales\\ar")],
+        files: getFileList("locales/ar"),
         name: "العربية",
       },
     ],
